@@ -169,18 +169,18 @@
 
 <!-- See More Script -->
 <script>
-  document.addEventListener(\"DOMContentLoaded\", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     let batch = 1;
     const totalBatches = 4;
 
-    document.getElementById(\"load-more\").addEventListener(\"click\", function (e) {
+    document.getElementById("load-more").addEventListener("click", function (e) {
       e.preventDefault();
       const currentBatch = document.querySelector(`.batch-${batch}`);
       if (currentBatch) {
-        currentBatch.style.display = \"flex\";
+        currentBatch.style.display = "flex";
         batch++;
         if (batch > totalBatches) {
-          this.style.display = \"none\";
+          this.style.display = "none";
         }
       }
     });
