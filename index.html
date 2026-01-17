@@ -239,6 +239,10 @@
 		<p style="color: black;">Select a date and send your request. I’ll get back to you personally to confirm availability.</p>
 
 		<form method="POST" action="https://formspree.io/f/xnnvndyv">
+			
+			<input type="hidden" name="_next" value="https://raoufpx.com/confirmation.html">
+<input type="hidden" name="_subject" value="New Booking – RAOUF px">
+
 			<div class="fields">
 				<div class="field half">
 					<input type="text" name="name" placeholder="Your Name" required style="color: black; background-color: white;" />
@@ -291,38 +295,7 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-	const form = document.querySelector('form');
-	const messageBox = document.getElementById('form-message');
 
-	form.addEventListener('submit', function (event) {
-		event.preventDefault();
-		const formData = new FormData(form);
-
-		fetch(form.action, {
-			method: form.method,
-			body: formData,
-			headers: { 'Accept': 'application/json' }
-		})
-		.then(response => {
-			if (response.ok) {
-				form.reset();
-				showMessage("✅ Thank you! Your request has been sent.", "lightgreen");
-			} else {
-				showMessage("❌ Oops! Something went wrong. Please try again.", "lightcoral");
-			}
-		})
-		.catch(() => {
-			showMessage("❌ Network error. Please try again later.", "lightcoral");
-		});
-
-		function showMessage(msg, color) {
-			messageBox.textContent = msg;
-			messageBox.style.color = color;
-			messageBox.style.display = "block";
-		}
-	});
-});
-</script>
 	</body>
 </html>
+
