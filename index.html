@@ -11,6 +11,46 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(circle at top, #111 0%, #000 60%);
+  }
+
+  h1, h2, h3 {
+    font-weight: 800;
+    letter-spacing: -0.8px;
+  }
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  .content.box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+  }
+
+  .button.primary {
+    background: #f5c16c !important;
+    color: #000 !important;
+    border-radius: 50px;
+    font-weight: 600;
+  }
+
+  .button.primary:hover {
+    background: #ffd88a !important;
+    transform: translateY(-2px);
+  }
+</style>
+
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -34,15 +74,23 @@
 
 		<!-- Intro -->
 			<section id="intro" class="main style1 dark fullscreen">
-				<div class="content">
-					<header>
-						<h2>Hey.</h2>
-					</header>
-					<p>Welcome to <strong>RAOUF px</strong> — a window into how I see the world, and how you might see yourself through it.</p>
-					<footer>
-						<a href="#one" class="button style2 down">More</a>
-					</footer>
-				</div>
+			<div class="content">
+  <header>
+    <h1>
+      This is not a photoshoot.<br>
+      <span style="color:#f5c16c;">It’s a moment.</span>
+    </h1>
+  </header>
+
+  <p>
+    I don’t just take portraits.<br>
+    I create frames where people recognize themselves.
+  </p>
+
+  <footer>
+    <a href="#booking" class="button primary">Book Your Session</a>
+  </footer>
+</div>
 			</section>
 
 		<!-- One -->
@@ -51,7 +99,12 @@
 					<header>
 						<h2>What I Do</h2>
 					</header>
-					<p>I invite people to see themselves through my lens — a mirror that reveals not just how they look, but <strong>who they are.</strong></p>
+					<p>
+  I photograph people who don’t feel comfortable in front of the camera —
+  and help them see themselves differently.
+  <br><br>
+  Calm. Honest. Cinematic.
+</p>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
 			</section>
@@ -276,7 +329,7 @@
 			</div>
 			<input type="text" name="_gotcha" style="display:none">
 			<ul class="actions special">
-				<li><input type="submit" value="Request Booking" /></li>
+				<li><input type="submit" value="Request Your Session" class="primary" /></li>
 			</ul>
 		</form>
 
@@ -298,4 +351,5 @@
 
 	</body>
 </html>
+
 
