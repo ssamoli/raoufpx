@@ -43,7 +43,30 @@
     color: #000 !important;
     border-radius: 50px;
     font-weight: 600;
-  }
+	  /* 3D See More button */
+#load-more {
+    background: linear-gradient(145deg, #f5c16c, #ffd88a);
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 1em 2.5em;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #c99e4c, 0 10px 15px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+/* Hover motion + press effect */
+#load-more:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 0 #c99e4c, 0 12px 20px rgba(0,0,0,0.6);
+}
+
+#load-more:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #c99e4c, 0 6px 10px rgba(0,0,0,0.5);
+}
 
   .button.primary:hover {
     background: #ffd88a !important;
@@ -306,6 +329,7 @@
 
 	</body>
 </html>
+
 
 
 
