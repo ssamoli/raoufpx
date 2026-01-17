@@ -66,4 +66,60 @@
     .button {
       padding: 0.9em 1.4em;
       border-radius: 50px;
-      f
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .button.primary {
+      background: #f5c16c;
+      color: #000;
+    }
+
+    .button.primary:hover {
+      background: #ffd88a;
+      transform: translateY(-2px);
+    }
+
+    .button.secondary {
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+    }
+
+    .button.secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<section class="confirmation">
+  <div class="box">
+    <h1>Your session is <span>on the way</span>.</h1>
+
+    <p>
+      I’ve received your request.<br>
+      I’ll personally review the details and get back to you shortly.
+      <br><br>
+      This isn’t just a photoshoot — it’s a moment we’ll create together.
+    </p>
+
+    <div class="actions">
+      <a href="https://wa.me/201XXXXXXXXX" class="button primary">
+        Continue on WhatsApp
+      </a>
+      <a href="index.html" class="button secondary">
+        Back to Home
+      </a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
