@@ -67,7 +67,7 @@
 						<li><a href="#two">Who I Am</a></li>
 						<li><a href="#work">My Work</a></li>
                                                 <li><a href="#packages">Packages</a></li>
-						<li><a href="#booking">Book Now</a></li>
+						<li><a href="booking.html">Book Now</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -283,60 +283,6 @@
     </div>
   </div>
 </section>
-		<!-- Booking -->
-<section id="booking" class="main style1 dark fullscreen">
-	<div class="content">
-		<header>
-			<h2 style="color: black;">Book a Session</h2>
-		</header>
-		<p style="color: black;">Select a date and send your request. I’ll get back to you personally to confirm availability.</p>
-
-		<form method="POST" action="https://formspree.io/f/xnnvndyv">
-			
-			<input type="hidden" name="_next" value="https://raoufpx.com/confirmation.html">
-<input type="hidden" name="_subject" value="New Booking – RAOUF px">
-
-			<div class="fields">
-				<div class="field half">
-					<input type="text" name="name" placeholder="Your Name" required style="color: black; background-color: white;" />
-				</div>
-				<div class="field half">
-					<input type="email" name="email" placeholder="Your Email" required style="color: black; background-color: white;" />
-				</div>
-				<div class="field half">
-					<label for="date">Select a Date:</label>
-					<input type="date" name="date" id="date" required />
-				</div>
-				<div class="field half">
-					<label for="time">Preferred Time:</label>
-					<input type="time" name="time" id="time" />
-				</div>
-				<div class="field">
-					<label for="type">Type of Session</label >
-					<select name="type" id="type" required
-                                         style="color: black; background-color: white;">
-						<option value="">-- Select --</option>
-						<option value="Starter">Starter</option>
-						<option value="Signature">Signature</option>
-						<option value="Storytelling">Storytelling</option>
-						<option value="other">Other</option>
-					</select>
-				</div>
-				<div class="field">
-					<label for="message" style="font-weight: bold;">For bookings and inquiries</label>
-					<textarea name="message" id="message" rows="4" placeholder="Tell me about the shoot or preferred time." style="color: black; background-color: white; padding: 0.75em; border-radius: 0.5em;"></textarea>
-				</div>
-			</div>
-			<input type="text" name="_gotcha" style="display:none">
-			<ul class="actions special">
-				<li><input type="submit" value="Request Your Session" class="primary" /></li>
-			</ul>
-		</form>
-
-		<!-- Message box -->
-		<div id="form-message" style="display:none; margin-top: 1em; font-weight: bold;"></div>
-	</div>
-</section>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -351,5 +297,6 @@
 
 	</body>
 </html>
+
 
 
