@@ -1,19 +1,118 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>My Work – RAOUF px</title>
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!-- Header copied from index.html -->
-  <header id="header"> ... </header>
+<!-- Work -->
+			<section id="work" class="main style3 primary" style="padding-top:120px;">
+				<div class="content">
+					<header>
+						<h2>My Work</h2>
+						<p>My work is driven by curiosity, the quiet kind that looks deeper than smiles or poses. I specialize in <strong>portraits</strong> and <strong>candid moments</strong> because they show people as they are, not as they perform to be.
 
-  <!-- Work Section -->
-  <section id="work" class="main style3 primary" style="padding-top:120px;">
-    ... all your #work content here ...
-  </section>
-</body>
-</html>
+						Through my lens, I strip away performance, emotion, and pressure — and what’s left is raw truth. It’s in that stillness that people often see themselves clearly for the first time.
 
+						For those who feel shy or unfamiliar in front of the camera, I guide them with kindness. Because this isn’t just about a good photo — it’s about giving someone a moment where they say, “Wow. That’s me.”
+
+						And I do it with love. Every frame is a quiet mirror — honest, simple, and unforgettable.</p>
+					</header>
+
+					<!-- Gallery  -->
+<div class="gallery">
+  <!-- First 4 images shown -->
+  <article class="from-left">
+    <a href="images/fulls/01.jpg" class="image fit"><img src="images/thumbs/01.jpg" alt="Photo 1" /></a>
+  </article>
+  <article class="from-right">
+    <a href="images/fulls/02.jpg" class="image fit"><img src="images/thumbs/02.jpg" alt="Photo 2" /></a>
+  </article>
+  <article class="from-left">
+    <a href="images/fulls/03.jpg" class="image fit"><img src="images/thumbs/03.jpg" alt="Photo 3" /></a>
+  </article>
+  <article class="from-right">
+    <a href="images/fulls/04.jpg" class="image fit"><img src="images/thumbs/04.jpg" alt="Photo 4" /></a>
+  </article>
+
+  <!-- Hidden batch 1 -->
+  <div class="extra-gallery batch-1" style="display: none;">
+    <article class="from-left">
+      <a href="images/fulls/05.jpg" class="image fit"><img src="images/thumbs/05.jpg" alt="Photo 5" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/06.jpg" class="image fit"><img src="images/thumbs/06.jpg" alt="Photo 6" /></a>
+    </article>
+    <article class="from-left">
+      <a href="images/fulls/07.jpg" class="image fit"><img src="images/thumbs/07.jpg" alt="Photo 7" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/08.jpg" class="image fit"><img src="images/thumbs/08.jpg" alt="Photo 8" /></a>
+    </article>
+  </div>
+
+  <!-- Hidden batch 2 -->
+  <div class="extra-gallery batch-2" style="display: none;">
+    <article class="from-left">
+      <a href="images/fulls/09.jpg" class="image fit"><img src="images/thumbs/09.jpg" alt="Photo 9" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/10.jpg" class="image fit"><img src="images/thumbs/10.jpg" alt="Photo 10" /></a>
+    </article>
+    <article class="from-left">
+      <a href="images/fulls/11.jpg" class="image fit"><img src="images/thumbs/11.jpg" alt="Photo 11" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/12.jpg" class="image fit"><img src="images/thumbs/12.jpg" alt="Photo 12" /></a>
+    </article>
+  </div>
+
+  <!-- Hidden batch 3 -->
+  <div class="extra-gallery batch-3" style="display: none;">
+    <article class="from-left">
+      <a href="images/fulls/13.jpg" class="image fit"><img src="images/thumbs/13.jpg" alt="Photo 13" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/14.jpg" class="image fit"><img src="images/thumbs/14.jpg" alt="Photo 14" /></a>
+    </article>
+    <article class="from-left">
+      <a href="images/fulls/15.jpg" class="image fit"><img src="images/thumbs/15.jpg" alt="Photo 15" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/16.jpg" class="image fit"><img src="images/thumbs/16.jpg" alt="Photo 16" /></a>
+    </article>
+  </div>
+
+  <!-- Hidden batch 4 -->
+  <div class="extra-gallery batch-4" style="display: none;">
+    <article class="from-left">
+      <a href="images/fulls/17.jpg" class="image fit"><img src="images/thumbs/17.jpg" alt="Photo 17" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/18.jpg" class="image fit"><img src="images/thumbs/18.jpg" alt="Photo 18" /></a>
+    </article>
+    <article class="from-left">
+      <a href="images/fulls/19.jpg" class="image fit"><img src="images/thumbs/19.jpg" alt="Photo 19" /></a>
+    </article>
+    <article class="from-right">
+      <a href="images/fulls/20.jpg" class="image fit"><img src="images/thumbs/20.jpg" alt="Photo 20" /></a>
+    </article>
+  </div>
+
+<!-- See More Button -->
+<footer style="width:100%;display:flex;justify-content:center;margin-top:22px;">
+  <button id="load-more" class="button style2">See More</button>
+</footer>
+
+<!-- See More Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let batch = 1;
+    const totalBatches = 4;
+
+    document.getElementById("load-more").addEventListener("click", function (e) {
+      e.preventDefault();
+      const currentBatch = document.querySelector(`.batch-${batch}`);
+      if (currentBatch) {
+        currentBatch.style.display = "flex";
+        batch++;
+        if (batch > totalBatches) {
+          this.style.display = "none";
+        }
+      }
+    });
+  });
+</script>
