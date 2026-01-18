@@ -51,10 +51,59 @@
       #header{padding:12px 18px;}
       .logo-inner img{height:40px;}
     }
+    /* Background CTA watermark */
+.bg-cta {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-cta span {
+  position: absolute;
+  font-size: clamp(6rem, 18vw, 22rem);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: rgba(245,193,108,0.08); /* accent but very soft */
+  filter: blur(6px);
+  white-space: nowrap;
+  animation: floatCTA 28s ease-in-out infinite;
+}
+
+/* Different positions if you want more than one */
+.bg-cta span:nth-child(1) {
+  top: 35%;
+  left: -10%;
+}
+.bg-cta span:nth-child(2) {
+  top: 65%;
+  left: -30%;
+  animation-duration: 36s;
+  opacity: 0.05;
+}
+
+/* Slow cinematic movement */
+@keyframes floatCTA {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(25%); }
+  100% { transform: translateX(0); }
+}
+
+/* Make sure real content stays above */
+.main, .content, header, footer {
+  position: relative;
+  z-index: 2;
+}
   </style>
 </head>
 
 <body class="is-preload">
+  <div class="bg-cta">
+  <span>BOOK&nbsp;NOW</span>
+  <span>BOOK&nbsp;NOW</span>
+</div>
+
 <header id="header">
   <div class="logo-frame" aria-hidden="false">
     <div class="logo-inner">
