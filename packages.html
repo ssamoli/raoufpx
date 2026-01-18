@@ -1,108 +1,108 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Photography Packages – RAOUF px</title>
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>Photography Packages – RAOUF px</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <style>
-        /* Keep logo small */
-        .logo-inner img {
-            height: 46px;
-            width: auto;
-            display: block;
-            object-fit: contain;
-        }
+  <style>
+    :root{
+      --bg-1: #040405;
+      --bg-2: #0b0b0f;
+      --panel: rgba(255,255,255,0.03);
+      --accent: #f5c16c;
+      --muted: rgba(255,255,255,0.75);
+    }
 
-        /* Fixed header */
-        #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 36px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
-        }
+    html,body{height:100%;margin:0;padding:0;font-family:'Montserrat',sans-serif;background: radial-gradient(1200px circle at 10% 10%, var(--bg-2) 0%, var(--bg-1) 60%);color:var(--muted);-webkit-font-smoothing:antialiased;}
 
-        /* Push content below header */
-        .main {
-            padding-top: 140px;
-        }
+    h1,h2,h3{font-weight:800;letter-spacing:-0.6px;color:#fff;margin:0 0 0.25rem;}
+    p{font-size:1.05rem;line-height:1.7;color:var(--muted);}
 
-        /* Video player style */
-        .content video {
-            border-radius: 10px;
-            margin-top: 12px;
-        }
-    </style>
+    .content.box{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:2.2rem;backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,0.7);}
+
+    #header{display:flex;align-items:center;justify-content:space-between;padding:18px 36px;position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.08));border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);}
+    .logo-frame{display:flex;align-items:center;gap:12px;padding:6px;border-radius:14px;background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;}
+    .logo-frame::before{content:"";position:absolute;inset:-3px;border-radius:16px;background:linear-gradient(90deg, rgba(0,212,255,0.08), rgba(245,193,108,0.07));filter:blur(8px);z-index:-2;}
+    .logo-frame::after{content:"";position:absolute;inset:-1.6px;border-radius:15px;background:linear-gradient(135deg,#08101a00,#ffffff06);z-index:-1;mix-blend-mode:overlay;}
+    .logo-inner{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));}
+    .logo-inner img{height:46px;width:auto;border-radius:8px;display:block;object-fit:contain;filter:drop-shadow(0 6px 22px rgba(0,0,0,0.6));}
+
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:0.95rem;}
+    nav a:hover{color:#fff;}
+
+    .main.style1.dark.fullscreen{display:flex;align-items:center;justify-content:center;padding:6rem 2rem 3rem;min-height:100vh;background:transparent;}
+    .content.box h2,.content.box h3,.content.box p{color:#000 !important;}
+    .gallery{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;}
+    .gallery article{flex:1 1 calc(33% - 16px);min-width:220px;background:transparent;border-radius:10px;overflow:hidden;}
+    .gallery article img{border-radius:10px;display:block;width:100%;height:auto;object-fit:cover;}
+    video{border-radius:10px; width:100%; margin-top:12px; display:block;}
+
+    @media (max-width:900px){
+      nav{display:none;}
+      .gallery article{flex:1 1 calc(50% - 12px);}
+      #header{padding:12px 18px;}
+      .logo-inner img{height:40px;}
+    }
+  </style>
 </head>
+
 <body class="is-preload">
-
-<!-- Header -->
 <header id="header">
-    <div class="logo-frame" aria-hidden="false">
-        <div class="logo-inner">
-            <img src="images/logo.png" alt="RAOUF px Logo" />
-        </div>
+  <div class="logo-frame" aria-hidden="false">
+    <div class="logo-inner">
+      <img src="images/logo.png" alt="RAOUF px Logo" />
     </div>
-
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="work.html">My Work</a></li>
-            <li><a href="packages.html">Packages</a></li>
-            <li><a href="booking.html">Book Now</a></li>
-        </ul>
-    </nav>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html">My Work</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
 </header>
 
-<!-- Packages Section -->
-<section id="packages" class="main style1 dark fullscreen">
-    <div class="content box style2">
-        <header>
-            <h2>Photography Packages – Dubai</h2>
-        </header>
+<section id="packages" class="main style1 dark fullscreen" style="padding-top:120px;">
+  <div class="content box style2">
+    <header>
+      <h2>Photography Packages – Dubai</h2>
+    </header>
 
-        <div class="gallery">
-            <!-- Starter Package -->
-            <article>
-                <a href="images/fulls/Starter.jpg" class="image fit"><img src="images/thumbs/Starter.jpg" alt="Starter Package" /></a>
-                <h3>Starter – AED 250</h3>
-                <p>30 min | 10 edits | 1 location | 3-day delivery</p>
-            </article>
+    <div class="gallery">
+      <!-- Starter Package -->
+      <article>
+        <a href="images/fulls/Starter.jpg"><img src="images/thumbs/Starter.jpg" alt="Starter Package" /></a>
+        <h3>Starter – AED 250</h3>
+        <p>30 min | 10 edits | 1 location | 3-day delivery</p>
+      </article>
 
-            <!-- Signature Package -->
-            <article>
-                <a href="images/fulls/Signature.jpg" class="image fit"><img src="images/thumbs/Signature.jpg" alt="Signature Package" /></a>
-                <h3>Signature – AED 450</h3>
-                <p>1 hr | 25 edits | 2 locations | outfit change</p>
-            </article>
+      <!-- Signature Package -->
+      <article>
+        <a href="images/fulls/Signature.jpg"><img src="images/thumbs/Signature.jpg" alt="Signature Package" /></a>
+        <h3>Signature – AED 450</h3>
+        <p>1 hr | 25 edits | 2 locations | outfit change</p>
+      </article>
 
-            <!-- Storytelling Package -->
-            <article>
-                <a href="images/fulls/story.jpg" class="image fit"><img src="images/thumbs/story.jpg" alt="Storytelling Package" /></a>
-                <h3>Storytelling – AED 700</h3>
-                <p>
-                    2 hrs | 50+ edits | 3 locations | outfit changes<br>
-                    🎬 Includes a short cinematic reel
-                </p>
-
-                <!-- Direct video player -->
-                <video controls style="width:100%;">
-                    <source src="videos/story.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </article>
-        </div>
-
-        <a href="index.html" class="button primary" style="margin:18px 0; display:inline-block;">Back to Home</a>
+      <!-- Storytelling Package -->
+      <article>
+        <a href="images/fulls/story.jpg"><img src="images/thumbs/story.jpg" alt="Storytelling Package" /></a>
+        <h3>Storytelling – AED 700</h3>
+        <p>2 hrs | 50+ edits | 3 locations | outfit changes<br>🎬 Includes a short cinematic reel</p>
+        <video controls>
+          <source src="https://raw.githubusercontent.com/ssamoli/raoufpx/main/videos/story.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </article>
     </div>
+
+    <a href="index.html" class="button primary" style="margin-top:18px;display:inline-block;">Back to Home</a>
+  </div>
 </section>
 
 <script src="assets/js/jquery.min.js"></script>
@@ -113,6 +113,10 @@
 <script src="assets/js/breakpoints.min.js"></script>
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script>
+  window.addEventListener('load', ()=>document.body.classList.remove('is-preload'));
+</script>
 
 </body>
 </html>
