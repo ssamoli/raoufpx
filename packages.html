@@ -1,101 +1,118 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Photography Packages – RAOUF px</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photography Packages – RAOUF px</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Keep logo small */
+        .logo-inner img {
+            height: 46px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
 
-  <style>
-    body{font-family:'Montserrat',sans-serif; background: radial-gradient(1200px circle at 10% 10%, #0b0b0f 0%, #040405 60%); color:#000;}
-    h2,h3{color:#000;}
-    p{color:#000; line-height:1.6;}
-    .gallery{display:flex; flex-wrap:wrap; gap:16px; margin-top:18px;}
-    .gallery article{flex:1 1 calc(33% - 16px); min-width:220px; background:transparent; border-radius:10px; overflow:hidden;}
-    .image.fit img{width:100%; display:block; border-radius:10px;}
-    #load-more{display:none;} /* optional, no batches here */
-    .button.primary{background:#f5c16c;color:#000;border-radius:50px;font-weight:700;padding:0.9rem 1.6rem;border:none;cursor:pointer;}
-    header h2{margin-bottom:1rem;}
-    iframe{border-radius:10px; margin-top:10px;}
-    @media(max-width:900px){.gallery article{flex:1 1 calc(50% - 12px);}}
+        /* Fixed header */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 36px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+        }
 
-  </style>
+        /* Push content below header */
+        .main {
+            padding-top: 140px;
+        }
+
+        /* Video player style */
+        .content video {
+            border-radius: 10px;
+            margin-top: 12px;
+        }
+    </style>
 </head>
 <body class="is-preload">
 
 <!-- Header -->
 <header id="header">
-  <div class="logo-frame" aria-hidden="false">
-    <div class="logo-inner">
-      <!-- Replace images/logo.png with your transparent logo -->
-      <img src="images/logo.png" alt="RAOUF px Logo" />
+    <div class="logo-frame" aria-hidden="false">
+        <div class="logo-inner">
+            <img src="images/logo.png" alt="RAOUF px Logo" />
+        </div>
     </div>
-  </div>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">My Work</a></li>
-      <li><a href="packages.html">Packages</a></li>
-      <li><a href="booking.html">Book Now</a></li>
-    </ul>
-  </nav>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">My Work</a></li>
+            <li><a href="packages.html">Packages</a></li>
+            <li><a href="booking.html">Book Now</a></li>
+        </ul>
+    </nav>
 </header>
 
-
-  <!-- Packages Section -->
-  <section id="packages" class="main style1 dark fullscreen" style="padding-top:120px;">
+<!-- Packages Section -->
+<section id="packages" class="main style1 dark fullscreen">
     <div class="content box style2">
-      <header>
-        <h2>Photography Packages – Dubai</h2>
-      </header>
+        <header>
+            <h2>Photography Packages – Dubai</h2>
+        </header>
 
-      <div class="gallery">
-        <!-- Starter Package -->
-        <article>
-          <a href="images/fulls/Starter.jpg" class="image fit"><img src="images/thumbs/Starter.jpg" alt="Starter Package" /></a>
-          <h3>Starter – AED 250</h3>
-          <p>30 min | 10 edits | 1 location | 3-day delivery</p>
-        </article>
+        <div class="gallery">
+            <!-- Starter Package -->
+            <article>
+                <a href="images/fulls/Starter.jpg" class="image fit"><img src="images/thumbs/Starter.jpg" alt="Starter Package" /></a>
+                <h3>Starter – AED 250</h3>
+                <p>30 min | 10 edits | 1 location | 3-day delivery</p>
+            </article>
 
-        <!-- Signature Package -->
-        <article>
-          <a href="images/fulls/Signature.jpg" class="image fit"><img src="images/thumbs/Signature.jpg" alt="Signature Package" /></a>
-          <h3>Signature – AED 450</h3>
-          <p>1 hr | 25 edits | 2 locations | outfit change</p>
-        </article>
+            <!-- Signature Package -->
+            <article>
+                <a href="images/fulls/Signature.jpg" class="image fit"><img src="images/thumbs/Signature.jpg" alt="Signature Package" /></a>
+                <h3>Signature – AED 450</h3>
+                <p>1 hr | 25 edits | 2 locations | outfit change</p>
+            </article>
 
-        <!-- Storytelling Package with Direct Video -->
-        <article>
-          <a href="images/fulls/story.jpg" class="image fit"><img src="images/thumbs/story.jpg" alt="Storytelling Package" /></a>
-          <h3>Storytelling – AED 700</h3>
-          <p>
-            2 hrs | 50+ edits | 3 locations | outfit changes<br>
-            🎬 Includes a short cinematic reel
-          </p>
+            <!-- Storytelling Package -->
+            <article>
+                <a href="images/fulls/story.jpg" class="image fit"><img src="images/thumbs/story.jpg" alt="Storytelling Package" /></a>
+                <h3>Storytelling – AED 700</h3>
+                <p>
+                    2 hrs | 50+ edits | 3 locations | outfit changes<br>
+                    🎬 Includes a short cinematic reel
+                </p>
 
-          <!-- Direct Video Player -->
-          <video controls style="width:100%; max-width:100%; margin-top:10px; border-radius:10px;">
-            <source src="videos/story/story.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </article>
-      </div>
+                <!-- Direct video player -->
+                <video controls style="width:100%;">
+                    <source src="videos/story.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </article>
+        </div>
 
-      <!-- Back to Home -->
-      <a href="index.html" class="button primary" style="margin:18px 0; display:inline-block;">Back to Home</a>
+        <a href="index.html" class="button primary" style="margin:18px 0; display:inline-block;">Back to Home</a>
     </div>
-  </section>
+</section>
 
-  <!-- Scripts -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/main.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.poptrox.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 
-  <script>
-    window.addEventListener('load', ()=>document.body.classList.remove('is-preload'));
-  </script>
 </body>
 </html>
