@@ -1,181 +1,186 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Work – RAOUF px</title>
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>My Work – RAOUF px</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <style>
-        /* Keep logo small */
-        .logo-inner img {
-            height: 46px;
-            width: auto;
-            display: block;
-            object-fit: contain;
-        }
+  <style>
+    :root{
+      --bg-1: #040405;
+      --bg-2: #0b0b0f;
+      --panel: rgba(255,255,255,0.03);
+      --accent: #f5c16c;
+      --muted: rgba(255,255,255,0.75);
+    }
 
-        /* Fixed header */
-        #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 36px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
-        }
+    html,body{height:100%;margin:0;padding:0;font-family:'Montserrat',sans-serif;background: radial-gradient(1200px circle at 10% 10%, var(--bg-2) 0%, var(--bg-1) 60%);color:var(--muted);-webkit-font-smoothing:antialiased;}
 
-        /* Push content below header */
-        .main {
-            padding-top: 140px;
-        }
-    </style>
+    h1,h2,h3{font-weight:800;letter-spacing:-0.6px;color:#fff;margin:0 0 0.25rem;}
+    p{font-size:1.05rem;line-height:1.7;color:var(--muted);}
+
+    .content.box{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:2.2rem;backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,0.7);}
+
+    #header{display:flex;align-items:center;justify-content:space-between;padding:18px 36px;position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.08));border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);}
+    .logo-frame{display:flex;align-items:center;gap:12px;padding:6px;border-radius:14px;background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;}
+    .logo-frame::before{content:"";position:absolute;inset:-3px;border-radius:16px;background:linear-gradient(90deg, rgba(0,212,255,0.08), rgba(245,193,108,0.07));filter:blur(8px);z-index:-2;}
+    .logo-frame::after{content:"";position:absolute;inset:-1.6px;border-radius:15px;background:linear-gradient(135deg,#08101a00,#ffffff06);z-index:-1;mix-blend-mode:overlay;}
+    .logo-inner{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));}
+    .logo-inner img{height:46px;width:auto;border-radius:8px;display:block;object-fit:contain;filter:drop-shadow(0 6px 22px rgba(0,0,0,0.6));}
+
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:0.95rem;}
+    nav a:hover{color:#fff;}
+
+    .main.style1.dark.fullscreen,.main.style2.dark.fullscreen,.main.style3.primary{display:flex;align-items:center;justify-content:center;padding:6rem 2rem 3rem;min-height:100vh;background:transparent;}
+    .main.style1.dark .content header h1{font-size:2.2rem;margin-bottom:0.6rem;}
+    .main.style1.dark p,.main.style2.dark .content.box p,.main.style3.primary .content.box p{max-width:760px;color:rgba(255,255,255,0.9);}
+    .button.primary{background:var(--accent);color:#000;border-radius:50px;font-weight:700;padding:0.9rem 1.6rem;border:none;cursor:pointer;box-shadow:0 12px 30px rgba(245,193,108,0.06);}
+    .gallery{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;}
+    .gallery article{flex:1 1 calc(25% - 16px);min-width:220px;background:transparent;border-radius:10px;overflow:hidden;}
+    #load-more{background:linear-gradient(145deg,var(--accent), #ffd88a);border:none;color:#000;font-weight:700;padding:1em 2.2em;border-radius:50px;cursor:pointer;box-shadow:0 5px 0 #c99e4c, 0 10px 20px rgba(0,0,0,0.5);transition:all 0.28s ease;transform-style:preserve-3d;}
+    #load-more:hover{transform:translateY(-4px);box-shadow:0 8px 0 #c99e4c, 0 12px 28px rgba(0,0,0,0.6);}
+    #load-more:active{transform:translateY(2px);box-shadow:0 3px 0 #c99e4c, 0 6px 12px rgba(0,0,0,0.5);}
+
+    @media (max-width:900px){
+      nav{display:none;}
+      .gallery article{flex:1 1 calc(50% - 12px);}
+      #header{padding:12px 18px;}
+      .logo-inner img{height:40px;}
+    }
+  </style>
 </head>
+
 <body class="is-preload">
-
-<!-- Header -->
 <header id="header">
-    <div class="logo-frame" aria-hidden="false">
-        <div class="logo-inner">
-            <img src="images/logo.png" alt="RAOUF px Logo" />
-        </div>
+  <div class="logo-frame" aria-hidden="false">
+    <div class="logo-inner">
+      <img src="images/logo.png" alt="RAOUF px Logo" />
     </div>
-
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="work.html">My Work</a></li>
-            <li><a href="packages.html">Packages</a></li>
-            <li><a href="booking.html">Book Now</a></li>
-        </ul>
-    </nav>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html">My Work</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
 </header>
 
-<!-- Work Section -->
-<section id="work" class="main style3 primary fullscreen">
-    <div class="content">
-        <header>
-            <h2>My Work</h2>
-            <p>
-                My work is driven by curiosity, the quiet kind that looks deeper than smiles or poses.
-                I specialize in <strong>portraits</strong> and <strong>candid moments</strong> because they show people as they are, not as they perform to be.
-                <br><br>
-                Through my lens, I strip away performance, emotion, and pressure — and what’s left is raw truth. It’s in that stillness that people often see themselves clearly for the first time.
-                <br><br>
-                For those who feel shy or unfamiliar in front of the camera, I guide them with kindness. Because this isn’t just about a good photo — it’s about giving someone a moment where they say, “Wow. That’s me.”
-                <br><br>
-                And I do it with love. Every frame is a quiet mirror — honest, simple, and unforgettable.
-            </p>
-        </header>
+<section id="work" class="main style3 primary fullscreen" style="padding-top:120px;">
+  <div class="content box style2">
+    <header>
+      <h2>My Work</h2>
+      <p>My work is driven by curiosity, the quiet kind that looks deeper than smiles or poses. I specialize in <strong>portraits</strong> and <strong>candid moments</strong> because they show people as they are, not as they perform to be.
 
-        <!-- Gallery -->
-        <div class="gallery">
-            <article class="from-left">
-                <a href="images/fulls/01.jpg" class="image fit"><img src="images/thumbs/01.jpg" alt="Photo 1" /></a>
-            </article>
-            <article class="from-right">
-                <a href="images/fulls/02.jpg" class="image fit"><img src="images/thumbs/02.jpg" alt="Photo 2" /></a>
-            </article>
-            <article class="from-left">
-                <a href="images/fulls/03.jpg" class="image fit"><img src="images/thumbs/03.jpg" alt="Photo 3" /></a>
-            </article>
-            <article class="from-right">
-                <a href="images/fulls/04.jpg" class="image fit"><img src="images/thumbs/04.jpg" alt="Photo 4" /></a>
-            </article>
+      Through my lens, I strip away performance, emotion, and pressure — and what’s left is raw truth. It’s in that stillness that people often see themselves clearly for the first time.
 
-            <!-- Hidden batches -->
-            <div class="extra-gallery batch-1" style="display:none;">
-                <article class="from-left">
-                    <a href="images/fulls/05.jpg" class="image fit"><img src="images/thumbs/05.jpg" alt="Photo 5" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/06.jpg" class="image fit"><img src="images/thumbs/06.jpg" alt="Photo 6" /></a>
-                </article>
-                <article class="from-left">
-                    <a href="images/fulls/07.jpg" class="image fit"><img src="images/thumbs/07.jpg" alt="Photo 7" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/08.jpg" class="image fit"><img src="images/thumbs/08.jpg" alt="Photo 8" /></a>
-                </article>
-            </div>
+      For those who feel shy or unfamiliar in front of the camera, I guide them with kindness. Because this isn’t just about a good photo — it’s about giving someone a moment where they say, “Wow. That’s me.”
 
-            <div class="extra-gallery batch-2" style="display:none;">
-                <article class="from-left">
-                    <a href="images/fulls/09.jpg" class="image fit"><img src="images/thumbs/09.jpg" alt="Photo 9" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/10.jpg" class="image fit"><img src="images/thumbs/10.jpg" alt="Photo 10" /></a>
-                </article>
-                <article class="from-left">
-                    <a href="images/fulls/11.jpg" class="image fit"><img src="images/thumbs/11.jpg" alt="Photo 11" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/12.jpg" class="image fit"><img src="images/thumbs/12.jpg" alt="Photo 12" /></a>
-                </article>
-            </div>
+      And I do it with love. Every frame is a quiet mirror — honest, simple, and unforgettable.</p>
+    </header>
 
-            <div class="extra-gallery batch-3" style="display:none;">
-                <article class="from-left">
-                    <a href="images/fulls/13.jpg" class="image fit"><img src="images/thumbs/13.jpg" alt="Photo 13" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/14.jpg" class="image fit"><img src="images/thumbs/14.jpg" alt="Photo 14" /></a>
-                </article>
-                <article class="from-left">
-                    <a href="images/fulls/15.jpg" class="image fit"><img src="images/thumbs/15.jpg" alt="Photo 15" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/16.jpg" class="image fit"><img src="images/thumbs/16.jpg" alt="Photo 16" /></a>
-                </article>
-            </div>
+    <div class="gallery">
+      <article class="from-left">
+        <a href="images/fulls/01.jpg" class="image fit"><img src="images/thumbs/01.jpg" alt="Photo 1" /></a>
+      </article>
+      <article class="from-right">
+        <a href="images/fulls/02.jpg" class="image fit"><img src="images/thumbs/02.jpg" alt="Photo 2" /></a>
+      </article>
+      <article class="from-left">
+        <a href="images/fulls/03.jpg" class="image fit"><img src="images/thumbs/03.jpg" alt="Photo 3" /></a>
+      </article>
+      <article class="from-right">
+        <a href="images/fulls/04.jpg" class="image fit"><img src="images/thumbs/04.jpg" alt="Photo 4" /></a>
+      </article>
 
-            <div class="extra-gallery batch-4" style="display:none;">
-                <article class="from-left">
-                    <a href="images/fulls/17.jpg" class="image fit"><img src="images/thumbs/17.jpg" alt="Photo 17" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/18.jpg" class="image fit"><img src="images/thumbs/18.jpg" alt="Photo 18" /></a>
-                </article>
-                <article class="from-left">
-                    <a href="images/fulls/19.jpg" class="image fit"><img src="images/thumbs/19.jpg" alt="Photo 19" /></a>
-                </article>
-                <article class="from-right">
-                    <a href="images/fulls/20.jpg" class="image fit"><img src="images/thumbs/20.jpg" alt="Photo 20" /></a>
-                </article>
-            </div>
-        </div>
+      <div class="extra-gallery batch-1" style="display:none;">
+        <article class="from-left">
+          <a href="images/fulls/05.jpg" class="image fit"><img src="images/thumbs/05.jpg" alt="Photo 5" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/06.jpg" class="image fit"><img src="images/thumbs/06.jpg" alt="Photo 6" /></a>
+        </article>
+        <article class="from-left">
+          <a href="images/fulls/07.jpg" class="image fit"><img src="images/thumbs/07.jpg" alt="Photo 7" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/08.jpg" class="image fit"><img src="images/thumbs/08.jpg" alt="Photo 8" /></a>
+        </article>
+      </div>
 
-        <!-- See More Button -->
-        <footer style="width:100%;display:flex;justify-content:center;margin-top:22px;">
-            <button id="load-more" class="button style2">See More</button>
-        </footer>
+      <div class="extra-gallery batch-2" style="display:none;">
+        <article class="from-left">
+          <a href="images/fulls/09.jpg" class="image fit"><img src="images/thumbs/09.jpg" alt="Photo 9" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/10.jpg" class="image fit"><img src="images/thumbs/10.jpg" alt="Photo 10" /></a>
+        </article>
+        <article class="from-left">
+          <a href="images/fulls/11.jpg" class="image fit"><img src="images/thumbs/11.jpg" alt="Photo 11" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/12.jpg" class="image fit"><img src="images/thumbs/12.jpg" alt="Photo 12" /></a>
+        </article>
+      </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                let batch = 1;
-                const totalBatches = 4;
+      <div class="extra-gallery batch-3" style="display:none;">
+        <article class="from-left">
+          <a href="images/fulls/13.jpg" class="image fit"><img src="images/thumbs/13.jpg" alt="Photo 13" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/14.jpg" class="image fit"><img src="images/thumbs/14.jpg" alt="Photo 14" /></a>
+        </article>
+        <article class="from-left">
+          <a href="images/fulls/15.jpg" class="image fit"><img src="images/thumbs/15.jpg" alt="Photo 15" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/16.jpg" class="image fit"><img src="images/thumbs/16.jpg" alt="Photo 16" /></a>
+        </article>
+      </div>
 
-                document.getElementById("load-more").addEventListener("click", function (e) {
-                    e.preventDefault();
-                    const currentBatch = document.querySelector(`.batch-${batch}`);
-                    if (currentBatch) {
-                        currentBatch.style.display = "flex";
-                        batch++;
-                        if (batch > totalBatches) {
-                            this.style.display = "none";
-                        }
-                    }
-                });
-            });
-        </script>
-
-        <a href="index.html" class="button primary" style="margin:18px 0; display:inline-block;">Back to Home</a>
+      <div class="extra-gallery batch-4" style="display:none;">
+        <article class="from-left">
+          <a href="images/fulls/17.jpg" class="image fit"><img src="images/thumbs/17.jpg" alt="Photo 17" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/18.jpg" class="image fit"><img src="images/thumbs/18.jpg" alt="Photo 18" /></a>
+        </article>
+        <article class="from-left">
+          <a href="images/fulls/19.jpg" class="image fit"><img src="images/thumbs/19.jpg" alt="Photo 19" /></a>
+        </article>
+        <article class="from-right">
+          <a href="images/fulls/20.jpg" class="image fit"><img src="images/thumbs/20.jpg" alt="Photo 20" /></a>
+        </article>
+      </div>
     </div>
+
+    <footer style="width:100%;display:flex;justify-content:center;margin-top:22px;">
+      <button id="load-more" class="button style2">See More</button>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let batch = 1;
+        const totalBatches = 4;
+        document.getElementById("load-more").addEventListener("click", function (e) {
+          e.preventDefault();
+          const currentBatch = document.querySelector(`.batch-${batch}`);
+          if (currentBatch) {
+            currentBatch.style.display = "flex";
+            batch++;
+            if (batch > totalBatches) this.style.display = "none";
+          }
+        });
+      });
+    </script>
+
+    <a href="index.html" class="button primary" style="margin-top:18px;display:inline-block;">Back to Home</a>
+  </div>
 </section>
 
 <script src="assets/js/jquery.min.js"></script>
