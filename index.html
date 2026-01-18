@@ -92,26 +92,11 @@
     #header{padding:12px 18px;}
     .logo-inner img{height:40px;}
   }
-  /* FORCE DARK BACKGROUND – override HTML5UP */
-section,
-.main,
-.wrapper,
-.style1,
-.style2,
-.style3,
-.primary {
-  background: transparent !important;
-}
-
-body {
-  background-color: #040405 !important;
-}
-
 </style>
 
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
-	<body>
+	<body class="is-preload">
 
 		<!-- Header -->
 			<header id="header">
@@ -357,6 +342,9 @@ body {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+<script>
+  // small init to remove preload class for smooth appearance
+  window.addEventListener('load', ()=>document.body.classList.remove('is-preload'));
+</script>
 </body>
 </html>
