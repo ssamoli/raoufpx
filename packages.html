@@ -1,175 +1,736 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <title>Photography Packages – RAOUF px</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Photography Packages – RAOUF px</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Professional photography packages for portraits, events, and cinematic storytelling in Dubai." />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+    
+    <style>
+        /* CSS Variables - Consistent with other pages */
+        :root {
+            --bg-1: #040405;
+            --bg-2: #0b0b0f;
+            --panel: rgba(20, 20, 25, 0.9);
+            --accent: #f5c16c;
+            --accent-dark: #c99e4c;
+            --accent-light: #ffd88a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-accent: rgba(245, 193, 108, 0.3);
+            --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.8);
+            --shadow-md: 0 15px 40px rgba(0, 0, 0, 0.6);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.4);
+            --radius-lg: 20px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  <style>
-    :root{
-      --bg-1: #040405;
-      --bg-2: #0b0b0f;
-      --panel: rgba(255,255,255,0.03);
-      --accent: #f5c16c;
-      --muted: rgba(255,255,255,0.75);
-    }
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    html,body{height:100%;margin:0;padding:0;font-family:'Montserrat',sans-serif;background: radial-gradient(1200px circle at 10% 10%, var(--bg-2) 0%, var(--bg-1) 60%);color:var(--muted);-webkit-font-smoothing:antialiased;}
+        html {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
 
-    h1,h2,h3{font-weight:800;letter-spacing:-0.6px;margin:0 0 0.25rem;}
-    p{font-size:1.05rem;line-height:1.7;color:var(--muted);}
+        body {
+            min-height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    .content.box{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:2.2rem;backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,0.7);}
+        /* Background Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(245, 193, 108, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
 
-    #header{display:flex;align-items:center;justify-content:space-between;padding:18px 36px;position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.08));border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);}
-    .logo-frame{display:flex;align-items:center;gap:12px;padding:6px;border-radius:14px;background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;}
-    .logo-frame::before{content:"";position:absolute;inset:-3px;border-radius:16px;background:linear-gradient(90deg, rgba(0,212,255,0.08), rgba(245,193,108,0.07));filter:blur(8px);z-index:-2;}
-    .logo-frame::after{content:"";position:absolute;inset:-1.6px;border-radius:15px;background:linear-gradient(135deg,#08101a00,#ffffff06);z-index:-1;mix-blend-mode:overlay;}
-    .logo-inner{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));}
-    .logo-inner img{height:46px;width:auto;border-radius:8px;display:block;object-fit:contain;filter:drop-shadow(0 6px 22px rgba(0,0,0,0.6));}
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
 
-    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;}
-    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:0.95rem;}
-    nav a:hover{color:#fff;}
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
 
-    .main.style1.dark.fullscreen{display:flex;align-items:center;justify-content:center;padding:6rem 2rem 3rem;min-height:100vh;background:transparent;}
+        p {
+            font-size: clamp(1rem, 1.1vw, 1.1rem);
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
 
-    .gallery{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;}
-    .gallery article{flex:1 1 calc(33% - 16px);min-width:220px;background:transparent;border-radius:10px;overflow:hidden;}
-    .gallery article img{border-radius:10px;display:block;width:100%;height:auto;object-fit:cover;}
-    video{border-radius:10px; width:100%; margin-top:12px; display:block;}
+        /* Header */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem clamp(1rem, 4vw, 3rem);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+            border-bottom: 1px solid var(--border-light);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: var(--transition);
+        }
 
-    /* Text colors */
-    #packages h2,#packages h3{color:var(--accent);}
-    #packages p{color:#fff;}
+        #header.scrolled {
+            background: rgba(11, 11, 15, 0.95);
+            box-shadow: var(--shadow-md);
+        }
 
-    @media (max-width:900px){
-      nav{display:none;}
-      .gallery article{flex:1 1 calc(50% - 12px);}
-      #header{padding:12px 18px;}
-      .logo-inner img{height:40px;}
-    }
-    /* Background CTA watermark */
-.bg-cta {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
+        .logo-frame {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+            position: relative;
+            isolation: isolate;
+        }
 
-.bg-cta span {
-  position: absolute;
-  font-size: clamp(6rem, 18vw, 22rem);
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  color: rgba(245,193,108,0.08); /* accent but very soft */
-  filter: blur(6px);
-  white-space: nowrap;
-  animation: floatCTA 28s ease-in-out infinite;
-}
+        .logo-frame::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: calc(var(--radius-md) + 2px);
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(245, 193, 108, 0.15));
+            filter: blur(10px);
+            z-index: -2;
+            opacity: 0.6;
+        }
 
-/* Different positions if you want more than one */
-.bg-cta span:nth-child(1) {
-  top: 35%;
-  left: -10%;
-}
-.bg-cta span:nth-child(2) {
-  top: 65%;
-  left: -30%;
-  animation-duration: 36s;
-  opacity: 0.05;
-}
+        .logo-frame::after {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: calc(var(--radius-md) + 1px);
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.08));
+            z-index: -1;
+        }
 
-/* Slow cinematic movement */
-@keyframes floatCTA {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(25%); }
-  100% { transform: translateX(0); }
-}
+        .logo-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
+        }
 
-/* Make sure real content stays above */
-.main, .content, header, footer {
-  position: relative;
-  z-index: 2;
-}
-  </style>
+        .logo-inner img {
+            height: clamp(2.5rem, 4vw, 3rem);
+            width: auto;
+            border-radius: 8px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.8));
+        }
+
+        nav ul {
+            display: flex;
+            gap: clamp(1.5rem, 2.5vw, 2.5rem);
+            list-style: none;
+        }
+
+        nav a {
+            font-weight: 600;
+            font-size: clamp(0.9rem, 1.1vw, 1rem);
+            color: var(--text-muted);
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--text-primary);
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .packages-container {
+            min-height: 100vh;
+            padding: clamp(8rem, 15vh, 12rem) clamp(1.5rem, 4vw, 4rem) 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .packages-wrapper {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Intro Content */
+        .intro-content {
+            background: var(--panel);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: clamp(2rem, 3vw, 3rem);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .intro-content h2 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 2px;
+        }
+
+        .intro-content p {
+            font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Packages Grid */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .package-card {
+            background: var(--panel);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: clamp(1.5rem, 2vw, 2rem);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            opacity: 0.8;
+        }
+
+        .package-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .package-image {
+            width: 100%;
+            height: 200px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .package-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .package-card:hover .package-image img {
+            transform: scale(1.05);
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .package-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .package-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-shadow: 0 2px 10px rgba(245, 193, 108, 0.3);
+        }
+
+        .package-details {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-details li {
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .package-details li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .package-highlight {
+            background: linear-gradient(135deg, rgba(245, 193, 108, 0.1), rgba(245, 193, 108, 0.05));
+            border: 1px solid rgba(245, 193, 108, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            text-align: center;
+        }
+
+        /* Video Styling */
+        .package-video {
+            margin-top: 1.5rem;
+        }
+
+        .package-video video {
+            width: 100%;
+            border-radius: var(--radius-md);
+            display: block;
+        }
+
+        /* Book Now Button */
+        .book-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: #000;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .book-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .book-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(245, 193, 108, 0.3);
+        }
+
+        .book-button:hover::before {
+            left: 100%;
+        }
+
+        /* Back Button */
+        .back-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* Background CTA Watermark */
+        .bg-cta {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-cta span {
+            position: absolute;
+            font-size: clamp(6rem, 18vw, 22rem);
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            color: rgba(245, 193, 108, 0.04);
+            filter: blur(8px);
+            white-space: nowrap;
+            animation: floatCTA 28s ease-in-out infinite;
+        }
+
+        .bg-cta span:nth-child(1) {
+            top: 35%;
+            left: -10%;
+        }
+
+        .bg-cta span:nth-child(2) {
+            top: 65%;
+            left: -30%;
+            animation-duration: 36s;
+            opacity: 0.03;
+        }
+
+        @keyframes floatCTA {
+            0%   { transform: translateX(0); }
+            50%  { transform: translateX(25%); }
+            100% { transform: translateX(0); }
+        }
+
+        .packages-container, .intro-content, .packages-grid {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .packages-grid {
+                grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .packages-container {
+                padding: 7rem 1rem 2rem;
+            }
+            
+            .intro-content {
+                padding: 1.5rem;
+            }
+            
+            .packages-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .package-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .package-image {
+                height: 180px;
+            }
+            
+            .package-price {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body class="is-preload">
-  <div class="bg-cta">
-  <span>BOOK&nbsp;NOW</span>
-  <span>BOOK&nbsp;NOW</span>
-</div>
-<header id="header">
-<a href="index.html" class="logo-frame" aria-label="Go to Home">
-  <div class="logo-inner">
-    <img src="images/logo.png" alt="RAOUF px Logo" />
-  </div>
-</a>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="work.html">My Work</a></li>
-      <li><a href="packages.html">Packages</a></li>
-      <li><a href="booking.html">Book Now</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section id="packages" class="main style1 dark fullscreen" style="padding-top:120px;">
-  <div class="content box style2">
-    <header>
-      <h2>Photography Packages – Dubai</h2>
-    </header>
-
-    <div class="gallery">
-      <!-- Starter Package -->
-      <article>
-        <a href="images/fulls/Starter.jpg"><img src="images/thumbs/Starter.jpg" alt="Starter Package" /></a>
-        <h3>Starter – AED 250</h3>
-        <p>30 min | 10 edits | 1 location | 3-day delivery</p>
-      </article>
-
-      <!-- Signature Package -->
-      <article>
-        <a href="images/fulls/Signature.jpg"><img src="images/thumbs/Signature.jpg" alt="Signature Package" /></a>
-        <h3>Signature – AED 499</h3>
-        <p>1 hr | 25 edits | 2 locations | outfit change</p>
-      </article>
-
-      <!-- Storytelling Package -->
-      <article>
-        <a href="images/fulls/story.jpg"><img src="images/thumbs/story.jpg" alt="Storytelling Package" /></a>
-        <h3>Storytelling – AED 999</h3>
-        <p>2 hrs | 50+ edits | 3 locations | outfit changes<br>🎬 Includes a short cinematic reel</p>
-        <video controls>
-          <source src="https://raw.githubusercontent.com/ssamoli/raoufpx/main/videos/story.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </article>
+    <!-- Background CTA -->
+    <div class="bg-cta">
+        <span>BOOK&nbsp;NOW</span>
+        <span>BOOK&nbsp;NOW</span>
     </div>
 
-    <a href="index.html" class="button primary" style="margin-top:18px;display:inline-block;">Back to Home</a>
-  </div>
-</section>
+    <!-- Header -->
+    <header id="header">
+        <a href="index.html" class="logo-frame" aria-label="RAOUF px Home">
+            <div class="logo-inner">
+                <img src="images/logo.png" alt="RAOUF px Logo" width="48" height="48" />
+            </div>
+        </a>
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.poptrox.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="work.html">My Work</a></li>
+                <li><a href="packages.html" class="active">Packages</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<script>
-  window.addEventListener('load', ()=>document.body.classList.remove('is-preload'));
-</script>
+    <!-- Main Content -->
+    <main class="packages-container">
+        <div class="packages-wrapper">
+            <!-- Intro -->
+            <section class="intro-content">
+                <h2>Photography Packages – Dubai</h2>
+                <p>Choose the perfect package for your photography session. Each package is designed to capture your unique story with cinematic quality and professional editing.</p>
+            </section>
+
+            <!-- Packages Grid -->
+            <div class="packages-grid">
+                <!-- Starter Package -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="images/thumbs/Starter.jpg" alt="Starter Package - Portrait Photography" loading="lazy" />
+                    </div>
+                    <div class="package-header">
+                        <div class="package-name">Starter</div>
+                        <div class="package-price">AED 250</div>
+                    </div>
+                    <ul class="package-details">
+                        <li>30 minute photoshoot</li>
+                        <li>10 professionally edited photos</li>
+                        <li>1 shooting location</li>
+                        <li>3-day delivery</li>
+                    </ul>
+                    <a href="booking.html?package=starter" class="book-button">Book This Package</a>
+                </div>
+
+                <!-- Signature Package -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="images/thumbs/Signature.jpg" alt="Signature Package - Professional Photography" loading="lazy" />
+                    </div>
+                    <div class="package-header">
+                        <div class="package-name">Signature</div>
+                        <div class="package-price">AED 499</div>
+                    </div>
+                    <ul class="package-details">
+                        <li>1 hour photoshoot</li>
+                        <li>25 professionally edited photos</li>
+                        <li>2 shooting locations</li>
+                        <li>Outfit change included</li>
+                    </ul>
+                    <a href="booking.html?package=signature" class="book-button">Book This Package</a>
+                </div>
+
+                <!-- Storytelling Package -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="images/thumbs/story.jpg" alt="Storytelling Package - Cinematic Photography" loading="lazy" />
+                    </div>
+                    <div class="package-header">
+                        <div class="package-name">Storytelling</div>
+                        <div class="package-price">AED 999</div>
+                    </div>
+                    <ul class="package-details">
+                        <li>2 hour photoshoot</li>
+                        <li>50+ professionally edited photos</li>
+                        <li>3 shooting locations</li>
+                        <li>Multiple outfit changes</li>
+                    </ul>
+                    <div class="package-highlight">
+                        🎬 Includes a short cinematic reel
+                    </div>
+                    <div class="package-video">
+                        <video controls poster="images/thumbs/story.jpg">
+                            <source src="https://raw.githubusercontent.com/ssamoli/raoufpx/main/videos/story.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <a href="booking.html?package=storytelling" class="book-button">Book This Package</a>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="back-container">
+                <a href="index.html" class="back-button">
+                    ← Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove preload class
+            document.body.classList.remove('is-preload');
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Check URL for package parameter and auto-select
+            const urlParams = new URLSearchParams(window.location.search);
+            const packageParam = urlParams.get('package');
+            
+            if (packageParam) {
+                // Find the corresponding package card and scroll to it
+                const packageCard = document.querySelector(`.package-card [href*="${packageParam}"]`);
+                if (packageCard) {
+                    packageCard.closest('.package-card').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                    
+                    // Add visual highlight
+                    packageCard.closest('.package-card').style.animation = 'none';
+                    packageCard.closest('.package-card').offsetHeight; // Trigger reflow
+                    packageCard.closest('.package-card').style.animation = 'pulse 2s';
+                }
+                
+                // Add pulse animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes pulse {
+                        0% { box-shadow: 0 0 0 0 rgba(245, 193, 108, 0.7); }
+                        70% { box-shadow: 0 0 0 20px rgba(245, 193, 108, 0); }
+                        100% { box-shadow: 0 0 0 0 rgba(245, 193, 108, 0); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Image lazy loading
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                if (img.dataset.src) {
+                    imageObserver.observe(img);
+                }
+            });
+
+            // Video lazy loading
+            const videos = document.querySelectorAll('video');
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        video.load();
+                        videoObserver.unobserve(video);
+                    }
+                });
+            });
+
+            videos.forEach(video => {
+                videoObserver.observe(video);
+            });
+        });
+    </script>
 
 </body>
 </html>
