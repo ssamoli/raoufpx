@@ -5,28 +5,32 @@
     <title>Book a Session | RAOUF px</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="assets/css/main.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
     
     <style>
-        /* CSS Variables - Same as your index */
+        /* CSS Variables - Black & Yellow Theme */
         :root {
             --bg-1: #040405;
             --bg-2: #0b0b0f;
-            --panel: rgba(255, 255, 255, 0.03);
+            --panel: rgba(20, 20, 25, 0.9);
             --accent: #f5c16c;
             --accent-dark: #c99e4c;
             --accent-light: #ffd88a;
-            --muted: rgba(255, 255, 255, 0.75);
-            --white: #ffffff;
-            --border-light: rgba(255, 255, 255, 0.06);
-            --shadow-dark: 0 30px 80px rgba(0, 0, 0, 0.7);
-            --radius-lg: 18px;
-            --radius-md: 14px;
-            --radius-sm: 10px;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-accent: rgba(245, 193, 108, 0.3);
+            --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.8);
+            --shadow-md: 0 15px 40px rgba(0, 0, 0, 0.6);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.4);
+            --radius-lg: 20px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Base Styles - Consistent with your index */
+        /* Reset & Base */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -35,270 +39,471 @@
 
         html {
             height: 100%;
+            scroll-behavior: smooth;
         }
 
         body {
             min-height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(1200px circle at 10% 10%, var(--bg-2) 0%, var(--bg-1) 60%);
-            color: var(--muted);
+            background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+            color: var(--text-secondary);
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Header - Exactly like your index */
+        /* Background Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(245, 193, 108, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        p {
+            font-size: clamp(1rem, 1.1vw, 1.1rem);
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        /* Header - Same as index */
         #header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 36px;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 60;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.08));
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(6px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem clamp(1rem, 4vw, 3rem);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+            border-bottom: 1px solid var(--border-light);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: var(--transition);
         }
 
-        /* Logo Frame - Exactly like your index */
+        #header.scrolled {
+            background: rgba(11, 11, 15, 0.95);
+            box-shadow: var(--shadow-md);
+        }
+
         .logo-frame {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 6px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            gap: 0.75rem;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
             position: relative;
+            isolation: isolate;
         }
 
         .logo-frame::before {
             content: "";
             position: absolute;
-            inset: -3px;
-            border-radius: 16px;
-            background: linear-gradient(90deg, rgba(0, 212, 255, 0.08), rgba(245, 193, 108, 0.07));
-            filter: blur(8px);
+            inset: -2px;
+            border-radius: calc(var(--radius-md) + 2px);
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(245, 193, 108, 0.15));
+            filter: blur(10px);
             z-index: -2;
+            opacity: 0.6;
         }
 
         .logo-frame::after {
             content: "";
             position: absolute;
-            inset: -1.6px;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #08101a00, #ffffff06);
+            inset: -1px;
+            border-radius: calc(var(--radius-md) + 1px);
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.08));
             z-index: -1;
-            mix-blend-mode: overlay;
         }
 
         .logo-inner {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 6px 10px;
-            border-radius: 10px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.12));
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
         }
 
         .logo-inner img {
-            height: 46px;
+            height: clamp(2.5rem, 4vw, 3rem);
             width: auto;
             border-radius: 8px;
-            display: block;
             object-fit: contain;
-            filter: drop-shadow(0 6px 22px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.8));
         }
 
-        /* Navigation - Exactly like your index */
+        .brand-text {
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 0.03em;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            text-transform: uppercase;
+        }
+
         nav ul {
             display: flex;
-            gap: 18px;
+            gap: clamp(1.5rem, 2.5vw, 2.5rem);
             list-style: none;
-            margin: 0;
-            padding: 0;
         }
 
         nav a {
-            color: var(--muted);
-            text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: clamp(0.9rem, 1.1vw, 1rem);
+            color: var(--text-muted);
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
         }
 
-        nav a:hover {
-            color: var(--white);
+        nav a:hover,
+        nav a.active {
+            color: var(--text-primary);
         }
 
-        /* Booking Section */
-        #booking {
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .booking-container {
+            min-height: 100vh;
+            padding: clamp(8rem, 15vh, 12rem) clamp(1.5rem, 4vw, 4rem) 4rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 120px 2rem 3rem; /* Match your index padding */
         }
 
-        /* Content Box - Consistent with your index */
-        .content.box {
+        .booking-wrapper {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: start;
+        }
+
+        /* Packages Section */
+        .packages-section {
+            position: relative;
+        }
+
+        .packages-section h2 {
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .packages-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            border-radius: 2px;
+        }
+
+        .packages-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .package-card {
             background: var(--panel);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: var(--shadow-dark);
-            max-width: 520px;
-            width: 100%;
+            padding: clamp(1.5rem, 2vw, 2rem);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Typography - Consistent with your index */
-        h2 {
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--white);
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        p {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: var(--muted);
+        .package-card.selected {
+            border-color: var(--border-accent);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .package-card.selected::before {
+            transform: scaleX(1);
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1.5rem;
         }
 
-        /* Form Styles */
-        .fields {
-            display: grid;
-            gap: 1.2rem;
-            margin-top: 1.5rem;
+        .package-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
-        input, select, textarea {
+        .package-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-shadow: 0 2px 10px rgba(245, 193, 108, 0.3);
+        }
+
+        .package-details {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-details li {
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .package-details li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .package-highlight {
+            background: linear-gradient(135deg, rgba(245, 193, 108, 0.1), rgba(245, 193, 108, 0.05));
+            border: 1px solid rgba(245, 193, 108, 0.2);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--accent-light);
+        }
+
+        /* Booking Form Section */
+        .booking-form-section {
+            position: sticky;
+            top: 8rem;
+        }
+
+        .form-container {
+            background: var(--panel);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: clamp(2rem, 3vw, 3rem);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .selected-package {
+            background: linear-gradient(135deg, rgba(245, 193, 108, 0.1), transparent);
+            border: 1px solid var(--border-accent);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .selected-package.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .selected-package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .selected-package-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .selected-package-price {
+            font-weight: 800;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
             width: 100%;
-            padding: 0.9rem 1rem;
+            padding: 0.9rem 1.2rem;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-sm);
-            color: var(--white);
-            transition: all 0.3s ease;
+            color: var(--text-primary);
+            transition: var(--transition);
         }
 
-        input:focus, select:focus, textarea:focus {
+        .form-control:focus {
             outline: none;
             border-color: var(--accent);
             background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(245, 193, 108, 0.1);
         }
 
-        input::placeholder, textarea::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        .form-control::placeholder {
+            color: var(--text-muted);
         }
 
-        /* Button - Consistent with your index */
-        .button.primary {
-            background: var(--accent);
-            color: #000;
-            border-radius: 50px;
-            font-weight: 700;
-            padding: 0.9rem 1.6rem;
-            border: none;
-            cursor: pointer;
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Submit Button */
+        .submit-btn {
             width: 100%;
-            margin-top: 1.5rem;
-            transition: all 0.28s ease;
-            box-shadow: 0 12px 30px rgba(245, 193, 108, 0.06);
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: #000;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .button.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(245, 193, 108, 0.1);
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
         }
 
-        .button.primary:disabled {
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(245, 193, 108, 0.3);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
 
-        /* Select dropdown styling */
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23f5c16c' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 12px;
-            padding-right: 2.5rem;
-            cursor: pointer;
+        /* Messages */
+        .message {
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            animation: fadeIn 0.3s ease;
         }
 
-        /* Form validation */
-        input:invalid, select:invalid {
-            border-color: rgba(255, 100, 100, 0.3);
+        .success {
+            background: linear-gradient(135deg, rgba(100, 255, 100, 0.1), transparent);
+            color: #90ee90;
+            border: 1px solid rgba(100, 255, 100, 0.3);
         }
 
-        input:valid, select:valid {
-            border-color: rgba(100, 255, 100, 0.3);
+        .error {
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.1), transparent);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 100, 100, 0.3);
         }
 
-        /* Responsive Design - Consistent with your index */
-        @media (max-width: 900px) {
-            #header {
-                padding: 10px 14px;
-            }
-
-            nav ul {
-                gap: 12px;
-            }
-
-            nav a {
-                font-size: 0.85rem;
-            }
-
-            .logo-inner img {
-                height: 36px;
-            }
-
-            #booking {
-                padding: 100px 1rem 2rem;
-            }
-
-            .content.box {
-                padding: 1.5rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            #header {
-                flex-direction: column;
-                gap: 10px;
-                padding: 10px;
-            }
-
-            nav ul {
-                gap: 10px;
-            }
-
-            h2 {
-                font-size: 1.6rem;
-            }
-
-            .button.primary {
-                padding: 0.75rem 1.5rem;
-            }
-        }
-
-        /* Loading animation */
+        /* Loading Animation */
         .loading {
             display: inline-block;
             width: 20px;
@@ -306,113 +511,228 @@
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top-color: var(--accent);
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-            vertical-align: middle;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* Success/Error messages */
-        .message {
-            padding: 1rem;
-            border-radius: var(--radius-sm);
-            margin-top: 1rem;
-            text-align: center;
-            font-weight: 600;
-            display: none;
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .booking-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .booking-form-section {
+                position: static;
+            }
         }
 
-        .success {
-            background: rgba(100, 255, 100, 0.1);
-            color: #90ee90;
-            border: 1px solid rgba(100, 255, 100, 0.3);
+        @media (max-width: 768px) {
+            #header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .booking-container {
+                padding: 7rem 1rem 2rem;
+            }
+            
+            .package-card {
+                padding: 1.5rem;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
         }
 
-        .error {
-            background: rgba(255, 100, 100, 0.1);
-            color: #ff6b6b;
-            border: 1px solid rgba(255, 100, 100, 0.3);
+        @media (max-width: 480px) {
+            .package-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .package-price {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Accessibility */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
         }
     </style>
 </head>
 
 <body class="is-preload">
 
-    <!-- Header - Exactly like your index -->
+    <!-- Header -->
     <header id="header">
-        <a href="index.html" class="logo-frame" aria-label="Go to Home">
+        <a href="index.html" class="logo-frame" aria-label="RAOUF px Home">
             <div class="logo-inner">
-                <img src="images/logo.png" alt="RAOUF px Logo" />
+                <img src="images/logo.png" alt="RAOUF px Logo" width="48" height="48" />
             </div>
         </a>
 
-        <nav>
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="work.html">My Work</a></li>
                 <li><a href="packages.html">Packages</a></li>
-                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="booking.html" class="active">Book Now</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Booking Section -->
-    <section id="booking">
-        <div class="content box">
-            <header>
-                <h2>Book a Session</h2>
-                <p>Select a date and send your request. I'll confirm availability personally.</p>
-            </header>
+    <!-- Main Content -->
+    <div class="booking-container">
+        <div class="booking-wrapper">
+            <div class="booking-grid">
+                <!-- Packages Section -->
+                <section class="packages-section">
+                    <h2>Choose Your Package</h2>
+                    <div class="packages-grid">
+                        <!-- Starter Package -->
+                        <div class="package-card" data-package="starter" data-price="250">
+                            <div class="package-header">
+                                <div class="package-name">Starter</div>
+                                <div class="package-price">AED 250</div>
+                            </div>
+                            <ul class="package-details">
+                                <li>30 min session</li>
+                                <li>10 professionally edited photos</li>
+                                <li>1 shooting location</li>
+                                <li>3-day delivery</li>
+                            </ul>
+                        </div>
 
-            <form id="booking-form">
-                <!-- Hidden fields for Formspree -->
-                <input type="hidden" name="_subject" value="New Booking Request - RAOUF px">
-                <input type="hidden" name="_replyto" id="reply-to">
-                <input type="text" name="_gotcha" style="display:none">
+                        <!-- Signature Package -->
+                        <div class="package-card selected" data-package="signature" data-price="499">
+                            <div class="package-header">
+                                <div class="package-name">Signature</div>
+                                <div class="package-price">AED 499</div>
+                            </div>
+                            <ul class="package-details">
+                                <li>1 hour session</li>
+                                <li>25 professionally edited photos</li>
+                                <li>2 shooting locations</li>
+                                <li>Outfit change included</li>
+                            </ul>
+                        </div>
 
-                <div class="fields">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required id="email-input">
-                    
-                    <select name="session-type" required>
-                        <option value="" disabled selected>Select Session Type</option>
-                        <option value="Portrait Session">Portrait Session</option>
-                        <option value="Couple Session">Couple Session</option>
-                        <option value="Family Session">Family Session</option>
-                        <option value="Commercial Shoot">Commercial Shoot</option>
-                        <option value="Other">Other</option>
-                    </select>
-                    
-                    <input type="date" name="date" required min="<?php echo date('Y-m-d'); ?>">
-                    
-                    <select name="time-preference">
-                        <option value="" disabled selected>Time Preference</option>
-                        <option value="Morning (9am-12pm)">Morning (9am-12pm)</option>
-                        <option value="Afternoon (1pm-4pm)">Afternoon (1pm-4pm)</option>
-                        <option value="Golden Hour (5pm-7pm)">Golden Hour (5pm-7pm)</option>
-                        <option value="Flexible">Flexible</option>
-                    </select>
-                    
-                    <textarea name="message" placeholder="Additional details or special requests..." rows="3"></textarea>
-                </div>
+                        <!-- Storytelling Package -->
+                        <div class="package-card" data-package="storytelling" data-price="999">
+                            <div class="package-header">
+                                <div class="package-name">Storytelling</div>
+                                <div class="package-price">AED 999</div>
+                            </div>
+                            <ul class="package-details">
+                                <li>2 hour session</li>
+                                <li>50+ professionally edited photos</li>
+                                <li>3 shooting locations</li>
+                                <li>Multiple outfit changes</li>
+                            </ul>
+                            <div class="package-highlight">
+                                🎬 Includes a short cinematic reel
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                <button type="submit" class="button primary" id="submit-btn">
-                    Book Your Session
-                </button>
+                <!-- Booking Form Section -->
+                <section class="booking-form-section">
+                    <div class="form-container">
+                        <h2 style="margin-bottom: 1.5rem;">Book Your Session</h2>
+                        <p style="margin-bottom: 2rem;">Fill in your details and select your preferred date. I'll confirm availability within 24 hours.</p>
 
-                <div class="message success" id="success-message">
-                    Thank you! Your booking request has been sent. I'll contact you soon.
-                </div>
+                        <!-- Selected Package Display -->
+                        <div class="selected-package" id="selected-package">
+                            <div class="selected-package-header">
+                                <div class="selected-package-name">Signature</div>
+                                <div class="selected-package-price">AED 499</div>
+                            </div>
+                            <div class="selected-package-details" style="color: var(--text-secondary); font-size: 0.9rem;">
+                                1 hour • 25 edits • 2 locations • Outfit change
+                            </div>
+                        </div>
 
-                <div class="message error" id="error-message">
-                    Something went wrong. Please try again or contact me directly.
-                </div>
-            </form>
+                        <!-- Booking Form -->
+                        <form id="booking-form">
+                            <!-- Hidden Fields for Formspree -->
+                            <input type="hidden" name="_subject" value="New Booking Request - RAOUF px">
+                            <input type="hidden" name="_replyto" id="reply-to">
+                            <input type="hidden" name="package" id="package-input" value="signature">
+                            <input type="hidden" name="package_price" id="package-price-input" value="499">
+                            <input type="text" name="_gotcha" style="display:none">
+
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="your.email@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" placeholder="+971 50 XXX XXXX">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">Preferred Date *</label>
+                                <input type="date" id="date" name="date" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="time">Preferred Time</label>
+                                <select id="time" name="time" class="form-control">
+                                    <option value="">Select preferred time</option>
+                                    <option value="Morning (9am-12pm)">Morning (9am-12pm)</option>
+                                    <option value="Afternoon (1pm-4pm)">Afternoon (1pm-4pm)</option>
+                                    <option value="Golden Hour (5pm-7pm)">Golden Hour (5pm-7pm)</option>
+                                    <option value="Flexible">Flexible - Let's discuss</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Additional Notes</label>
+                                <textarea id="message" name="message" class="form-control" placeholder="Any special requests, ideas, or questions..."></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn" id="submit-btn">
+                                Book Now
+                            </button>
+
+                            <div class="message success" id="success-message">
+                                ✅ Thank you! Your booking request has been sent. I'll contact you within 24 hours.
+                            </div>
+
+                            <div class="message error" id="error-message">
+                                ❌ Something went wrong. Please try again or contact me directly at contact@raoufpx.com
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
         </div>
-    </section>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -420,19 +740,84 @@
             // Remove preload class
             document.body.classList.remove('is-preload');
             
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Package selection
+            const packageCards = document.querySelectorAll('.package-card');
+            const selectedPackageDiv = document.getElementById('selected-package');
+            const packageInput = document.getElementById('package-input');
+            const packagePriceInput = document.getElementById('package-price-input');
+            const selectedPackageName = selectedPackageDiv.querySelector('.selected-package-name');
+            const selectedPackagePrice = selectedPackageDiv.querySelector('.selected-package-price');
+            const selectedPackageDetails = selectedPackageDiv.querySelector('.selected-package-details');
+
+            // Package details mapping
+            const packageDetails = {
+                'starter': {
+                    name: 'Starter',
+                    price: 'AED 250',
+                    details: '30 min • 10 edits • 1 location • 3-day delivery'
+                },
+                'signature': {
+                    name: 'Signature',
+                    price: 'AED 499',
+                    details: '1 hour • 25 edits • 2 locations • Outfit change'
+                },
+                'storytelling': {
+                    name: 'Storytelling',
+                    price: 'AED 999',
+                    details: '2 hours • 50+ edits • 3 locations • Outfit changes'
+                }
+            };
+
+            packageCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selected class from all cards
+                    packageCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Add selected class to clicked card
+                    this.classList.add('selected');
+                    
+                    // Get package data
+                    const packageType = this.dataset.package;
+                    const price = this.dataset.price;
+                    
+                    // Update form inputs
+                    packageInput.value = packageType;
+                    packagePriceInput.value = price;
+                    
+                    // Update selected package display
+                    selectedPackageName.textContent = packageDetails[packageType].name;
+                    selectedPackagePrice.textContent = packageDetails[packageType].price;
+                    selectedPackageDetails.textContent = packageDetails[packageType].details;
+                    
+                    // Show selected package
+                    selectedPackageDiv.classList.add('show');
+                });
+            });
+
+            // Form submission
             const form = document.getElementById('booking-form');
             const submitBtn = document.getElementById('submit-btn');
-            const emailInput = document.getElementById('email-input');
+            const emailInput = document.getElementById('email');
             const successMessage = document.getElementById('success-message');
             const errorMessage = document.getElementById('error-message');
             
-            // Set reply-to field to match email
+            // Set reply-to field
             emailInput.addEventListener('input', function() {
                 document.getElementById('reply-to').value = this.value;
             });
             
-            // Set minimum date to today
-            const dateInput = form.querySelector('input[type="date"]');
+            // Set minimum date
+            const dateInput = document.getElementById('date');
             const today = new Date().toISOString().split('T')[0];
             dateInput.min = today;
             
@@ -447,10 +832,10 @@
                 
                 // Show loading state
                 const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<span class="loading"></span>Sending...';
+                submitBtn.innerHTML = '<span class="loading"></span> Processing...';
                 submitBtn.disabled = true;
                 
-                // Hide any previous messages
+                // Hide messages
                 successMessage.style.display = 'none';
                 errorMessage.style.display = 'none';
                 
@@ -471,10 +856,14 @@
                         successMessage.style.display = 'block';
                         form.reset();
                         
-                        // Redirect after 3 seconds
-                        setTimeout(() => {
-                            window.location.href = 'index.html';
-                        }, 3000);
+                        // Reset to default package
+                        packageCards.forEach(c => c.classList.remove('selected'));
+                        document.querySelector('.package-card[data-package="signature"]').classList.add('selected');
+                        selectedPackageDiv.classList.add('show');
+                        
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        
                     } else {
                         throw new Error('Form submission failed');
                     }
@@ -484,8 +873,11 @@
                     errorMessage.style.display = 'block';
                     console.error('Form submission error:', error);
                     
+                    // Scroll to error message
+                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
                 } finally {
-                    // Reset button state after 2 seconds
+                    // Reset button after delay
                     setTimeout(() => {
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
@@ -493,7 +885,7 @@
                 }
             });
             
-            // Form field validation styling
+            // Form field validation
             const formInputs = form.querySelectorAll('input, select, textarea');
             formInputs.forEach(input => {
                 input.addEventListener('blur', function() {
@@ -505,16 +897,10 @@
                 });
             });
             
-            // Keyboard navigation support
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    document.body.classList.add('keyboard-user');
-                }
-            });
-            
-            document.addEventListener('mousedown', () => {
-                document.body.classList.remove('keyboard-user');
-            });
+            // Initialize date picker with tomorrow as default
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.value = tomorrow.toISOString().split('T')[0];
         });
     </script>
 
