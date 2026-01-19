@@ -1,125 +1,483 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-  <title>You're Booked – RAOUF px</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>You're Booked – RAOUF px</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Thank you for booking your photography session with RAOUF px." />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
+    
+    <style>
+        /* CSS Variables - Consistent with other pages */
+        :root {
+            --bg-1: #040405;
+            --bg-2: #0b0b0f;
+            --panel: rgba(20, 20, 25, 0.95);
+            --accent: #f5c16c;
+            --accent-dark: #c99e4c;
+            --accent-light: #ffd88a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-muted: rgba(255, 255, 255, 0.65);
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-accent: rgba(245, 193, 108, 0.3);
+            --shadow-lg: 0 40px 100px rgba(0, 0, 0, 0.9);
+            --shadow-md: 0 20px 50px rgba(0, 0, 0, 0.7);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="assets/css/main.css" />
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  <!-- Google Font (Bold & Modern) -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+        html {
+            height: 100%;
+        }
 
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at top, #111 0%, #000 60%);
-      color: #fff;
-      margin: 0;
-    }
+        body {
+            min-height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    .confirmation {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2em;
-    }
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(245, 193, 108, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 70% 30%, rgba(245, 193, 108, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(245, 193, 108, 0.02) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            animation: gradientShift 15s ease-in-out infinite alternate;
+        }
 
-    .box {
-      max-width: 680px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 18px;
-      padding: 3em 2.5em;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-      animation: fadeUp 0.9s ease-out;
-    }
+        @keyframes gradientShift {
+            0% { 
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
 
-    h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 0.3em;
-    }
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
 
-    h1 span {
-      color: #f5c16c;
-    }
+        .particle {
+            position: absolute;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
 
-    p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      opacity: 0.9;
-      margin-bottom: 2em;
-    }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-    }
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
 
-    .button {
-      padding: 0.9em 1.4em;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
+        h1 { 
+            font-size: clamp(2.8rem, 6vw, 4rem);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
 
-    .button.primary {
-      background: #f5c16c;
-      color: #000;
-    }
+        p {
+            font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .button.primary:hover {
-      background: #ffd88a;
-      transform: translateY(-2px);
-    }
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
 
-    .button.secondary {
-      border: 1px solid rgba(255,255,255,0.4);
-      color: #fff;
-    }
+        /* Confirmation Container */
+        .confirmation-container {
+            min-height: 100vh;
+            padding: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 4vw, 4rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .button.secondary:hover {
-      background: rgba(255,255,255,0.08);
-    }
+        .confirmation-wrapper {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+        /* Confirmation Card */
+        .confirmation-card {
+            background: var(--panel);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: clamp(3rem, 5vw, 4rem);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            animation: cardEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes cardEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confirmation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        }
+
+        .confirmation-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .success-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 50%;
+            animation: pulseIcon 2s ease-in-out infinite;
+        }
+
+        .success-icon::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            color: #000;
+            font-weight: 800;
+            z-index: 1;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(245, 193, 108, 0.4);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(245, 193, 108, 0);
+            }
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 3rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: #000;
+            box-shadow: 0 10px 30px rgba(245, 193, 108, 0.3);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 193, 108, 0.4);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--accent);
+        }
+
+        .button-secondary:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* WhatsApp Icon */
+        .whatsapp-icon {
+            font-size: 1.3em;
+        }
+
+        /* Footer Note */
+        .footer-note {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .confirmation-container {
+                padding: 3rem 1rem;
+            }
+            
+            .confirmation-card {
+                padding: 2rem;
+            }
+            
+            .action-buttons {
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .success-icon::after {
+                font-size: 1.8rem;
+            }
+            
+            .button {
+                padding: 0.9rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body class="is-preload">
 
-<section class="confirmation">
-  <div class="box">
-    <h1>Your session is <span>on the way</span>.</h1>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
 
-    <p>
-      I’ve received your request.<br>
-      I’ll personally review the details and get back to you shortly.
-      <br><br>
-      This isn’t just a photoshoot — it’s a moment we’ll create together.
-    </p>
+    <!-- Main Content -->
+    <main class="confirmation-container">
+        <div class="confirmation-wrapper">
+            <div class="confirmation-card">
+                <!-- Success Icon -->
+                <div class="success-icon"></div>
 
-    <div class="actions">
-      <a href="https://wa.me/+971506180828" class="button primary">
-        Continue on WhatsApp
-      </a>
-      <a href="index.html" class="button secondary">
-        Back to Home
-      </a>
-    </div>
-  </div>
-</section>
+                <!-- Heading -->
+                <h1>Your session is <span class="highlight">on the way</span>.</h1>
+
+                <!-- Message -->
+                <p>
+                    I've received your booking request and will personally review the details.
+                    <br><br>
+                    Expect to hear from me within <span class="highlight">24 hours</span> to confirm your session details and discuss your vision.
+                    <br><br>
+                    This isn't just a photoshoot — it's a moment we'll create together.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="https://wa.me/+971506180828" class="button button-primary" target="_blank" rel="noopener">
+                        <span class="whatsapp-icon">💬</span>
+                        Continue on WhatsApp
+                    </a>
+                    <a href="index.html" class="button button-secondary">
+                        ← Back to Home
+                    </a>
+                </div>
+
+                <!-- Footer Note -->
+                <div class="footer-note">
+                    Need immediate assistance?<br>
+                    Email: contact@raoufpx.com | WhatsApp: +971 50 618 0828
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove preload class
+            setTimeout(() => {
+                document.body.classList.remove('is-preload');
+            }, 100);
+
+            // Create floating particles
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size between 2-8px
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation delay and duration
+                const delay = Math.random() * 20;
+                const duration = Math.random() * 10 + 20;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.1 + 0.05;
+                
+                particlesContainer.appendChild(particle);
+            }
+
+            // Add confetti effect on load
+            setTimeout(() => {
+                const confettiCount = 30;
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'particle';
+                    confetti.style.width = '8px';
+                    confetti.style.height = '8px';
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.top = '0';
+                    confetti.style.animationDuration = '3s';
+                    confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+                    confetti.style.animationTimingFunction = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
+                    
+                    particlesContainer.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }
+            }, 500);
+        });
+    </script>
 
 </body>
 </html>
