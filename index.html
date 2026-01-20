@@ -30,35 +30,113 @@
   /* Glassy content boxes */
   .content.box{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:2.2rem;backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,0.7);}
 
-  /* Header & logo frame */
-  #header{display:flex;align-items:center;justify-content:space-between;padding:18px 36px;position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.08));border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);}
+  /* Header & logo frame - UPDATED TO MATCH OTHER PAGES */
+  #header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.25rem clamp(1rem,4vw,3rem);
+    background:linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
 
   .logo-frame{
-    display:flex;align-items:center;gap:12px;padding:6px;border-radius:14px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:flex;
+    align-items:center;
+    gap:0.75rem;
+    padding:0.5rem;
+    border-radius:14px;
+    background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     position:relative;
+    isolation:isolate;
   }
 
-  /* decorative neon gradient ring */
+  /* decorative neon gradient ring - ENHANCED */
   .logo-frame::before{
-    content:"";position:absolute;inset:-3px;border-radius:16px;
-    background:linear-gradient(90deg, rgba(0,212,255,0.08), rgba(245,193,108,0.07));
-    filter:blur(8px);z-index:-2;
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:16px;
+    background:linear-gradient(90deg, rgba(0,212,255,0.1), rgba(245,193,108,0.15));
+    filter:blur(10px);
+    z-index:-2;
+    opacity:0.6;
   }
   .logo-frame::after{
-    content:"";position:absolute;inset:-1.6px;border-radius:15px;background:linear-gradient(135deg,#08101a00,#ffffff06);z-index:-1;
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:15px;
+    background:linear-gradient(135deg,transparent,rgba(255,255,255,0.08));
+    z-index:-1;
     mix-blend-mode:overlay;
   }
 
-  .logo-inner{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));}
+  .logo-inner{
+    display:flex;
+    align-items:center;
+    gap:0.75rem;
+    padding:0.5rem 1rem;
+    border-radius:10px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2));
+  }
 
-  .logo-inner img{height:46px;width:auto;border-radius:8px;display:block;object-fit:contain;filter:drop-shadow(0 6px 22px rgba(0,0,0,0.6));}
+  .logo-inner img{
+    height:clamp(2.5rem,4vw,3rem);
+    width:auto;
+    border-radius:8px;
+    display:block;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 25px rgba(0,0,0,0.8));
+  }
 
   .brand-text{font-weight:800;color:var(--accent);letter-spacing:0.6px;font-size:1rem;}
 
-  nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;}
-  nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:0.95rem;}
-  nav a:hover{color:#fff;}
+  nav ul{
+    display:flex;
+    gap:clamp(1.5rem,2.5vw,2.5rem);
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-weight:600;
+    font-size:clamp(0.9rem,1.1vw,1rem);
+    padding:0.5rem 0;
+    position:relative;
+    transition:color 0.3s ease;
+  }
+  
+  nav a:hover,
+  nav a.active{
+    color:#fff;
+  }
+  
+  nav a::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:0;
+    height:2px;
+    background:var(--accent);
+    transition:width 0.3s ease;
+  }
+  
+  nav a:hover::after{
+    width:100%;
+  }
 
   /* Intro styling */
   .main.style1.dark.fullscreen{display:flex;align-items:center;justify-content:center;padding:6rem 2rem 3rem;min-height:100vh;background:transparent;}
@@ -85,10 +163,12 @@
   #load-more:hover{transform:translateY(-4px);box-shadow:0 8px 0 #c99e4c, 0 12px 28px rgba(0,0,0,0.6);}
   #load-more:active{transform:translateY(2px);box-shadow:0 3px 0 #c99e4c, 0 6px 12px rgba(0,0,0,0.5);}
 
-  /* Responsive tweaks */
+  /* Responsive tweaks - UPDATED */
  @media (max-width:900px){
   #header{
-    padding:10px 14px;
+    padding:1rem;
+    flex-direction:column;
+    gap:1rem;
   }
 
   nav{
@@ -96,16 +176,16 @@
   }
 
   nav ul{
-    gap:12px;
+    gap:1rem;
   }
 
   nav a{
-    font-size:0.8rem;
+    font-size:0.9rem;
     font-weight:600;
   }
 
   .logo-inner img{
-    height:36px;
+    height:2.5rem;
   }
 
   .gallery article{
@@ -126,18 +206,18 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Header -->
+		<!-- Header - UPDATED WITH ACTIVE STATE -->
 			<header id="header">
 			<a href="index.html" class="logo-frame" aria-label="Go to Home">
   <div class="logo-inner">
-    <img src="images/logo.png" alt="RAOUF px Logo" />
+    <img src="images/logo.png" alt="RAOUF px Logo" width="48" height="48" />
   </div>
 </a>
 
 
 				<nav>
   <ul>
-    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html" class="active">Home</a></li>
     <li><a href="work.html">My Work</a></li>
     <li><a href="packages.html">Packages</a></li>
     <li><a href="booking.html">Book Now</a></li>
@@ -151,12 +231,12 @@
   <header>
     <h1>
       This is not a photoshoot.<br>
-      <span style="color:var(--accent);">It’s a moment.</span>
+      <span style="color:var(--accent);">It's a moment.</span>
     </h1>
   </header>
 
   <p>
-    I don’t just take portraits.<br>
+    I don't just take portraits.<br>
     I create frames where people recognize themselves.
   </p>
 
@@ -173,13 +253,13 @@
 						<h2>What I Do</h2>
 					</header>
 					<p>
-  I photograph people who don’t feel comfortable in front of the camera —
+  I photograph people who don't feel comfortable in front of the camera —
   and help them see themselves differently.
   <br><br>
   Calm. Honest. Cinematic.
 </p>
 				</div>
-			<a href="work.html" class="button style2 down anchored">Next</a>
+			<a href="#two" class="button style2 down anchored">Next</a>
 			</section>
 
 		<!-- Two -->
@@ -188,7 +268,7 @@
 					<header>
 						<h2>Who I Am</h2>
 					</header>
-					<p>I’m <strong>Osama Raouf</strong> — a visual storyteller chasing light, emotion, and moments that speak without words.<br />
+					<p>I'm <strong>Osama Raouf</strong> — a visual storyteller chasing light, emotion, and moments that speak without words.<br />
 					This space is under construction, but the vision is in motion.</p>
 				</div>
 				<a href="#work" class="button style2 down anchored">Next</a>
@@ -207,6 +287,20 @@
 <script>
   // small init to remove preload class for smooth appearance
   window.addEventListener('load', ()=>document.body.classList.remove('is-preload'));
+  
+  // Add scroll effect for header (same as other pages)
+  document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(11, 11, 15, 0.95)';
+        header.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.6)';
+      } else {
+        header.style.background = 'linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3))';
+        header.style.boxShadow = 'none';
+      }
+    });
+  });
 </script>
 </body>
 </html>
