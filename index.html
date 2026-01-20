@@ -6,6 +6,7 @@
 <html>
 	<head>
                 <link rel="icon" href="favicon.ico" type="image/x-icon">
+		<title>RAOUF px</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -29,7 +30,7 @@
   /* Glassy content boxes */
   .content.box{background:var(--panel);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:2.2rem;backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,0.7);}
 
-  /* Header & logo frame - FIXED FOR VERTICAL */
+  /* Header & logo frame - CLEANED UP (NO DUPLICATE TEXT) */
   #header{
     position:fixed;
     top:0;
@@ -50,7 +51,6 @@
   .logo-frame{
     display:flex;
     align-items:center;
-    gap:0.5rem;
     padding:0.4rem;
     border-radius:12px;
     background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
@@ -59,7 +59,7 @@
     flex-shrink:0;
   }
 
-  /* decorative neon gradient ring - ENHANCED */
+  /* decorative neon gradient ring */
   .logo-frame::before{
     content:"";
     position:absolute;
@@ -83,7 +83,6 @@
   .logo-inner{
     display:flex;
     align-items:center;
-    gap:0.5rem;
     padding:0.4rem 0.8rem;
     border-radius:8px;
     background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2));
@@ -98,12 +97,9 @@
     filter:drop-shadow(0 6px 20px rgba(0,0,0,0.8));
   }
 
+  /* Brand text REMOVED - logo already contains the name */
   .brand-text{
-    font-size:0.9rem;
-    font-weight:800;
-    color:var(--accent);
-    letter-spacing:0.03em;
-    white-space:nowrap;
+    display:none !important;
   }
 
   /* Navigation - HIDDEN BY DEFAULT ON MOBILE */
@@ -151,7 +147,7 @@
     background:rgba(255,255,255,0.05);
   }
 
-  /* Mobile Toggle Button - ALWAYS VISIBLE ON MOBILE */
+  /* Mobile Toggle Button */
   .mobile-toggle{
     display:flex;
     align-items:center;
@@ -174,7 +170,7 @@
     color:#fff;
   }
 
-  /* Intro styling - ADJUSTED FOR MOBILE */
+  /* Intro styling */
   .main.style1.dark.fullscreen{
     display:flex;
     align-items:center;
@@ -317,10 +313,6 @@
       display:none;
     }
     
-    .brand-text{
-      display:inline;
-    }
-    
     #header{
       padding:1.25rem clamp(1rem,4vw,3rem);
     }
@@ -354,14 +346,7 @@
     
     .logo-frame{
       flex:1;
-      min-width:0; /* Allow shrinking */
-    }
-    
-    .brand-text{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      max-width:120px;
+      min-width:0;
     }
     
     .main.style1.dark.fullscreen{
@@ -414,11 +399,6 @@
       height:1.8rem;
     }
     
-    .brand-text{
-      font-size:0.8rem;
-      max-width:100px;
-    }
-    
     .mobile-toggle{
       width:2.2rem;
       height:2.2rem;
@@ -464,16 +444,15 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Header - MOBILE VERTICAL FIXED -->
+		<!-- Header - CLEANED (NO DUPLICATE TEXT) -->
 			<header id="header">
-			<a href="index.html" class="logo-frame" aria-label="Go to Home">
+			<a href="index.html" class="logo-frame" aria-label="RAOUF px Home">
   <div class="logo-inner">
     <img src="images/logo.png" alt="RAOUF px Logo" width="35" height="35" />
-    <span class="brand-text">RAOUF px</span>
   </div>
 </a>
 
-        <!-- Mobile Toggle Button - ALWAYS VISIBLE ON MOBILE -->
+        <!-- Mobile Toggle Button -->
         <button class="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileToggle">
           ☰
         </button>
@@ -553,7 +532,7 @@
     document.body.classList.remove('is-preload');
   });
   
-  // Mobile Navigation for Vertical Screens
+  // Mobile Navigation
   document.addEventListener('DOMContentLoaded', function() {
     const mobileToggle = document.getElementById('mobileToggle');
     const mainNav = document.getElementById('mainNav');
@@ -616,19 +595,6 @@
     // Adjust on resize
     window.addEventListener('resize', adjustSectionPadding);
     
-    // Adjust when menu opens/closes (for mobile)
-    if (mainNav) {
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.attributeName === 'class') {
-            setTimeout(adjustSectionPadding, 10);
-          }
-        });
-      });
-      
-      observer.observe(mainNav, { attributes: true });
-    }
-    
     // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -650,25 +616,6 @@
         }
       });
     });
-    
-    // Fix for iOS viewport height
-    function setVH() {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    
-    setVH();
-    window.addEventListener('resize', setVH);
-    
-    // Prevent zoom on double tap (iOS)
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', function(event) {
-      const now = (new Date()).getTime();
-      if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, false);
   });
 </script>
 </body>
