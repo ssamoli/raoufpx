@@ -1,117 +1,67 @@
 <!DOCTYPE HTML>
 <!--
-	RAOUF px — Cinematic Portrait Photography
-	Optimized for performance, accessibility, and polish.
+	Modified RAOUF px — dark, modern, futuristic frame for logo, white "What I Do" text, 3D See More preserved.
+	Generated for Osama — replace images/logo.png with a high-res transparent PNG for best effect.
 -->
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>RAOUF px | Cinematic Portrait Photography</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="Cinematic portrait photography by Osama Raouf. Capturing authentic moments, not just photos." />
-    <meta name="keywords" content="photography, portraits, cinematic, photographer, Dubai, photoshoot" />
-    <meta property="og:title" content="RAOUF px | Cinematic Portrait Photography" />
-    <meta property="og:description" content="This is not a photoshoot. It's a moment." />
-    <meta property="og:type" content="website" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/main.css" />
+<html>
+	<head>
+                <link rel="icon" href="favicon.ico" type="image/x-icon">
+		<title>RAOUF px</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-  /* CSS Variables with fallbacks */
+  /* Base */
   :root{
     --bg-1: #040405;
     --bg-2: #0b0b0f;
     --panel: rgba(255,255,255,0.03);
     --accent: #f5c16c;
-    --accent-dark: #c99e4c;
-    --accent-light: #ffd88a;
     --muted: rgba(255,255,255,0.75);
     --text-primary: #ffffff;
     --border-light: rgba(255,255,255,0.06);
-    --border-accent: rgba(245,193,108,0.3);
     --shadow-lg: 0 30px 80px rgba(0,0,0,0.7);
-    --shadow-md: 0 15px 40px rgba(0,0,0,0.5);
-    --radius-lg: 18px;
-    --radius-md: 14px;
-    --radius-sm: 10px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --header-height: 70px;
   }
 
-  /* System font stack as fallback before Montserrat loads */
   html,body{
     height:100%;
     margin:0;
     padding:0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family:'Montserrat', sans-serif;
     background: radial-gradient(1200px circle at 10% 10%, var(--bg-2) 0%, var(--bg-1) 60%);
     color:var(--muted);
     -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
     overflow-x:hidden;
-  }
-
-  /* Apply Montserrat once loaded */
-  .fonts-loaded body{
-    font-family:'Montserrat', system-ui, -apple-system, sans-serif;
   }
 
   h1,h2,h3{
     font-weight:800;
-    letter-spacing:-0.02em;
-    color:var(--text-primary);
-    margin:0 0 0.5em;
-    line-height:1.2;
+    letter-spacing:-0.6px;
+    color:#fff;
+    margin:0 0 0.25rem;
   }
-
-  h1{
-    font-size:clamp(1.8rem, 4.5vw, 2.5rem);
-  }
-
-  h2{
-    font-size:clamp(1.5rem, 3.5vw, 1.8rem);
-  }
-
+  
   p{
-    font-size:clamp(1rem, 1.1vw, 1.05rem);
+    font-size:1.05rem;
     line-height:1.7;
     color:var(--muted);
-    margin-bottom:1.25em;
   }
 
-  /* Reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-
-  /* Glassy content boxes with progressive enhancement */
+  /* Glassy content boxes */
   .content.box{
     background:var(--panel);
     border:1px solid var(--border-light);
-    border-radius:var(--radius-lg);
-    padding:clamp(1.5rem, 3vw, 2.2rem);
+    border-radius:18px;
+    padding:2.2rem;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
     box-shadow:var(--shadow-lg);
-    position:relative;
-    z-index:1;
   }
 
-  @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
-    .content.box{
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-    }
-  }
-
-  /* Header with will-change for smooth scrolling */
+  /* Header & logo frame */
   #header{
     position:fixed;
     top:0;
@@ -123,49 +73,38 @@
     justify-content:space-between;
     padding:1rem;
     background:rgba(11,11,15,0.98);
-    border-bottom:1px solid rgba(255,255,255,0.1);
+    border-bottom:1px solid var(--border-light);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
     box-shadow:0 4px 20px rgba(0,0,0,0.5);
-    will-change: transform, background-color;
-    transition:var(--transition);
-  }
-
-  @supports (backdrop-filter: blur(15px)) or (-webkit-backdrop-filter: blur(15px)) {
-    #header{
-      backdrop-filter:blur(15px);
-      -webkit-backdrop-filter:blur(15px);
-    }
   }
 
   .logo-frame{
     display:flex;
     align-items:center;
     padding:0.4rem;
-    border-radius:var(--radius-md);
-    background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:14px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     position:relative;
-    isolation:isolate;
-    flex-shrink:0;
-    will-change: transform;
   }
 
-  /* decorative neon gradient ring - reduced blur for performance */
+  /* decorative neon gradient ring */
   .logo-frame::before{
     content:"";
     position:absolute;
-    inset:-2px;
-    border-radius:calc(var(--radius-md) + 2px);
-    background:linear-gradient(90deg, rgba(0,212,255,0.1), rgba(245,193,108,0.15));
-    filter:blur(6px);
+    inset:-3px;
+    border-radius:16px;
+    background:linear-gradient(90deg, rgba(0,212,255,0.08), rgba(245,193,108,0.07));
+    filter:blur(8px);
     z-index:-2;
-    opacity:0.6;
   }
-
+  
   .logo-frame::after{
     content:"";
     position:absolute;
-    inset:-1px;
-    border-radius:calc(var(--radius-md) + 1px);
-    background:linear-gradient(135deg,transparent,rgba(255,255,255,0.08));
+    inset:-1.6px;
+    border-radius:15px;
+    background:linear-gradient(135deg,#08101a00,#ffffff06);
     z-index:-1;
     mix-blend-mode:overlay;
   }
@@ -173,20 +112,18 @@
   .logo-inner{
     display:flex;
     align-items:center;
-    padding:0.4rem 0.8rem;
-    border-radius:var(--radius-sm);
-    background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2));
+    padding:6px 10px;
+    border-radius:10px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
   }
 
   .logo-inner img{
-    height:clamp(1.8rem, 4vw, 2.2rem);
+    height:46px;
     width:auto;
-    border-radius:6px;
+    border-radius:8px;
     display:block;
     object-fit:contain;
-    filter:drop-shadow(0 6px 20px rgba(0,0,0,0.8));
-    loading:eager;
-    decoding:sync;
+    filter:drop-shadow(0 6px 22px rgba(0,0,0,0.6));
   }
 
   /* Navigation */
@@ -201,16 +138,11 @@
     left:0;
     right:0;
     background:rgba(11,11,15,0.98);
-    border-bottom:1px solid rgba(255,255,255,0.1);
+    border-bottom:1px solid var(--border-light);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
     padding:1rem;
-    box-shadow:var(--shadow-md);
-  }
-
-  @supports (backdrop-filter: blur(15px)) or (-webkit-backdrop-filter: blur(15px)) {
-    nav.active{
-      backdrop-filter:blur(15px);
-      -webkit-backdrop-filter:blur(15px);
-    }
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
   }
   
   nav ul{
@@ -229,16 +161,14 @@
     font-size:1rem;
     padding:0.8rem 1rem;
     display:block;
-    border-radius:var(--radius-sm);
-    transition:var(--transition);
+    border-radius:8px;
+    transition:all 0.3s ease;
   }
   
   nav a:hover,
-  nav a:focus-visible,
   nav a.active{
-    color:var(--text-primary);
+    color:#fff;
     background:rgba(255,255,255,0.05);
-    outline:none;
   }
 
   /* Mobile Toggle Button */
@@ -254,103 +184,73 @@
     padding:0.4rem;
     width:2.5rem;
     height:2.5rem;
-    border-radius:var(--radius-sm);
-    transition:var(--transition);
-    flex-shrink:0;
+    border-radius:8px;
+    transition:all 0.3s ease;
   }
   
-  .mobile-toggle:hover,
-  .mobile-toggle:focus-visible{
+  .mobile-toggle:hover{
     background:rgba(255,255,255,0.05);
-    color:var(--text-primary);
-    outline:2px solid var(--accent);
-    outline-offset:2px;
+    color:#fff;
   }
 
-  /* Main sections with proper spacing */
-  section{
-    min-height:100vh;
+  /* KEEP YOUR ORIGINAL SECTION CLASSES - This is what was missing! */
+  .main.style1.dark.fullscreen,
+  .main.style2.right.dark.fullscreen,
+  .main.style2.left.dark.fullscreen{
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:calc(var(--header-height) + 2rem) 1rem 3rem;
+    min-height:100vh;
+    padding:calc(var(--header-height) + 2rem) 2rem 3rem;
+    background:transparent;
     position:relative;
-    scroll-margin-top:var(--header-height);
   }
 
-  .main.style1.dark.fullscreen .content{
-    text-align:center;
-    max-width:760px;
-    width:100%;
+  .main.style1.dark .content header h1{
+    font-size:2.2rem;
+    margin-bottom:0.6rem;
   }
   
-  .main.style1.dark.fullscreen p{
+  .main.style1.dark p{
+    max-width:760px;
     color:rgba(255,255,255,0.9);
-    font-size:clamp(1.1rem, 1.3vw, 1.2rem);
-  }
-
-  .button{
-    display:inline-block;
-    font-weight:700;
-    text-align:center;
-    text-decoration:none;
-    cursor:pointer;
-    transition:var(--transition);
-    border:none;
-    font-family:inherit;
   }
 
   .button.primary{
-    background:linear-gradient(135deg, var(--accent), var(--accent-light));
+    background:var(--accent);
     color:#000;
     border-radius:50px;
-    padding:clamp(0.8rem, 1.5vw, 0.9rem) clamp(1.4rem, 2.5vw, 1.8rem);
-    box-shadow:0 12px 30px rgba(245,193,108,0.1);
-    position:relative;
-    overflow:hidden;
-    isolation:isolate;
+    font-weight:700;
+    padding:0.9rem 1.6rem;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 12px 30px rgba(245,193,108,0.06);
+    transition:all 0.3s ease;
   }
-
-  .button.primary::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition:left 0.6s ease;
-    z-index:-1;
-  }
-
-  .button.primary:hover,
-  .button.primary:focus-visible{
+  
+  .button.primary:hover{
     transform:translateY(-2px);
-    box-shadow:0 15px 35px rgba(245,193,108,0.2);
+    box-shadow:0 15px 35px rgba(245,193,108,0.1);
   }
 
-  .button.primary:hover::before{
-    left:100%;
-  }
-
-  .button.primary:active{
-    transform:translateY(1px);
-  }
-
-  /* Content sections */
+  /* "What I Do" and "Who I Am" sections */
   #one .content.box p,
   #two .content.box p{
-    color:var(--text-primary);
-    text-shadow:0 6px 30px rgba(0,0,0,0.6), 0 0 8px rgba(0,0,0,0.25);
-    font-size:clamp(1rem, 1.1vw, 1.06rem);
+    color:#fff;
+    text-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 0 8px rgba(0,0,0,0.25);
+    font-size:1.06rem;
     line-height:1.8;
     margin:0;
   }
 
-  #two .content.box strong{
-    color:var(--accent);
+  /* Make headings stand out */
+  #one .content.box h2,
+  #two .content.box h2{
+    color:#fff;
+    margin-bottom:0.6rem;
   }
 
+  /* Next buttons */
   .button.style2.down.anchored{
     position:absolute;
     bottom:2rem;
@@ -369,18 +269,8 @@
     60%{transform:translateX(-50%) translateY(-5px);}
   }
 
-  @media (prefers-reduced-motion: reduce){
-    .button.style2.down.anchored{
-      animation:none;
-    }
-  }
-
   /* Desktop styles */
   @media (min-width: 769px){
-    #header{
-      padding:1.25rem clamp(1rem,4vw,3rem);
-    }
-
     nav{
       display:block !important;
       position:static;
@@ -392,7 +282,7 @@
     
     nav ul{
       flex-direction:row;
-      gap:clamp(1rem, 2vw, 1.5rem);
+      gap:18px;
     }
     
     nav a{
@@ -401,6 +291,7 @@
       border-radius:0;
       background:none;
       position:relative;
+      font-size:0.95rem;
     }
     
     nav a::after{
@@ -415,7 +306,6 @@
     }
     
     nav a:hover::after,
-    nav a:focus-visible::after,
     nav a.active::after{
       width:100%;
     }
@@ -423,20 +313,20 @@
     .mobile-toggle{
       display:none;
     }
-
-    section{
-      padding:calc(var(--header-height) + 3rem) clamp(1rem, 4vw, 3rem) 4rem;
+    
+    #header{
+      padding:18px 36px;
     }
   }
 
-  /* Mobile optimizations */
+  /* Mobile styles */
   @media (max-width: 768px){
     #header{
-      padding:0.75rem;
+      padding:10px 14px;
     }
 
     .logo-inner img{
-      height:1.8rem;
+      height:36px;
     }
 
     .mobile-toggle{
@@ -445,282 +335,226 @@
       font-size:1.3rem;
     }
 
-    section{
-      padding:calc(var(--header-height) + 1.5rem) 0.75rem 2rem;
+    .main.style1.dark.fullscreen,
+    .main.style2.right.dark.fullscreen,
+    .main.style2.left.dark.fullscreen{
+      padding:calc(var(--header-height) + 1rem) 1rem 2rem;
+    }
+
+    .main.style1.dark .content header h1{
+      font-size:1.8rem;
     }
 
     .content.box{
-      padding:1.25rem;
-      margin:0 0.5rem;
+      padding:1.5rem;
     }
 
     .button.primary{
       width:100%;
-      max-width:280px;
+      max-width:300px;
     }
   }
 
-  /* Focus styles for accessibility */
-  :focus-visible{
-    outline:2px solid var(--accent);
-    outline-offset:3px;
-    border-radius:4px;
-  }
-
-  /* Print styles */
-  @media print{
-    #header,
-    .button.style2.down.anchored{
-      display:none;
+  /* Extra small phones */
+  @media (max-width: 480px){
+    #header{
+      padding:8px;
     }
 
-    section{
-      min-height:auto;
-      padding:2rem 0;
+    .logo-inner img{
+      height:32px;
     }
 
-    .content.box{
-      box-shadow:none;
-      border:1px solid #ddd;
-      background:white;
-      color:black;
+    .main.style1.dark .content header h1{
+      font-size:1.6rem;
     }
 
-    h1,h2,h3,p{
-      color:black;
+    #one .content.box h2,
+    #two .content.box h2{
+      font-size:1.4rem;
     }
   }
 
-  /* High contrast mode support */
-  @media (prefers-contrast: high){
-    :root{
-      --muted: #ffffff;
-      --border-light: rgba(255,255,255,0.3);
-    }
-
-    .content.box{
-      border-width:2px;
-    }
-  }
+	#packages .content.box, 
+#packages .content.box h2,
+#packages .content.box h3,
+#packages .content.box p {
+    color: #000 !important;
+}
 </style>
-</head>
 
-<body class="is-preload">
-    <!-- Header -->
-    <header id="header">
-        <a href="index.html" class="logo-frame" aria-label="RAOUF px Home">
-            <div class="logo-inner">
-                <img src="images/logo.png" alt="RAOUF px Logo" width="35" height="35" />
-            </div>
-        </a>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
+		<!-- Header -->
+			<header id="header">
+			<a href="index.html" class="logo-frame" aria-label="Go to Home">
+  <div class="logo-inner">
+    <img src="images/logo.png" alt="RAOUF px Logo" />
+  </div>
+</a>
+
+        <!-- Mobile Toggle Button -->
         <button class="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileToggle">
-            ☰
+          ☰
         </button>
 
-        <nav id="mainNav">
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="work.html">My Work</a></li>
-                <li><a href="packages.html">Packages</a></li>
-                <li><a href="booking.html">Book Now</a></li>
-            </ul>
-        </nav>
-    </header>
+				<nav id="mainNav">
+  <ul>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="work.html">My Work</a></li>
+    <li><a href="packages.html">Packages</a></li>
+    <li><a href="booking.html">Book Now</a></li>
+  </ul>
+</nav>
+			</header>
 
-    <!-- Intro -->
-    <section id="intro" class="main style1 dark fullscreen">
-        <div class="content">
-            <header>
-                <h1>
-                    This is not a photoshoot.<br>
-                    <span style="color:var(--accent);">It's a moment.</span>
-                </h1>
-            </header>
-            <p>
-                I don't just take portraits.<br>
-                I create frames where people recognize themselves.
-            </p>
-            <footer style="margin-top:2rem;">
-                <a href="booking.html" class="button primary">Book Your Session</a>
-            </footer>
-        </div>
-    </section>
+		<!-- Intro -->
+			<section id="intro" class="main style1 dark fullscreen">
+			<div class="content">
+  <header>
+    <h1>
+      This is not a photoshoot.<br>
+      <span style="color:var(--accent);">It's a moment.</span>
+    </h1>
+  </header>
 
-    <!-- What I Do -->
-    <section id="one" class="main style2 right dark fullscreen">
-        <div class="content box style2">
-            <header>
-                <h2>What I Do</h2>
-            </header>
-            <p>
-                I photograph people who don't feel comfortable in front of the camera —
-                and help them see themselves differently.
-                <br><br>
-                Calm. Honest. Cinematic.
-            </p>
-        </div>
-        <a href="#two" class="button style2 down anchored" aria-label="Next section">↓</a>
-    </section>
+  <p>
+    I don't just take portraits.<br>
+    I create frames where people recognize themselves.
+  </p>
 
-    <!-- Who I Am -->
-    <section id="two" class="main style2 left dark fullscreen">
-        <div class="content box style2">
-            <header>
-                <h2>Who I Am</h2>
-            </header>
-            <p>I'm <strong>Osama Raouf</strong> — a visual storyteller chasing light, emotion, and moments that speak without words.<br />
-                This space is under construction, but the vision is in motion.</p>
-        </div>
-        <a href="#work" class="button style2 down anchored" aria-label="Next section">↓</a>
-    </section>
+  <footer style="margin-top:18px;">
+  <a href="booking.html" class="button primary">Book Your Session</a>
+  </footer>
+</div>
+			</section>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.poptrox.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+		<!-- One -->
+			<section id="one" class="main style2 right dark fullscreen">
+				<div class="content box style2">
+					<header>
+						<h2>What I Do</h2>
+					</header>
+					<p>
+  I photograph people who don't feel comfortable in front of the camera —
+  and help them see themselves differently.
+  <br><br>
+  Calm. Honest. Cinematic.
+</p>
+				</div>
+			<a href="#two" class="button style2 down anchored">Next</a>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="main style2 left dark fullscreen">
+				<div class="content box style2">
+					<header>
+						<h2>Who I Am</h2>
+					</header>
+					<p>I'm <strong>Osama Raouf</strong> — a visual storyteller chasing light, emotion, and moments that speak without words.<br />
+					This space is under construction, but the vision is in motion.</p>
+				</div>
+				<a href="#work" class="button style2 down anchored">Next</a>
+			</section>
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+<script>
+  // Remove preload class
+  window.addEventListener('load', function() {
+    document.body.classList.remove('is-preload');
     
-    <script>
-        // Font loading detection
-        document.fonts.ready.then(() => {
-            document.documentElement.classList.add('fonts-loaded');
-        });
+    // Set header height CSS variable
+    const header = document.getElementById('header');
+    if (header) {
+      document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+    }
+  });
 
-        // Remove preload class
-        window.addEventListener('load', () => {
-            document.body.classList.remove('is-preload');
-            // Set header height CSS variable
+  // Mobile Navigation
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    if (mobileToggle && mainNav) {
+      // Toggle menu
+      mobileToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        mainNav.classList.toggle('active');
+        this.textContent = isExpanded ? '☰' : '✕';
+      });
+      
+      // Close menu when clicking a link
+      const navLinks = mainNav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mainNav.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileToggle.textContent = '☰';
+        });
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!mainNav.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mainNav.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileToggle.textContent = '☰';
+        }
+      });
+      
+      // Close on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+          mainNav.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileToggle.textContent = '☰';
+        }
+      });
+    }
+    
+    // Update header height on resize
+    window.addEventListener('resize', function() {
+      const header = document.getElementById('header');
+      if (header) {
+        document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+      }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '#work') return;
+        
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
             const header = document.getElementById('header');
-            if (header) {
-                document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
-            }
-        });
-
-        // Mobile Navigation
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileToggle = document.getElementById('mobileToggle');
-            const mainNav = document.getElementById('mainNav');
+            const headerHeight = header ? header.offsetHeight : 70;
             
-            if (mobileToggle && mainNav) {
-                const toggleMenu = () => {
-                    const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-                    mobileToggle.setAttribute('aria-expanded', !isExpanded);
-                    mainNav.classList.toggle('active');
-                    mobileToggle.textContent = isExpanded ? '☰' : '✕';
-                    
-                    // Prevent body scroll when menu is open
-                    document.body.style.overflow = isExpanded ? '' : 'hidden';
-                };
-
-                mobileToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    toggleMenu();
-                });
-
-                // Close menu on link click
-                mainNav.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mainNav.classList.remove('active');
-                        mobileToggle.setAttribute('aria-expanded', 'false');
-                        mobileToggle.textContent = '☰';
-                        document.body.style.overflow = '';
-                    });
-                });
-
-                // Close on escape
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                });
-
-                // Close when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (!mainNav.contains(e.target) && !mobileToggle.contains(e.target) && mainNav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                });
-            }
-
-            // Header scroll effect
-            const header = document.getElementById('header');
-            if (header) {
-                let lastScroll = 0;
-                window.addEventListener('scroll', () => {
-                    const currentScroll = window.pageYOffset;
-                    
-                    if (currentScroll <= 0) {
-                        header.style.boxShadow = 'none';
-                        header.style.transform = 'translateY(0)';
-                    } else if (currentScroll > lastScroll && currentScroll > 100) {
-                        // Scroll down - hide header
-                        header.style.transform = 'translateY(-100%)';
-                    } else {
-                        // Scroll up - show header
-                        header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.5)';
-                        header.style.transform = 'translateY(0)';
-                    }
-                    
-                    lastScroll = currentScroll;
-                });
-            }
-
-            // Smooth scrolling with offset for header
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href === '#' || href === '#work') return;
-                    
-                    if (href.startsWith('#')) {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            const headerHeight = document.getElementById('header').offsetHeight;
-                            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                            
-                            window.scrollTo({
-                                top: targetPosition - headerHeight - 20,
-                                behavior: 'smooth'
-                            });
-                            
-                            // Update URL without jumping
-                            history.pushState(null, null, href);
-                        }
-                    }
-                });
+            window.scrollTo({
+              top: target.offsetTop - headerHeight - 20,
+              behavior: 'smooth'
             });
-
-            // Update header height on resize
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    const header = document.getElementById('header');
-                    if (header) {
-                        document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
-                    }
-                }, 250);
-            });
-
-            // Preload critical images
-            const preloadImages = ['images/logo.png'];
-            preloadImages.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-
-            // Service worker registration (if supported)
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/sw.js').catch(console.error);
-                });
-            }
-        });
-    </script>
+          }
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
