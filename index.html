@@ -196,19 +196,112 @@
     padding:0 0.5rem;
   }
 
+  /* Book Your Session Button - Enhanced Version */
   .button.primary{
-    background:var(--accent);
+    background:linear-gradient(145deg,#f5c16c,#ffd88a);
     color:#000;
     border-radius:50px;
-    font-weight:700;
-    padding:0.9rem 1.8rem;
+    font-weight:800;
+    padding:1.1rem 2.5rem;
     border:none;
     cursor:pointer;
-    box-shadow:0 12px 30px rgba(245,193,108,0.06);
-    font-size:1rem;
+    box-shadow:0 8px 0 #c99e4c,0 15px 30px rgba(245,193,108,0.2),0 0 40px rgba(245,193,108,0.1);
+    font-size:1.1rem;
     display:inline-block;
     text-align:center;
-    min-width:200px;
+    min-width:240px;
+    text-decoration:none;
+    letter-spacing:0.5px;
+    position:relative;
+    overflow:hidden;
+    transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    transform-style:preserve-3d;
+    border:2px solid rgba(255,255,255,0.1);
+  }
+  
+  /* Subtle glow effect */
+  .button.primary::before{
+    content:'';
+    position:absolute;
+    top:-2px;
+    left:-2px;
+    right:-2px;
+    bottom:-2px;
+    background:linear-gradient(45deg,rgba(245,193,108,0.3),rgba(255,216,138,0.2),rgba(245,193,108,0.3));
+    border-radius:52px;
+    z-index:-1;
+    opacity:0;
+    transition:opacity 0.3s ease;
+  }
+  
+  .button.primary:hover{
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 12px 0 #c99e4c,0 25px 40px rgba(245,193,108,0.3),0 0 60px rgba(245,193,108,0.15);
+    background:linear-gradient(145deg,#ffd88a,#f5c16c);
+  }
+  
+  .button.primary:hover::before{
+    opacity:1;
+  }
+  
+  .button.primary:active{
+    transform:translateY(2px);
+    box-shadow:0 4px 0 #c99e4c,0 8px 20px rgba(245,193,108,0.2);
+    transition:all 0.1s ease;
+  }
+  
+  /* Pulsing animation for attention */
+  @keyframes pulse-subtle{
+    0%,100%{
+      box-shadow:0 8px 0 #c99e4c,0 15px 30px rgba(245,193,108,0.2),0 0 40px rgba(245,193,108,0.1);
+    }
+    50%{
+      box-shadow:0 8px 0 #c99e4c,0 15px 40px rgba(245,193,108,0.3),0 0 50px rgba(245,193,108,0.15);
+    }
+  }
+  
+  .button.primary{
+    animation:pulse-subtle 3s ease-in-out infinite;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width:768px){
+    .button.primary{
+      padding:1rem 2rem;
+      min-width:200px;
+      font-size:1rem;
+      width:100%;
+      max-width:300px;
+      margin:0 auto;
+      display:block;
+      animation:none; /* Remove pulsing on mobile for performance */
+    }
+    
+    .button.primary:hover{
+      transform:translateY(-3px);
+    }
+  }
+  
+  @media (max-width:360px){
+    .button.primary{
+      padding:0.9rem 1.8rem;
+      min-width:180px;
+      font-size:0.95rem;
+    }
+  }
+  
+  /* Ensure it works in the intro section */
+  .main.style1.dark.fullscreen footer{
+    margin-top:2rem;
+    text-align:center;
+  }
+  
+  /* Hover effect for touch devices */
+  @media (hover:none) and (pointer:coarse){
+    .button.primary:active{
+      transform:translateY(2px);
+      box-shadow:0 4px 0 #c99e4c,0 8px 20px rgba(245,193,108,0.2);
+    }
   }
 
   /* "What I Do" and "Who I Am" — force white text and remove harsh stroke */
