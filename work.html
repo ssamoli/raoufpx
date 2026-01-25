@@ -7,14 +7,13 @@
     <meta name="description" content="Portfolio of cinematic photography by Osama Raouf - Capturing authentic moments and emotions." />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS Variables - Enhanced with animation values */
+        /* CSS Variables - Consistent with index & booking */
         :root {
             --bg-1: #040405;
             --bg-2: #0b0b0f;
-            --panel: rgba(20, 20, 25, 0.95);
+            --panel: rgba(20, 20, 25, 0.9);
             --accent: #f5c16c;
             --accent-dark: #c99e4c;
             --accent-light: #ffd88a;
@@ -26,11 +25,10 @@
             --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.8);
             --shadow-md: 0 15px 40px rgba(0, 0, 0, 0.6);
             --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.4);
-            --radius-lg: 24px;
+            --radius-lg: 20px;
             --radius-md: 16px;
             --radius-sm: 12px;
-            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Reset & Base */
@@ -57,7 +55,7 @@
             position: relative;
         }
 
-        /* Enhanced Background Texture */
+        /* Background Texture */
         body::before {
             content: '';
             position: fixed;
@@ -67,58 +65,12 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 20% 80%, rgba(245, 193, 108, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.02) 0%, transparent 50%),
-                repeating-linear-gradient(90deg, transparent 0px, transparent 1px, rgba(0, 0, 0, 0.02) 1px, rgba(0, 0, 0, 0.02) 2px);
-            pointer-events: none;
-            z-index: -2;
-            animation: grain 8s steps(10) infinite;
-        }
-
-        @keyframes grain {
-            0%, 100% { transform: translate(0, 0); }
-            10% { transform: translate(-1%, -1%); }
-            20% { transform: translate(-2%, 1%); }
-            30% { transform: translate(1%, -2%); }
-            40% { transform: translate(-1%, 2%); }
-            50% { transform: translate(-2%, -1%); }
-            60% { transform: translate(2%, 1%); }
-            70% { transform: translate(1%, -1%); }
-            80% { transform: translate(-1%, 2%); }
-            90% { transform: translate(-2%, -1%); }
-        }
-
-        /* Animated Gradient Overlay */
-        .gradient-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(245, 193, 108, 0.07) 0%, transparent 70%),
-                radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.05) 0%, transparent 70%);
+                radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.02) 0%, transparent 50%);
             pointer-events: none;
             z-index: -1;
-            opacity: 0.4;
-            animation: gradientShift 20s ease-in-out infinite alternate;
         }
 
-        @keyframes gradientShift {
-            0% { 
-                transform: scale(1) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.1) rotate(180deg);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(1) rotate(360deg);
-                opacity: 0.3;
-            }
-        }
-
-        /* Typography with Animation */
+        /* Typography */
         h1, h2, h3, h4 {
             font-weight: 800;
             letter-spacing: -0.02em;
@@ -127,20 +79,8 @@
             margin-bottom: 0.75rem;
         }
 
-        h1 { 
-            font-size: clamp(2.5rem, 5vw, 3.5rem); 
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        h2 { 
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            position: relative;
-            display: inline-block;
-        }
-        
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
         h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
 
         p {
@@ -148,47 +88,14 @@
             line-height: 1.7;
             color: var(--text-secondary);
             margin-bottom: 1.25rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        p:nth-child(1) { animation-delay: 0.1s; }
-        p:nth-child(2) { animation-delay: 0.2s; }
-        p:nth-child(3) { animation-delay: 0.3s; }
-        p:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         strong {
             color: var(--accent);
             font-weight: 700;
-            position: relative;
         }
 
-        strong::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        strong:hover::after {
-            transform: scaleX(1);
-        }
-
-        /* Enhanced Header with Glass Morphism */
+        /* Header */
         #header {
             position: fixed;
             top: 0;
@@ -199,24 +106,15 @@
             align-items: center;
             justify-content: space-between;
             padding: 1.25rem clamp(1rem, 4vw, 3rem);
-            background: linear-gradient(180deg, 
-                rgba(0, 0, 0, 0.85) 0%, 
-                rgba(11, 11, 15, 0.7) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
             border-bottom: 1px solid var(--border-light);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            transition: var(--transition-smooth);
-            transform: translateY(0);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        #header.hidden {
-            transform: translateY(-100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: var(--transition);
         }
 
         #header.scrolled {
             background: rgba(11, 11, 15, 0.95);
-            padding: 0.8rem clamp(1rem, 4vw, 3rem);
             box-shadow: var(--shadow-md);
         }
 
@@ -226,16 +124,9 @@
             gap: 0.75rem;
             padding: 0.5rem;
             border-radius: var(--radius-md);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
             position: relative;
             isolation: isolate;
-            transition: var(--transition);
-            animation: logoFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .logo-frame::before {
@@ -243,19 +134,19 @@
             position: absolute;
             inset: -2px;
             border-radius: calc(var(--radius-md) + 2px);
-            background: linear-gradient(90deg, 
-                rgba(0, 212, 255, 0.1), 
-                rgba(245, 193, 108, 0.15),
-                rgba(255, 255, 255, 0.1));
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(245, 193, 108, 0.15));
             filter: blur(10px);
             z-index: -2;
             opacity: 0.6;
-            animation: logoShine 8s ease-in-out infinite;
         }
 
-        @keyframes logoShine {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
+        .logo-frame::after {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: calc(var(--radius-md) + 1px);
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.08));
+            z-index: -1;
         }
 
         .logo-inner {
@@ -264,10 +155,7 @@
             gap: 0.75rem;
             padding: 0.5rem 1rem;
             border-radius: var(--radius-sm);
-            background: linear-gradient(180deg, 
-                rgba(255, 255, 255, 0.08), 
-                rgba(0, 0, 0, 0.2));
-            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
         }
 
         .logo-inner img {
@@ -276,12 +164,6 @@
             border-radius: 8px;
             object-fit: contain;
             filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.8));
-            transition: var(--transition);
-        }
-
-        .logo-frame:hover img {
-            transform: rotate(5deg) scale(1.05);
-            filter: drop-shadow(0 8px 25px rgba(245, 193, 108, 0.3));
         }
 
         nav ul {
@@ -297,19 +179,6 @@
             padding: 0.5rem 0;
             position: relative;
             transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        nav a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         nav a:hover,
@@ -317,24 +186,20 @@
             color: var(--text-primary);
         }
 
-        nav a:hover::before,
-        nav a.active::before {
-            width: 100%;
-        }
-
-        nav a.active::after {
-            content: '•';
+        nav a::after {
+            content: "";
             position: absolute;
-            right: -10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent);
-            animation: pulse 2s infinite;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
         }
 
         /* Main Content */
@@ -344,12 +209,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            animation: fadeIn 1s ease 0.3s forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
         }
 
         .work-wrapper {
@@ -358,61 +217,22 @@
             margin: 0 auto;
         }
 
-        /* Enhanced Intro Content */
+        /* Intro Content */
         .intro-content {
             background: var(--panel);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-lg);
             padding: clamp(2rem, 3vw, 3rem);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            box-shadow: 
-                var(--shadow-lg),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-lg);
             margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-            transform: translateY(30px);
-            opacity: 0;
-            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
-        }
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .intro-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--accent), 
-                transparent);
-            animation: lineGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes lineGlow {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
         }
 
         .intro-content h2 {
             position: relative;
             display: inline-block;
             margin-bottom: 1.5rem;
-            animation: titleReveal 1s ease 0.7s forwards;
-            opacity: 0;
-        }
-
-        @keyframes titleReveal {
-            to { opacity: 1; }
         }
 
         .intro-content h2::after {
@@ -420,33 +240,29 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 0;
+            width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            background: linear-gradient(90deg, var(--accent), transparent);
             border-radius: 2px;
-            animation: underlineGrow 1.2s ease 1s forwards;
         }
 
-        @keyframes underlineGrow {
-            to { width: 80px; }
+        .intro-content p {
+            font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+            line-height: 1.8;
+            color: var(--text-secondary);
         }
 
-        /* Gallery Section */
+        /* Gallery */
         .gallery-section {
             margin-top: 3rem;
-            opacity: 0;
-            animation: fadeIn 1s ease 0.8s forwards;
         }
 
-        /* Enhanced Filter Buttons */
         .gallery-filter {
             display: flex;
             gap: 1rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 1s forwards;
+            justify-content: center;
         }
 
         .filter-btn {
@@ -456,31 +272,11 @@
             border-radius: 50px;
             color: var(--text-muted);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            letter-spacing: 0.5px;
-        }
-
-        .filter-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.1), 
-                transparent);
-            transition: left 0.6s ease;
-        }
-
-        .filter-btn:hover::before {
-            left: 100%;
+            min-width: 120px;
+            text-align: center;
         }
 
         .filter-btn:hover,
@@ -488,20 +284,10 @@
             background: var(--accent);
             color: #000;
             border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(245, 193, 108, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 193, 108, 0.2);
         }
 
-        .filter-btn.active {
-            animation: buttonPulse 2s infinite;
-        }
-
-        @keyframes buttonPulse {
-            0%, 100% { box-shadow: 0 10px 25px rgba(245, 193, 108, 0.3); }
-            50% { box-shadow: 0 10px 35px rgba(245, 193, 108, 0.5); }
-        }
-
-        /* Enhanced Gallery Grid */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
@@ -518,20 +304,18 @@
             aspect-ratio: 3/4;
             cursor: pointer;
             opacity: 0;
-            transform: scale(0.9);
-            animation: galleryItemReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: calc(var(--item-index) * 0.1s);
         }
 
-        .gallery-item:nth-child(1) { animation-delay: 1.1s; }
-        .gallery-item:nth-child(2) { animation-delay: 1.2s; }
-        .gallery-item:nth-child(3) { animation-delay: 1.3s; }
-        .gallery-item:nth-child(4) { animation-delay: 1.4s; }
-
-        @keyframes galleryItemReveal {
+        @keyframes fadeInUp {
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
         }
 
@@ -539,26 +323,18 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, 
-                transparent 40%, 
-                rgba(0, 0, 0, 0.8) 100%);
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.7));
             z-index: 1;
             opacity: 0;
-            transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: opacity 0.3s ease;
         }
 
         .gallery-item:hover::before {
             opacity: 1;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
-                        0 0 0 1px rgba(245, 193, 108, 0.2);
-        }
-
         .gallery-item:hover .thumbnail {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .thumbnail {
@@ -567,7 +343,7 @@
             object-fit: cover;
             display: block;
             border-radius: var(--radius-md);
-            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.5s ease;
         }
 
         .gallery-overlay {
@@ -575,76 +351,39 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 2rem;
-            background: linear-gradient(to top, 
-                rgba(0, 0, 0, 0.9) 0%, 
-                transparent 100%);
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
             z-index: 2;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: opacity 0.3s ease;
         }
 
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
-            transform: translateY(0);
         }
 
         .view-full {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            background: var(--accent);
             color: #000;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 50px;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(245, 193, 108, 0.3);
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.5px;
-        }
-
-        .view-full::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
-                transparent);
-            transition: left 0.6s ease;
+            gap: 0.5rem;
         }
 
         .view-full:hover {
-            background: linear-gradient(135deg, var(--accent-light), var(--accent));
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(245, 193, 108, 0.5);
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 193, 108, 0.3);
         }
 
-        .view-full:hover::before {
-            left: 100%;
-        }
-
-        .view-full i {
-            font-size: 1.1rem;
-            animation: eyeBlink 3s infinite;
-        }
-
-        @keyframes eyeBlink {
-            0%, 90%, 100% { transform: scale(1); }
-            95% { transform: scale(1.1); }
-        }
-
-        /* Enhanced Lightbox Modal */
+        /* Lightbox Modal */
         .lightbox {
             display: none;
             position: fixed;
@@ -652,23 +391,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            z-index: 3000;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             opacity: 0;
-            transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: opacity 0.3s ease;
         }
 
         .lightbox.active {
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 1;
-        }
-
-        .lightbox.active .lightbox-content {
-            transform: scale(1);
             opacity: 1;
         }
 
@@ -680,12 +414,13 @@
             height: auto;
             border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: 
-                var(--shadow-lg),
-                0 0 0 1px rgba(245, 193, 108, 0.1);
-            transform: scale(0.8);
-            opacity: 0;
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
         }
 
         .lightbox-img {
@@ -694,44 +429,30 @@
             height: auto;
             max-height: 90vh;
             object-fit: contain;
-            animation: imageAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes imageAppear {
-            from { 
-                transform: scale(1.1);
-                filter: blur(10px);
-            }
-            to { 
-                transform: scale(1);
-                filter: blur(0);
-            }
         }
 
         .lightbox-close {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            background: rgba(0, 0, 0, 0.7);
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
             border: 2px solid var(--border-light);
             color: var(--text-primary);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            z-index: 3001;
-            backdrop-filter: blur(10px);
+            z-index: 2001;
         }
 
         .lightbox-close:hover {
-            background: rgba(245, 193, 108, 0.3);
+            background: rgba(245, 193, 108, 0.2);
             border-color: var(--accent);
-            transform: rotate(90deg) scale(1.1);
         }
 
         .lightbox-nav {
@@ -740,75 +461,52 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 30px;
+            padding: 0 20px;
             transform: translateY(-50%);
-            z-index: 3001;
+            z-index: 2001;
         }
 
         .lightbox-prev,
         .lightbox-next {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             border: 2px solid var(--border-light);
             color: var(--text-primary);
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: navButtonsSlide 0.5s ease 0.3s forwards;
-        }
-
-        .lightbox-next {
-            transform: translateX(20px);
-        }
-
-        @keyframes navButtonsSlide {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .lightbox-prev:hover,
         .lightbox-next:hover {
-            background: rgba(245, 193, 108, 0.3);
+            background: rgba(245, 193, 108, 0.2);
             border-color: var(--accent);
-            transform: scale(1.1);
         }
 
         .lightbox-counter {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             color: var(--text-primary);
-            padding: 0.8rem 1.5rem;
+            padding: 0.5rem 1rem;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 1rem;
-            z-index: 3001;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-light);
-            opacity: 0;
-            animation: fadeIn 0.5s ease 0.4s forwards;
+            font-size: 0.9rem;
+            z-index: 2001;
         }
 
-        /* Enhanced Load More Button */
+        /* Load More Button */
         .load-more-container {
             display: flex;
             justify-content: center;
             margin-top: 4rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease 1.5s forwards;
         }
 
         #load-more {
@@ -817,27 +515,17 @@
             border: none;
             padding: 1.2rem 3rem;
             font-size: 1.1rem;
-            font-weight: 800;
+            font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            box-shadow: 
-                0 10px 30px rgba(245, 193, 108, 0.3),
-                0 0 0 1px rgba(245, 193, 108, 0.1);
+            gap: 0.75rem;
+            box-shadow: 0 8px 25px rgba(245, 193, 108, 0.2);
             position: relative;
             overflow: hidden;
             z-index: 1;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            animation: buttonFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes buttonFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         #load-more::before {
@@ -847,20 +535,14 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
-                transparent);
-            transition: left 0.8s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
             z-index: -1;
         }
 
         #load-more:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 
-                0 15px 40px rgba(245, 193, 108, 0.4),
-                0 0 0 1px rgba(245, 193, 108, 0.2);
-            letter-spacing: 2px;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245, 193, 108, 0.3);
         }
 
         #load-more:hover::before {
@@ -870,16 +552,15 @@
         #load-more:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-            animation: none !important;
+            transform: none;
+            box-shadow: none;
         }
 
         .loading {
             display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(0, 0, 0, 0.2);
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top-color: #000;
             animation: spin 1s linear infinite;
@@ -889,18 +570,16 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Enhanced Back Button */
+        /* Back Button */
         .back-container {
             text-align: center;
             margin-top: 4rem;
-            opacity: 0;
-            animation: fadeIn 1s ease 1.6s forwards;
         }
 
         .back-button {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
             padding: 1rem 2.5rem;
             background: transparent;
             color: var(--text-primary);
@@ -909,38 +588,16 @@
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .back-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(245, 193, 108, 0.1), 
-                transparent);
-            transition: left 0.6s ease;
         }
 
         .back-button:hover {
             background: var(--accent);
             color: #000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(245, 193, 108, 0.3);
-            letter-spacing: 1px;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 193, 108, 0.2);
         }
 
-        .back-button:hover::before {
-            left: 100%;
-        }
-
-        /* Enhanced Background CTA Watermark */
+        /* Background CTA Watermark */
         .bg-cta {
             position: fixed;
             inset: 0;
@@ -951,40 +608,31 @@
 
         .bg-cta span {
             position: absolute;
-            font-size: clamp(8rem, 20vw, 24rem);
+            font-size: clamp(6rem, 18vw, 22rem);
             font-weight: 800;
-            letter-spacing: 0.3em;
-            color: rgba(245, 193, 108, 0.03);
-            filter: blur(12px);
+            letter-spacing: 0.2em;
+            color: rgba(245, 193, 108, 0.04);
+            filter: blur(8px);
             white-space: nowrap;
-            animation: floatCTA 30s ease-in-out infinite;
-            text-transform: uppercase;
+            animation: floatCTA 28s ease-in-out infinite;
         }
 
         .bg-cta span:nth-child(1) {
-            top: 30%;
-            left: -15%;
-            animation-delay: 0s;
+            top: 35%;
+            left: -10%;
         }
 
         .bg-cta span:nth-child(2) {
-            top: 60%;
-            left: -25%;
-            animation-duration: 40s;
-            opacity: 0.02;
-            animation-delay: 10s;
+            top: 65%;
+            left: -30%;
+            animation-duration: 36s;
+            opacity: 0.03;
         }
 
         @keyframes floatCTA {
-            0% { 
-                transform: translateX(0) rotate(0deg);
-            }
-            50% { 
-                transform: translateX(30%) rotate(5deg);
-            }
-            100% { 
-                transform: translateX(0) rotate(0deg);
-            }
+            0%   { transform: translateX(0); }
+            50%  { transform: translateX(25%); }
+            100% { transform: translateX(0); }
         }
 
         .work-container, .intro-content, .gallery-section {
@@ -992,25 +640,18 @@
             z-index: 2;
         }
 
-        /* Hover effects for loaded batch items */
-        .gallery-batch .gallery-item {
-            animation: newItemSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        @keyframes newItemSlide {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
+        /* Responsive */
+        @media (max-width: 1024px) {
             .gallery {
                 grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
                 gap: 1.5rem;
+            }
+            
+            .lightbox-prev,
+            .lightbox-next {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
         }
 
@@ -1019,7 +660,6 @@
                 padding: 1rem;
                 flex-direction: column;
                 gap: 1rem;
-                backdrop-filter: blur(15px);
             }
             
             nav ul {
@@ -1042,28 +682,9 @@
             }
             
             .filter-btn {
-                padding: 0.6rem 1.2rem;
+                padding: 0.7rem 1.5rem;
                 font-size: 0.85rem;
-            }
-            
-            .lightbox-close {
-                width: 50px;
-                height: 50px;
-                top: 15px;
-                right: 15px;
-            }
-            
-            .lightbox-prev,
-            .lightbox-next {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-                padding: 0 20px;
-            }
-            
-            #load-more {
-                padding: 1rem 2rem;
-                font-size: 1rem;
+                min-width: 100px;
             }
         }
 
@@ -1076,27 +697,30 @@
                 font-size: 1rem;
             }
             
+            .lightbox-close {
+                width: 40px;
+                height: 40px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .lightbox-prev,
+            .lightbox-next {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
             .filter-btn {
                 flex: 1;
-                min-width: 120px;
-                text-align: center;
-            }
-            
-            .bg-cta span {
-                font-size: clamp(5rem, 15vw, 15rem);
-            }
-            
-            .lightbox-nav {
-                padding: 0 10px;
+                min-width: 80px;
+                padding: 0.6rem 1rem;
             }
         }
     </style>
 </head>
 
 <body class="is-preload">
-
-    <!-- Enhanced Gradient Overlay -->
-    <div class="gradient-overlay"></div>
 
     <!-- Background CTA -->
     <div class="bg-cta">
@@ -1109,7 +733,6 @@
         <a href="index.html" class="logo-frame" aria-label="RAOUF px Home">
             <div class="logo-inner">
                 <img src="images/logo.png" alt="RAOUF px Logo" width="48" height="48" />
-                <span style="color: var(--text-primary); font-weight: 700; font-size: 1.2rem;">RAOUF px</span>
             </div>
         </a>
 
@@ -1161,7 +784,7 @@
                              data-full="images/fulls/01.jpg">
                         <div class="gallery-overlay">
                             <button class="view-full" data-index="0">
-                                <i class="fas fa-eye"></i> View Full
+                                👁️ View Full
                             </button>
                         </div>
                     </div>
@@ -1171,7 +794,7 @@
                              data-full="images/fulls/02.jpg">
                         <div class="gallery-overlay">
                             <button class="view-full" data-index="1">
-                                <i class="fas fa-eye"></i> View Full
+                                👁️ View Full
                             </button>
                         </div>
                     </div>
@@ -1181,7 +804,7 @@
                              data-full="images/fulls/03.jpg">
                         <div class="gallery-overlay">
                             <button class="view-full" data-index="2">
-                                <i class="fas fa-eye"></i> View Full
+                                👁️ View Full
                             </button>
                         </div>
                     </div>
@@ -1191,532 +814,210 @@
                              data-full="images/fulls/04.jpg">
                         <div class="gallery-overlay">
                             <button class="view-full" data-index="3">
-                                <i class="fas fa-eye"></i> View Full
+                                👁️ View Full
                             </button>
                         </div>
                     </div>
 
-                    <!-- Hidden batches (5-8) -->
-                    <!-- Batches 5-8 content remains exactly as before -->
-                    <!-- [Your existing batch 5-8 HTML goes here - unchanged] -->
-                    <!-- Just make sure it's properly formatted with all 32 photos -->
+                    <!-- Hidden batches (21-32) -->
+                    <div class="gallery-batch" style="display: none;">
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/05.jpg" alt="Photo 5" class="thumbnail" 
+                                 data-full="images/fulls/05.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="4">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="candid">
+                            <img src="images/thumbs/06.jpg" alt="Photo 6" class="thumbnail"
+                                 data-full="images/fulls/06.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="5">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/07.jpg" alt="Photo 7" class="thumbnail"
+                                 data-full="images/fulls/07.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="6">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/08.jpg" alt="Photo 8" class="thumbnail"
+                                 data-full="images/fulls/08.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="7">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                </div>
+                    <div class="gallery-batch" style="display: none;">
+                        <div class="gallery-item" data-category="candid">
+                            <img src="images/thumbs/09.jpg" alt="Photo 9" class="thumbnail"
+                                 data-full="images/fulls/09.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="8">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/10.jpg" alt="Photo 10" class="thumbnail"
+                                 data-full="images/fulls/10.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="9">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/11.jpg" alt="Photo 11" class="thumbnail"
+                                 data-full="images/fulls/11.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="10">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/12.jpg" alt="Photo 12" class="thumbnail"
+                                 data-full="images/fulls/12.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="11">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Load More Button -->
-                <div class="load-more-container">
-                    <button id="load-more" type="button">
-                        <i class="fas fa-plus-circle"></i> Load More Photos
-                    </button>
-                </div>
-            </section>
+                    <div class="gallery-batch" style="display: none;">
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/13.jpg" alt="Photo 13" class="thumbnail"
+                                 data-full="images/fulls/13.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="12">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="candid">
+                            <img src="images/thumbs/14.jpg" alt="Photo 14" class="thumbnail"
+                                 data-full="images/fulls/14.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="13">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/15.jpg" alt="Photo 15" class="thumbnail"
+                                 data-full="images/fulls/15.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="14">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/16.jpg" alt="Photo 16" class="thumbnail"
+                                 data-full="images/fulls/16.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="15">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Back Button -->
-            <div class="back-container">
-                <a href="index.html" class="back-button">
-                    <i class="fas fa-arrow-left"></i> Back to Home
-                </a>
-            </div>
-        </div>
-    </main>
+                    <div class="gallery-batch" style="display: none;">
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/17.jpg" alt="Photo 17" class="thumbnail"
+                                 data-full="images/fulls/17.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="16">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="candid">
+                            <img src="images/thumbs/18.jpg" alt="Photo 18" class="thumbnail"
+                                 data-full="images/fulls/18.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="17">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/19.jpg" alt="Photo 19" class="thumbnail"
+                                 data-full="images/fulls/19.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="18">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/20.jpg" alt="Photo 20" class="thumbnail"
+                                 data-full="images/fulls/20.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="19">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Lightbox Modal -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightbox-close">
-            <i class="fas fa-times"></i>
-        </button>
-        
-        <div class="lightbox-nav">
-            <button class="lightbox-prev" id="lightbox-prev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="lightbox-next" id="lightbox-next">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-        
-        <div class="lightbox-content">
-            <img class="lightbox-img" id="lightbox-img" src="" alt="">
-        </div>
-        
-        <div class="lightbox-counter" id="lightbox-counter">1 / 32</div>
-    </div>
+                    <!-- Additional batches for photos 21-32 -->
+                    <div class="gallery-batch" style="display: none;">
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/21.jpg" alt="Photo 21 - Artistic portrait" class="thumbnail"
+                                 data-full="images/fulls/21.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="20">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="candid">
+                            <img src="images/thumbs/22.jpg" alt="Photo 22 - Candid expression" class="thumbnail"
+                                 data-full="images/fulls/22.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="21">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/23.jpg" alt="Photo 23 - Cinematic mood" class="thumbnail"
+                                 data-full="images/fulls/23.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="22">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/24.jpg" alt="Photo 24 - Studio portrait" class="thumbnail"
+                                 data-full="images/fulls/24.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="23">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Enhanced JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Remove preload class with delay
-            setTimeout(() => {
-                document.body.classList.remove('is-preload');
-            }, 300);
-            
-            // Header scroll effects
-            const header = document.getElementById('header');
-            let lastScroll = 0;
-            
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.scrollY;
-                
-                // Add scrolled class for styling
-                if (currentScroll > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-                
-                // Hide/show header on scroll
-                if (currentScroll > lastScroll && currentScroll > 100) {
-                    header.classList.add('hidden');
-                } else {
-                    header.classList.remove('hidden');
-                }
-                
-                lastScroll = currentScroll;
-            });
-
-            // Gallery data and initialization
-            let currentBatch = 0;
-            const batches = document.querySelectorAll('.gallery-batch');
-            const loadMoreBtn = document.getElementById('load-more');
-            
-            // Lightbox elements
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxClose = document.getElementById('lightbox-close');
-            const lightboxPrev = document.getElementById('lightbox-prev');
-            const lightboxNext = document.getElementById('lightbox-next');
-            const lightboxCounter = document.getElementById('lightbox-counter');
-            
-            // Collect all gallery items
-            let galleryItems = [];
-            let currentIndex = 0;
-
-            // Enhanced Load More functionality with animations
-            loadMoreBtn.addEventListener('click', function() {
-                if (currentBatch < batches.length) {
-                    // Show loading state with enhanced animation
-                    const originalText = loadMoreBtn.innerHTML;
-                    loadMoreBtn.innerHTML = '<span class="loading"></span> Loading...';
-                    loadMoreBtn.disabled = true;
-                    
-                    // Create a ripple effect
-                    const ripple = document.createElement('span');
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.4);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        pointer-events: none;
-                    `;
-                    loadMoreBtn.appendChild(ripple);
-                    
-                    // Position ripple at click location
-                    const rect = loadMoreBtn.getBoundingClientRect();
-                    ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
-                    ripple.style.left = (rect.width / 2) + 'px';
-                    ripple.style.top = (rect.height / 2) + 'px';
-                    
-                    // Add ripple animation
-                    const style = document.createElement('style');
-                    style.textContent = `
-                        @keyframes ripple {
-                            to {
-                                transform: scale(4);
-                                opacity: 0;
-                            }
-                        }
-                    `;
-                    document.head.appendChild(style);
-
-                    // Simulate loading with better UX
-                    setTimeout(() => {
-                        // Show the next batch with animation
-                        const batch = batches[currentBatch];
-                        batch.style.display = 'grid';
-                        batch.style.gridTemplateColumns = 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))';
-                        batch.style.gap = '2rem';
-                        batch.style.animation = 'fadeIn 0.8s ease forwards';
-                        
-                        // Add items from this batch to galleryItems array with delay
-                        const newItems = batch.querySelectorAll('.gallery-item');
-                        newItems.forEach((item, index) => {
-                            // Animate each new item sequentially
-                            setTimeout(() => {
-                                item.style.animationDelay = `${index * 0.1}s`;
-                                item.style.animation = 'newItemSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
-                                galleryItems.push(item);
-                            }, index * 100);
-                        });
-
-                        currentBatch++;
-
-                        // Update button text or hide if no more batches
-                        if (currentBatch >= batches.length) {
-                            // Animate button out
-                            loadMoreBtn.style.animation = 'fadeOut 0.5s ease forwards';
-                            setTimeout(() => {
-                                loadMoreBtn.style.display = 'none';
-                            }, 500);
-                        } else {
-                            // Reset button with animation
-                            setTimeout(() => {
-                                loadMoreBtn.innerHTML = originalText;
-                                loadMoreBtn.disabled = false;
-                                loadMoreBtn.style.animation = 'buttonPulse 2s infinite';
-                            }, 300);
-                        }
-
-                        // Smooth scroll to newly loaded content
-                        setTimeout(() => {
-                            batch.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'start',
-                                inline: 'nearest'
-                            });
-                        }, 500);
-                        
-                        // Remove ripple after animation
-                        setTimeout(() => {
-                            ripple.remove();
-                            style.remove();
-                        }, 600);
-                    }, 800);
-                }
-            });
-
-            // Initialize gallery items (first 4)
-            const initialItems = document.querySelectorAll('.gallery-item');
-            initialItems.forEach(item => {
-                galleryItems.push(item);
-            });
-
-            // Enhanced Filter functionality with animation
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Add click animation
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                    
-                    // Update active button with transition
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        btn.style.animation = 'none';
-                    });
-                    this.classList.add('active');
-                    
-                    const filter = this.dataset.filter;
-                    
-                    // Animate filtering
-                    galleryItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            if (filter === 'all' || item.dataset.category === filter) {
-                                item.style.display = 'block';
-                                item.style.animation = 'galleryItemReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
-                            } else {
-                                item.style.animation = 'fadeOut 0.3s ease forwards';
-                                setTimeout(() => {
-                                    item.style.display = 'none';
-                                    item.style.animation = '';
-                                }, 300);
-                            }
-                        }, index * 30);
-                    });
-                });
-            });
-
-            // Enhanced Open Lightbox with animation
-            function openLightbox(index) {
-                currentIndex = index;
-                const item = galleryItems[currentIndex];
-                const fullSrc = item.querySelector('.thumbnail').dataset.full;
-                
-                // Preload image for smoother animation
-                const preloadImg = new Image();
-                preloadImg.src = fullSrc;
-                
-                preloadImg.onload = () => {
-                    lightboxImg.src = fullSrc;
-                    lightboxImg.alt = item.querySelector('.thumbnail').alt;
-                    updateLightboxCounter();
-                    
-                    // Add entrance animation
-                    lightbox.style.display = 'flex';
-                    setTimeout(() => {
-                        lightbox.classList.add('active');
-                        document.body.style.overflow = 'hidden';
-                    }, 10);
-                    
-                    // Add subtle vibration to indicate loading success
-                    lightbox.style.animation = 'vibrate 0.3s ease';
-                    setTimeout(() => {
-                        lightbox.style.animation = '';
-                    }, 300);
-                };
-            }
-
-            // Close Lightbox with animation
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-                setTimeout(() => {
-                    lightbox.style.display = 'none';
-                    document.body.style.overflow = '';
-                }, 400);
-            }
-
-            // Update Lightbox Counter
-            function updateLightboxCounter() {
-                const visibleItems = Array.from(galleryItems).filter(item => 
-                    item.style.display !== 'none' && item.style.display !== ''
-                );
-                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
-                lightboxCounter.textContent = `${currentItemIndex + 1} / ${visibleItems.length}`;
-            }
-
-            // Enhanced Navigation with animations
-            function showPrevImage() {
-                const visibleItems = Array.from(galleryItems).filter(item => 
-                    item.style.display !== 'none' && item.style.display !== ''
-                );
-                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
-                
-                if (currentItemIndex > 0) {
-                    // Animate transition
-                    lightboxImg.style.animation = 'slideOutRight 0.4s ease forwards';
-                    
-                    setTimeout(() => {
-                        const prevItem = visibleItems[currentItemIndex - 1];
-                        currentIndex = galleryItems.indexOf(prevItem);
-                        const fullSrc = prevItem.querySelector('.thumbnail').dataset.full;
-                        
-                        lightboxImg.src = fullSrc;
-                        lightboxImg.alt = prevItem.querySelector('.thumbnail').alt;
-                        lightboxImg.style.animation = 'slideInLeft 0.4s ease forwards';
-                        
-                        setTimeout(() => {
-                            lightboxImg.style.animation = '';
-                            updateLightboxCounter();
-                        }, 400);
-                    }, 200);
-                }
-            }
-
-            function showNextImage() {
-                const visibleItems = Array.from(galleryItems).filter(item => 
-                    item.style.display !== 'none' && item.style.display !== ''
-                );
-                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
-                
-                if (currentItemIndex < visibleItems.length - 1) {
-                    // Animate transition
-                    lightboxImg.style.animation = 'slideOutLeft 0.4s ease forwards';
-                    
-                    setTimeout(() => {
-                        const nextItem = visibleItems[currentItemIndex + 1];
-                        currentIndex = galleryItems.indexOf(nextItem);
-                        const fullSrc = nextItem.querySelector('.thumbnail').dataset.full;
-                        
-                        lightboxImg.src = fullSrc;
-                        lightboxImg.alt = nextItem.querySelector('.thumbnail').alt;
-                        lightboxImg.style.animation = 'slideInRight 0.4s ease forwards';
-                        
-                        setTimeout(() => {
-                            lightboxImg.style.animation = '';
-                            updateLightboxCounter();
-                        }, 400);
-                    }, 200);
-                }
-            }
-
-            // Add slide animations to styles
-            const slideAnimations = document.createElement('style');
-            slideAnimations.textContent = `
-                @keyframes slideInLeft {
-                    from { transform: translateX(-30px); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideInRight {
-                    from { transform: translateX(30px); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOutLeft {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(-30px); opacity: 0; }
-                }
-                @keyframes slideOutRight {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(30px); opacity: 0; }
-                }
-                @keyframes fadeOut {
-                    from { opacity: 1; }
-                    to { opacity: 0; }
-                }
-                @keyframes vibrate {
-                    0%, 100% { transform: translateX(0); }
-                    25% { transform: translateX(-2px); }
-                    75% { transform: translateX(2px); }
-                }
-            `;
-            document.head.appendChild(slideAnimations);
-
-            // Event Listeners for View Full buttons with animation
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('view-full') || e.target.closest('.view-full')) {
-                    e.preventDefault();
-                    const viewFullBtn = e.target.classList.contains('view-full') ? e.target : e.target.closest('.view-full');
-                    const index = parseInt(viewFullBtn.dataset.index);
-                    
-                    // Add click animation to button
-                    viewFullBtn.style.transform = 'scale(0.9)';
-                    setTimeout(() => {
-                        viewFullBtn.style.transform = '';
-                    }, 200);
-                    
-                    openLightbox(index);
-                }
-            });
-
-            // Also allow clicking on the image itself to open lightbox
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('thumbnail')) {
-                    const galleryItem = e.target.closest('.gallery-item');
-                    const index = Array.from(galleryItems).indexOf(galleryItem);
-                    if (index !== -1) {
-                        // Add ripple effect to thumbnail
-                        const ripple = document.createElement('span');
-                        ripple.style.cssText = `
-                            position: absolute;
-                            border-radius: 50%;
-                            background: rgba(245, 193, 108, 0.3);
-                            transform: scale(0);
-                            animation: thumbnailRipple 0.6s linear;
-                            pointer-events: none;
-                            z-index: 10;
-                        `;
-                        galleryItem.appendChild(ripple);
-                        
-                        const rect = galleryItem.getBoundingClientRect();
-                        ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
-                        ripple.style.left = (e.clientX - rect.left - parseInt(ripple.style.width)/2) + 'px';
-                        ripple.style.top = (e.clientY - rect.top - parseInt(ripple.style.height)/2) + 'px';
-                        
-                        setTimeout(() => {
-                            openLightbox(index);
-                            setTimeout(() => ripple.remove(), 600);
-                        }, 300);
-                    }
-                }
-            });
-
-            // Add thumbnail ripple animation
-            const rippleStyle = document.createElement('style');
-            rippleStyle.textContent = `
-                @keyframes thumbnailRipple {
-                    to {
-                        transform: scale(2);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(rippleStyle);
-
-            // Lightbox Controls
-            lightboxClose.addEventListener('click', closeLightbox);
-            lightboxPrev.addEventListener('click', showPrevImage);
-            lightboxNext.addEventListener('click', showNextImage);
-
-            // Enhanced Keyboard Navigation
-            document.addEventListener('keydown', function(e) {
-                if (lightbox.classList.contains('active')) {
-                    e.preventDefault();
-                    if (e.key === 'Escape') {
-                        lightboxClose.style.transform = 'scale(0.9)';
-                        setTimeout(() => {
-                            lightboxClose.style.transform = '';
-                        }, 150);
-                        closeLightbox();
-                    }
-                    if (e.key === 'ArrowLeft') {
-                        lightboxPrev.style.transform = 'scale(0.9)';
-                        setTimeout(() => {
-                            lightboxPrev.style.transform = '';
-                        }, 150);
-                        showPrevImage();
-                    }
-                    if (e.key === 'ArrowRight') {
-                        lightboxNext.style.transform = 'scale(0.9)';
-                        setTimeout(() => {
-                            lightboxNext.style.transform = '';
-                        }, 150);
-                        showNextImage();
-                    }
-                }
-            });
-
-            // Close lightbox when clicking outside image with animation
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) {
-                    // Add fade out animation to entire lightbox
-                    lightbox.style.animation = 'fadeOut 0.3s ease forwards';
-                    setTimeout(() => {
-                        closeLightbox();
-                        lightbox.style.animation = '';
-                    }, 300);
-                }
-            });
-
-            // Image lazy loading with intersection observer
-            const images = document.querySelectorAll('.thumbnail');
-            const imageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            // Fade in loaded image
-                            img.style.opacity = '0';
-                            img.style.transition = 'opacity 0.6s ease';
-                            
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            
-                            img.onload = () => {
-                                img.style.opacity = '1';
-                            };
-                        }
-                        imageObserver.unobserve(img);
-                    }
-                });
-            }, {
-                rootMargin: '100px',
-                threshold: 0.1
-            });
-
-            images.forEach(img => {
-                if (img.dataset.src) {
-                    imageObserver.observe(img);
-                }
-            });
-
-            // Add hover sound effects (optional - can be removed)
-            const buttons = document.querySelectorAll('button, .gallery-item');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function() {
-                    this.style.cursor = 'pointer';
-                });
-            });
-
-            // Initialize animations for first batch
-            setTimeout(() => {
-                const firstBatchItems = document.querySelectorAll('.gallery-item');
-                firstBatchItems.forEach((item, index) => {
-                    item.style.animationDelay = `${1.1 + (index * 0.1)}s`;
-                });
-            }, 1000);
-        });
-    </script>
-
-</body>
-</html>
+                    <div class="gallery-batch" style="display: none;">
+                        <div class="gallery-item" data-category="candid">
+                            <img src="images/thumbs/25.jpg" alt="Photo 25 - Emotional moment" class="thumbnail"
+                                 data-full="images/fulls/25.jpg">
+                            <
