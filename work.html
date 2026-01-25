@@ -1020,4 +1020,382 @@
                         <div class="gallery-item" data-category="candid">
                             <img src="images/thumbs/25.jpg" alt="Photo 25 - Emotional moment" class="thumbnail"
                                  data-full="images/fulls/25.jpg">
-                            <
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="24">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/26.jpg" alt="Photo 26 - Professional portrait" class="thumbnail"
+                                 data-full="images/fulls/26.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="25">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/27.jpg" alt="Photo 27 - Urban cinematic" class="thumbnail"
+                                 data-full="images/fulls/27.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="26">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/28.jpg" alt="Photo 28 - Dramatic portrait" class="thumbnail"
+                                 data-full="images/fulls/28.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="27">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-batch" style="display: none;">
+                        <div class="gallery-item" data-category="candid">
+                            <img src="images/thumbs/29.jpg" alt="Photo 29 - Spontaneous moment" class="thumbnail"
+                                 data-full="images/fulls/29.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="28">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/30.jpg" alt="Photo 30 - Expressive portrait" class="thumbnail"
+                                 data-full="images/fulls/30.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="29">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="cinematic">
+                            <img src="images/thumbs/31.jpg" alt="Photo 31 - Storytelling cinematic" class="thumbnail"
+                                 data-full="images/fulls/31.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="30">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-category="portraits">
+                            <img src="images/thumbs/32.jpg" alt="Photo 32 - Final portfolio piece" class="thumbnail"
+                                 data-full="images/fulls/32.jpg">
+                            <div class="gallery-overlay">
+                                <button class="view-full" data-index="31">
+                                    👁️ View Full
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container">
+                    <button id="load-more" type="button">
+                        Load More Photos
+                    </button>
+                </div>
+            </section>
+
+            <!-- Back Button -->
+            <div class="back-container">
+                <a href="index.html" class="back-button">
+                    ← Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">✕</button>
+        
+        <div class="lightbox-nav">
+            <button class="lightbox-prev" id="lightbox-prev">‹</button>
+            <button class="lightbox-next" id="lightbox-next">›</button>
+        </div>
+        
+        <div class="lightbox-content">
+            <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        </div>
+        
+        <div class="lightbox-counter" id="lightbox-counter">1 / 4</div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove preload class
+            document.body.classList.remove('is-preload');
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Gallery data - FIXED: We have 7 hidden batches (5-32)
+            let currentBatch = 0;
+            const batches = document.querySelectorAll('.gallery-batch');
+            const loadMoreBtn = document.getElementById('load-more');
+            const galleryGrid = document.getElementById('gallery-grid');
+            
+            // Lightbox elements
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            
+            // Collect all gallery items (starting with first 4)
+            let galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+            let currentIndex = 0;
+
+            console.log(`Total batches found: ${batches.length}`);
+            console.log(`Initial gallery items: ${galleryItems.length}`);
+
+            // FIXED Load More functionality
+            loadMoreBtn.addEventListener('click', function() {
+                console.log(`Loading batch ${currentBatch + 1} of ${batches.length}`);
+                
+                if (currentBatch < batches.length) {
+                    // Show loading state
+                    const originalText = loadMoreBtn.innerHTML;
+                    loadMoreBtn.innerHTML = '<span class="loading"></span> Loading...';
+                    loadMoreBtn.disabled = true;
+
+                    // Simulate loading delay
+                    setTimeout(() => {
+                        // Get the next batch
+                        const batch = batches[currentBatch];
+                        
+                        // Make the batch visible by changing display style
+                        batch.style.display = 'grid';
+                        
+                        // Get all items from this batch
+                        const newItems = batch.querySelectorAll('.gallery-item');
+                        console.log(`Adding ${newItems.length} new items`);
+                        
+                        // Add animation delay based on index
+                        newItems.forEach((item, index) => {
+                            item.style.animationDelay = `${(currentBatch * 4 + index) * 0.1}s`;
+                            galleryItems.push(item);
+                        });
+
+                        currentBatch++;
+
+                        // Update button text or hide if no more batches
+                        if (currentBatch >= batches.length) {
+                            loadMoreBtn.style.display = 'none';
+                            console.log('All batches loaded, hiding button');
+                        } else {
+                            loadMoreBtn.innerHTML = originalText;
+                            loadMoreBtn.disabled = false;
+                        }
+
+                        // Smooth scroll to newly loaded content
+                        setTimeout(() => {
+                            batch.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'nearest' 
+                            });
+                        }, 100);
+                        
+                    }, 800);
+                } else {
+                    console.log('No more batches to load');
+                }
+            });
+
+            // Set initial animation delays for first 4 items
+            document.querySelectorAll('.gallery-item').forEach((item, index) => {
+                if (index < 4) {
+                    item.style.animationDelay = `${index * 0.1}s`;
+                }
+            });
+
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    // Show/hide items based on filter
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.dataset.category === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Update lightbox counter for visible items
+                    if (lightbox.classList.contains('active')) {
+                        updateLightboxCounter();
+                    }
+                });
+            });
+
+            // Open Lightbox
+            function openLightbox(index) {
+                currentIndex = index;
+                const item = galleryItems[currentIndex];
+                const fullSrc = item.querySelector('.thumbnail').dataset.full;
+                
+                if (fullSrc) {
+                    lightboxImg.src = fullSrc;
+                    lightboxImg.alt = item.querySelector('.thumbnail').alt;
+                    updateLightboxCounter();
+                    
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    console.error('No full image source found for item:', item);
+                }
+            }
+
+            // Close Lightbox
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Update Lightbox Counter
+            function updateLightboxCounter() {
+                const visibleItems = Array.from(galleryItems).filter(item => 
+                    item.style.display !== 'none' && getComputedStyle(item).display !== 'none'
+                );
+                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
+                const totalVisible = visibleItems.length;
+                
+                if (currentItemIndex !== -1) {
+                    lightboxCounter.textContent = `${currentItemIndex + 1} / ${totalVisible}`;
+                } else {
+                    lightboxCounter.textContent = `1 / ${totalVisible}`;
+                }
+            }
+
+            // Navigation
+            function showPrevImage() {
+                const visibleItems = Array.from(galleryItems).filter(item => 
+                    item.style.display !== 'none' && getComputedStyle(item).display !== 'none'
+                );
+                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
+                
+                if (currentItemIndex > 0) {
+                    const prevItem = visibleItems[currentItemIndex - 1];
+                    currentIndex = galleryItems.indexOf(prevItem);
+                    const fullSrc = prevItem.querySelector('.thumbnail').dataset.full;
+                    
+                    if (fullSrc) {
+                        lightboxImg.src = fullSrc;
+                        lightboxImg.alt = prevItem.querySelector('.thumbnail').alt;
+                        updateLightboxCounter();
+                    }
+                }
+            }
+
+            function showNextImage() {
+                const visibleItems = Array.from(galleryItems).filter(item => 
+                    item.style.display !== 'none' && getComputedStyle(item).display !== 'none'
+                );
+                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
+                
+                if (currentItemIndex < visibleItems.length - 1) {
+                    const nextItem = visibleItems[currentItemIndex + 1];
+                    currentIndex = galleryItems.indexOf(nextItem);
+                    const fullSrc = nextItem.querySelector('.thumbnail').dataset.full;
+                    
+                    if (fullSrc) {
+                        lightboxImg.src = fullSrc;
+                        lightboxImg.alt = nextItem.querySelector('.thumbnail').alt;
+                        updateLightboxCounter();
+                    }
+                }
+            }
+
+            // Event Listeners for View Full buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('view-full') || e.target.closest('.view-full')) {
+                    const viewFullBtn = e.target.classList.contains('view-full') ? e.target : e.target.closest('.view-full');
+                    const index = parseInt(viewFullBtn.dataset.index);
+                    if (!isNaN(index)) {
+                        openLightbox(index);
+                    }
+                }
+            });
+
+            // Also allow clicking on the image itself to open lightbox
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('thumbnail')) {
+                    const galleryItem = e.target.closest('.gallery-item');
+                    const index = Array.from(galleryItems).indexOf(galleryItem);
+                    if (index !== -1) {
+                        openLightbox(index);
+                    }
+                }
+            });
+
+            // Lightbox Controls
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', showPrevImage);
+            lightboxNext.addEventListener('click', showNextImage);
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', function(e) {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') showPrevImage();
+                    if (e.key === 'ArrowRight') showNextImage();
+                }
+            });
+
+            // Close lightbox when clicking outside image
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Image lazy loading
+            const images = document.querySelectorAll('.thumbnail[data-src]');
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                if (img.dataset.src) {
+                    imageObserver.observe(img);
+                }
+            });
+            
+            console.log('Page loaded successfully. Load More button is functional.');
+        });
+    </script>
+
+</body>
+</html>
