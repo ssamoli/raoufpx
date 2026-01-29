@@ -102,43 +102,34 @@
     display:none !important;
   }
 
-  /* Navigation - HIDDEN BY DEFAULT ON MOBILE */
+  /* Navigation - ALWAYS VISIBLE ON MOBILE */
   nav{
-    display:none;
-  }
-  
-  nav.active{
     display:block;
-    position:absolute;
-    top:100%;
-    left:0;
-    right:0;
-    background:rgba(11,11,15,0.98);
-    border-bottom:1px solid rgba(255,255,255,0.1);
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-    padding:1rem;
-    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    flex:1;
+    margin-left:1rem;
   }
   
   nav ul{
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
+    flex-wrap:wrap;
     gap:0.5rem;
     list-style:none;
     margin:0;
     padding:0;
+    justify-content:flex-end;
   }
   
   nav a{
     color:var(--muted);
     text-decoration:none;
     font-weight:600;
-    font-size:1rem;
-    padding:0.8rem 1rem;
-    display:block;
-    border-radius:8px;
+    font-size:0.9rem;
+    padding:0.4rem 0.6rem;
+    display:inline-block;
+    border-radius:6px;
     transition:all 0.3s ease;
+    white-space:nowrap;
   }
   
   nav a:hover,
@@ -147,27 +138,9 @@
     background:rgba(255,255,255,0.05);
   }
 
-  /* Mobile Toggle Button */
+  /* Mobile Toggle Button - HIDDEN */
   .mobile-toggle{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:none;
-    border:none;
-    color:var(--muted);
-    font-size:1.5rem;
-    cursor:pointer;
-    padding:0.4rem;
-    width:2.5rem;
-    height:2.5rem;
-    border-radius:8px;
-    transition:all 0.3s ease;
-    flex-shrink:0;
-  }
-  
-  .mobile-toggle:hover{
-    background:rgba(255,255,255,0.05);
-    color:#fff;
+    display:none !important;
   }
 
   /* Intro styling */
@@ -433,24 +406,42 @@
     }
     
     #header{
-      flex-wrap:nowrap;
+      flex-wrap:wrap;
       align-items:center;
+      padding:0.8rem;
     }
     
     .logo-frame{
-      flex:1;
-      min-width:0;
+      flex:0 0 auto;
+      margin-bottom:0;
+    }
+    
+    nav{
+      flex:1 0 100%;
+      order:3;
+      margin:0.5rem 0 0 0;
+      padding-top:0.5rem;
+      border-top:1px solid rgba(255,255,255,0.1);
+    }
+    
+    nav ul{
+      justify-content:center;
+    }
+    
+    nav a{
+      font-size:0.85rem;
+      padding:0.4rem 0.5rem;
     }
     
     .main.style1.dark.fullscreen{
-      padding-top:4.5rem;
-      min-height:calc(100vh - 4.5rem);
+      padding-top:6rem; /* Increased to account for header height with nav */
+      min-height:calc(100vh - 6rem);
     }
     
     #intro,
     #one,
     #two{
-      padding-top:4.5rem !important;
+      padding-top:6rem !important;
     }
     
     .content.box{
@@ -492,10 +483,9 @@
       height:1.8rem;
     }
     
-    .mobile-toggle{
-      width:2.2rem;
-      height:2.2rem;
-      font-size:1.3rem;
+    nav a{
+      font-size:0.8rem;
+      padding:0.3rem 0.4rem;
     }
     
     .main.style1.dark .content header h1{
@@ -544,11 +534,6 @@
     <img src="images/logo.png" alt="RAOUF px Logo" width="35" height="35" />
   </div>
 </a>
-
-        <!-- Mobile Toggle Button -->
-        <button class="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false" id="mobileToggle">
-          ☰
-        </button>
 
 				<nav id="mainNav">
   <ul>
@@ -625,89 +610,42 @@
     document.body.classList.remove('is-preload');
   });
   
-  // Mobile Navigation
-  document.addEventListener('DOMContentLoaded', function() {
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mainNav = document.getElementById('mainNav');
+  // Auto-adjust section padding for header height
+  function adjustSectionPadding() {
+    const header = document.getElementById('header');
+    const sections = document.querySelectorAll('section');
+    const headerHeight = header ? header.offsetHeight : 70;
     
-    if (mobileToggle && mainNav) {
-      // Toggle menu
-      mobileToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-        mainNav.classList.toggle('active');
-        
-        // Toggle hamburger icon
-        this.textContent = isExpanded ? '☰' : '✕';
-      });
+    sections.forEach(section => {
+      section.style.paddingTop = headerHeight + 20 + 'px';
+    });
+  }
+  
+  // Initial adjustment
+  adjustSectionPadding();
+  
+  // Adjust on resize
+  window.addEventListener('resize', adjustSectionPadding);
+  
+  // Smooth scrolling
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '#work') return;
       
-      // Close menu when clicking a link
-      const navLinks = mainNav.querySelectorAll('a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          mainNav.classList.remove('active');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-          mobileToggle.textContent = '☰';
-        });
-      });
-      
-      // Close menu when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!mainNav.contains(e.target) && !mobileToggle.contains(e.target)) {
-          mainNav.classList.remove('active');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-          mobileToggle.textContent = '☰';
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const header = document.getElementById('header');
+          const headerHeight = header ? header.offsetHeight : 70;
+          
+          window.scrollTo({
+            top: target.offsetTop - headerHeight - 10,
+            behavior: 'smooth'
+          });
         }
-      });
-      
-      // Close menu on escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-          mainNav.classList.remove('active');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-          mobileToggle.textContent = '☰';
-        }
-      });
-    }
-    
-    // Auto-adjust section padding for header height
-    function adjustSectionPadding() {
-      const header = document.getElementById('header');
-      const sections = document.querySelectorAll('section');
-      const headerHeight = header ? header.offsetHeight : 70;
-      
-      sections.forEach(section => {
-        section.style.paddingTop = headerHeight + 20 + 'px';
-      });
-    }
-    
-    // Initial adjustment
-    adjustSectionPadding();
-    
-    // Adjust on resize
-    window.addEventListener('resize', adjustSectionPadding);
-    
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href === '#work') return;
-        
-        if (href.startsWith('#')) {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            const header = document.getElementById('header');
-            const headerHeight = header ? header.offsetHeight : 70;
-            
-            window.scrollTo({
-              top: target.offsetTop - headerHeight - 10,
-              behavior: 'smooth'
-            });
-          }
-        }
-      });
+      }
     });
   });
 </script>
