@@ -11,133 +11,138 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;max-width:100%}
-:root{--bg:#080810;--bg2:#0e0e1a;--surface:rgba(255,255,255,.03);--border:rgba(255,255,255,.08);--accent:#f0b44c;--accent2:#ff7e3e;--accent3:#4cf0d0;--muted:rgba(255,255,255,.45);--text:rgba(255,255,255,.82);--header-h:60px;--radius:0px;--radius-sm:0px}
-html{scroll-behavior:smooth}
-html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;-webkit-font-smoothing:none;overflow-x:hidden;cursor:none}
-body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.12) 2px,rgba(0,0,0,.12) 4px);pointer-events:none;z-index:8000;opacity:.55}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,180,76,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.02) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
-.cursor{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-.cursor-inner{width:12px;height:12px;background:var(--accent);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:cpulse 1.5s ease-in-out infinite}
-.cursor-outer{position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);width:28px;height:28px;border:2px solid rgba(240,180,76,.35);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);transition:width .25s,height .25s,border-color .25s}
-body:has(a:hover) .cursor-outer,body:has(button:hover) .cursor-outer{width:44px;height:44px;border-color:var(--accent)}
-@keyframes cpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
-.glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(120px);opacity:.07}
-.glow-1{width:500px;height:500px;background:#f0b44c;top:-150px;left:-100px;animation:g1 20s ease-in-out infinite alternate}
-.glow-2{width:400px;height:400px;background:#ff7e3e;bottom:0;right:-80px;animation:g2 25s ease-in-out infinite alternate}
-.glow-3{width:280px;height:280px;background:#4cf0d0;top:40%;left:45%;animation:g3 18s ease-in-out infinite alternate;opacity:.04}
-@keyframes g1{to{transform:translate(60px,40px)}}@keyframes g2{to{transform:translate(-50px,-60px)}}@keyframes g3{to{transform:translate(30px,-30px)}}
-#scroll-progress{position:fixed;top:var(--header-h);left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent2));z-index:1001;transition:width .08s linear}
-#header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,4vw,3rem);height:var(--header-h);background:rgba(8,8,16,.93);border-bottom:2px solid rgba(240,180,76,.15);backdrop-filter:blur(12px);transition:border-color .3s}
-#header.scrolled{border-bottom-color:rgba(240,180,76,.35)}
-.logo-frame{display:flex;align-items:center;text-decoration:none;flex-shrink:0;padding:5px;border:2px solid rgba(240,180,76,.2);position:relative;transition:border-color .25s}
-.logo-frame:hover{border-color:var(--accent)}
-.logo-frame::before,.logo-frame::after{content:'';position:absolute;width:7px;height:7px;background:var(--accent)}
-.logo-frame::before{top:-3px;left:-3px}.logo-frame::after{bottom:-3px;right:-3px}
-.logo-inner img{height:2rem;width:auto;display:block;image-rendering:pixelated;filter:drop-shadow(0 0 8px rgba(240,180,76,.4))}
-nav ul{display:flex;gap:.15rem;list-style:none}
-nav a{color:var(--muted);text-decoration:none;font-family:'Press Start 2P',monospace;font-size:.5rem;letter-spacing:.05em;padding:.5rem .75rem;display:inline-block;transition:color .2s,background .2s;border:1px solid transparent}
-nav a:hover,nav a.active{color:var(--accent);background:rgba(240,180,76,.06);border-color:rgba(240,180,76,.2)}
-nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-left:2px;font-size:.45rem}
-@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:1px solid rgba(240,180,76,.2);cursor:none;padding:.5rem;z-index:1001}
-.hamburger span{display:block;width:20px;height:2px;background:var(--text);transition:all .25s ease}
-.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-.mobile-nav{display:none;position:fixed;top:var(--header-h);left:0;right:0;background:rgba(8,8,16,.98);border-bottom:2px solid rgba(240,180,76,.2);z-index:999;padding:1rem;transform:translateY(-10px);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
-.mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:all}
-.mobile-nav ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
-.mobile-nav a{display:block;color:var(--text);text-decoration:none;font-family:'Press Start 2P',monospace;font-size:.6rem;padding:1rem .8rem;border-bottom:1px solid var(--border);transition:color .2s,background .2s}
-.mobile-nav a:last-child{border-bottom:none}
-.mobile-nav a:hover,.mobile-nav a.active{color:var(--accent);background:rgba(240,180,76,.05)}
-.page-eyebrow{font-family:'Press Start 2P',monospace;font-size:.47rem;color:var(--accent3);letter-spacing:.2em;display:block;margin-bottom:.8rem;opacity:0;animation:pxIn .6s steps(8) .2s forwards}
-.page-eyebrow::before{content:'> ';color:var(--accent)}
-.page-title{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,2.5vw,1.8rem);line-height:1.7;color:#fff;margin-bottom:.5rem;text-shadow:3px 3px 0 rgba(240,180,76,.15);opacity:0;animation:pxIn .8s steps(12) .35s forwards}
-.page-title .hl{color:var(--accent)}
-.page-sub{font-family:'Space Mono',monospace;font-size:.82rem;color:var(--muted);line-height:2;margin-bottom:3rem;opacity:0;animation:pxIn .7s steps(8) .55s forwards}
-.pixel-card{background:var(--surface);border:2px solid rgba(240,180,76,.14);padding:clamp(1.8rem,4vw,2.8rem);position:relative;opacity:0;transform:translateY(20px);transition:opacity .5s steps(8),transform .5s steps(8),border-color .3s}
-.pixel-card.visible{opacity:1;transform:translateY(0)}
-.pixel-card:hover{border-color:rgba(240,180,76,.3)}
-.pixel-card::before{content:'';position:absolute;top:-2px;left:-2px;width:20px;height:20px;border-top:3px solid var(--accent);border-left:3px solid var(--accent)}
-.pixel-card::after{content:'';position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;border-bottom:3px solid var(--accent);border-right:3px solid var(--accent)}
-.card-label{font-family:'Press Start 2P',monospace;font-size:.47rem;color:var(--accent3);letter-spacing:.2em;margin-bottom:1rem;display:block}
-.card-label::before{content:'// ';color:var(--muted)}
-.card-title{font-family:'Press Start 2P',monospace;font-size:clamp(.8rem,2vw,1.4rem);color:#fff;line-height:1.7;margin-bottom:1.2rem;text-shadow:2px 2px 0 rgba(240,180,76,.14)}
-.card-body{font-family:'Space Mono',monospace;font-size:.8rem;line-height:2;color:var(--text)}
-.card-body strong{color:#fff;font-weight:700}
-.btn-pixel{display:inline-block;font-family:'Press Start 2P',monospace;font-size:.62rem;color:#080810;background:var(--accent);text-decoration:none;padding:.9rem 1.6rem;border:none;cursor:none;position:relative;box-shadow:4px 4px 0 #7a5a20,8px 8px 0 rgba(0,0,0,.4);transition:box-shadow .1s steps(1),transform .1s steps(1);letter-spacing:.05em}
-.btn-pixel::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 60%);pointer-events:none}
-.btn-pixel:hover{box-shadow:2px 2px 0 #7a5a20,4px 4px 0 rgba(0,0,0,.4);transform:translate(2px,2px)}
-.btn-pixel:active{box-shadow:0 0 0 #7a5a20;transform:translate(4px,4px)}
-.btn-pixel:disabled{opacity:.5;cursor:not-allowed}
-.btn-pixel-outline{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:4px 4px 0 rgba(240,180,76,.25);color:var(--accent)}
-.btn-pixel-outline:hover{background:rgba(240,180,76,.08);box-shadow:2px 2px 0 rgba(240,180,76,.25);transform:translate(2px,2px)}
-@keyframes pxIn{from{opacity:0;transform:translateY(12px);clip-path:inset(100% 0 0 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0% 0 0 0)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.cursor,.cursor-outer{display:none}html,body{cursor:auto}.glow{display:none}}
-@media(max-width:768px){:root{--header-h:56px}nav{display:none}.hamburger{display:flex}.mobile-nav{display:block}.cursor,.cursor-outer{display:none}html,body{cursor:auto}}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-    .page-wrapper{position:relative;z-index:1;padding:calc(var(--header-h) + 4rem) clamp(1rem,4vw,4rem) 6rem;max-width:1300px;margin:0 auto}
-    .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:start}
-    .col-label{font-family:'Press Start 2P',monospace;font-size:.47rem;color:var(--accent3);letter-spacing:.2em;margin-bottom:1rem;display:block}
-    .col-label::before{content:'// '}
-    .col-heading{font-family:'Press Start 2P',monospace;font-size:clamp(.75rem,2vw,1.1rem);color:#fff;line-height:1.7;margin-bottom:1.8rem}
-    .packages-list{display:flex;flex-direction:column;gap:1rem}
-    .pkg{background:var(--surface);border:2px solid var(--border);padding:1.5rem 1.6rem;cursor:none;position:relative;transition:border-color .2s,box-shadow .2s}
-    .pkg::before{content:'';position:absolute;top:-2px;left:-2px;width:14px;height:14px;border-top:2px solid var(--accent);border-left:2px solid var(--accent);opacity:0;transition:opacity .2s}
-    .pkg:hover::before,.pkg.selected::before{opacity:1}
-    .pkg:hover{border-color:rgba(240,180,76,.25)}
-    .pkg.selected{border-color:rgba(240,180,76,.5);background:rgba(240,180,76,.04);box-shadow:4px 4px 0 rgba(240,180,76,.12)}
-    .pkg-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
-    .pkg-name{font-family:'Press Start 2P',monospace;font-size:.7rem;color:#fff;line-height:1.6}
-    .pkg-price{font-family:'Press Start 2P',monospace;font-size:.85rem;color:var(--accent);text-shadow:1px 1px 0 rgba(240,120,30,.4)}
-    .pkg-features{list-style:none;display:flex;flex-direction:column;gap:.35rem}
-    .pkg-features li{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted);padding-left:1.2rem;position:relative;line-height:1.6}
-    .pkg-features li::before{content:'>';position:absolute;left:0;color:var(--accent);font-size:.7rem}
-    .pkg-badge{margin-top:.9rem;display:inline-flex;align-items:center;gap:.4rem;background:rgba(76,240,208,.06);border:1px solid rgba(76,240,208,.25);padding:.45rem .8rem;font-family:'Press Start 2P',monospace;font-size:.42rem;color:var(--accent3);letter-spacing:.05em}
-    .form-col{position:sticky;top:calc(var(--header-h) + 1.5rem)}
-    .form-card{padding:clamp(1.8rem,3vw,2.6rem)}
-    .form-heading{font-family:'Press Start 2P',monospace;font-size:clamp(.75rem,2vw,1.1rem);color:#fff;line-height:1.7;margin-bottom:.4rem}
-    .form-sub{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:1.6rem;line-height:1.9}
-    .spd{display:none;background:rgba(240,180,76,.05);border:1px solid rgba(240,180,76,.25);padding:.9rem 1.1rem;margin-bottom:1.6rem;animation:pxIn .3s steps(6)}
-    .spd.show{display:flex;justify-content:space-between;align-items:center}
-    .spd-name{font-family:'Press Start 2P',monospace;font-size:.55rem;color:#fff}
-    .spd-meta{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:.3rem}
-    .spd-price{font-family:'Press Start 2P',monospace;font-size:.75rem;color:var(--accent);flex-shrink:0}
-    .form-group{margin-bottom:1.2rem}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    label{display:block;font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(255,255,255,.4);letter-spacing:.1em;margin-bottom:.45rem}
-    .form-control{width:100%;padding:.8rem 1rem;font-family:'Space Mono',monospace;font-size:.8rem;font-weight:400;background:rgba(255,255,255,.03);border:2px solid var(--border);color:#fff;transition:border-color .2s,background .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
-    .form-control:focus{outline:none;border-color:rgba(240,180,76,.55);background:rgba(255,255,255,.05);box-shadow:3px 3px 0 rgba(240,180,76,.08)}
+    :root{
+      --bg:#080810;--bg2:#0e0e1a;--surface:rgba(255,255,255,.03);--border:rgba(255,255,255,.08);
+      --accent:#f0b44c;--accent2:#ff7e3e;--accent3:#4cf0d0;
+      --muted:rgba(255,255,255,.45);--text:rgba(255,255,255,.82);--header-h:60px;
+      --radius:0px;--radius-sm:0px
+    }
+    html{scroll-behavior:smooth}
+    html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;-webkit-font-smoothing:none;overflow-x:hidden;cursor:none}
+    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.13) 2px,rgba(0,0,0,.13) 4px);pointer-events:none;z-index:8000;opacity:.5}
+    body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,180,76,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+    .cursor{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    .cursor-inner{width:12px;height:12px;background:var(--accent);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:cpulse 1.5s ease-in-out infinite}
+    .cursor-outer{position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);width:28px;height:28px;border:2px solid rgba(240,180,76,.35);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);transition:width .25s,height .25s,border-color .25s}
+    body:has(a:hover) .cursor-outer,body:has(button:hover) .cursor-outer{width:44px;height:44px;border-color:var(--accent)}
+    @keyframes cpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+    .glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(120px);opacity:.07}
+    .glow-1{width:500px;height:500px;background:#f0b44c;top:-150px;left:-100px;animation:g1 20s ease-in-out infinite alternate}
+    .glow-2{width:400px;height:400px;background:#ff7e3e;bottom:0;right:-80px;animation:g2 25s ease-in-out infinite alternate}
+    @keyframes g1{to{transform:translate(60px,40px)}}@keyframes g2{to{transform:translate(-50px,-60px)}}
+    #scroll-progress{position:fixed;top:var(--header-h);left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent2));z-index:1001;transition:width .08s linear}
+    #header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,4vw,3rem);height:var(--header-h);background:rgba(8,8,16,.93);border-bottom:2px solid rgba(240,180,76,.15);backdrop-filter:blur(8px);transition:border-color .3s}
+    #header.scrolled{border-bottom-color:rgba(240,180,76,.4)}
+    .logo-frame{display:flex;align-items:center;text-decoration:none;flex-shrink:0;padding:5px;border:2px solid rgba(240,180,76,.2);position:relative;transition:border-color .25s}
+    .logo-frame:hover{border-color:var(--accent)}
+    .logo-frame::before,.logo-frame::after{content:'';position:absolute;width:7px;height:7px;background:var(--accent)}
+    .logo-frame::before{top:-3px;left:-3px}.logo-frame::after{bottom:-3px;right:-3px}
+    .logo-inner img{height:2rem;width:auto;display:block;filter:drop-shadow(0 0 10px rgba(240,180,76,.55)) drop-shadow(0 0 22px rgba(240,180,76,.25))}
+    nav ul{display:flex;gap:.15rem;list-style:none}
+    nav a{color:var(--muted);text-decoration:none;font-family:'Press Start 2P',monospace;font-size:.5rem;letter-spacing:.05em;padding:.5rem .75rem;display:inline-block;transition:color .2s,background .2s;border:1px solid transparent}
+    nav a:hover,nav a.active{color:var(--accent);background:rgba(240,180,76,.06);border-color:rgba(240,180,76,.2)}
+    nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-left:2px;font-size:.45rem}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:1px solid rgba(240,180,76,.2);cursor:none;padding:.5rem;z-index:1001}
+    .hamburger span{display:block;width:20px;height:2px;background:var(--text);transition:all .25s ease}
+    .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+    .mobile-nav{display:none;position:fixed;top:var(--header-h);left:0;right:0;background:rgba(8,8,16,.98);border-bottom:2px solid rgba(240,180,76,.2);z-index:999;padding:1rem;transform:translateY(-10px);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+    .mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:all}
+    .mobile-nav ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
+    .mobile-nav a{display:block;color:var(--text);text-decoration:none;font-family:'Press Start 2P',monospace;font-size:.6rem;padding:1rem .8rem;border-bottom:1px solid var(--border);transition:color .2s,background .2s}
+    .mobile-nav a:last-child{border-bottom:none}
+    .mobile-nav a:hover,.mobile-nav a.active{color:var(--accent);background:rgba(240,180,76,.05)}
+
+    /* ── PAGE ── */
+    .page-wrap{position:relative;z-index:1;padding:calc(var(--header-h) + 3.5rem) clamp(1rem,4vw,4rem) 6rem;max-width:1300px;margin:0 auto}
+    .page-eyebrow{font-family:'Press Start 2P',monospace;font-size:.45rem;color:var(--accent3);letter-spacing:.2em;display:block;margin-bottom:1rem;opacity:0;animation:pxIn .6s steps(8) .2s forwards}
+    .page-eyebrow::before{content:'> ';color:var(--accent)}
+    .page-title{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,2.5vw,1.8rem);color:#fff;line-height:1.7;margin-bottom:.5rem;opacity:0;animation:pxIn .7s steps(10) .35s forwards;text-shadow:3px 3px 0 rgba(240,180,76,.2)}
+    .page-title .hl{color:var(--accent)}
+    .page-sub{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted);margin-bottom:3rem;line-height:2;opacity:0;animation:pxIn .6s steps(8) .55s forwards}
+    @keyframes pxIn{from{opacity:0;transform:translateY(10px);clip-path:inset(100% 0 0 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0% 0 0 0)}}
+
+    /* ── GRID ── */
+    .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start}
+
+    /* ── PIXEL CARD BASE ── */
+    .px-card{background:var(--surface);border:2px solid rgba(240,180,76,.14);padding:clamp(1.5rem,3vw,2.4rem);position:relative;border-color:.3s}
+    .px-card:hover{border-color:rgba(240,180,76,.28)}
+    .px-card::before{content:'';position:absolute;top:-2px;left:-2px;width:20px;height:20px;border-top:3px solid var(--accent);border-left:3px solid var(--accent)}
+    .px-card::after{content:'';position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;border-bottom:3px solid var(--accent);border-right:3px solid var(--accent)}
+    /* Reveal animation — only applied to cards that use data-reveal */
+    [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .5s steps(8),transform .5s steps(8)}
+    [data-reveal].visible{opacity:1;transform:translateY(0)}
+
+    /* ── SECTION LABEL ── */
+    .sec-label{font-family:'Press Start 2P',monospace;font-size:.45rem;color:var(--accent3);letter-spacing:.2em;margin-bottom:1rem;display:block}
+    .sec-label::before{content:'// ';color:var(--muted)}
+    .sec-heading{font-family:'Press Start 2P',monospace;font-size:clamp(.7rem,1.8vw,1.1rem);color:#fff;line-height:1.8;margin-bottom:1.6rem;text-shadow:2px 2px 0 rgba(240,180,76,.12)}
+
+    /* ── PACKAGE CARDS ── */
+    .pkg-list{display:flex;flex-direction:column;gap:.8rem}
+    .pkg{background:rgba(255,255,255,.025);border:2px solid var(--border);padding:1.4rem 1.6rem;cursor:none;position:relative;transition:border-color .2s steps(3),background .2s steps(3)}
+    .pkg::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .25s steps(4)}
+    .pkg:hover{border-color:rgba(240,180,76,.2)}
+    .pkg.selected{border-color:rgba(240,180,76,.45);background:rgba(240,180,76,.04)}
+    .pkg.selected::before{transform:scaleX(1)}
+    .pkg-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem}
+    .pkg-name{font-family:'Press Start 2P',monospace;font-size:.65rem;color:#fff;line-height:1.5}
+    .pkg-price{font-family:'Press Start 2P',monospace;font-size:.75rem;color:var(--accent)}
+    .pkg-features{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+    .pkg-features li{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--muted);padding-left:1.2rem;position:relative;line-height:1.6}
+    .pkg-features li::before{content:'>';position:absolute;left:0;color:var(--accent3);font-size:.7rem}
+    .pkg-badge{margin-top:.8rem;display:inline-block;background:rgba(240,180,76,.08);border:1px solid rgba(240,180,76,.25);padding:.4rem .7rem;font-family:'Press Start 2P',monospace;font-size:.42rem;color:var(--accent);letter-spacing:.05em}
+
+    /* ── FORM CARD ── */
+    .form-col{position:sticky;top:calc(var(--header-h) + 1.2rem)}
+    .spd{display:none;background:rgba(76,240,208,.05);border:1px solid rgba(76,240,208,.2);padding:.9rem 1.1rem;margin-bottom:1.5rem;font-family:'Space Mono',monospace;animation:pxIn .3s steps(6) forwards}
+    .spd.show{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+    .spd-left .spd-name{font-family:'Press Start 2P',monospace;font-size:.52rem;color:#fff}
+    .spd-left .spd-meta{font-size:.65rem;color:var(--muted);margin-top:.3rem}
+    .spd-price{font-family:'Press Start 2P',monospace;font-size:.6rem;color:var(--accent);white-space:nowrap}
+    .form-heading{font-family:'Press Start 2P',monospace;font-size:clamp(.6rem,1.5vw,.9rem);color:#fff;line-height:1.8;margin-bottom:.4rem}
+    .form-sub{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:1.6rem;line-height:1.8}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .form-group{margin-bottom:1.1rem}
+    label{display:block;font-family:'Press Start 2P',monospace;font-size:.42rem;color:rgba(255,255,255,.4);letter-spacing:.1em;margin-bottom:.4rem}
+    .form-control{width:100%;padding:.75rem .9rem;font-family:'Space Mono',monospace;font-size:.78rem;background:rgba(255,255,255,.04);border:2px solid var(--border);color:#fff;transition:border-color .2s steps(3),background .2s steps(3);appearance:none;-webkit-appearance:none}
+    .form-control:focus{outline:none;border-color:rgba(240,180,76,.5);background:rgba(240,180,76,.04);box-shadow:0 0 0 2px rgba(240,180,76,.08)}
     .form-control::placeholder{color:rgba(255,255,255,.2)}
     .form-control option{background:#0e0e1a;color:#fff}
     .select-wrap{position:relative}
-    .select-wrap::after{content:'▼';position:absolute;right:.9rem;top:50%;transform:translateY(-50%);color:rgba(240,180,76,.5);font-size:.55rem;pointer-events:none}
-    .select-wrap select{padding-right:2rem;cursor:none}
+    .select-wrap::after{content:'▼';position:absolute;right:.9rem;top:50%;transform:translateY(-50%);font-family:'Press Start 2P',monospace;font-size:.4rem;color:var(--accent);pointer-events:none}
+    .select-wrap select{padding-right:2.2rem;cursor:none}
     textarea.form-control{min-height:90px;resize:vertical}
-    input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.7) sepia(1) saturate(2) hue-rotate(5deg);opacity:.6;cursor:none}
-    .field-hint{font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.28);margin-top:.35rem;display:block}
-    .field-error{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--accent2);margin-top:.3rem;display:none}
+    input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.65) sepia(1) saturate(3) hue-rotate(10deg);cursor:none}
+    .field-hint{font-family:'Space Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.28);margin-top:.3rem;display:block}
+    .field-error{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--accent2);margin-top:.3rem;display:none}
     .field-error.show{display:block}
-    .form-control.error{border-color:rgba(255,126,62,.6);background:rgba(255,126,62,.04)}
-    .submit-btn{width:100%;margin-top:1.6rem;font-family:'Press Start 2P',monospace;font-size:.6rem;color:#080810;background:var(--accent);border:none;padding:1rem;cursor:none;position:relative;box-shadow:4px 4px 0 #7a5a20,8px 8px 0 rgba(0,0,0,.4);transition:box-shadow .1s steps(1),transform .1s steps(1),opacity .2s;letter-spacing:.05em}
+    .form-control.error{border-color:rgba(255,126,62,.5)}
+    .submit-btn{width:100%;padding:.9rem;font-family:'Press Start 2P',monospace;font-size:.55rem;letter-spacing:.05em;color:#080810;background:var(--accent);border:none;cursor:none;margin-top:1.5rem;position:relative;box-shadow:4px 4px 0 #7a5a20,6px 6px 0 rgba(0,0,0,.4);transition:box-shadow .1s steps(1),transform .1s steps(1),opacity .3s}
     .submit-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 60%);pointer-events:none}
     .submit-btn:hover:not(:disabled){box-shadow:2px 2px 0 #7a5a20,4px 4px 0 rgba(0,0,0,.4);transform:translate(2px,2px)}
-    .submit-btn:active:not(:disabled){box-shadow:0 0 0 #7a5a20;transform:translate(4px,4px)}
+    .submit-btn:active:not(:disabled){box-shadow:0 0 0;transform:translate(4px,4px)}
     .submit-btn:disabled{opacity:.5;cursor:not-allowed}
-    .spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.2);border-top-color:#080810;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:.4rem}
-    .status-msg{display:none;margin-top:1.1rem;padding:.85rem 1rem;font-family:'Space Mono',monospace;font-size:.75rem;line-height:1.7;border:1px solid;animation:pxIn .3s steps(6)}
-    .status-msg.success{background:rgba(76,240,80,.06);border-color:rgba(76,240,80,.25);color:#7ddf8a}
-    .status-msg.error-msg{background:rgba(255,126,62,.06);border-color:rgba(255,126,62,.25);color:var(--accent2)}
+    .spinner{display:inline-block;width:10px;height:10px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;animation:spin .8s linear infinite;vertical-align:middle;margin-right:.5rem}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .status-msg{display:none;margin-top:1rem;padding:.75rem 1rem;font-family:'Space Mono',monospace;font-size:.72rem;line-height:1.7;border:2px solid;animation:pxIn .3s steps(6)}
+    .status-msg.success{background:rgba(76,240,208,.05);border-color:rgba(76,240,208,.3);color:var(--accent3)}
+    .status-msg.error-msg{background:rgba(255,126,62,.05);border-color:rgba(255,126,62,.3);color:var(--accent2)}
+
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.cursor,.cursor-outer{display:none}html,body{cursor:auto}.glow{display:none}}
     @media(max-width:960px){.booking-grid{grid-template-columns:1fr}.form-col{position:static}}
-    @media(max-width:768px){.form-row{grid-template-columns:1fr}.page-wrapper{padding:calc(var(--header-h) + 2.5rem) 1rem 4rem}}
-    @media(max-width:420px){.pkg-top{flex-direction:column;gap:.4rem}}
+    @media(max-width:768px){:root{--header-h:56px}nav{display:none}.hamburger{display:flex}.mobile-nav{display:block}.cursor,.cursor-outer{display:none}html,body{cursor:auto}.form-row{grid-template-columns:1fr}.page-wrap{padding:calc(var(--header-h) + 2rem) 1rem 4rem}}
+    @media(max-width:420px){.pkg-top{flex-direction:column;gap:.3rem}.submit-btn{font-size:.48rem}}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   </style>
 </head>
 <body>
   <div class="cursor" id="cursorInner"><div class="cursor-inner"></div></div>
   <div class="cursor-outer" id="cursorOuter"></div>
-  <div class="glow glow-1"></div><div class="glow glow-2"></div><div class="glow glow-3"></div>
+  <div class="glow glow-1"></div><div class="glow glow-2"></div>
   <div id="scroll-progress"></div>
 
   <header id="header">
@@ -152,7 +157,7 @@ nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-le
         <li><a href="booking.html" class="active">BOOK</a></li>
       </ul>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </header>
@@ -165,52 +170,75 @@ nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-le
     </ul>
   </nav>
 
-  <div class="page-wrapper">
-    <span class="page-eyebrow">DUBAI · WEEKENDS ONLY</span>
+  <div class="page-wrap">
+    <span class="page-eyebrow">DUBAI &nbsp;·&nbsp; WEEKENDS ONLY</span>
     <h1 class="page-title">BOOK YOUR<br><span class="hl">SESSION.</span></h1>
-    <p class="page-sub">Select a package, pick a date.<br>Confirmed within 24 hours.</p>
+    <p class="page-sub">// Select a package. Pick a date.<br>// I'll confirm within 24 hours.</p>
 
     <div class="booking-grid">
       <!-- PACKAGES -->
-      <div data-reveal>
-        <span class="col-label">STEP_01</span>
-        <h2 class="col-heading">CHOOSE<br>PACKAGE</h2>
-        <div class="packages-list">
+      <div class="px-card" data-reveal>
+        <span class="sec-label">STEP_01</span>
+        <h2 class="sec-heading">CHOOSE<br>PACKAGE</h2>
+        <div class="pkg-list">
 
-          <div class="pkg" data-pkg="starter" data-price="250" data-label="30 MIN / 10 EDITS / 1 LOCATION" role="button" tabindex="0" aria-pressed="false">
-            <div class="pkg-top"><span class="pkg-name">STARTER</span><span class="pkg-price">AED 250</span></div>
+          <div class="pkg" data-pkg="starter" data-price="250" data-label="30min · 10 edits · 1 location" role="button" tabindex="0" aria-pressed="false">
+            <div class="pkg-top">
+              <span class="pkg-name">STARTER</span>
+              <span class="pkg-price">AED 250</span>
+            </div>
             <ul class="pkg-features">
-              <li>30-min session</li><li>10 edited photos</li><li>1 location</li><li>3-day delivery</li>
+              <li>30-minute session</li>
+              <li>10 edited photos</li>
+              <li>1 location</li>
+              <li>3-day delivery</li>
             </ul>
           </div>
 
-          <div class="pkg selected" data-pkg="signature" data-price="499" data-label="1 HR / 25 EDITS / 2 LOCATIONS / OUTFIT" role="button" tabindex="0" aria-pressed="true">
-            <div class="pkg-top"><span class="pkg-name">SIGNATURE</span><span class="pkg-price">AED 499</span></div>
+          <div class="pkg selected" data-pkg="signature" data-price="499" data-label="1hr · 25 edits · 2 locations · outfit change" role="button" tabindex="0" aria-pressed="true">
+            <div class="pkg-top">
+              <span class="pkg-name">SIGNATURE</span>
+              <span class="pkg-price">AED 499</span>
+            </div>
             <ul class="pkg-features">
-              <li>1-hour session</li><li>25 edited photos</li><li>2 locations</li><li>Outfit change</li>
+              <li>1-hour session</li>
+              <li>25 edited photos</li>
+              <li>2 locations</li>
+              <li>Outfit change</li>
             </ul>
           </div>
 
-          <div class="pkg" data-pkg="storytelling" data-price="999" data-label="2 HRS / 50+ EDITS / 3 LOCATIONS / REEL" role="button" tabindex="0" aria-pressed="false">
-            <div class="pkg-top"><span class="pkg-name">STORYTELLING</span><span class="pkg-price">AED 999</span></div>
+          <div class="pkg" data-pkg="storytelling" data-price="999" data-label="2hrs · 50+ edits · 3 locations · reel" role="button" tabindex="0" aria-pressed="false">
+            <div class="pkg-top">
+              <span class="pkg-name">STORYTELLING</span>
+              <span class="pkg-price">AED 999</span>
+            </div>
             <ul class="pkg-features">
-              <li>2-hour session</li><li>50+ edited photos</li><li>3 locations</li><li>Outfit changes</li>
+              <li>2-hour session</li>
+              <li>50+ edited photos</li>
+              <li>3 locations</li>
+              <li>Multiple outfit changes</li>
             </ul>
             <div class="pkg-badge">[ CINEMATIC REEL INCLUDED ]</div>
           </div>
+
         </div>
       </div>
 
       <!-- FORM -->
-      <div class="form-col" data-reveal style="transition-delay:.15s">
-        <div class="pixel-card form-card">
+      <div class="form-col">
+        <div class="px-card">
+
           <div class="spd show" id="spd" role="status" aria-live="polite">
-            <div><div class="spd-name" id="spd-name">SIGNATURE</div><div class="spd-meta" id="spd-meta">1 HR / 25 EDITS / 2 LOCATIONS / OUTFIT</div></div>
+            <div class="spd-left">
+              <div class="spd-name" id="spd-name">SIGNATURE</div>
+              <div class="spd-meta" id="spd-meta">1hr · 25 edits · 2 locations · outfit change</div>
+            </div>
             <div class="spd-price" id="spd-price">AED 499</div>
           </div>
 
           <h2 class="form-heading">YOUR<br>DETAILS</h2>
-          <p class="form-sub">Fill in below and I'll reach out to confirm.</p>
+          <p class="form-sub">// Fill in & I'll reach out to confirm.</p>
 
           <form id="booking-form" novalidate>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
@@ -222,12 +250,12 @@ nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-le
               <div class="form-group">
                 <label for="f-name">FULL NAME *</label>
                 <input type="text" id="f-name" name="name" class="form-control" placeholder="Your name" autocomplete="name" required>
-                <span class="field-error" id="err-name">Name required.</span>
+                <span class="field-error" id="err-name">Enter your name.</span>
               </div>
               <div class="form-group">
                 <label for="f-email">EMAIL *</label>
-                <input type="email" id="f-email" name="email" class="form-control" placeholder="you@example.com" autocomplete="email" required>
-                <span class="field-error" id="err-email">Valid email required.</span>
+                <input type="email" id="f-email" name="email" class="form-control" placeholder="you@email.com" autocomplete="email" required>
+                <span class="field-error" id="err-email">Invalid email.</span>
               </div>
             </div>
 
@@ -240,18 +268,18 @@ nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-le
               <div class="form-group">
                 <label for="f-date">DATE *</label>
                 <input type="date" id="f-date" name="date" class="form-control" required>
-                <span class="field-hint">SAT &amp; SUN ONLY</span>
-                <span class="field-error" id="err-date">Pick a Sat or Sun.</span>
+                <span class="field-hint">// SAT & SUN only</span>
+                <span class="field-error" id="err-date">Weekends only.</span>
               </div>
               <div class="form-group">
-                <label for="f-time">TIME SLOT</label>
+                <label for="f-time">TIME</label>
                 <div class="select-wrap">
                   <select id="f-time" name="time" class="form-control">
-                    <option value="">ANY</option>
-                    <option value="Morning (9am-12pm)">MORNING 9AM-12PM</option>
-                    <option value="Afternoon (1pm-4pm)">AFTERNOON 1PM-4PM</option>
-                    <option value="Golden Hour (5pm-7pm)">GOLDEN HOUR 5PM-7PM</option>
-                    <option value="Flexible">FLEXIBLE</option>
+                    <option value="">Any time</option>
+                    <option value="Morning (9am–12pm)">Morning 9–12</option>
+                    <option value="Afternoon (1pm–4pm)">Afternoon 1–4</option>
+                    <option value="Golden Hour (5pm–7pm)">Golden Hour 5–7</option>
+                    <option value="Flexible">Flexible</option>
                   </select>
                 </div>
               </div>
@@ -259,23 +287,28 @@ nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-le
 
             <div class="form-group">
               <label for="f-message">NOTES</label>
-              <textarea id="f-message" name="message" class="form-control" placeholder="Ideas, locations, questions..."></textarea>
+              <textarea id="f-message" name="message" class="form-control" placeholder="// ideas, locations, questions..."></textarea>
             </div>
 
             <button type="submit" class="submit-btn" id="submit-btn">[ REQUEST BOOKING ]</button>
-            <div class="status-msg success" id="msg-success" role="alert">REQUEST SENT — I'll confirm within 24 hrs.</div>
-            <div class="status-msg error-msg" id="msg-error" role="alert">ERROR — Try again or email contact@raoufpx.com</div>
+
+            <div class="status-msg success" id="msg-success" role="alert">
+              &gt; REQUEST SENT_<br>I'll confirm within 24 hours.
+            </div>
+            <div class="status-msg error-msg" id="msg-error" role="alert">
+              &gt; ERROR_<br>Try again or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f0939f9e84919384b082919f85968088de939f9d">[email&#160;protected]</a>
+            </div>
           </form>
+
         </div>
       </div>
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.addEventListener('DOMContentLoaded',()=>{
       const ci=document.getElementById('cursorInner'),co=document.getElementById('cursorOuter');
-      if(window.matchMedia('(pointer:fine)').matches){document.addEventListener('mousemove',e=>{ci.style.left=e.clientX+'px';ci.style.top=e.clientY+'px';co.style.left=e.clientX+'px';co.style.top=e.clientY+'px'})}
-      else{ci.style.display=co.style.display='none';document.body.style.cursor='auto'}
+      if(window.matchMedia('(pointer:fine)').matches){document.addEventListener('mousemove',e=>{ci.style.left=e.clientX+'px';ci.style.top=e.clientY+'px';co.style.left=e.clientX+'px';co.style.top=e.clientY+'px'})}else{ci.style.display=co.style.display='none';document.body.style.cursor='auto'}
       const bar=document.getElementById('scroll-progress');
       window.addEventListener('scroll',()=>{const t=document.body.scrollHeight-window.innerHeight;bar.style.width=(t>0?window.scrollY/t*100:0)+'%'},{passive:true});
       const hdr=document.getElementById('header');
@@ -286,50 +319,57 @@ nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-le
       const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.1});
       document.querySelectorAll('[data-reveal]').forEach(el=>ro.observe(el));
 
-      /* Date helpers */
-      function isWeekend(d){const day=d.getDay();return day===0||day===6}
+      // Date helpers
+      function isWeekend(d){return d.getDay()===0||d.getDay()===6}
       function toYMD(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-      function nextWknd(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+1);while(!isWeekend(d))d.setDate(d.getDate()+1);return d}
+      function nextWeekend(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+1);while(!isWeekend(d))d.setDate(d.getDate()+1);return d}
       const dateInput=document.getElementById('f-date');
-      const tom=new Date();tom.setHours(0,0,0,0);tom.setDate(tom.getDate()+1);
-      dateInput.min=toYMD(tom);dateInput.value=toYMD(nextWknd());
-      dateInput.addEventListener('change',()=>{if(!dateInput.value)return;const[y,m,dd]=dateInput.value.split('-').map(Number);const p=new Date(y,m-1,dd);if(!isWeekend(p)){dateInput.value=toYMD(nextWknd());showErr('err-date',true);dateInput.classList.add('error')}else{showErr('err-date',false);dateInput.classList.remove('error')}});
+      const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);
+      dateInput.min=toYMD(tomorrow);dateInput.value=toYMD(nextWeekend());
+      dateInput.addEventListener('change',()=>{
+        if(!dateInput.value)return;
+        const[y,m,dd]=dateInput.value.split('-').map(Number);
+        const p=new Date(y,m-1,dd);
+        if(!isWeekend(p)){dateInput.value=toYMD(nextWeekend());showErr('err-date',true);dateInput.classList.add('error')}
+        else{showErr('err-date',false);dateInput.classList.remove('error')}
+      });
 
-      /* Package select */
+      // Package selection
       const pkgs=document.querySelectorAll('.pkg');
       const spdEl=document.getElementById('spd'),spdName=document.getElementById('spd-name'),spdMeta=document.getElementById('spd-meta'),spdPrice=document.getElementById('spd-price');
-      const fPkg=document.getElementById('f-package'),fPrice=document.getElementById('f-price');
-      function selPkg(card){pkgs.forEach(p=>{p.classList.remove('selected');p.setAttribute('aria-pressed','false')});card.classList.add('selected');card.setAttribute('aria-pressed','true');spdName.textContent=card.querySelector('.pkg-name').textContent;spdMeta.textContent=card.dataset.label;spdPrice.textContent='AED '+card.dataset.price;fPkg.value=card.dataset.pkg;fPrice.value=card.dataset.price;spdEl.classList.add('show')}
-      pkgs.forEach(c=>{c.addEventListener('click',()=>selPkg(c));c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selPkg(c)}})});
+      const fPkg=document.getElementById('f-package'),fPrc=document.getElementById('f-price');
+      function selectPkg(card){
+        pkgs.forEach(p=>{p.classList.remove('selected');p.setAttribute('aria-pressed','false')});
+        card.classList.add('selected');card.setAttribute('aria-pressed','true');
+        spdName.textContent=card.querySelector('.pkg-name').textContent;
+        spdMeta.textContent=card.dataset.label;
+        spdPrice.textContent='AED '+card.dataset.price;
+        fPkg.value=card.dataset.pkg;fPrc.value=card.dataset.price;
+        spdEl.classList.add('show');
+      }
+      pkgs.forEach(c=>{c.addEventListener('click',()=>selectPkg(c));c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectPkg(c)}})});
 
-      /* Validation */
+      // Validation
       function showErr(id,show){const el=document.getElementById(id);if(el)el.classList.toggle('show',show)}
-      function valField(inp,errId,test){const ok=test(inp);inp.classList.toggle('error',!ok);showErr(errId,!ok);return ok}
-      const nInp=document.getElementById('f-name'),eInp=document.getElementById('f-email');
-      nInp.addEventListener('blur',()=>valField(nInp,'err-name',i=>i.value.trim().length>=2));
-      eInp.addEventListener('blur',()=>valField(eInp,'err-email',i=>/^\S+@\S+\.\S+$/.test(i.value.trim())));
+      function valField(inp,eid,fn){const ok=fn(inp);inp.classList.toggle('error',!ok);showErr(eid,!ok);return ok}
+      const nameInp=document.getElementById('f-name'),emailInp=document.getElementById('f-email');
+      nameInp.addEventListener('blur',()=>valField(nameInp,'err-name',i=>i.value.trim().length>=2));
+      emailInp.addEventListener('blur',()=>valField(emailInp,'err-email',i=>/^\S+@\S+\.\S+$/.test(i.value.trim())));
 
-      /* Submit */
+      // Submit
       const form=document.getElementById('booking-form'),btn=document.getElementById('submit-btn');
       const msgOk=document.getElementById('msg-success'),msgErr=document.getElementById('msg-error');
       form.addEventListener('submit',async e=>{
         e.preventDefault();
         let ok=true;
-        ok=valField(nInp,'err-name',i=>i.value.trim().length>=2)&&ok;
-        ok=valField(eInp,'err-email',i=>/^\S+@\S+\.\S+$/.test(i.value.trim()))&&ok;
+        ok=valField(nameInp,'err-name',i=>i.value.trim().length>=2)&&ok;
+        ok=valField(emailInp,'err-email',i=>/^\S+@\S+\.\S+$/.test(i.value.trim()))&&ok;
         if(!dateInput.value){dateInput.classList.add('error');showErr('err-date',true);ok=false}
         else{const[y,m,dd]=dateInput.value.split('-').map(Number);if(!isWeekend(new Date(y,m-1,dd))){dateInput.classList.add('error');showErr('err-date',true);ok=false}}
-        if(!ok){const fe=form.querySelector('.form-control.error');if(fe)fe.scrollIntoView({behavior:'smooth',block:'center'});return}
+        if(!ok){form.querySelector('.form-control.error')?.scrollIntoView({behavior:'smooth',block:'center'});return}
         btn.disabled=true;btn.innerHTML='<span class="spinner"></span>SENDING...';
         msgOk.style.display=msgErr.style.display='none';
         try{
           const res=await fetch('https://formspree.io/f/xnnvndyv',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-          if(res.ok){msgOk.style.display='block';form.reset();dateInput.value=toYMD(nextWknd());msgOk.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{window.location.href='confirmation.html'},2500)}
-          else throw new Error()
-        }catch{msgErr.style.display='block';msgErr.scrollIntoView({behavior:'smooth',block:'center'})}
-        finally{btn.disabled=false;btn.innerHTML='[ REQUEST BOOKING ]'}
-      });
-    });
-  </script>
-</body>
-</html>
+          if(res.ok){msgOk.style.display='block';form.reset();dateInput.value=toYMD(nextWeekend());msgOk.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{window.location.href='confirmation.html'},2500)}
+          else throw new
