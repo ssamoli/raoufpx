@@ -1,483 +1,369 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>You're Booked – RAOUF px</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="Thank you for booking your photography session with RAOUF px." />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
-    
-    <style>
-        /* CSS Variables - Consistent with other pages */
-        :root {
-            --bg-1: #040405;
-            --bg-2: #0b0b0f;
-            --panel: rgba(20, 20, 25, 0.95);
-            --accent: #f5c16c;
-            --accent-dark: #c99e4c;
-            --accent-light: #ffd88a;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.85);
-            --text-muted: rgba(255, 255, 255, 0.65);
-            --border-light: rgba(255, 255, 255, 0.1);
-            --border-accent: rgba(245, 193, 108, 0.3);
-            --shadow-lg: 0 40px 100px rgba(0, 0, 0, 0.9);
-            --shadow-md: 0 20px 50px rgba(0, 0, 0, 0.7);
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You're Booked — RAOUF px</title>
+  <meta name="description" content="Thank you for booking your photography session with RAOUF px." />
+  <meta property="og:title" content="Booking Confirmed — RAOUF px" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;max-width:100%;}
+    :root{
+      --bg:#04040a;--bg2:#08080f;
+      --surface:rgba(255,255,255,0.03);
+      --border:rgba(255,255,255,0.1);
+      --accent:#f0b860;--accent2:#e8885a;
+      --green:#39ff9a;
+      --muted:rgba(255,255,255,0.5);
+      --text:rgba(255,255,255,0.85);
+      --px:'Press Start 2P',monospace;
+      --mono:'Share Tech Mono',monospace;
+    }
+    html,body{
+      min-height:100%;background:var(--bg);color:var(--text);
+      font-family:var(--mono);-webkit-font-smoothing:none;
+      overflow-x:hidden;cursor:none;
+    }
 
-        /* Reset & Base */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    /* SCANLINES */
+    body::before{
+      content:'';position:fixed;inset:0;z-index:9001;pointer-events:none;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px);
+    }
+    /* CRT VIGNETTE */
+    body::after{
+      content:'';position:fixed;inset:0;z-index:9002;pointer-events:none;
+      background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.65) 100%);
+    }
 
-        html {
-            height: 100%;
-        }
+    /* PIXEL CURSOR */
+    .pxc{width:10px;height:10px;background:var(--accent);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--accent),0 0 14px var(--accent);}
+    .pxt{width:4px;height:4px;background:var(--accent2);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.5;}
 
-        body {
-            min-height: 100%;
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
-            color: var(--text-secondary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-            position: relative;
-        }
+    /* GRAIN */
+    .grain{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:0.3;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
 
-        /* Animated Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 30% 70%, rgba(245, 193, 108, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 70% 30%, rgba(245, 193, 108, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(245, 193, 108, 0.02) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: -1;
-            animation: gradientShift 15s ease-in-out infinite alternate;
-        }
+    /* AMBIENT GLOW */
+    .amb{position:fixed;pointer-events:none;z-index:0;filter:blur(110px);opacity:0.08;}
+    .amb-1{width:500px;height:500px;background:var(--accent);top:-100px;left:-100px;animation:ab1 20s ease-in-out infinite alternate;}
+    .amb-2{width:400px;height:400px;background:var(--accent2);bottom:0;right:-60px;animation:ab2 25s ease-in-out infinite alternate;}
+    @keyframes ab1{to{transform:translate(70px,50px);}}
+    @keyframes ab2{to{transform:translate(-50px,-70px);}}
 
-        @keyframes gradientShift {
-            0% { 
-                transform: scale(1);
-                opacity: 0.8;
-            }
-            100% { 
-                transform: scale(1.1);
-                opacity: 1;
-            }
-        }
+    /* PIXEL RAIN — decorative falling chars */
+    .px-rain{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .px-col{position:absolute;top:0;font-family:var(--px);font-size:0.45rem;line-height:1.8;color:rgba(57,255,154,0.06);animation:rainDrop linear infinite;white-space:nowrap;writing-mode:vertical-rl;}
+    @keyframes rainDrop{from{transform:translateY(-100%);}to{transform:translateY(110vh);}}
 
-        /* Floating Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+    /* MAIN LAYOUT */
+    .page{
+      position:relative;z-index:1;
+      min-height:100dvh;
+      display:flex;align-items:center;justify-content:center;
+      padding:clamp(3rem,8vw,6rem) clamp(1rem,4vw,3rem);
+    }
 
-        .particle {
-            position: absolute;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 20s linear infinite;
-        }
+    /* CONFIRMATION CARD */
+    .card{
+      background:var(--surface);
+      border:2px solid var(--border);
+      border-top:3px solid var(--accent);
+      max-width:680px;width:100%;
+      padding:clamp(2.5rem,5vw,4rem);
+      text-align:center;
+      position:relative;
+      box-shadow:8px 8px 0 rgba(0,0,0,0.7);
+      opacity:0;
+      animation:cardIn 0.7s 0.3s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes cardIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.1;
-            }
-            90% {
-                opacity: 0.1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    /* pixel corner accents */
+    .card::before{content:'■';font-family:var(--px);font-size:0.4rem;color:rgba(240,184,96,0.35);position:absolute;top:10px;left:12px;}
+    .card::after {content:'■';font-family:var(--px);font-size:0.4rem;color:rgba(240,184,96,0.35);position:absolute;bottom:10px;right:12px;}
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-            line-height: 1.2;
-            margin-bottom: 0.75rem;
-        }
+    /* SUCCESS ICON — pixel checkbox */
+    .icon-wrap{
+      width:80px;height:80px;margin:0 auto 2.2rem;
+      position:relative;display:flex;align-items:center;justify-content:center;
+    }
+    /* outer pixel ring — 8 segments drawn as box-shadows */
+    .icon-ring{
+      width:60px;height:60px;
+      background:var(--accent);
+      position:relative;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:
+        0 0 0 3px var(--bg),
+        0 0 0 5px var(--accent),
+        0 0 0 8px var(--bg),
+        0 0 0 10px rgba(240,184,96,0.2),
+        0 0 30px rgba(240,184,96,0.25);
+      animation:iconPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes iconPulse{
+      0%,100%{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent),0 0 0 8px var(--bg),0 0 0 10px rgba(240,184,96,0.2),0 0 30px rgba(240,184,96,0.2);}
+      50%{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent),0 0 0 8px var(--bg),0 0 0 14px rgba(240,184,96,0.1),0 0 50px rgba(240,184,96,0.3);}
+    }
+    .icon-check{
+      font-family:var(--px);font-size:1.4rem;color:#000;
+      /* pixel checkmark drawn in CSS */
+      position:relative;
+      text-shadow:2px 2px 0 rgba(0,0,0,0.3);
+    }
 
-        h1 { 
-            font-size: clamp(2.8rem, 6vw, 4rem);
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
+    /* EYEBROW */
+    .eyebrow{
+      font-family:var(--px);font-size:0.4rem;letter-spacing:0.2em;
+      color:var(--green);text-transform:uppercase;
+      margin-bottom:1.2rem;display:block;
+    }
+    .eyebrow::before{content:'> ';}
 
-        p {
-            font-size: clamp(1.1rem, 1.3vw, 1.3rem);
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* HEADLINE */
+    .headline{
+      font-family:var(--px);
+      font-size:clamp(0.85rem,2.2vw,1.5rem);
+      color:#fff;line-height:2;
+      margin-bottom:0;
+      text-shadow:4px 4px 0 rgba(0,0,0,0.8);
+    }
+    .headline .gold{
+      color:var(--accent);
+      text-shadow:0 0 18px rgba(240,184,96,0.4),4px 4px 0 rgba(0,0,0,0.8);
+    }
+    /* blinking cursor at end of headline */
+    .headline .cursor-blink::after{content:'█';font-size:0.7em;color:var(--accent);animation:blink 0.85s step-end infinite;margin-left:4px;}
 
-        .highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
+    /* DIVIDER */
+    .divider{
+      width:100%;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(240,184,96,0.3),transparent);
+      margin:2rem 0;
+    }
 
-        /* Confirmation Container */
-        .confirmation-container {
-            min-height: 100vh;
-            padding: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 4vw, 4rem);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    /* BODY TEXT */
+    .body-txt{
+      font-family:var(--mono);font-size:0.95rem;
+      line-height:1.9;color:var(--text);
+      max-width:520px;margin:0 auto 0;
+    }
+    .body-txt::before{content:'// ';color:rgba(57,255,154,0.35);}
+    .body-txt strong{color:var(--accent);}
 
-        .confirmation-wrapper {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
+    /* COUNTDOWN */
+    .countdown-wrap{
+      margin:2rem 0;
+      display:flex;flex-direction:column;align-items:center;gap:0.6rem;
+    }
+    .countdown-label{font-family:var(--px);font-size:0.36rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+    .countdown-bar{
+      width:240px;height:6px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(240,184,96,0.2);
+      position:relative;overflow:hidden;
+    }
+    .countdown-fill{
+      height:100%;
+      background:linear-gradient(90deg,var(--accent),var(--green));
+      box-shadow:0 0 8px var(--accent);
+      animation:countFill 24s linear forwards;
+    }
+    @keyframes countFill{from{width:100%;}to{width:0%;}}
+    .countdown-timer{font-family:var(--px);font-size:0.55rem;color:var(--accent);}
 
-        /* Confirmation Card */
-        .confirmation-card {
-            background: var(--panel);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: clamp(3rem, 5vw, 4rem);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-            animation: cardEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
+    /* ACTION BUTTONS */
+    .actions{
+      display:flex;flex-direction:column;gap:0.9rem;
+      margin-top:2.5rem;max-width:360px;margin-left:auto;margin-right:auto;
+    }
 
-        @keyframes cardEntrance {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* PIXEL BUTTON */
+    .btn-px{
+      display:flex;align-items:center;justify-content:center;gap:0.6rem;
+      font-family:var(--px);font-size:0.48rem;letter-spacing:0.08em;
+      text-transform:uppercase;text-decoration:none;
+      padding:1rem 1.8rem;border:none;cursor:none;
+      transition:transform 0.08s,box-shadow 0.08s;
+    }
+    .btn-primary{
+      background:var(--accent);color:#000;
+      box-shadow:4px 4px 0 var(--accent2),7px 7px 0 rgba(0,0,0,0.5);
+    }
+    .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--accent2),9px 9px 0 rgba(0,0,0,0.5);color:#000;}
+    .btn-primary:active{transform:translate(4px,4px);box-shadow:none;}
 
-        .confirmation-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-        }
+    .btn-ghost{
+      background:transparent;color:var(--accent);
+      border:2px solid var(--accent);
+      box-shadow:4px 4px 0 rgba(240,184,96,0.2);
+    }
+    .btn-ghost:hover{background:rgba(240,184,96,0.06);transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(240,184,96,0.2);color:var(--accent);}
+    .btn-ghost:active{transform:translate(4px,4px);box-shadow:none;}
 
-        .confirmation-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-        }
+    /* WA icon */
+    .wa-icon{font-size:1em;}
 
-        /* Success Icon */
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            position: relative;
-        }
+    /* FOOTER NOTE */
+    .foot-note{
+      margin-top:2.5rem;
+      padding-top:1.5rem;
+      border-top:1px solid rgba(255,255,255,0.07);
+      font-family:var(--mono);font-size:0.8rem;
+      color:var(--muted);line-height:1.7;
+    }
+    .foot-note a{color:var(--accent);text-decoration:none;}
+    .foot-note a:hover{text-decoration:underline;}
 
-        .success-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-radius: 50%;
-            animation: pulseIcon 2s ease-in-out infinite;
-        }
+    /* PIXEL SCAN LINE on card image area */
+    .card-scanline{
+      position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,transparent,rgba(57,255,154,0.2),transparent);
+      animation:scanSwipe 4s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes scanSwipe{
+      0%{top:0;opacity:0;}
+      5%{opacity:1;}
+      95%{opacity:1;}
+      100%{top:100%;opacity:0;}
+    }
 
-        .success-icon::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            color: #000;
-            font-weight: 800;
-            z-index: 1;
-        }
+    /* ANIMS */
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
 
-        @keyframes pulseIcon {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(245, 193, 108, 0.4);
-            }
-            50% { 
-                transform: scale(1.05);
-                box-shadow: 0 0 0 15px rgba(245, 193, 108, 0);
-            }
-        }
+    /* REDUCED MOTION */
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}
+      .pxc,.pxt{display:none;}html,body{cursor:auto;}
+      .amb,.px-rain{display:none;}
+    }
 
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 3rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
-            z-index: -1;
-        }
-
-        .button:hover::before {
-            left: 100%;
-        }
-
-        .button-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #000;
-            box-shadow: 0 10px 30px rgba(245, 193, 108, 0.3);
-        }
-
-        .button-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(245, 193, 108, 0.4);
-        }
-
-        .button-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--accent);
-        }
-
-        .button-secondary:hover {
-            background: var(--accent);
-            color: #000;
-            transform: translateY(-3px);
-        }
-
-        /* WhatsApp Icon */
-        .whatsapp-icon {
-            font-size: 1.3em;
-        }
-
-        /* Footer Note */
-        .footer-note {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-light);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            opacity: 0.8;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .confirmation-container {
-                padding: 3rem 1rem;
-            }
-            
-            .confirmation-card {
-                padding: 2rem;
-            }
-            
-            .action-buttons {
-                max-width: 100%;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            p {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .success-icon {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .success-icon::after {
-                font-size: 1.8rem;
-            }
-            
-            .button {
-                padding: 0.9rem 1.5rem;
-                font-size: 1rem;
-            }
-        }
-    </style>
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .pxc,.pxt{display:none;}html,body{cursor:auto;}
+      .card{padding:2rem 1.5rem;}
+      .headline{font-size:0.82rem;}
+      .actions{max-width:100%;}
+      .btn-px{font-size:0.42rem;padding:0.9rem 1.4rem;}
+    }
+    @media(max-width:420px){
+      .icon-ring{width:48px;height:48px;}
+      .icon-check{font-size:1rem;}
+      .headline{font-size:0.72rem;}
+    }
+    :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  </style>
 </head>
+<body>
+  <div class="pxc" id="pxc"></div>
+  <div class="pxt" id="pxt"></div>
+  <div class="grain"></div>
+  <div class="amb amb-1"></div>
+  <div class="amb amb-2"></div>
+  <div class="px-rain" id="pxRain"></div>
 
-<body class="is-preload">
+  <main class="page">
+    <div class="card">
+      <div class="card-scanline"></div>
 
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Main Content -->
-    <main class="confirmation-container">
-        <div class="confirmation-wrapper">
-            <div class="confirmation-card">
-                <!-- Success Icon -->
-                <div class="success-icon"></div>
-
-                <!-- Heading -->
-                <h1>Your session is <span class="highlight">on the way</span>.</h1>
-
-                <!-- Message -->
-                <p>
-                    I've received your booking request and will personally review the details.
-                    <br><br>
-                    Expect to hear from me within <span class="highlight">24 hours</span> to confirm your session details and discuss your vision.
-                    <br><br>
-                    This isn't just a photoshoot — it's a moment we'll create together.
-                </p>
-
-                <!-- Action Buttons -->
-                <div class="action-buttons">
-                    <a href="https://wa.me/+971506180828" class="button button-primary" target="_blank" rel="noopener">
-                        <span class="whatsapp-icon">💬</span>
-                        Continue on WhatsApp
-                    </a>
-                    <a href="index.html" class="button button-secondary">
-                        ← Back to Home
-                    </a>
-                </div>
-
-                <!-- Footer Note -->
-                <div class="footer-note">
-                    Need immediate assistance?<br>
-                    Email: contact@raoufpx.com | WhatsApp: +971 50 618 0828
-                </div>
-            </div>
+      <!-- SUCCESS ICON -->
+      <div class="icon-wrap">
+        <div class="icon-ring">
+          <span class="icon-check">✓</span>
         </div>
-    </main>
+      </div>
 
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Remove preload class
-            setTimeout(() => {
-                document.body.classList.remove('is-preload');
-            }, 100);
+      <!-- HEADING -->
+      <span class="eyebrow">Booking Received</span>
+      <h1 class="headline">
+        Your session<br>is <span class="gold cursor-blink">on the way.</span>
+      </h1>
 
-            // Create floating particles
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random size between 2-8px
-                const size = Math.random() * 6 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random position
-                particle.style.left = `${Math.random() * 100}%`;
-                
-                // Random animation delay and duration
-                const delay = Math.random() * 20;
-                const duration = Math.random() * 10 + 20;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                
-                // Random opacity
-                particle.style.opacity = Math.random() * 0.1 + 0.05;
-                
-                particlesContainer.appendChild(particle);
-            }
+      <div class="divider"></div>
 
-            // Add confetti effect on load
-            setTimeout(() => {
-                const confettiCount = 30;
-                for (let i = 0; i < confettiCount; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'particle';
-                    confetti.style.width = '8px';
-                    confetti.style.height = '8px';
-                    confetti.style.left = `${Math.random() * 100}%`;
-                    confetti.style.top = '0';
-                    confetti.style.animationDuration = '3s';
-                    confetti.style.animationDelay = `${Math.random() * 0.5}s`;
-                    confetti.style.animationTimingFunction = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
-                    
-                    particlesContainer.appendChild(confetti);
-                    
-                    // Remove confetti after animation
-                    setTimeout(() => {
-                        confetti.remove();
-                    }, 3000);
-                }
-            }, 500);
-        });
-    </script>
+      <!-- MESSAGE -->
+      <p class="body-txt">
+        I've received your booking request and will<br>
+        personally review the details.<br><br>
+        Expect to hear from me within <strong>24 hours</strong><br>
+        to confirm your session and discuss your vision.<br><br>
+        This isn't just a photoshoot —<br>it's a moment we'll create together.
+      </p>
 
+      <!-- COUNTDOWN -->
+      <div class="countdown-wrap">
+        <span class="countdown-label">Redirecting to home in</span>
+        <div class="countdown-bar"><div class="countdown-fill"></div></div>
+        <span class="countdown-timer" id="cdTimer">0:24</span>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="actions">
+        <a href="https://wa.me/+971506180828" class="btn-px btn-primary" target="_blank" rel="noopener noreferrer">
+          <span class="wa-icon">💬</span>
+          [ Continue_on_WhatsApp ]
+        </a>
+        <a href="index.html" class="btn-px btn-ghost">
+          ◀ [ Back_to_Home ]
+        </a>
+      </div>
+
+      <!-- FOOTER NOTE -->
+      <div class="foot-note">
+        Need immediate assistance?<br>
+        <a href="mailto:contact@raoufpx.com">contact@raoufpx.com</a>
+        &nbsp;·&nbsp;
+        <a href="https://wa.me/+971506180828">+971 50 618 0828</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    /* CURSOR */
+    const pxc=document.getElementById('pxc'),pxt=document.getElementById('pxt');
+    if(window.matchMedia('(pointer:fine)').matches){
+      document.addEventListener('mousemove',e=>{
+        pxc.style.left=e.clientX+'px'; pxc.style.top=e.clientY+'px';
+        setTimeout(()=>{ pxt.style.left=e.clientX+'px'; pxt.style.top=e.clientY+'px'; },90);
+      });
+    } else { pxc.style.display=pxt.style.display='none'; document.body.style.cursor='auto'; }
+
+    /* PIXEL RAIN — generate columns of random chars */
+    const chars='0123456789ABCDEF▮▯■□▸▹◆◇';
+    const rain=document.getElementById('pxRain');
+    const cols=Math.floor(window.innerWidth/28);
+    for(let i=0;i<cols;i++){
+      const col=document.createElement('div');
+      col.className='px-col';
+      let txt='';
+      const len=Math.floor(Math.random()*18)+8;
+      for(let j=0;j<len;j++) txt+=chars[Math.floor(Math.random()*chars.length)]+'\n';
+      col.textContent=txt;
+      col.style.left=(i*28+Math.random()*10)+'px';
+      col.style.animationDuration=(Math.random()*18+12)+'s';
+      col.style.animationDelay=(Math.random()*20)+'s';
+      col.style.opacity=(Math.random()*0.05+0.02)+'';
+      rain.appendChild(col);
+    }
+
+    /* COUNTDOWN TIMER — redirect after 24s */
+    let secs=24;
+    const tmr=document.getElementById('cdTimer');
+    const tick=setInterval(()=>{
+      secs--;
+      tmr.textContent='0:'+(secs<10?'0':'')+secs;
+      if(secs<=0){ clearInterval(tick); window.location.href='index.html'; }
+    },1000);
+
+    /* Clicking "back to home" cancels redirect */
+    document.querySelectorAll('a[href="index.html"]').forEach(a=>
+      a.addEventListener('click',()=>clearInterval(tick))
+    );
+  </script>
 </body>
 </html>
