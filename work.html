@@ -1,1401 +1,858 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>My Work – RAOUF px</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="Portfolio of cinematic photography by Osama Raouf - Capturing authentic moments and emotions." />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet" />
-    
-    <style>
-        /* CSS Variables - Consistent with index & booking */
-        :root {
-            --bg-1: #040405;
-            --bg-2: #0b0b0f;
-            --panel: rgba(20, 20, 25, 0.9);
-            --accent: #f5c16c;
-            --accent-dark: #c99e4c;
-            --accent-light: #ffd88a;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.85);
-            --text-muted: rgba(255, 255, 255, 0.65);
-            --border-light: rgba(255, 255, 255, 0.1);
-            --border-accent: rgba(245, 193, 108, 0.3);
-            --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.8);
-            --shadow-md: 0 15px 40px rgba(0, 0, 0, 0.6);
-            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.4);
-            --radius-lg: 20px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Reset & Base */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            height: 100%;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100%;
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
-            color: var(--text-secondary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Background Texture */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(245, 193, 108, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(245, 193, 108, 0.02) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-            line-height: 1.2;
-            margin-bottom: 0.75rem;
-        }
-
-        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
-        h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
-        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-
-        p {
-            font-size: clamp(1rem, 1.1vw, 1.1rem);
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-        }
-
-        strong {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        /* Header */
-        #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.25rem clamp(1rem, 4vw, 3rem);
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
-            border-bottom: 1px solid var(--border-light);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            transition: var(--transition);
-        }
-
-        #header.scrolled {
-            background: rgba(11, 11, 15, 0.95);
-            box-shadow: var(--shadow-md);
-        }
-
-        .logo-frame {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-            position: relative;
-            isolation: isolate;
-        }
-
-        .logo-frame::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            border-radius: calc(var(--radius-md) + 2px);
-            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), rgba(245, 193, 108, 0.15));
-            filter: blur(10px);
-            z-index: -2;
-            opacity: 0.6;
-        }
-
-        .logo-frame::after {
-            content: "";
-            position: absolute;
-            inset: -1px;
-            border-radius: calc(var(--radius-md) + 1px);
-            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.08));
-            z-index: -1;
-        }
-
-        .logo-inner {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.2));
-        }
-
-        .logo-inner img {
-            height: clamp(2.5rem, 4vw, 3rem);
-            width: auto;
-            border-radius: 8px;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.8));
-        }
-
-        nav ul {
-            display: flex;
-            gap: clamp(1.5rem, 2.5vw, 2.5rem);
-            list-style: none;
-        }
-
-        nav a {
-            font-weight: 600;
-            font-size: clamp(0.9rem, 1.1vw, 1rem);
-            color: var(--text-muted);
-            padding: 0.5rem 0;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        nav a:hover,
-        nav a.active {
-            color: var(--text-primary);
-        }
-
-        nav a::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover::after,
-        nav a.active::after {
-            width: 100%;
-        }
-
-        /* Main Content */
-        .work-container {
-            min-height: 100vh;
-            padding: clamp(8rem, 15vh, 12rem) clamp(1.5rem, 4vw, 4rem) 4rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .work-wrapper {
-            max-width: 1400px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        /* Intro Content */
-        .intro-content {
-            background: var(--panel);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: clamp(2rem, 3vw, 3rem);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 3rem;
-        }
-
-        .intro-content h2 {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .intro-content h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-            border-radius: 2px;
-        }
-
-        .intro-content p {
-            font-size: clamp(1.05rem, 1.2vw, 1.2rem);
-            line-height: 1.8;
-            color: var(--text-secondary);
-        }
-
-        /* Gallery */
-        .gallery-section {
-            margin-top: 3rem;
-        }
-
-        .gallery-filter {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            padding: 0.8rem 2rem;
-            background: transparent;
-            border: 1px solid var(--border-light);
-            border-radius: 50px;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: var(--transition);
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(245, 193, 108, 0.2);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            transition: var(--transition);
-            background: transparent;
-            aspect-ratio: 3/4;
-            cursor: pointer;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: calc(var(--item-index) * 0.1s);
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-        }
-
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.7));
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover::before {
-            opacity: 1;
-        }
-
-        .gallery-item:hover .thumbnail {
-            transform: scale(1.05);
-        }
-
-        .thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border-radius: var(--radius-md);
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .view-full {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .view-full:hover {
-            background: var(--accent-light);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(245, 193, 108, 0.3);
-        }
-
-        /* Lightbox Modal */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .lightbox.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
-            width: auto;
-            height: auto;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .lightbox.active .lightbox-content {
-            transform: scale(1);
-        }
-
-        .lightbox-img {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 90vh;
-            object-fit: contain;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--border-light);
-            color: var(--text-primary);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            z-index: 2001;
-        }
-
-        .lightbox-close:hover {
-            background: rgba(245, 193, 108, 0.2);
-            border-color: var(--accent);
-        }
-
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            transform: translateY(-50%);
-            z-index: 2001;
-        }
-
-        .lightbox-prev,
-        .lightbox-next {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--border-light);
-            color: var(--text-primary);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .lightbox-prev:hover,
-        .lightbox-next:hover {
-            background: rgba(245, 193, 108, 0.2);
-            border-color: var(--accent);
-        }
-
-        .lightbox-counter {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            z-index: 2001;
-        }
-
-        /* Load More Button */
-        .load-more-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 4rem;
-        }
-
-        #load-more {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #000;
-            border: none;
-            padding: 1.2rem 3rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            box-shadow: 0 8px 25px rgba(245, 193, 108, 0.2);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        #load-more::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
-            z-index: -1;
-        }
-
-        #load-more:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(245, 193, 108, 0.3);
-        }
-
-        #load-more:hover::before {
-            left: 100%;
-        }
-
-        #load-more:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #000;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Back Button */
-        .back-container {
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2.5rem;
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .back-button:hover {
-            background: var(--accent);
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(245, 193, 108, 0.2);
-        }
-
-        /* Background CTA Watermark */
-        .bg-cta {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .bg-cta span {
-            position: absolute;
-            font-size: clamp(6rem, 18vw, 22rem);
-            font-weight: 800;
-            letter-spacing: 0.2em;
-            color: rgba(245, 193, 108, 0.04);
-            filter: blur(8px);
-            white-space: nowrap;
-            animation: floatCTA 28s ease-in-out infinite;
-        }
-
-        .bg-cta span:nth-child(1) {
-            top: 35%;
-            left: -10%;
-        }
-
-        .bg-cta span:nth-child(2) {
-            top: 65%;
-            left: -30%;
-            animation-duration: 36s;
-            opacity: 0.03;
-        }
-
-        @keyframes floatCTA {
-            0%   { transform: translateX(0); }
-            50%  { transform: translateX(25%); }
-            100% { transform: translateX(0); }
-        }
-
-        .work-container, .intro-content, .gallery-section {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-                gap: 1.5rem;
-            }
-            
-            .lightbox-prev,
-            .lightbox-next {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            #header {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .work-container {
-                padding: 7rem 1rem 2rem;
-            }
-            
-            .intro-content {
-                padding: 1.5rem;
-            }
-            
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
-                gap: 1rem;
-            }
-            
-            .filter-btn {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.85rem;
-                min-width: 100px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .intro-content p {
-                font-size: 1rem;
-            }
-            
-            .lightbox-close {
-                width: 40px;
-                height: 40px;
-                top: 10px;
-                right: 10px;
-            }
-            
-            .lightbox-prev,
-            .lightbox-next {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
-            .filter-btn {
-                flex: 1;
-                min-width: 80px;
-                padding: 0.6rem 1rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <title>My Work — RAOUF px</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="description" content="Portfolio of cinematic photography by Osama Raouf — Capturing authentic moments and emotions in Dubai." />
+  <meta property="og:title" content="My Work — RAOUF px" />
+  <meta property="og:description" content="Portraits. Candid moments. Cinematic frames." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── RESET & ROOT ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; max-width: 100%; }
+
+    :root {
+      --bg:        #06060a;
+      --bg2:       #0d0d13;
+      --surface:   rgba(255,255,255,0.035);
+      --border:    rgba(255,255,255,0.07);
+      --accent:    #f0b860;
+      --accent2:   #e8885a;
+      --muted:     rgba(255,255,255,0.6);
+      --text:      rgba(255,255,255,0.88);
+      --header-h:  70px;
+      --radius:    18px;
+      --radius-sm: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CUSTOM CURSOR ────────────────────────────────── */
+    .cursor-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(240,184,96,0.4);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, transform 0.15s ease;
+    }
+    body:has(a:hover) .cursor-ring,
+    body:has(button:hover) .cursor-ring { width: 56px; height: 56px; border-color: var(--accent); }
+
+    /* ─── GRAIN ────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9000; opacity: 0.35;
+    }
+
+    /* ─── AMBIENT ──────────────────────────────────────── */
+    .ambient {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 0; filter: blur(130px); opacity: 0.1;
+    }
+    .ambient-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #f0b860, transparent 70%);
+      top: -200px; left: -150px;
+      animation: drift1 18s ease-in-out infinite alternate;
+    }
+    .ambient-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #e8885a, transparent 70%);
+      bottom: 0; right: -100px;
+      animation: drift2 22s ease-in-out infinite alternate;
+    }
+    @keyframes drift1 { to { transform: translate(80px,60px); } }
+    @keyframes drift2 { to { transform: translate(-60px,-80px); } }
+
+    /* ─── SCROLL PROGRESS ──────────────────────────────── */
+    #scroll-progress {
+      position: fixed; top: var(--header-h); left: 0;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index: 1001; transition: width 0.1s linear;
+    }
+
+    /* ─── HEADER ───────────────────────────────────────── */
+    #header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1rem,4vw,3rem);
+      height: var(--header-h);
+      background: rgba(6,6,10,0.85);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      transition: height 0.3s ease, background 0.3s ease;
+    }
+    #header.scrolled { height: 58px; background: rgba(6,6,10,0.97); }
+
+    .logo-frame {
+      display: flex; align-items: center; text-decoration: none;
+      flex-shrink: 0; padding: 0.3rem; border-radius: 10px; transition: opacity 0.3s;
+    }
+    .logo-frame:hover { opacity: 0.8; }
+    .logo-inner img {
+      height: 2rem; width: auto; display: block; object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8));
+    }
+
+    nav { display: block; }
+    nav ul { display: flex; gap: 0.25rem; list-style: none; }
+    nav a {
+      color: var(--muted); text-decoration: none;
+      font-weight: 400; font-size: 0.88rem; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 0.5rem 1rem; border-radius: 6px;
+      display: inline-block; transition: color 0.25s, background 0.25s; white-space: nowrap;
+    }
+    nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.05); }
+    nav a.active { color: var(--accent); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: none; padding: 0.5rem; z-index: 1001;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1); transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none; position: fixed;
+      top: var(--header-h); left: 0; right: 0;
+      background: rgba(6,6,10,0.97); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px); z-index: 999;
+      padding: 1rem; transform: translateY(-20px); opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none;
+    }
+    .mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+    .mobile-nav a {
+      display: block; color: var(--text); text-decoration: none;
+      font-size: 1rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.9rem 1rem; border-radius: 8px; border-bottom: 1px solid var(--border);
+      transition: background 0.2s, color 0.2s;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav a:hover, .mobile-nav a.active { background: var(--surface); color: var(--accent); }
+
+    /* ─── PAGE WRAPPER ─────────────────────────────────── */
+    .page-wrapper {
+      position: relative; z-index: 1;
+      padding: calc(var(--header-h) + 4rem) clamp(1rem,4vw,4rem) 6rem;
+      max-width: 1400px; margin: 0 auto;
+    }
+
+    /* ─── PAGE HEADING ─────────────────────────────────── */
+    .page-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 0.8rem; display: block;
+      opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(2.4rem,5vw,4.2rem); color: #fff; line-height: 1.1;
+      margin-bottom: 0.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.35s ease forwards;
+    }
+    .page-title em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ─── ABOUT CARD ───────────────────────────────────── */
+    .about-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: clamp(1.8rem,3vw,2.8rem);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      position: relative; overflow: hidden;
+      margin: 2.5rem 0 3.5rem;
+      opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
+    }
+    .about-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 60px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .about-card p {
+      font-weight: 300; font-size: clamp(0.95rem,1.1vw,1.05rem);
+      line-height: 1.85; color: var(--text); margin-bottom: 1rem;
+    }
+    .about-card p:last-child { margin-bottom: 0; }
+    .about-card strong { color: var(--accent); font-weight: 600; }
+
+    /* ─── FILTER BAR ───────────────────────────────────── */
+    .filter-bar {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.7s 0.65s ease forwards;
+    }
+    .filter-btn {
+      padding: 0.55rem 1.4rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 60px; color: var(--muted);
+      font-family: 'Outfit', sans-serif; font-weight: 400;
+      font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: none; transition: all 0.25s ease;
+    }
+    .filter-btn:hover { color: #fff; border-color: rgba(255,255,255,0.15); }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-color: transparent; color: #0a0702; font-weight: 700;
+    }
+
+    /* ─── GALLERY GRID ─────────────────────────────────── */
+    .gallery {
+      columns: 3; column-gap: 1.2rem;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1.2rem;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      position: relative;
+      cursor: none;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .gallery-item.visible { opacity: 1; transform: translateY(0); }
+    .gallery-item.hidden { display: none; }
+
+    .gallery-item img {
+      width: 100%; height: auto; display: block;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+      border-radius: var(--radius-sm);
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    /* Hover overlay */
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(6,6,10,0.75) 0%, transparent 55%);
+      opacity: 0; transition: opacity 0.3s ease;
+      border-radius: var(--radius-sm);
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    .gallery-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.2rem; z-index: 2;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; transform: translateY(0); }
+
+    .view-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(240,184,96,0.15); border: 1px solid rgba(240,184,96,0.35);
+      color: var(--accent); font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.5rem 1rem; border-radius: 60px;
+      cursor: none; transition: background 0.2s ease, color 0.2s ease;
+    }
+    .view-btn:hover { background: var(--accent); color: #0a0702; }
+
+    /* ─── LOAD MORE ────────────────────────────────────── */
+    .load-more-wrap {
+      display: flex; justify-content: center; margin-top: 3.5rem;
+    }
+    #load-more {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0a0702; font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 1rem 2.6rem; border: none; border-radius: 60px;
+      cursor: none; position: relative; overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    }
+    #load-more::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left 0.55s ease;
+    }
+    #load-more:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(240,184,96,0.25); }
+    #load-more:hover:not(:disabled)::before { left: 100%; }
+    #load-more:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .spinner {
+      display: inline-block; width: 14px; height: 14px;
+      border: 2px solid rgba(0,0,0,0.25); border-top-color: #0a0702;
+      border-radius: 50%; animation: spin 0.8s linear infinite;
+    }
+
+    /* ─── LIGHTBOX ─────────────────────────────────────── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(4,4,8,0.96);
+      z-index: 5000; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; animation: fadeIn 0.25s ease; }
+
+    .lightbox-inner {
+      position: relative; max-width: min(90vw, 1100px); max-height: 92dvh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #lightbox-img {
+      display: block; max-width: 100%; max-height: 88dvh;
+      object-fit: contain; border-radius: var(--radius-sm);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+      animation: scaleIn 0.25s ease;
+    }
+
+    /* Close */
+    .lb-close {
+      position: fixed; top: 1.2rem; right: 1.5rem;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+      color: var(--text); font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; transition: background 0.2s, border-color 0.2s;
+      z-index: 5001;
+    }
+    .lb-close:hover { background: rgba(240,184,96,0.15); border-color: var(--accent); color: var(--accent); }
+
+    /* Prev / Next */
+    .lb-prev, .lb-next {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+      color: var(--text); font-size: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; transition: background 0.2s, border-color 0.2s; z-index: 5001;
+    }
+    .lb-prev { left: 1.2rem; }
+    .lb-next { right: 1.2rem; }
+    .lb-prev:hover, .lb-next:hover { background: rgba(240,184,96,0.15); border-color: var(--accent); color: var(--accent); }
+    .lb-prev:disabled, .lb-next:disabled { opacity: 0.25; pointer-events: none; }
+
+    /* Counter */
+    .lb-counter {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); background: rgba(6,6,10,0.7);
+      padding: 0.45rem 1.1rem; border-radius: 60px;
+      border: 1px solid var(--border); z-index: 5001;
+    }
+
+    /* ─── ANIMATIONS ───────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── REDUCED MOTION ───────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .cursor-dot, .cursor-ring { display: none; }
+      html, body { cursor: auto; }
+      .ambient { display: none; }
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      .gallery { columns: 2; }
+    }
+    @media (max-width: 768px) {
+      :root { --header-h: 60px; }
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: block; }
+      .cursor-dot, .cursor-ring { display: none; }
+      html, body { cursor: auto; }
+      .gallery { columns: 2; column-gap: 0.8rem; }
+      .gallery-item { margin-bottom: 0.8rem; }
+      .lb-prev { left: 0.5rem; }
+      .lb-next { right: 0.5rem; }
+    }
+    @media (max-width: 480px) {
+      .gallery { columns: 1; }
+      .page-wrapper { padding: calc(var(--header-h) + 2.5rem) 1rem 4rem; }
+    }
+
+    :focus-visible { outline: 2px solid rgba(240,184,96,0.6); outline-offset: 3px; }
+  </style>
 </head>
 
-<body class="is-preload">
+<body>
 
-    <!-- Background CTA -->
-    <div class="bg-cta">
-        <span>PORTFOLIO</span>
-        <span>PORTFOLIO</span>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+  <div id="scroll-progress"></div>
+
+  <!-- ─── HEADER ────────────────────────────────────────── -->
+  <header id="header">
+    <a href="index.html" class="logo-frame" aria-label="RAOUF px Home">
+      <div class="logo-inner">
+        <img src="images/logo.png" alt="RAOUF px Logo" width="32" height="32" />
+      </div>
+    </a>
+
+    <nav id="mainNav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html" class="active">My Work</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work.html" class="active">My Work</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── PAGE CONTENT ──────────────────────────────────── -->
+  <main class="page-wrapper">
+
+    <span class="page-eyebrow">Portfolio · Dubai</span>
+    <h1 class="page-title">Every frame<br>carries <em>a feeling.</em></h1>
+
+    <!-- About -->
+    <div class="about-card">
+      <p>My work is driven by curiosity — the quiet kind that looks deeper than smiles or poses. I specialize in <strong>portraits</strong> and <strong>candid moments</strong> because they show people as they are, not as they perform to be.</p>
+      <p>Through my lens, I strip away performance and pressure. What's left is raw truth. It's in that stillness that people often see themselves clearly for the first time.</p>
+      <p>For those who feel shy in front of the camera, I guide them with patience. Because this isn't just about a good photo — it's about giving someone a moment where they say, <em style="color:rgba(255,255,255,0.75)">"Wow. That's me."</em></p>
     </div>
 
-    <!-- Header -->
-    <header id="header">
-        <a href="index.html" class="logo-frame" aria-label="RAOUF px Home">
-            <div class="logo-inner">
-                <img src="images/logo.png" alt="RAOUF px Logo" width="48" height="48" />
-            </div>
-        </a>
-
-        <nav aria-label="Main navigation">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="work.html" class="active">My Work</a></li>
-                <li><a href="packages.html">Packages</a></li>
-                <li><a href="booking.html">Book Now</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="work-container">
-        <div class="work-wrapper">
-            <!-- Intro -->
-            <section class="intro-content">
-                <h2>My Work</h2>
-                <p>
-                    My work is driven by curiosity, the quiet kind that looks deeper than smiles or poses. I specialize in <strong>portraits</strong> and <strong>candid moments</strong> because they show people as they are, not as they perform to be.
-                </p>
-                <p>
-                    Through my lens, I strip away performance, emotion, and pressure — and what's left is raw truth. It's in that stillness that people often see themselves clearly for the first time.
-                </p>
-                <p>
-                    For those who feel shy or unfamiliar in front of the camera, I guide them with kindness. Because this isn't just about a good photo — it's about giving someone a moment where they say, "Wow. That's me."
-                </p>
-                <p>
-                    And I do it with love. Every frame is a quiet mirror — honest, simple, and unforgettable.
-                </p>
-            </section>
-
-            <!-- Gallery -->
-            <section class="gallery-section">
-                <!-- Filter Buttons -->
-                <div class="gallery-filter">
-                    <button class="filter-btn active" data-filter="all">All Photos</button>
-                    <button class="filter-btn" data-filter="portraits">Portraits</button>
-                    <button class="filter-btn" data-filter="candid">Candid</button>
-                    <button class="filter-btn" data-filter="cinematic">Cinematic</button>
-                </div>
-
-                <!-- Gallery Grid -->
-                <div class="gallery" id="gallery-grid">
-                    <!-- Initial 4 images -->
-                    <div class="gallery-item" data-category="portraits">
-                        <img src="images/thumbs/01.jpg" alt="Cinematic portrait - Golden hour photography" class="thumbnail" 
-                             data-full="images/fulls/01.jpg">
-                        <div class="gallery-overlay">
-                            <button class="view-full" data-index="0">
-                                👁️ View Full
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" data-category="candid">
-                        <img src="images/thumbs/02.jpg" alt="Candid moment - Emotional storytelling" class="thumbnail"
-                             data-full="images/fulls/02.jpg">
-                        <div class="gallery-overlay">
-                            <button class="view-full" data-index="1">
-                                👁️ View Full
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" data-category="portraits">
-                        <img src="images/thumbs/03.jpg" alt="Studio portrait - Professional lighting" class="thumbnail"
-                             data-full="images/fulls/03.jpg">
-                        <div class="gallery-overlay">
-                            <button class="view-full" data-index="2">
-                                👁️ View Full
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item" data-category="cinematic">
-                        <img src="images/thumbs/04.jpg" alt="Dubai photography - Urban portraits" class="thumbnail"
-                             data-full="images/fulls/04.jpg">
-                        <div class="gallery-overlay">
-                            <button class="view-full" data-index="3">
-                                👁️ View Full
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Hidden batches (21-32) -->
-                    <div class="gallery-batch" style="display: none;">
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/05.jpg" alt="Photo 5" class="thumbnail" 
-                                 data-full="images/fulls/05.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="4">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="candid">
-                            <img src="images/thumbs/06.jpg" alt="Photo 6" class="thumbnail"
-                                 data-full="images/fulls/06.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="5">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/07.jpg" alt="Photo 7" class="thumbnail"
-                                 data-full="images/fulls/07.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="6">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/08.jpg" alt="Photo 8" class="thumbnail"
-                                 data-full="images/fulls/08.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="7">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-batch" style="display: none;">
-                        <div class="gallery-item" data-category="candid">
-                            <img src="images/thumbs/09.jpg" alt="Photo 9" class="thumbnail"
-                                 data-full="images/fulls/09.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="8">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/10.jpg" alt="Photo 10" class="thumbnail"
-                                 data-full="images/fulls/10.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="9">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/11.jpg" alt="Photo 11" class="thumbnail"
-                                 data-full="images/fulls/11.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="10">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/12.jpg" alt="Photo 12" class="thumbnail"
-                                 data-full="images/fulls/12.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="11">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-batch" style="display: none;">
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/13.jpg" alt="Photo 13" class="thumbnail"
-                                 data-full="images/fulls/13.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="12">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="candid">
-                            <img src="images/thumbs/14.jpg" alt="Photo 14" class="thumbnail"
-                                 data-full="images/fulls/14.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="13">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/15.jpg" alt="Photo 15" class="thumbnail"
-                                 data-full="images/fulls/15.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="14">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/16.jpg" alt="Photo 16" class="thumbnail"
-                                 data-full="images/fulls/16.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="15">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-batch" style="display: none;">
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/17.jpg" alt="Photo 17" class="thumbnail"
-                                 data-full="images/fulls/17.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="16">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="candid">
-                            <img src="images/thumbs/18.jpg" alt="Photo 18" class="thumbnail"
-                                 data-full="images/fulls/18.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="17">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/19.jpg" alt="Photo 19" class="thumbnail"
-                                 data-full="images/fulls/19.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="18">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/20.jpg" alt="Photo 20" class="thumbnail"
-                                 data-full="images/fulls/20.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="19">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Additional batches for photos 21-32 -->
-                    <div class="gallery-batch" style="display: none;">
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/21.jpg" alt="Photo 21 - Artistic portrait" class="thumbnail"
-                                 data-full="images/fulls/21.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="20">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="candid">
-                            <img src="images/thumbs/22.jpg" alt="Photo 22 - Candid expression" class="thumbnail"
-                                 data-full="images/fulls/22.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="21">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/23.jpg" alt="Photo 23 - Cinematic mood" class="thumbnail"
-                                 data-full="images/fulls/23.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="22">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/24.jpg" alt="Photo 24 - Studio portrait" class="thumbnail"
-                                 data-full="images/fulls/24.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="23">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-batch" style="display: none;">
-                        <div class="gallery-item" data-category="candid">
-                            <img src="images/thumbs/25.jpg" alt="Photo 25 - Emotional moment" class="thumbnail"
-                                 data-full="images/fulls/25.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="24">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/26.jpg" alt="Photo 26 - Professional portrait" class="thumbnail"
-                                 data-full="images/fulls/26.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="25">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/27.jpg" alt="Photo 27 - Urban cinematic" class="thumbnail"
-                                 data-full="images/fulls/27.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="26">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/28.jpg" alt="Photo 28 - Dramatic portrait" class="thumbnail"
-                                 data-full="images/fulls/28.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="27">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery-batch" style="display: none;">
-                        <div class="gallery-item" data-category="candid">
-                            <img src="images/thumbs/29.jpg" alt="Photo 29 - Spontaneous moment" class="thumbnail"
-                                 data-full="images/fulls/29.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="28">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/30.jpg" alt="Photo 30 - Expressive portrait" class="thumbnail"
-                                 data-full="images/fulls/30.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="29">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="cinematic">
-                            <img src="images/thumbs/31.jpg" alt="Photo 31 - Storytelling cinematic" class="thumbnail"
-                                 data-full="images/fulls/31.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="30">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-category="portraits">
-                            <img src="images/thumbs/32.jpg" alt="Photo 32 - Final portfolio piece" class="thumbnail"
-                                 data-full="images/fulls/32.jpg">
-                            <div class="gallery-overlay">
-                                <button class="view-full" data-index="31">
-                                    👁️ View Full
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Load More Button -->
-                <div class="load-more-container">
-                    <button id="load-more" type="button">
-                        Load More Photos
-                    </button>
-                </div>
-            </section>
-
-            <!-- Back Button -->
-            <div class="back-container">
-                <a href="index.html" class="back-button">
-                    ← Back to Home
-                </a>
-            </div>
-        </div>
-    </main>
-
-    <!-- Lightbox Modal -->
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" id="lightbox-close">✕</button>
-        
-        <div class="lightbox-nav">
-            <button class="lightbox-prev" id="lightbox-prev">‹</button>
-            <button class="lightbox-next" id="lightbox-next">›</button>
-        </div>
-        
-        <div class="lightbox-content">
-            <img class="lightbox-img" id="lightbox-img" src="" alt="">
-        </div>
-        
-        <div class="lightbox-counter" id="lightbox-counter">1 / 4</div>
+    <!-- Filter -->
+    <div class="filter-bar" role="group" aria-label="Filter gallery by category">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="portraits">Portraits</button>
+      <button class="filter-btn" data-filter="candid">Candid</button>
+      <button class="filter-btn" data-filter="cinematic">Cinematic</button>
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Remove preload class
-            document.body.classList.remove('is-preload');
-            
-            // Header scroll effect
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
+    <!-- Gallery -->
+    <div class="gallery" id="gallery" role="list" aria-label="Photo gallery">
 
-            // Gallery data - FIXED: We have 7 hidden batches (5-32)
-            let currentBatch = 0;
-            const batches = document.querySelectorAll('.gallery-batch');
-            const loadMoreBtn = document.getElementById('load-more');
-            const galleryGrid = document.getElementById('gallery-grid');
-            
-            // Lightbox elements
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxClose = document.getElementById('lightbox-close');
-            const lightboxPrev = document.getElementById('lightbox-prev');
-            const lightboxNext = document.getElementById('lightbox-next');
-            const lightboxCounter = document.getElementById('lightbox-counter');
-            
-            // Collect all gallery items (starting with first 4)
-            let galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-            let currentIndex = 0;
+      <div class="gallery-item" data-category="portraits" role="listitem">
+        <img src="images/thumbs/01.jpg" alt="Cinematic portrait — golden hour" data-full="images/fulls/01.jpg" loading="lazy">
+        <div class="gallery-overlay">
+          <button class="view-btn" aria-label="View full image 1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            View
+          </button>
+        </div>
+      </div>
 
-            console.log(`Total batches found: ${batches.length}`);
-            console.log(`Initial gallery items: ${galleryItems.length}`);
+      <div class="gallery-item" data-category="candid" role="listitem">
+        <img src="images/thumbs/02.jpg" alt="Candid emotional storytelling" data-full="images/fulls/02.jpg" loading="lazy">
+        <div class="gallery-overlay">
+          <button class="view-btn" aria-label="View full image 2">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            View
+          </button>
+        </div>
+      </div>
 
-            // FIXED Load More functionality
-            loadMoreBtn.addEventListener('click', function() {
-                console.log(`Loading batch ${currentBatch + 1} of ${batches.length}`);
-                
-                if (currentBatch < batches.length) {
-                    // Show loading state
-                    const originalText = loadMoreBtn.innerHTML;
-                    loadMoreBtn.innerHTML = '<span class="loading"></span> Loading...';
-                    loadMoreBtn.disabled = true;
+      <div class="gallery-item" data-category="portraits" role="listitem">
+        <img src="images/thumbs/03.jpg" alt="Studio portrait — professional lighting" data-full="images/fulls/03.jpg" loading="lazy">
+        <div class="gallery-overlay">
+          <button class="view-btn" aria-label="View full image 3">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            View
+          </button>
+        </div>
+      </div>
 
-                    // Simulate loading delay
-                    setTimeout(() => {
-                        // Get the next batch
-                        const batch = batches[currentBatch];
-                        
-                        // Make the batch visible by changing display style
-                        batch.style.display = 'grid';
-                        
-                        // Get all items from this batch
-                        const newItems = batch.querySelectorAll('.gallery-item');
-                        console.log(`Adding ${newItems.length} new items`);
-                        
-                        // Add animation delay based on index
-                        newItems.forEach((item, index) => {
-                            item.style.animationDelay = `${(currentBatch * 4 + index) * 0.1}s`;
-                            galleryItems.push(item);
-                        });
+      <div class="gallery-item" data-category="cinematic" role="listitem">
+        <img src="images/thumbs/04.jpg" alt="Dubai urban cinematic portrait" data-full="images/fulls/04.jpg" loading="lazy">
+        <div class="gallery-overlay">
+          <button class="view-btn" aria-label="View full image 4">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            View
+          </button>
+        </div>
+      </div>
 
-                        currentBatch++;
+      <!-- ─ BATCH 2 (hidden) ─ -->
+      <div class="gallery-item hidden" data-category="portraits" data-batch="2" role="listitem">
+        <img src="images/thumbs/05.jpg" alt="Portrait 5" data-full="images/fulls/05.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 5"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="candid" data-batch="2" role="listitem">
+        <img src="images/thumbs/06.jpg" alt="Candid 6" data-full="images/fulls/06.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 6"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="2" role="listitem">
+        <img src="images/thumbs/07.jpg" alt="Cinematic 7" data-full="images/fulls/07.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 7"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="2" role="listitem">
+        <img src="images/thumbs/08.jpg" alt="Portrait 8" data-full="images/fulls/08.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 8"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
 
-                        // Update button text or hide if no more batches
-                        if (currentBatch >= batches.length) {
-                            loadMoreBtn.style.display = 'none';
-                            console.log('All batches loaded, hiding button');
-                        } else {
-                            loadMoreBtn.innerHTML = originalText;
-                            loadMoreBtn.disabled = false;
-                        }
+      <!-- ─ BATCH 3 (hidden) ─ -->
+      <div class="gallery-item hidden" data-category="candid" data-batch="3" role="listitem">
+        <img src="images/thumbs/09.jpg" alt="Candid 9" data-full="images/fulls/09.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 9"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="3" role="listitem">
+        <img src="images/thumbs/10.jpg" alt="Portrait 10" data-full="images/fulls/10.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 10"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="3" role="listitem">
+        <img src="images/thumbs/11.jpg" alt="Cinematic 11" data-full="images/fulls/11.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 11"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="3" role="listitem">
+        <img src="images/thumbs/12.jpg" alt="Portrait 12" data-full="images/fulls/12.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 12"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
 
-                        // Smooth scroll to newly loaded content
-                        setTimeout(() => {
-                            batch.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'nearest' 
-                            });
-                        }, 100);
-                        
-                    }, 800);
-                } else {
-                    console.log('No more batches to load');
-                }
-            });
+      <!-- ─ BATCH 4 (hidden) ─ -->
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="4" role="listitem">
+        <img src="images/thumbs/13.jpg" alt="Cinematic 13" data-full="images/fulls/13.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 13"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="candid" data-batch="4" role="listitem">
+        <img src="images/thumbs/14.jpg" alt="Candid 14" data-full="images/fulls/14.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 14"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="4" role="listitem">
+        <img src="images/thumbs/15.jpg" alt="Portrait 15" data-full="images/fulls/15.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 15"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="4" role="listitem">
+        <img src="images/thumbs/16.jpg" alt="Cinematic 16" data-full="images/fulls/16.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 16"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
 
-            // Set initial animation delays for first 4 items
-            document.querySelectorAll('.gallery-item').forEach((item, index) => {
-                if (index < 4) {
-                    item.style.animationDelay = `${index * 0.1}s`;
-                }
-            });
+      <!-- ─ BATCH 5 (hidden) ─ -->
+      <div class="gallery-item hidden" data-category="portraits" data-batch="5" role="listitem">
+        <img src="images/thumbs/17.jpg" alt="Portrait 17" data-full="images/fulls/17.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 17"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="candid" data-batch="5" role="listitem">
+        <img src="images/thumbs/18.jpg" alt="Candid 18" data-full="images/fulls/18.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 18"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="5" role="listitem">
+        <img src="images/thumbs/19.jpg" alt="Portrait 19" data-full="images/fulls/19.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 19"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="5" role="listitem">
+        <img src="images/thumbs/20.jpg" alt="Cinematic 20" data-full="images/fulls/20.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 20"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
 
-            // Filter functionality
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Update active button
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const filter = this.dataset.filter;
-                    
-                    // Show/hide items based on filter
-                    galleryItems.forEach(item => {
-                        if (filter === 'all' || item.dataset.category === filter) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                    
-                    // Update lightbox counter for visible items
-                    if (lightbox.classList.contains('active')) {
-                        updateLightboxCounter();
-                    }
-                });
-            });
+      <!-- ─ BATCH 6 (hidden) ─ -->
+      <div class="gallery-item hidden" data-category="portraits" data-batch="6" role="listitem">
+        <img src="images/thumbs/21.jpg" alt="Portrait 21" data-full="images/fulls/21.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 21"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="candid" data-batch="6" role="listitem">
+        <img src="images/thumbs/22.jpg" alt="Candid 22" data-full="images/fulls/22.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 22"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="6" role="listitem">
+        <img src="images/thumbs/23.jpg" alt="Cinematic 23" data-full="images/fulls/23.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 23"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="6" role="listitem">
+        <img src="images/thumbs/24.jpg" alt="Portrait 24" data-full="images/fulls/24.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 24"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
 
-            // Open Lightbox
-            function openLightbox(index) {
-                currentIndex = index;
-                const item = galleryItems[currentIndex];
-                const fullSrc = item.querySelector('.thumbnail').dataset.full;
-                
-                if (fullSrc) {
-                    lightboxImg.src = fullSrc;
-                    lightboxImg.alt = item.querySelector('.thumbnail').alt;
-                    updateLightboxCounter();
-                    
-                    lightbox.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    console.error('No full image source found for item:', item);
-                }
-            }
+      <!-- ─ BATCH 7 (hidden) ─ -->
+      <div class="gallery-item hidden" data-category="candid" data-batch="7" role="listitem">
+        <img src="images/thumbs/25.jpg" alt="Candid 25" data-full="images/fulls/25.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 25"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="7" role="listitem">
+        <img src="images/thumbs/26.jpg" alt="Portrait 26" data-full="images/fulls/26.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 26"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="7" role="listitem">
+        <img src="images/thumbs/27.jpg" alt="Cinematic 27" data-full="images/fulls/27.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 27"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="7" role="listitem">
+        <img src="images/thumbs/28.jpg" alt="Portrait 28" data-full="images/fulls/28.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 28"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
 
-            // Close Lightbox
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+      <!-- ─ BATCH 8 (hidden) ─ -->
+      <div class="gallery-item hidden" data-category="candid" data-batch="8" role="listitem">
+        <img src="images/thumbs/29.jpg" alt="Candid 29" data-full="images/fulls/29.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 29"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="8" role="listitem">
+        <img src="images/thumbs/30.jpg" alt="Portrait 30" data-full="images/fulls/30.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 30"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="cinematic" data-batch="8" role="listitem">
+        <img src="images/thumbs/31.jpg" alt="Cinematic 31" data-full="images/fulls/31.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 31"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
+      <div class="gallery-item hidden" data-category="portraits" data-batch="8" role="listitem">
+        <img src="images/thumbs/32.jpg" alt="Portrait 32" data-full="images/fulls/32.jpg" loading="lazy">
+        <div class="gallery-overlay"><button class="view-btn" aria-label="View full image 32"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>View</button></div>
+      </div>
 
-            // Update Lightbox Counter
-            function updateLightboxCounter() {
-                const visibleItems = Array.from(galleryItems).filter(item => 
-                    item.style.display !== 'none' && getComputedStyle(item).display !== 'none'
-                );
-                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
-                const totalVisible = visibleItems.length;
-                
-                if (currentItemIndex !== -1) {
-                    lightboxCounter.textContent = `${currentItemIndex + 1} / ${totalVisible}`;
-                } else {
-                    lightboxCounter.textContent = `1 / ${totalVisible}`;
-                }
-            }
+    </div><!-- /gallery -->
 
-            // Navigation
-            function showPrevImage() {
-                const visibleItems = Array.from(galleryItems).filter(item => 
-                    item.style.display !== 'none' && getComputedStyle(item).display !== 'none'
-                );
-                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
-                
-                if (currentItemIndex > 0) {
-                    const prevItem = visibleItems[currentItemIndex - 1];
-                    currentIndex = galleryItems.indexOf(prevItem);
-                    const fullSrc = prevItem.querySelector('.thumbnail').dataset.full;
-                    
-                    if (fullSrc) {
-                        lightboxImg.src = fullSrc;
-                        lightboxImg.alt = prevItem.querySelector('.thumbnail').alt;
-                        updateLightboxCounter();
-                    }
-                }
-            }
+    <!-- Load More -->
+    <div class="load-more-wrap">
+      <button id="load-more" type="button">Load More</button>
+    </div>
 
-            function showNextImage() {
-                const visibleItems = Array.from(galleryItems).filter(item => 
-                    item.style.display !== 'none' && getComputedStyle(item).display !== 'none'
-                );
-                const currentItemIndex = visibleItems.indexOf(galleryItems[currentIndex]);
-                
-                if (currentItemIndex < visibleItems.length - 1) {
-                    const nextItem = visibleItems[currentItemIndex + 1];
-                    currentIndex = galleryItems.indexOf(nextItem);
-                    const fullSrc = nextItem.querySelector('.thumbnail').dataset.full;
-                    
-                    if (fullSrc) {
-                        lightboxImg.src = fullSrc;
-                        lightboxImg.alt = nextItem.querySelector('.thumbnail').alt;
-                        updateLightboxCounter();
-                    }
-                }
-            }
+  </main><!-- /page-wrapper -->
 
-            // Event Listeners for View Full buttons
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('view-full') || e.target.closest('.view-full')) {
-                    const viewFullBtn = e.target.classList.contains('view-full') ? e.target : e.target.closest('.view-full');
-                    const index = parseInt(viewFullBtn.dataset.index);
-                    if (!isNaN(index)) {
-                        openLightbox(index);
-                    }
-                }
-            });
+  <!-- ─── LIGHTBOX ───────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lb-close" id="lb-close" aria-label="Close lightbox">✕</button>
+    <button class="lb-prev" id="lb-prev" aria-label="Previous image">‹</button>
+    <button class="lb-next" id="lb-next" aria-label="Next image">›</button>
+    <div class="lightbox-inner">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <div class="lb-counter" id="lb-counter" aria-live="polite"></div>
+  </div>
 
-            // Also allow clicking on the image itself to open lightbox
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('thumbnail')) {
-                    const galleryItem = e.target.closest('.gallery-item');
-                    const index = Array.from(galleryItems).indexOf(galleryItem);
-                    if (index !== -1) {
-                        openLightbox(index);
-                    }
-                }
-            });
+  <!-- ─── SCRIPTS ───────────────────────────────────────── -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
-            // Lightbox Controls
-            lightboxClose.addEventListener('click', closeLightbox);
-            lightboxPrev.addEventListener('click', showPrevImage);
-            lightboxNext.addEventListener('click', showNextImage);
-
-            // Keyboard Navigation
-            document.addEventListener('keydown', function(e) {
-                if (lightbox.classList.contains('active')) {
-                    if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowLeft') showPrevImage();
-                    if (e.key === 'ArrowRight') showNextImage();
-                }
-            });
-
-            // Close lightbox when clicking outside image
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) {
-                    closeLightbox();
-                }
-            });
-
-            // Image lazy loading
-            const images = document.querySelectorAll('.thumbnail[data-src]');
-            const imageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                        }
-                        imageObserver.unobserve(img);
-                    }
-                });
-            });
-
-            images.forEach(img => {
-                if (img.dataset.src) {
-                    imageObserver.observe(img);
-                }
-            });
-            
-            console.log('Page loaded successfully. Load More button is functional.');
+      /* ── Cursor ─────────────────────────────────── */
+      const dot  = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (window.matchMedia('(pointer: fine)').matches) {
+        document.addEventListener('mousemove', e => {
+          dot.style.left  = e.clientX + 'px'; dot.style.top  = e.clientY + 'px';
+          ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px';
         });
-    </script>
+      } else {
+        dot.style.display = ring.style.display = 'none';
+        document.body.style.cursor = 'auto';
+      }
+
+      /* ── Scroll progress ────────────────────────── */
+      const progress = document.getElementById('scroll-progress');
+      window.addEventListener('scroll', () => {
+        const total = document.body.scrollHeight - window.innerHeight;
+        progress.style.width = (total > 0 ? window.scrollY / total * 100 : 0) + '%';
+      }, { passive: true });
+
+      /* ── Header shrink ──────────────────────────── */
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+      /* ── Hamburger ──────────────────────────────── */
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobileNav');
+      hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        mobileNav.setAttribute('aria-hidden', !open);
+      });
+      mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        hamburger.classList.remove('open'); mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded','false'); mobileNav.setAttribute('aria-hidden','true');
+      }));
+
+      /* ── Scroll reveal for initial items ────────── */
+      const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+
+      // Reveal only non-hidden items initially
+      document.querySelectorAll('.gallery-item:not(.hidden)').forEach((el, i) => {
+        setTimeout(() => revealObs.observe(el), i * 80);
+      });
+
+      /* ── FIX: Load More — flat items with data-batch ─
+         Original bug: used wrapper divs that broke the
+         CSS columns layout. Now items live directly in
+         the gallery and are simply un-hidden per batch. */
+      const BATCH_SIZE = 4;
+      const MAX_BATCH  = 8;
+      let currentBatch = 1; // batches 2..8 are hidden
+      const loadMoreBtn = document.getElementById('load-more');
+
+      // Hide button if nothing to load
+      if (currentBatch >= MAX_BATCH) loadMoreBtn.style.display = 'none';
+
+      loadMoreBtn.addEventListener('click', () => {
+        currentBatch++;
+        const toReveal = document.querySelectorAll(`.gallery-item[data-batch="${currentBatch}"]`);
+
+        // Show loading state
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.innerHTML = '<span class="spinner"></span> Loading…';
+
+        setTimeout(() => {
+          toReveal.forEach((el, i) => {
+            el.classList.remove('hidden');
+            // Re-apply active filter
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            if (activeFilter !== 'all' && el.dataset.category !== activeFilter) {
+              el.classList.add('hidden');
+            } else {
+              setTimeout(() => revealObs.observe(el), i * 80);
+            }
+          });
+
+          if (currentBatch >= MAX_BATCH) {
+            loadMoreBtn.style.display = 'none';
+          } else {
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.innerHTML = 'Load More';
+          }
+        }, 600);
+      });
+
+      /* ── FIX: Filter — works correctly with flat items ─
+         Original bug: filter only applied to initially
+         loaded items; newly loaded batches weren't filtered. */
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+
+          document.querySelectorAll('.gallery-item').forEach(item => {
+            // Only operate on items that have been revealed (not in an unrevealed batch)
+            if (item.dataset.batch && parseInt(item.dataset.batch) > currentBatch) return;
+
+            if (filter === 'all' || item.dataset.category === filter) {
+              item.classList.remove('hidden');
+              if (!item.classList.contains('visible')) revealObs.observe(item);
+            } else {
+              item.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      /* ── LIGHTBOX ───────────────────────────────── */
+      const lightbox   = document.getElementById('lightbox');
+      const lbImg      = document.getElementById('lightbox-img');
+      const lbCounter  = document.getElementById('lb-counter');
+      const lbClose    = document.getElementById('lb-close');
+      const lbPrev     = document.getElementById('lb-prev');
+      const lbNext     = document.getElementById('lb-next');
+      let lbIndex = 0;
+
+      // Get currently visible items for lightbox navigation
+      function getVisible() {
+        return Array.from(document.querySelectorAll('.gallery-item:not(.hidden).visible'));
+      }
+
+      function openLightbox(item) {
+        const visible = getVisible();
+        lbIndex = visible.indexOf(item);
+        showLbImage(visible);
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        lbClose.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function showLbImage(visible) {
+        // Clamp index
+        lbIndex = Math.max(0, Math.min(lbIndex, visible.length - 1));
+        const item = visible[lbIndex];
+        const img  = item.querySelector('img');
+        lbImg.src  = img.dataset.full || img.src;
+        lbImg.alt  = img.alt;
+        lbCounter.textContent = `${lbIndex + 1} / ${visible.length}`;
+        lbPrev.disabled = lbIndex === 0;
+        lbNext.disabled = lbIndex === visible.length - 1;
+      }
+
+      // Click on image or view button
+      document.getElementById('gallery').addEventListener('click', e => {
+        const item = e.target.closest('.gallery-item');
+        if (!item || item.classList.contains('hidden')) return;
+        openLightbox(item);
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+      lbPrev.addEventListener('click', () => { lbIndex--; showLbImage(getVisible()); });
+      lbNext.addEventListener('click', () => { lbIndex++; showLbImage(getVisible()); });
+
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')  { lbIndex--; showLbImage(getVisible()); }
+        if (e.key === 'ArrowRight') { lbIndex++; showLbImage(getVisible()); }
+      });
+
+      // Touch swipe support
+      let touchStartX = 0;
+      lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      lightbox.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) { dx < 0 ? lbIndex++ : lbIndex--; showLbImage(getVisible()); }
+      });
+
+    });
+  </script>
 
 </body>
 </html>
