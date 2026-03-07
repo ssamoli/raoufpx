@@ -370,6 +370,47 @@
         btn.disabled=true;btn.innerHTML='<span class="spinner"></span>SENDING...';
         msgOk.style.display=msgErr.style.display='none';
         try{
-          const res=await fetch('https://formspree.io/f/xnnvndyv',{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-          if(res.ok){msgOk.style.display='block';form.reset();dateInput.value=toYMD(nextWeekend());msgOk.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{window.location.href='confirmation.html'},2500)}
-          else throw new
+          const res = await fetch('https://formspree.io/f/xnnvndyv',{
+            method:'POST',
+            body:new FormData(form),
+            headers:{'Accept':'application/json'}
+          });
+
+          if(res.ok){
+            msgOk.style.display='block';
+            form.reset();
+            dateInput.value = toYMD(nextWeekend());
+
+            msgOk.scrollIntoView({
+              behavior:'smooth',
+              block:'center'
+            });
+
+            setTimeout(()=>{
+              window.location.href='confirmation.html'
+            },2500);
+
+          } else {
+            throw new Error("Form submission failed");
+          }
+
+        } catch(err){
+
+          msgErr.style.display='block';
+
+          msgErr.scrollIntoView({
+            behavior:'smooth',
+            block:'center'
+          });
+
+        } finally {
+
+          btn.disabled=false;
+          btn.innerHTML='[ REQUEST BOOKING ]';
+
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
