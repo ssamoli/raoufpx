@@ -286,4 +286,8 @@
       mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open');ham.setAttribute('aria-expanded','false');mob.setAttribute('aria-hidden','true')}));
       const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.15});
       document.querySelectorAll('[data-reveal]').forEach(el=>ro.observe(el));
-      document.querySelectorAll('a[href^="#
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-hdr.offsetHeight-10,behavior:'smooth'})}})});
+    });
+  </script>
+</body>
+</html>
