@@ -1,1 +1,443 @@
-file
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>RAOUF px — Book Your Portrait Session in Dubai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Natural, cinematic portrait photography in Dubai. No poses. No pretending. Just you."/>
+  <meta property="og:title" content="Your Portrait. No Poses. No Pretending."/>
+  <meta property="og:description" content="Book a session in Dubai. You don't need to be ready. Just show up."/>
+  <meta property="og:type" content="website"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── RESET & TOKENS ── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    img,svg{max-width:100%;display:block}
+    :root{
+      --bg:#080810;--surface:rgba(255,255,255,.04);
+      --accent:#f0b44c;--accent2:#ff7e3e;--accent3:#4cf0d0;--accent4:#c84bff;
+      --muted:rgba(255,255,255,.45);--text:rgba(255,255,255,.82);
+      --bar-h:56px
+    }
+    html{scroll-behavior:smooth}
+    html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
+
+    /* ── CRT SCANLINES (single layer, lighter on mobile) ── */
+    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.11) 2px,rgba(0,0,0,.11) 4px);pointer-events:none;z-index:8000;opacity:.5}
+    /* ── PIXEL GRID ── */
+    body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,180,76,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.022) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+
+    /* ── CURSOR (desktop only) ── */
+    .cursor{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    .cursor-inner{width:12px;height:12px;background:var(--accent);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:cpulse 1.5s ease-in-out infinite}
+    .cursor-outer{position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);width:28px;height:28px;border:2px solid rgba(240,180,76,.35);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);transition:width .2s,height .2s,border-color .2s}
+    body:has(a:hover) .cursor-outer,body:has(button:hover) .cursor-outer{width:42px;height:42px;border-color:var(--accent)}
+    @keyframes cpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.82)}}
+
+    /* ── AMBIENT GLOWS (reduced for perf) ── */
+    .glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(100px);opacity:.06}
+    .glow-1{width:420px;height:420px;background:#f0b44c;top:-120px;left:-80px;animation:g1 22s ease-in-out infinite alternate}
+    .glow-2{width:340px;height:340px;background:#ff7e3e;bottom:-60px;right:-60px;animation:g2 28s ease-in-out infinite alternate}
+    @keyframes g1{to{transform:translate(50px,35px)}}
+    @keyframes g2{to{transform:translate(-45px,-55px)}}
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-progress{position:fixed;top:var(--bar-h);left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent2));z-index:1001;transition:width .08s linear}
+
+    /* ── TOP BAR (logo only — no nav) ── */
+    #topbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--bar-h);display:flex;align-items:center;justify-content:center;background:rgba(8,8,16,.9);border-bottom:1px solid rgba(240,180,76,.12);backdrop-filter:blur(10px)}
+    .logo-frame{display:inline-flex;align-items:center;text-decoration:none;padding:5px;border:2px solid rgba(240,180,76,.22);position:relative;transition:border-color .2s}
+    .logo-frame:hover{border-color:var(--accent)}
+    .logo-frame::before,.logo-frame::after{content:'';position:absolute;width:6px;height:6px;background:var(--accent)}
+    .logo-frame::before{top:-3px;left:-3px}.logo-frame::after{bottom:-3px;right:-3px}
+    .logo-inner img{height:1.9rem;width:auto;filter:drop-shadow(0 0 10px rgba(240,180,76,.5)) drop-shadow(0 0 20px rgba(240,180,76,.2))}
+
+    /* ── HERO SLIDESHOW ── */
+    .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+    .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center top;opacity:0;transition:opacity 2s ease;will-change:opacity}
+    .hero-slide.active{opacity:1}
+    /* Use thumbs for faster initial load, fulls for quality */
+    .hero-slide:nth-child(1){background-image:url('images/fulls/01.jpg')}
+    .hero-slide:nth-child(2){background-image:url('images/fulls/09.jpg')}
+    .hero-slide:nth-child(3){background-image:url('images/fulls/13.jpg')}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,16,.42) 0%,rgba(8,8,16,.55) 45%,rgba(8,8,16,.97) 100%);z-index:1}
+    .hero-bg::before{content:'';position:absolute;inset:0;z-index:2;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.08) 3px,rgba(0,0,0,.08) 4px);pointer-events:none}
+
+    /* ── HERO SECTION ── */
+    #hero{
+      position:relative;z-index:1;
+      min-height:100dvh;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;
+      padding:calc(var(--bar-h) + 2.5rem) clamp(1rem,5vw,4rem) 3rem
+    }
+    #hero > *:not(.hero-bg){position:relative;z-index:3}
+
+    /* eyebrow */
+    .h-tag{font-family:'Press Start 2P',monospace;font-size:.42rem;color:var(--accent3);letter-spacing:.22em;margin-bottom:1.6rem;opacity:0;animation:pxIn .5s steps(8) .2s forwards}
+    .h-tag::before{content:'> ';color:var(--accent)}
+
+    /* headline */
+    .h-hl{font-family:'Press Start 2P',monospace;font-size:clamp(1rem,3.8vw,2.2rem);line-height:1.75;color:#fff;opacity:0;animation:pxIn .7s steps(12) .4s forwards;text-shadow:3px 3px 0 rgba(240,180,76,.18),-1px -1px 0 rgba(76,240,208,.07);margin-bottom:1.6rem}
+    .h-hl .hl{color:var(--accent);text-shadow:3px 3px 0 rgba(240,120,30,.35)}
+    .h-hl::after{content:'█';color:var(--accent);animation:blink .8s steps(1) infinite;font-size:.75em;margin-left:5px}
+
+    /* subheadline — reassurance */
+    .h-sub{font-family:'Space Mono',monospace;font-size:clamp(.8rem,1.7vw,.98rem);color:var(--muted);max-width:480px;line-height:2;margin:0 auto 1rem;opacity:0;animation:pxIn .6s steps(8) .8s forwards}
+
+    /* short support */
+    .h-support{font-family:'Space Mono',monospace;font-size:clamp(.68rem,1.2vw,.78rem);color:rgba(255,255,255,.38);max-width:400px;line-height:2;margin:0 auto 2.2rem;opacity:0;animation:pxIn .5s steps(6) 1s forwards}
+
+    /* CTA group */
+    .cta-group{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:pxIn .5s steps(6) 1.2s forwards;margin-bottom:1.6rem}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-family:'Press Start 2P',monospace;font-size:.58rem;text-decoration:none;padding:1rem 1.7rem;position:relative;cursor:none;letter-spacing:.05em;line-height:1.4;white-space:nowrap;transition:box-shadow .1s steps(1),transform .1s steps(1)}
+    .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 55%);pointer-events:none}
+    .btn:hover{transform:translate(2px,2px)}
+    .btn:active{transform:translate(4px,4px)}
+    .btn-wa{background:#25d366;color:#fff;box-shadow:4px 4px 0 #128c3e,7px 7px 0 rgba(0,0,0,.35)}
+    .btn-wa:hover{box-shadow:2px 2px 0 #128c3e,4px 4px 0 rgba(0,0,0,.35)}
+    .btn-wa:active{box-shadow:0 0 0 #128c3e}
+    .btn-book{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:4px 4px 0 rgba(240,180,76,.22)}
+    .btn-book:hover{background:rgba(240,180,76,.07);box-shadow:2px 2px 0 rgba(240,180,76,.22)}
+    .btn-book:active{box-shadow:0 0 0 rgba(240,180,76,.22)}
+
+    /* urgency nudge */
+    .urgency{font-family:'Press Start 2P',monospace;font-size:.3rem;color:rgba(240,180,76,.55);letter-spacing:.12em;opacity:0;animation:pxIn .5s steps(4) 1.4s forwards;margin-bottom:2rem}
+    .urgency::before{content:'⚠ ';color:var(--accent2)}
+
+    /* ── TRUST BAR ── */
+    .trust-bar{display:flex;align-items:center;justify-content:center;gap:clamp(.6rem,2.5vw,2rem);flex-wrap:wrap;opacity:0;animation:pxIn .5s steps(6) 1.6s forwards;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,.05)}
+    .t-item{font-family:'Press Start 2P',monospace;font-size:.28rem;color:rgba(255,255,255,.25);letter-spacing:.1em;display:flex;align-items:center;gap:.4rem}
+    .t-dot{width:5px;height:5px;border-radius:50%;background:var(--accent3);box-shadow:0 0 5px var(--accent3);flex-shrink:0}
+
+    /* ── HERO TESTIMONIAL (above fold on desktop, just below fold on mobile) ── */
+    .hero-testi{max-width:520px;margin:2.5rem auto 0;opacity:0;animation:pxIn .5s steps(6) 1.8s forwards;border:1px solid rgba(240,180,76,.12);background:rgba(255,255,255,.03);padding:1.2rem 1.6rem;position:relative}
+    .hero-testi::before{content:'';position:absolute;top:-1px;left:-1px;width:12px;height:12px;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+    .hero-testi::after{content:'';position:absolute;bottom:-1px;right:-1px;width:12px;height:12px;border-bottom:2px solid var(--accent);border-right:2px solid var(--accent)}
+    .testi-quote{font-family:'Space Mono',monospace;font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.9;font-style:italic;margin-bottom:.7rem}
+    .testi-attr{font-family:'Press Start 2P',monospace;font-size:.28rem;color:rgba(240,180,76,.45);letter-spacing:.12em;display:flex;align-items:center;gap:.5rem}
+    .ping-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent3);box-shadow:0 0 7px var(--accent3);flex-shrink:0;animation:pingpulse 1.6s ease-in-out infinite}
+    @keyframes pingpulse{0%,100%{box-shadow:0 0 4px var(--accent3)}50%{box-shadow:0 0 12px var(--accent3),0 0 24px rgba(76,240,208,.25)}}
+
+    /* ── BELOW FOLD: WHY SECTION ── */
+    #why{position:relative;z-index:1;padding:4.5rem clamp(1rem,5vw,4rem);display:flex;flex-direction:column;align-items:center;gap:2.5rem;border-top:1px solid rgba(240,180,76,.08)}
+    #why::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(76,240,208,.01) 3px,rgba(76,240,208,.01) 4px);pointer-events:none}
+    #why > *{position:relative;z-index:1}
+    .section-label{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--accent3);letter-spacing:.22em;text-align:center}
+    .section-label::before{content:'// ';color:rgba(255,255,255,.2)}
+    .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:860px;width:100%}
+    .why-card{background:var(--surface);border:2px solid rgba(240,180,76,.1);padding:1.5rem;position:relative;opacity:0;transform:translateY(14px);transition:opacity .45s steps(7),transform .45s steps(7),border-color .25s}
+    .why-card.visible{opacity:1;transform:translateY(0)}
+    .why-card:hover{border-color:rgba(240,180,76,.28)}
+    .why-card::before{content:'';position:absolute;top:-2px;left:-2px;width:14px;height:14px;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+    .why-card::after{content:'';position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;border-bottom:2px solid var(--accent3);border-right:2px solid var(--accent3)}
+    .why-icon{font-size:.9rem;margin-bottom:.8rem;display:block}
+    .why-title{font-family:'Press Start 2P',monospace;font-size:.42rem;color:#fff;line-height:1.9;margin-bottom:.7rem}
+    .why-text{font-family:'Space Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.9}
+
+    /* ── SECOND TESTIMONIAL ── */
+    #proof{position:relative;z-index:1;padding:4rem clamp(1rem,5vw,4rem);display:flex;flex-direction:column;align-items:center;gap:1.2rem;border-top:1px solid rgba(255,255,255,.04);text-align:center}
+    .proof-quote{font-family:'Space Mono',monospace;font-size:clamp(.8rem,1.5vw,.92rem);color:rgba(255,255,255,.72);line-height:2;font-style:italic;max-width:600px;position:relative;padding:0 1.2rem}
+    .proof-quote::before{content:'"';font-family:'Press Start 2P',monospace;font-size:1.8rem;color:rgba(240,180,76,.2);position:absolute;top:-.6rem;left:0;line-height:1}
+    .proof-attr{font-family:'Press Start 2P',monospace;font-size:.3rem;color:rgba(240,180,76,.4);letter-spacing:.15em;display:flex;align-items:center;gap:.5rem;justify-content:center}
+
+    /* ── FINAL CTA SECTION ── */
+    #final{position:relative;z-index:1;padding:4.5rem clamp(1rem,5vw,4rem) 5rem;display:flex;flex-direction:column;align-items:center;gap:1.4rem;text-align:center;border-top:1px solid rgba(240,180,76,.1)}
+    .final-eyebrow{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--accent3);letter-spacing:.2em}
+    .final-eyebrow::before{content:'> ';color:var(--accent)}
+    .final-headline{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,2.8vw,1.7rem);color:#fff;line-height:1.75;text-shadow:3px 3px 0 rgba(240,180,76,.15)}
+    .final-headline .hl{color:var(--accent)}
+    .final-sub{font-family:'Space Mono',monospace;font-size:clamp(.72rem,1.4vw,.85rem);color:var(--muted);max-width:440px;line-height:2}
+    .status-line{display:flex;align-items:center;gap:.6rem;font-family:'Press Start 2P',monospace;font-size:.3rem;color:rgba(76,240,208,.5);letter-spacing:.14em}
+    .status-line::before,.status-line::after{content:'';flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(76,240,208,.2))}
+    .status-line::after{background:linear-gradient(270deg,transparent,rgba(76,240,208,.2))}
+    .final-urgency{font-family:'Press Start 2P',monospace;font-size:.3rem;color:rgba(240,180,76,.5);letter-spacing:.1em}
+    .final-urgency::before{content:'⚠ ';color:var(--accent2)}
+
+    /* ── FOOTER ── */
+    footer{text-align:center;padding:2rem 1rem;border-top:1px solid rgba(255,255,255,.04)}
+    footer p{font-family:'Press Start 2P',monospace;font-size:.28rem;color:rgba(255,255,255,.12);letter-spacing:.07em;line-height:2.2}
+    footer a{color:rgba(240,180,76,.3);text-decoration:none;transition:color .2s}
+    footer a:hover{color:var(--accent)}
+
+    /* ── ANIMATIONS ── */
+    @keyframes pxIn{from{opacity:0;transform:translateY(10px);clip-path:inset(100% 0 0 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0% 0 0 0)}}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+    /* ── REDUCED MOTION ── */
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+      .cursor,.cursor-outer{display:none}html,body{cursor:auto}
+      .glow{display:none}
+    }
+
+    /* ── MOBILE ── */
+    @media(max-width:768px){
+      .cursor,.cursor-outer{display:none}
+      html,body{cursor:auto}
+      .h-hl{font-size:.95rem}
+      .glow-1{width:280px;height:280px}
+      .glow-2{width:220px;height:220px}
+    }
+    @media(max-width:480px){
+      .cta-group{flex-direction:column;align-items:center}
+      .btn{font-size:.52rem;padding:.9rem 1.4rem;width:100%;max-width:300px}
+      .h-hl{font-size:.85rem}
+      .trust-bar{gap:.5rem}
+      .t-item{font-size:.24rem}
+    }
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursorInner"><div class="cursor-inner"></div></div>
+  <div class="cursor-outer" id="cursorOuter"></div>
+
+  <!-- Glows -->
+  <div class="glow glow-1" aria-hidden="true"></div>
+  <div class="glow glow-2" aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div id="scroll-progress" role="progressbar" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════
+       TOP BAR — logo only, no nav
+  ══════════════════════════════════ -->
+  <div id="topbar" role="banner">
+    <a href="index.html" class="logo-frame" aria-label="RAOUF px — back to main site">
+      <div class="logo-inner">
+        <img src="images/logo.png" alt="RAOUF px" width="32" height="32" loading="eager"/>
+      </div>
+    </a>
+  </div>
+
+  <!-- ══════════════════════════════════
+       HERO — everything above the fold
+  ══════════════════════════════════ -->
+  <section id="hero" aria-label="Hero">
+
+    <!-- Slideshow background (3 images, reduced from 4 for speed) -->
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-slide active"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+    </div>
+
+    <!-- Eyebrow -->
+    <span class="h-tag" aria-hidden="true">RAOUF_px.exe &nbsp;·&nbsp; DUBAI &nbsp;·&nbsp; EST. 2024</span>
+
+    <!-- Main headline (Variation 3) -->
+    <h1 class="h-hl">
+      Your Portrait.<br>
+      No Poses.<br>
+      <span class="hl">No Pretending.</span>
+    </h1>
+
+    <!-- Subheadline — camera-shy reassurance -->
+    <p class="h-sub">
+      Book a session in Dubai and walk away<br>
+      with photos you'll actually want to share.
+    </p>
+
+    <!-- Short support copy -->
+    <p class="h-support">
+      // You don't need to be ready. Just show up.
+    </p>
+
+    <!-- PRIMARY CTAs -->
+    <div class="cta-group">
+      <a href="https://wa.me/971506180828?text=Hi%20Osama%2C%20I%27d%20like%20to%20book%20a%20portrait%20session." class="btn btn-wa" target="_blank" rel="noopener" aria-label="Message Osama on WhatsApp to book a session">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        [ BOOK ON WHATSAPP ]
+      </a>
+      <a href="booking.html" class="btn btn-book" aria-label="Book a session online">
+        [ BOOK ONLINE ]
+      </a>
+    </div>
+
+    <!-- Urgency nudge -->
+    <p class="urgency">Limited sessions available each week</p>
+
+    <!-- Trust bar -->
+    <div class="trust-bar" aria-label="Trust signals">
+      <div class="t-item"><div class="t-dot"></div>DUBAI BASED</div>
+      <div class="t-item"><div class="t-dot"></div>NO STUDIO STIFFNESS</div>
+      <div class="t-item"><div class="t-dot"></div>REAL MOMENTS ONLY</div>
+      <div class="t-item"><div class="t-dot"></div>EST. 2024</div>
+      <div class="t-item"><div class="t-dot"></div>FROM AED 250</div>
+    </div>
+
+    <!-- Hesitation-addressing testimonial — visible above fold on desktop -->
+    <aside class="hero-testi" aria-label="Client testimonial">
+      <p class="testi-quote">
+        "I thought I'd hate being in front of a camera… I was wrong. I left with a photo I've been looking for my whole life."
+      </p>
+      <p class="testi-attr">
+        <span class="ping-dot" aria-hidden="true"></span>
+        VERIFIED CLIENT &nbsp;·&nbsp; DUBAI, 2024
+      </p>
+    </aside>
+
+  </section>
+
+  <!-- ══════════════════════════════════
+       WHY — below fold
+  ══════════════════════════════════ -->
+  <section id="why" aria-label="Why RAOUF px">
+    <p class="section-label">WHY_RAOUF_px</p>
+    <div class="why-grid">
+
+      <div class="why-card" data-reveal>
+        <span class="why-icon" aria-hidden="true">◈</span>
+        <div class="why-title">NO POSES.<br>NO DIRECTIONS.</div>
+        <p class="why-text">Forget what you think you're supposed to do. We talk, we move, and I find the real shot — naturally.</p>
+      </div>
+
+      <div class="why-card" data-reveal>
+        <span class="why-icon" aria-hidden="true">◈</span>
+        <div class="why-title">CINEMATIC.<br>NOT FILTERED.</div>
+        <p class="why-text">Every edit is intentional. Light, shadow, tone — all in service of the moment, not hiding it.</p>
+      </div>
+
+      <div class="why-card" data-reveal>
+        <span class="why-icon" aria-hidden="true">◈</span>
+        <div class="why-title">BUILT FOR THE<br>CAMERA-SHY.</div>
+        <p class="why-text">Most clients say they hate being photographed. Every single one leaves with their favourite photo ever taken.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SECOND TESTIMONIAL
+  ══════════════════════════════════ -->
+  <section id="proof" aria-label="Social proof">
+    <p class="section-label">CLIENT_VOICE</p>
+    <blockquote class="proof-quote">
+      I arrived genuinely nervous. Osama doesn't make you perform — he makes you feel comfortable enough to just exist. The photos don't even look like me. They look better.
+    </blockquote>
+    <p class="proof-attr">
+      <span class="ping-dot" aria-hidden="true"></span>
+      PORTRAIT SESSION &nbsp;·&nbsp; DUBAI 2024
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════
+       FINAL CTA — repeat conversion
+  ══════════════════════════════════ -->
+  <section id="final" aria-label="Book your session">
+
+    <p class="final-eyebrow">ONE SESSION. ONE MOMENT.</p>
+
+    <h2 class="final-headline">
+      Ready to See Yourself<br>
+      <span class="hl">Differently?</span>
+    </h2>
+
+    <p class="final-sub">
+      You don't need to be camera-ready.<br>
+      You just need to show up.
+    </p>
+
+    <div class="status-line" aria-label="Currently available">
+      <span class="ping-dot" aria-hidden="true"></span>
+      ONLINE &nbsp;·&nbsp; AVAILABLE FOR BOOKINGS
+    </div>
+
+    <p class="final-urgency">Limited sessions available each week</p>
+
+    <div class="cta-group">
+      <a href="https://wa.me/971506180828?text=Hi%20Osama%2C%20I%27d%20like%20to%20book%20a%20portrait%20session." class="btn btn-wa" target="_blank" rel="noopener" aria-label="Message Osama on WhatsApp">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        [ BOOK ON WHATSAPP ]
+      </a>
+      <a href="booking.html" class="btn btn-book" aria-label="Book a session online">
+        [ BOOK ONLINE ]
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+  <footer>
+    <p>
+      &copy; 2025 RAOUF px &nbsp;·&nbsp; Dubai, UAE &nbsp;·&nbsp;
+      <a href="mailto:Contact@raoufpx.com">Contact@raoufpx.com</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">Main site</a>
+    </p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ── Hero slideshow (3 slides, 5s interval) ── */
+      const slides = document.querySelectorAll('.hero-slide');
+      let si = 0;
+      if (slides.length > 1) {
+        setInterval(() => {
+          slides[si].classList.remove('active');
+          si = (si + 1) % slides.length;
+          slides[si].classList.add('active');
+        }, 5000);
+      }
+
+      /* ── Custom cursor (desktop pointer only) ── */
+      const ci = document.getElementById('cursorInner');
+      const co = document.getElementById('cursorOuter');
+      if (window.matchMedia('(pointer:fine)').matches) {
+        document.addEventListener('mousemove', e => {
+          ci.style.left = e.clientX + 'px';
+          ci.style.top  = e.clientY + 'px';
+          co.style.left = e.clientX + 'px';
+          co.style.top  = e.clientY + 'px';
+        });
+      } else {
+        ci.style.display = co.style.display = 'none';
+        document.body.style.cursor = 'auto';
+      }
+
+      /* ── Scroll progress bar ── */
+      const bar = document.getElementById('scroll-progress');
+      window.addEventListener('scroll', () => {
+        const t = document.body.scrollHeight - window.innerHeight;
+        bar.style.width = (t > 0 ? window.scrollY / t * 100 : 0) + '%';
+      }, { passive: true });
+
+      /* ── Scroll reveal for why-cards ── */
+      const ro = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            ro.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('[data-reveal]').forEach(el => ro.observe(el));
+
+      /* ── Smooth scroll for anchor links ── */
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            window.scrollTo({ top: target.offsetTop - 64, behavior: 'smooth' });
+          }
+        });
+      });
+
+    });
+  </script>
+
+</body>
+</html>
