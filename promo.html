@@ -261,7 +261,10 @@
       (async () => {
         let expiresAt = null;
         try {
-          const res  = await fetch('/verify-token', { credentials: 'same-origin' });
+          const API_BASE = 'https://raoufpx-promo-server-production.up.railway.app';
+          const res  = await fetch(`${API_BASE}/verify-token`, {
+            credentials: 'include', // sends the HttpOnly cookie cross-origin
+          });
           const data = await res.json();
           if (!data.valid) {
             window.location.replace('secret.html');
