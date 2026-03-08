@@ -19,7 +19,7 @@
     }
     html{scroll-behavior:smooth}
     html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;-webkit-font-smoothing:none;overflow-x:hidden;cursor:none}
-    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.13) 2px,rgba(0,0,0,.13) 4px);pointer-events:none;z-index:8000;opacity:.55}
+    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.13) 2px,rgba(0,0,0,.13) 4px);pointer-events:none;z-index:500;opacity:.55}
     body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,180,76,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
 
     /* ── CURSOR ── */
@@ -37,10 +37,10 @@
     @keyframes g1{to{transform:translate(60px,40px)}}@keyframes g2{to{transform:translate(-50px,-60px)}}@keyframes g3{to{transform:translate(30px,-30px)}}
 
     /* ── SCROLL BAR ── */
-    #scroll-progress{position:fixed;top:var(--header-h);left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent2));z-index:1001;transition:width .08s linear}
+    #scroll-progress{position:fixed;top:var(--header-h);left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent2));z-index:2002;transition:width .08s linear}
 
     /* ── HEADER ── */
-    #header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,4vw,3rem);height:var(--header-h);background:rgba(8,8,16,.93);border-bottom:2px solid rgba(240,180,76,.15);backdrop-filter:blur(8px);transition:border-color .3s}
+    #header{position:fixed;top:0;left:0;right:0;z-index:2000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,4vw,3rem);height:var(--header-h);background:rgba(8,8,16,.93);border-bottom:2px solid rgba(240,180,76,.15);backdrop-filter:blur(8px);transition:border-color .3s}
     #header.scrolled{border-bottom-color:rgba(240,180,76,.4)}
     .logo-frame{display:flex;align-items:center;text-decoration:none;flex-shrink:0;padding:5px;border:2px solid rgba(240,180,76,.2);position:relative;transition:border-color .25s}
     .logo-frame:hover{border-color:var(--accent)}
@@ -52,12 +52,12 @@
     nav a:hover,nav a.active{color:var(--accent);background:rgba(240,180,76,.06);border-color:rgba(240,180,76,.2)}
     nav a.active::after{content:'▌';animation:blink 1s steps(1) infinite;margin-left:2px;font-size:.45rem}
     @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-    .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:1px solid rgba(240,180,76,.2);cursor:none;padding:.5rem;z-index:1001}
+    .hamburger{display:none;flex-direction:column;gap:4px;background:none;border:1px solid rgba(240,180,76,.2);cursor:pointer;padding:.5rem;z-index:2001;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
     .hamburger span{display:block;width:20px;height:2px;background:var(--text);transition:all .25s ease}
     .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
     .hamburger.open span:nth-child(2){opacity:0}
     .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-    .mobile-nav{display:none;position:fixed;top:var(--header-h);left:0;right:0;background:rgba(8,8,16,.98);border-bottom:2px solid rgba(240,180,76,.2);z-index:999;padding:1rem;transform:translateY(-10px);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+    .mobile-nav{display:none;position:fixed;top:var(--header-h);left:0;right:0;background:rgba(8,8,16,.98);border-bottom:2px solid rgba(240,180,76,.2);z-index:1999;padding:1rem;transform:translateY(-10px);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
     .mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:all}
     .mobile-nav ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
     .mobile-nav a{display:block;color:var(--text);text-decoration:none;font-family:'Press Start 2P',monospace;font-size:.6rem;padding:1rem .8rem;border-bottom:1px solid var(--border);transition:color .2s,background .2s}
@@ -86,7 +86,7 @@
     .intro-headline::after{content:'█';color:var(--accent);animation:blink .8s steps(1) infinite;font-size:.8em;margin-left:4px}
     .intro-divider{width:80px;height:4px;background:linear-gradient(90deg,var(--accent3),var(--accent),transparent);margin:2rem auto;opacity:0;animation:pxIn .5s steps(4) .9s forwards}
     .intro-sub{font-family:'Space Mono',monospace;font-size:clamp(.72rem,1.5vw,.88rem);color:var(--muted);max-width:420px;line-height:2.1;margin:0 auto 2.5rem;opacity:0;animation:pxIn .6s steps(8) 1.1s forwards}
-    .intro-cta{opacity:0;animation:pxIn .6s steps(6) 1.3s forwards}
+    .intro-cta{opacity:0;animation:pxIn .6s steps(6) 1.3s forwards;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
     /* ── VIDEO GAME HUD OVERLAYS ── */
     /* Top-left: GPS coordinates + signal */
@@ -143,7 +143,7 @@
     .card-title{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,2.5vw,1.5rem);color:#fff;line-height:1.7;margin-bottom:1.4rem;text-shadow:2px 2px 0 rgba(240,180,76,.14)}
     .card-body{font-family:'Space Mono',monospace;font-size:.8rem;line-height:2;color:var(--text)}
     .card-body strong{color:#fff;font-weight:700}
-    #one{justify-content:flex-end}#two{justify-content:flex-start}
+    #one{justify-content:flex-end}#two{justify-content:flex-start}#three{justify-content:flex-end}
 
     /* ── SCROLL CUE ── */
     .scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;text-decoration:none;color:var(--muted);font-family:'Press Start 2P',monospace;font-size:.42rem;letter-spacing:.15em;transition:color .2s}
@@ -286,6 +286,7 @@
       <p class="intro-sub">// I don't just take portraits.<br>// I create frames where people<br>// recognize themselves.</p>
       <div class="intro-cta">
         <a href="booking.html" class="btn-pixel">[ BOOK SESSION ]</a>
+        <a href="work.html" class="btn-pixel btn-pixel-outline">[ VIEW WORK ]</a>
       </div>
     </div>
 
@@ -315,6 +316,19 @@
       <span class="card-label">WHO_I_AM</span>
       <h2 class="card-title">OSAMA<br>RAOUF.</h2>
       <p class="card-body">Visual storyteller chasing light,<br>emotion, and moments that<br>speak without words.<br><br><strong>Site under construction</strong><br>— the vision is already live.</p>
+      <br>
+      <a href="work.html" class="btn-pixel btn-pixel-outline">[ VIEW WORK ]</a>
+    </div>
+    <a href="#three" class="scroll-cue" aria-label="Next section"><span>NEXT</span><div class="scroll-chevron"></div></a>
+  </section>
+
+  <!-- ═══ CLIENT TRANSFORMATIONS ═══ -->
+  <section id="three">
+    <div class="pixel-card" data-reveal>
+      <span class="card-hud-badge">UNIT_03</span>
+      <span class="card-label">CLIENT_TRANSFORMATIONS</span>
+      <h2 class="card-title">REAL PEOPLE.<br>REAL MOMENTS.</h2>
+      <p class="card-body">Most people arrive saying they<br>hate being photographed.<br><br>They leave with a portrait that<br>finally feels like them.<br><br>No stiff poses.<br>No pretending.<br>Just a moment where you<br>recognize yourself.</p>
       <br>
       <a href="work.html" class="btn-pixel btn-pixel-outline">[ VIEW WORK ]</a>
     </div>
@@ -367,7 +381,7 @@
     </div>
 
     <p class="contact-footer-note">// Dubai, UAE &nbsp;·&nbsp; Available for bookings worldwide</p>
-    <p class="contact-copyright">&copy; 2026 RAOUF px &nbsp;·&nbsp; All rights reserved</p>
+    <p class="contact-copyright">&copy; 2025 RAOUF px &nbsp;·&nbsp; All rights reserved</p>
   </section>
 
   <script>
@@ -408,8 +422,4 @@
       },600);
 
       /* Smooth scroll */
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-hdr.offsetHeight-10,behavior:'smooth'})}})});
-    });
-  </script>
-</body>
-</html>
+      document.querySelectorAll('a[href^="#
