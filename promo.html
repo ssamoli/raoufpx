@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>RAOUF px — Your Exclusive Offer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#080810;--surface:rgba(255,255,255,.04);
+      --accent:#f0b44c;--accent2:#ff7e3e;--accent3:#4cf0d0;--accent4:#c84bff;
+      --muted:rgba(255,255,255,.45);--text:rgba(255,255,255,.82);
+    }
+    html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
+    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.11) 2px,rgba(0,0,0,.11) 4px);pointer-events:none;z-index:8000;opacity:.5}
+    body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,180,76,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.022) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+
+    /* Cursor */
+    .cursor{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    .cursor-inner{width:12px;height:12px;background:var(--accent);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:cpulse 1.5s ease-in-out infinite}
+    .cursor-outer{position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);width:28px;height:28px;border:2px solid rgba(240,180,76,.35);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);transition:width .2s,height .2s}
+    body:has(a:hover) .cursor-outer{width:42px;height:42px;border-color:var(--accent)}
+    @keyframes cpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.82)}}
+
+    /* Glows */
+    .glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(100px);opacity:.07}
+    .glow-1{width:420px;height:420px;background:#f0b44c;top:-120px;left:-80px;animation:g1 22s ease-in-out infinite alternate}
+    .glow-2{width:340px;height:340px;background:#4cf0d0;bottom:-60px;right:-60px;animation:g2 28s ease-in-out infinite alternate}
+    @keyframes g1{to{transform:translate(50px,35px)}}
+    @keyframes g2{to{transform:translate(-45px,-55px)}}
+
+    /* ── GATE GUARD ── */
+    /* Content hidden by default, shown only after JS verifies session token */
+    #content{opacity:0;pointer-events:none;position:relative;z-index:1}
+    #content.unlocked{opacity:1;pointer-events:auto;animation:pxIn .6s steps(10) forwards}
+
+    /* ── LAYOUT ── */
+    main{min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem clamp(1rem,5vw,3rem);text-align:center}
+
+    /* Logo */
+    .logo-wrap{margin-bottom:2.5rem}
+    .logo-frame{display:inline-flex;align-items:center;text-decoration:none;padding:6px;border:2px solid rgba(240,180,76,.22);position:relative}
+    .logo-frame::before,.logo-frame::after{content:'';position:absolute;width:6px;height:6px;background:var(--accent)}
+    .logo-frame::before{top:-3px;left:-3px}.logo-frame::after{bottom:-3px;right:-3px}
+    .logo-frame img{height:2rem;width:auto;filter:drop-shadow(0 0 10px rgba(240,180,76,.5)) drop-shadow(0 0 20px rgba(240,180,76,.2))}
+
+    /* ── OFFER CARD ── */
+    .offer-card{width:100%;max-width:520px;background:var(--surface);border:2px solid rgba(240,180,76,.2);padding:clamp(1.8rem,5vw,3rem);position:relative}
+    .offer-card::before{content:'';position:absolute;top:-2px;left:-2px;width:20px;height:20px;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+    .offer-card::after{content:'';position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;border-bottom:2px solid var(--accent3);border-right:2px solid var(--accent3)}
+
+    /* status ping */
+    .offer-status{display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:'Press Start 2P',monospace;font-size:.28rem;color:rgba(76,240,208,.55);letter-spacing:.14em;margin-bottom:1.6rem}
+    .ping-dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 7px var(--accent3);animation:pingpulse 1.6s ease-in-out infinite;flex-shrink:0}
+    @keyframes pingpulse{0%,100%{box-shadow:0 0 4px var(--accent3)}50%{box-shadow:0 0 14px var(--accent3),0 0 28px rgba(76,240,208,.3)}}
+
+    /* eyebrow */
+    .offer-tag{font-family:'Press Start 2P',monospace;font-size:.35rem;color:var(--accent3);letter-spacing:.22em;margin-bottom:1.2rem;display:block}
+    .offer-tag::before{content:'> ';color:var(--accent)}
+
+    /* ── DISCOUNT BADGE ── */
+    .discount-badge{margin:0 auto 1.6rem;display:inline-block;position:relative;padding:1.2rem 2.2rem;border:3px solid var(--accent);background:rgba(240,180,76,.06)}
+    .discount-badge::before{content:'';position:absolute;top:-3px;left:-3px;width:14px;height:14px;border-top:3px solid var(--accent2);border-left:3px solid var(--accent2)}
+    .discount-badge::after{content:'';position:absolute;bottom:-3px;right:-3px;width:14px;height:14px;border-bottom:3px solid var(--accent2);border-right:3px solid var(--accent2)}
+    .discount-pct{font-family:'Press Start 2P',monospace;font-size:clamp(2.5rem,10vw,4rem);color:var(--accent);text-shadow:4px 4px 0 rgba(240,120,30,.35),0 0 30px rgba(240,180,76,.3);line-height:1;display:block}
+    .discount-label{font-family:'Press Start 2P',monospace;font-size:.45rem;color:rgba(255,255,255,.6);letter-spacing:.18em;margin-top:.5rem;display:block}
+
+    /* headline */
+    .offer-title{font-family:'Press Start 2P',monospace;font-size:clamp(.75rem,2.5vw,1rem);color:#fff;line-height:1.8;margin-bottom:.8rem;text-shadow:2px 2px 0 rgba(240,180,76,.12)}
+
+    /* divider */
+    .divider{width:70px;height:3px;background:linear-gradient(90deg,var(--accent3),var(--accent),transparent);margin:1.4rem auto}
+
+    /* body copy */
+    .offer-body{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted);line-height:2;max-width:380px;margin:0 auto 2rem}
+
+    /* ── WHAT'S INCLUDED ── */
+    .included-label{font-family:'Press Start 2P',monospace;font-size:.32rem;color:var(--accent3);letter-spacing:.18em;margin-bottom:1rem}
+    .included-label::before{content:'// ';color:rgba(255,255,255,.2)}
+    .included-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;text-align:left}
+    .included-list li{font-family:'Space Mono',monospace;font-size:.76rem;color:var(--text);line-height:1.8;display:flex;align-items:flex-start;gap:.6rem}
+    .included-list li::before{content:'◈';color:var(--accent);font-size:.6rem;flex-shrink:0;margin-top:.15rem}
+
+    /* ── CTA BUTTONS ── */
+    .cta-group{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.4rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-family:'Press Start 2P',monospace;font-size:.58rem;text-decoration:none;padding:1rem 1.6rem;position:relative;cursor:none;letter-spacing:.05em;line-height:1.4;white-space:nowrap;transition:box-shadow .1s steps(1),transform .1s steps(1)}
+    .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 55%);pointer-events:none}
+    .btn:hover{transform:translate(2px,2px)}
+    .btn:active{transform:translate(4px,4px)}
+    .btn-wa{background:#25d366;color:#fff;box-shadow:4px 4px 0 #128c3e,7px 7px 0 rgba(0,0,0,.35)}
+    .btn-wa:hover{box-shadow:2px 2px 0 #128c3e,4px 4px 0 rgba(0,0,0,.35)}
+    .btn-book{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:4px 4px 0 rgba(240,180,76,.22)}
+    .btn-book:hover{background:rgba(240,180,76,.07);box-shadow:2px 2px 0 rgba(240,180,76,.22)}
+
+    /* urgency */
+    .urgency{font-family:'Press Start 2P',monospace;font-size:.3rem;color:rgba(240,180,76,.45);letter-spacing:.1em}
+    .urgency::before{content:'⚠ ';color:var(--accent2)}
+
+    /* ── COUNTDOWN TIMER ── */
+    .countdown-wrap{margin:1.6rem 0;padding:1.2rem 1.4rem;border:1px solid rgba(255,126,62,.25);background:rgba(255,126,62,.04);position:relative}
+    .countdown-wrap::before{content:'';position:absolute;top:-1px;left:-1px;width:12px;height:12px;border-top:2px solid var(--accent2);border-left:2px solid var(--accent2)}
+    .countdown-wrap::after{content:'';position:absolute;bottom:-1px;right:-1px;width:12px;height:12px;border-bottom:2px solid var(--accent2);border-right:2px solid var(--accent2)}
+    .countdown-label{font-family:'Press Start 2P',monospace;font-size:.3rem;color:var(--accent2);letter-spacing:.16em;margin-bottom:.9rem;display:block}
+    .countdown-label::before{content:'⏱ '}
+    .countdown-digits{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
+    .cd-unit{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+    .cd-num{font-family:'Press Start 2P',monospace;font-size:clamp(1rem,4vw,1.5rem);color:var(--accent2);text-shadow:0 0 16px rgba(255,126,62,.4),2px 2px 0 rgba(255,126,62,.2);line-height:1;min-width:2ch;text-align:center}
+    .cd-lbl{font-family:'Press Start 2P',monospace;font-size:.26rem;color:rgba(255,126,62,.45);letter-spacing:.1em}
+    .cd-sep{font-family:'Press Start 2P',monospace;font-size:1.2rem;color:rgba(255,126,62,.35);margin-bottom:1rem;animation:blink .9s steps(1) infinite}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    .countdown-expired{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--accent2);letter-spacing:.12em;display:none}
+    .countdown-expired::before{content:'✕ '}
+
+    /* ── SCARCITY BLOCK ── */
+    .scarcity-wrap{margin:1.4rem 0;padding:1rem 1.4rem;border:1px solid rgba(240,180,76,.15);background:rgba(240,180,76,.03);display:flex;align-items:center;gap:.8rem;text-align:left}
+    .scarcity-icon{font-family:'Press Start 2P',monospace;font-size:.55rem;color:var(--accent);flex-shrink:0}
+    .scarcity-text{font-family:'Press Start 2P',monospace;font-size:.3rem;color:rgba(240,180,76,.6);letter-spacing:.1em;line-height:2}
+    .scarcity-text strong{color:var(--accent);display:block}
+    .scarcity-bar-wrap{margin:.5rem 0 0;height:3px;background:rgba(255,255,255,.06)}
+    .scarcity-bar{height:100%;width:30%;background:linear-gradient(90deg,var(--accent3),var(--accent));animation:scarcpulse 2.5s ease-in-out infinite alternate}
+    @keyframes scarcpulse{from{opacity:.6}to{opacity:1}}
+
+    /* fine print */
+    .fine-print{font-family:'Press Start 2P',monospace;font-size:.26rem;color:rgba(255,255,255,.12);letter-spacing:.06em;margin-top:1.2rem;line-height:2}
+
+    /* ── ANIMATIONS ── */
+    @keyframes pxIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px){
+      .cursor,.cursor-outer{display:none}html,body{cursor:auto}
+      .cta-group{flex-direction:column;align-items:center}
+      .btn{width:100%;max-width:300px;font-size:.52rem}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .cursor,.cursor-outer{display:none}html,body{cursor:auto}.glow{display:none}
+    }
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursorInner"><div class="cursor-inner"></div></div>
+  <div class="cursor-outer" id="cursorOuter"></div>
+
+  <!-- Glows -->
+  <div class="glow glow-1" aria-hidden="true"></div>
+  <div class="glow glow-2" aria-hidden="true"></div>
+
+  <main>
+    <div id="content">
+
+      <!-- Logo -->
+      <div class="logo-wrap">
+        <a href="index.html" class="logo-frame" aria-label="RAOUF px">
+          <img src="images/logo.png" alt="RAOUF px" width="32" height="32" loading="eager"/>
+        </a>
+      </div>
+
+      <!-- Offer card -->
+      <div class="offer-card">
+
+        <div class="offer-status">
+          <span class="ping-dot" aria-hidden="true"></span>
+          CODE_VERIFIED &nbsp;·&nbsp; OFFER_UNLOCKED
+        </div>
+
+        <span class="offer-tag" aria-hidden="true">STREET_PROMO &nbsp;·&nbsp; EXCLUSIVE</span>
+
+        <!-- Discount badge -->
+        <div class="discount-badge" aria-label="50% discount">
+          <span class="discount-pct">50%</span>
+          <span class="discount-label">OFF YOUR SESSION</span>
+        </div>
+
+        <h1 class="offer-title">You Unlocked<br>Something Real.</h1>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <!-- Countdown timer — 48hr from unlock, injected by JS -->
+        <div class="countdown-wrap" id="countdownWrap" aria-label="Offer expiry countdown">
+          <span class="countdown-label">OFFER_EXPIRES_IN</span>
+          <div class="countdown-digits" id="countdownDigits">
+            <div class="cd-unit"><span class="cd-num" id="cd-h">48</span><span class="cd-lbl">HRS</span></div>
+            <span class="cd-sep" aria-hidden="true">:</span>
+            <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">MIN</span></div>
+            <span class="cd-sep" aria-hidden="true">:</span>
+            <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">SEC</span></div>
+          </div>
+          <p class="countdown-expired" id="countdownExpired">OFFER EXPIRED</p>
+        </div>
+
+        <!-- Scarcity block -->
+        <div class="scarcity-wrap" aria-label="Session availability">
+          <span class="scarcity-icon" aria-hidden="true">◈</span>
+          <div>
+            <div class="scarcity-text">
+              <strong>SESSIONS FILLING FAST</strong>
+              Only a few discounted spots are available each week.
+            </div>
+            <div class="scarcity-bar-wrap"><div class="scarcity-bar"></div></div>
+          </div>
+        </div>
+
+        <p class="offer-body">
+          You were given this code for a reason. Book your portrait session with RAOUF px and get 50% off — no strings, no catches, no forced smiles.
+        </p>
+
+        <!-- What's included -->
+        <p class="included-label">WHAT'S_INCLUDED</p>
+        <ul class="included-list" aria-label="Session inclusions">
+          <li>Full portrait session in Dubai (up to 1 hour)</li>
+          <li>Natural, cinematic style — no stiff poses</li>
+          <li>10 professionally edited portraits delivered</li>
+          <li>Private online gallery within 7 days</li>
+          <li>50% discount applied automatically at booking</li>
+        </ul>
+
+        <!-- CTAs -->
+        <div class="cta-group">
+          <a
+            href="https://wa.me/971506180828?text=Hi%20Osama%2C%20I%20have%20a%20street%20promo%20code%20and%20I%27d%20like%20to%20book%20my%2050%25%20off%20session."
+            class="btn btn-wa"
+            target="_blank"
+            rel="noopener"
+            aria-label="Book on WhatsApp with 50% discount"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            [ CLAIM ON WHATSAPP ]
+          </a>
+          <a href="booking.html" class="btn btn-book" aria-label="Book online">
+            [ BOOK ONLINE ]
+          </a>
+        </div>
+
+        <p class="urgency">Limited sessions available each week</p>
+
+        <p class="fine-print">
+          Offer valid for new bookings only &nbsp;·&nbsp; Cannot be combined with other offers<br>
+          Mention your promo code when booking &nbsp;·&nbsp; RAOUF px &nbsp;·&nbsp; Dubai 2024
+        </p>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+
+      /* ── GATE GUARD — verify HttpOnly cookie server-side ──
+         Content stays hidden (opacity:0, pointer-events:none) until server confirms
+         the raoufpx_access cookie is valid. Cannot be bypassed client-side. ── */
+      (async () => {
+        let expiresAt = null;
+        try {
+          const res  = await fetch('/verify-token', { credentials: 'same-origin' });
+          const data = await res.json();
+          if (!data.valid) {
+            window.location.replace('secret.html');
+            return;
+          }
+          expiresAt = data.expiresAt;
+        } catch {
+          window.location.replace('secret.html');
+          return;
+        }
+
+        // ✅ Token confirmed — reveal content
+        document.getElementById('content').classList.add('unlocked');
+
+        /* ── Cursor ── */
+        const ci = document.getElementById('cursorInner');
+        const co = document.getElementById('cursorOuter');
+        if (window.matchMedia('(pointer:fine)').matches) {
+          document.addEventListener('mousemove', e => {
+            ci.style.left = e.clientX + 'px'; ci.style.top = e.clientY + 'px';
+            co.style.left = e.clientX + 'px'; co.style.top = e.clientY + 'px';
+          });
+        } else {
+          ci.style.display = co.style.display = 'none';
+          document.body.style.cursor = 'auto';
+        }
+
+        /* ── Countdown Timer ──
+           Uses expiresAt from server (same 48h window as the token TTL).
+           Falls back to 48h from now if somehow missing. ── */
+        const deadline  = expiresAt || (Date.now() + 48 * 60 * 60 * 1000);
+        const cdH       = document.getElementById('cd-h');
+        const cdM       = document.getElementById('cd-m');
+        const cdS       = document.getElementById('cd-s');
+        const cdDigits  = document.getElementById('countdownDigits');
+        const cdExpired = document.getElementById('countdownExpired');
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function updateClock() {
+          const remaining = deadline - Date.now();
+          if (remaining <= 0) {
+            cdDigits.style.display  = 'none';
+            cdExpired.style.display = 'block';
+            clearInterval(timer);
+            return;
+          }
+          const totalSec = Math.floor(remaining / 1000);
+          const h = Math.floor(totalSec / 3600);
+          const m = Math.floor((totalSec % 3600) / 60);
+          const s = totalSec % 60;
+          cdH.textContent = pad(h);
+          cdM.textContent = pad(m);
+          cdS.textContent = pad(s);
+        }
+
+        updateClock();
+        const timer = setInterval(updateClock, 1000);
+
+      })();
+    })();
+  </script>
+
+</body>
+</html>
