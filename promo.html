@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>RAOUF px — Your Exclusive Offer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    img,svg{max-width:100%;display:block}
+    :root{
+      --bg:#080810;--surface:rgba(255,255,255,.04);
+      --accent:#f0b44c;--accent2:#ff7e3e;--accent3:#4cf0d0;--accent4:#c84bff;
+      --muted:rgba(255,255,255,.45);--text:rgba(255,255,255,.82);
+    }
+    html{scroll-behavior:smooth}
+    html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
+    body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.11) 2px,rgba(0,0,0,.11) 4px);pointer-events:none;z-index:8000;opacity:.5}
+    body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,180,76,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.022) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+    .cursor{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    .cursor-inner{width:12px;height:12px;background:var(--accent);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:cpulse 1.5s ease-in-out infinite}
+    .cursor-outer{position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);width:28px;height:28px;border:2px solid rgba(240,180,76,.35);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);transition:width .2s,height .2s,border-color .2s}
+    body:has(a:hover) .cursor-outer,body:has(button:hover) .cursor-outer{width:42px;height:42px;border-color:var(--accent)}
+    @keyframes cpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.82)}}
+    .glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(100px);opacity:.06}
+    .glow-1{width:420px;height:420px;background:#f0b44c;top:-120px;left:-80px;animation:g1 22s ease-in-out infinite alternate}
+    .glow-2{width:340px;height:340px;background:#4cf0d0;bottom:-60px;right:-60px;animation:g2 28s ease-in-out infinite alternate}
+    @keyframes g1{to{transform:translate(50px,35px)}}
+    @keyframes g2{to{transform:translate(-45px,-55px)}}
+    #page{opacity:0;pointer-events:none;transition:opacity .35s}
+    #page.unlocked{opacity:1;pointer-events:auto}
+    #topbar{position:sticky;top:0;z-index:1000;height:56px;display:flex;align-items:center;justify-content:center;background:rgba(8,8,16,.92);border-bottom:1px solid rgba(240,180,76,.12);backdrop-filter:blur(10px)}
+    .logo-frame{display:inline-flex;align-items:center;text-decoration:none;padding:5px;border:2px solid rgba(240,180,76,.22);position:relative;transition:border-color .2s}
+    .logo-frame:hover{border-color:var(--accent)}
+    .logo-frame::before,.logo-frame::after{content:'';position:absolute;width:6px;height:6px;background:var(--accent)}
+    .logo-frame::before{top:-3px;left:-3px}.logo-frame::after{bottom:-3px;right:-3px}
+    .logo-frame img{height:1.9rem;width:auto;filter:drop-shadow(0 0 10px rgba(240,180,76,.5))}
+    .promo-hero{position:relative;z-index:1;text-align:center;padding:3.5rem clamp(1rem,5vw,4rem) 2rem}
+    .promo-tag{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--accent3);letter-spacing:.22em;display:block;margin-bottom:1.2rem}
+    .promo-tag::before{content:'> ';color:var(--accent)}
+    .promo-headline{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,3vw,1.8rem);color:#fff;line-height:1.75;text-shadow:3px 3px 0 rgba(240,180,76,.18);margin-bottom:.8rem}
+    .promo-headline .hl{color:var(--accent)}
+    .promo-sub{font-family:'Space Mono',monospace;font-size:clamp(.78rem,1.5vw,.9rem);color:var(--muted);max-width:500px;margin:0 auto;line-height:2}
+    .countdown-section{position:relative;z-index:1;display:flex;justify-content:center;padding:0 1rem 2rem}
+    .countdown-card{width:100%;max-width:460px;padding:1.3rem 1.5rem;border:1px solid rgba(255,126,62,.3);background:rgba(255,126,62,.05);position:relative;text-align:center}
+    .countdown-card::before{content:'';position:absolute;top:-1px;left:-1px;width:11px;height:11px;border-top:2px solid var(--accent2);border-left:2px solid var(--accent2)}
+    .countdown-card::after{content:'';position:absolute;bottom:-1px;right:-1px;width:11px;height:11px;border-bottom:2px solid var(--accent2);border-right:2px solid var(--accent2)}
+    .cd-label{font-family:'Press Start 2P',monospace;font-size:.29rem;color:var(--accent2);letter-spacing:.16em;margin-bottom:.8rem;display:block}
+    .cd-label::before{content:'⏱ '}
+    .cd-digits{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
+    .cd-unit{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+    .cd-num{font-family:'Press Start 2P',monospace;font-size:clamp(1.1rem,4.5vw,1.8rem);color:var(--accent2);text-shadow:0 0 16px rgba(255,126,62,.45),2px 2px 0 rgba(255,126,62,.2);line-height:1;min-width:2.2ch;text-align:center}
+    .cd-unit-lbl{font-family:'Press Start 2P',monospace;font-size:.25rem;color:rgba(255,126,62,.4);letter-spacing:.1em}
+    .cd-sep{font-family:'Press Start 2P',monospace;font-size:1.3rem;color:rgba(255,126,62,.35);margin-bottom:1rem;animation:blink .9s steps(1) infinite}
+    .cd-expired{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--accent2);letter-spacing:.1em;display:none}
+    .cd-expired::before{content:'✕ '}
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+    .scarcity{position:relative;z-index:1;display:flex;justify-content:center;padding:0 1rem 2.5rem}
+    .scarcity-inner{width:100%;max-width:460px;display:flex;align-items:center;gap:.8rem;padding:.9rem 1.2rem;border:1px solid rgba(240,180,76,.14);background:rgba(240,180,76,.03)}
+    .sc-icon{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--accent);flex-shrink:0}
+    .sc-text{font-family:'Press Start 2P',monospace;font-size:.27rem;color:rgba(240,180,76,.5);letter-spacing:.08em;line-height:2;text-align:left}
+    .sc-text strong{color:var(--accent);display:block;margin-bottom:.2rem}
+    .sc-bar-wrap{height:3px;background:rgba(255,255,255,.06);margin-top:.4rem}
+    .sc-bar{height:100%;width:28%;background:linear-gradient(90deg,var(--accent3),var(--accent));animation:scpulse 2.5s ease-in-out infinite alternate}
+    @keyframes scpulse{from{opacity:.5}to{opacity:1}}
+    .packages-section{position:relative;z-index:1;padding:0 clamp(1rem,4vw,3rem) 3rem}
+    .section-label{font-family:'Press Start 2P',monospace;font-size:.36rem;color:var(--accent3);letter-spacing:.2em;text-align:center;margin-bottom:2rem}
+    .section-label::before{content:'// ';color:rgba(255,255,255,.18)}
+    .pkg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;max-width:860px;margin:0 auto}
+    .pkg-card{background:var(--surface);border:2px solid rgba(240,180,76,.12);padding:1.5rem;position:relative;cursor:none;transition:border-color .2s,transform .1s steps(1)}
+    .pkg-card::before{content:'';position:absolute;top:-2px;left:-2px;width:13px;height:13px;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+    .pkg-card::after{content:'';position:absolute;bottom:-2px;right:-2px;width:13px;height:13px;border-bottom:2px solid var(--accent3);border-right:2px solid var(--accent3)}
+    .pkg-card.selected{border-color:var(--accent);background:rgba(240,180,76,.07);transform:translate(-2px,-2px)}
+    .pkg-card.popular{border-color:rgba(200,75,255,.35)}
+    .pkg-badge{font-family:'Press Start 2P',monospace;font-size:.27rem;background:var(--accent);color:#080810;padding:.28rem .55rem;display:inline-block;margin-bottom:.75rem;letter-spacing:.07em}
+    .pkg-popular-badge{background:var(--accent4);color:#fff}
+    .pkg-name{font-family:'Press Start 2P',monospace;font-size:.52rem;color:#fff;line-height:1.8;margin-bottom:.55rem}
+    .pkg-price-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.35rem;flex-wrap:wrap}
+    .pkg-price-new{font-family:'Press Start 2P',monospace;font-size:1rem;color:var(--accent);text-shadow:2px 2px 0 rgba(240,120,30,.3)}
+    .pkg-price-old{font-family:'Space Mono',monospace;font-size:.76rem;color:rgba(255,255,255,.22);text-decoration:line-through}
+    .pkg-save{font-family:'Press Start 2P',monospace;font-size:.27rem;color:var(--accent3);letter-spacing:.07em;margin-bottom:.9rem}
+    .pkg-save::before{content:'▼ '}
+    .pkg-features{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.3rem}
+    .pkg-features li{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);line-height:1.8;display:flex;gap:.45rem;align-items:flex-start}
+    .pkg-features li::before{content:'◈';color:var(--accent);font-size:.52rem;flex-shrink:0;margin-top:.14rem}
+    .pkg-select-btn{width:100%;font-family:'Press Start 2P',monospace;font-size:.4rem;padding:.7rem;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:none;letter-spacing:.05em;transition:background .15s,color .15s}
+    .pkg-select-btn:hover,.pkg-card.selected .pkg-select-btn{background:var(--accent);color:#080810}
+    .pkg-card.selected .pkg-select-btn::after{content:' ✓'}
+    .form-section{position:relative;z-index:1;padding:0 clamp(1rem,4vw,3rem) 4rem}
+    .form-wrap{max-width:580px;margin:0 auto;background:var(--surface);border:2px solid rgba(240,180,76,.15);padding:clamp(1.4rem,4vw,2.4rem);position:relative}
+    .form-wrap::before{content:'';position:absolute;top:-2px;left:-2px;width:15px;height:15px;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+    .form-wrap::after{content:'';position:absolute;bottom:-2px;right:-2px;width:15px;height:15px;border-bottom:2px solid var(--accent3);border-right:2px solid var(--accent3)}
+    .form-title{font-family:'Press Start 2P',monospace;font-size:clamp(.58rem,2vw,.82rem);color:#fff;line-height:1.8;margin-bottom:.5rem;text-align:center}
+    .form-sub{font-family:'Space Mono',monospace;font-size:.76rem;color:var(--muted);text-align:center;line-height:1.9;margin-bottom:1.8rem}
+    .field-group{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
+    .field-label{font-family:'Press Start 2P',monospace;font-size:.28rem;color:rgba(255,255,255,.32);letter-spacing:.12em}
+    .field-input{width:100%;font-family:'Space Mono',monospace;font-size:.8rem;color:#fff;background:rgba(255,255,255,.04);border:2px solid rgba(240,180,76,.2);padding:.82rem .95rem;outline:none;cursor:none;caret-color:var(--accent);transition:border-color .2s,box-shadow .2s}
+    .field-input::placeholder{color:rgba(255,255,255,.16)}
+    .field-input:focus{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 12px rgba(240,180,76,.1)}
+    .field-input.err{border-color:var(--accent2);animation:shake .3s steps(5)}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
+    .pkg-display{font-family:'Press Start 2P',monospace;font-size:.3rem;color:var(--accent3);letter-spacing:.09em;padding:.55rem .75rem;border:1px solid rgba(76,240,208,.2);background:rgba(76,240,208,.04);margin-bottom:1.1rem;line-height:1.8}
+    .pkg-display::before{content:'◈ ';color:var(--accent)}
+    .pkg-display.empty{color:rgba(255,255,255,.18);border-color:rgba(255,255,255,.07);background:transparent}
+    .calendar-wrap{margin-bottom:1.3rem}
+    .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+    .cal-month{font-family:'Press Start 2P',monospace;font-size:.42rem;color:#fff;letter-spacing:.08em}
+    .cal-nav{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--accent);background:none;border:1px solid rgba(240,180,76,.28);padding:.38rem .65rem;cursor:none;transition:background .15s}
+    .cal-nav:hover:not(:disabled){background:rgba(240,180,76,.1)}
+    .cal-nav:disabled{color:rgba(255,255,255,.12);border-color:rgba(255,255,255,.07);cursor:not-allowed}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+    .cal-dow{font-family:'Press Start 2P',monospace;font-size:.24rem;color:rgba(255,255,255,.22);text-align:center;padding:.38rem 0;letter-spacing:.03em}
+    .cal-day{font-family:'Press Start 2P',monospace;font-size:.33rem;text-align:center;padding:.52rem .15rem;border:1px solid transparent;cursor:none;transition:background .12s,border-color .12s,color .12s;position:relative;line-height:1;user-select:none}
+    .cal-day.empty{pointer-events:none}
+    .cal-day.past,.cal-day.disabled{color:rgba(255,255,255,.13);pointer-events:none;background:rgba(255,255,255,.02)}
+    .cal-day.disabled::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 3px,rgba(0,0,0,.12) 3px,rgba(0,0,0,.12) 4px)}
+    .cal-day.available{color:var(--text);border-color:rgba(240,180,76,.14);background:rgba(240,180,76,.04)}
+    .cal-day.available:hover{background:rgba(240,180,76,.13);border-color:var(--accent);color:#fff}
+    .cal-day.sel{background:var(--accent);color:#080810;border-color:var(--accent);box-shadow:2px 2px 0 #7a5a20}
+    .cal-hint{font-family:'Press Start 2P',monospace;font-size:.25rem;color:rgba(255,255,255,.18);margin-top:.5rem;text-align:right;letter-spacing:.05em}
+    .form-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(240,180,76,.18),transparent);margin:1.3rem 0}
+    .btn-submit{width:100%;font-family:'Press Start 2P',monospace;font-size:.6rem;color:#080810;background:var(--accent);border:none;cursor:none;padding:1.1rem;letter-spacing:.07em;position:relative;box-shadow:4px 4px 0 #7a5a20,7px 7px 0 rgba(0,0,0,.32);transition:box-shadow .1s steps(1),transform .1s steps(1);margin-top:.3rem}
+    .btn-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.17) 0%,transparent 55%);pointer-events:none}
+    .btn-submit:hover:not(:disabled){box-shadow:2px 2px 0 #7a5a20,4px 4px 0 rgba(0,0,0,.32);transform:translate(2px,2px)}
+    .btn-submit:active:not(:disabled){box-shadow:0 0 0 #7a5a20;transform:translate(4px,4px)}
+    .btn-submit:disabled{opacity:.5;cursor:not-allowed}
+    .form-status{font-family:'Press Start 2P',monospace;font-size:.3rem;letter-spacing:.09em;min-height:1rem;padding:.45rem 0;text-align:center;transition:opacity .2s}
+    .form-status.hidden{opacity:0}
+    .form-status.err{color:var(--accent2)}
+    .form-status.err::before{content:'✕ '}
+    .form-status.sending{color:var(--muted)}
+    .form-status.sending::before{content:'... '}
+    .success-overlay{display:none;text-align:center;padding:1.5rem 0}
+    .success-overlay.show{display:block}
+    .success-icon{font-family:'Press Start 2P',monospace;font-size:1.8rem;color:var(--accent3);margin-bottom:1rem;display:block}
+    .success-title{font-family:'Press Start 2P',monospace;font-size:clamp(.58rem,2vw,.82rem);color:#fff;line-height:1.8;margin-bottom:.8rem}
+    .success-body{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--muted);line-height:2;margin-bottom:1.5rem}
+    .success-wa{display:inline-flex;align-items:center;gap:.5rem;font-family:'Press Start 2P',monospace;font-size:.48rem;background:#25d366;color:#fff;text-decoration:none;padding:.88rem 1.3rem;box-shadow:4px 4px 0 #128c3e;transition:box-shadow .1s steps(1),transform .1s steps(1);cursor:none;position:relative}
+    .success-wa::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);pointer-events:none}
+    .success-wa:hover{box-shadow:2px 2px 0 #128c3e;transform:translate(2px,2px)}
+    .fine-print{font-family:'Press Start 2P',monospace;font-size:.25rem;color:rgba(255,255,255,.1);letter-spacing:.05em;text-align:center;line-height:2.2;padding:0 1rem 3rem;position:relative;z-index:1}
+    @keyframes pxIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .4s steps(7),transform .4s steps(7)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:600px){
+      .cursor,.cursor-outer{display:none}html,body{cursor:auto}
+      .pkg-grid{grid-template-columns:1fr}
+      .cal-day{font-size:.28rem;padding:.44rem .1rem}
+      .cal-month{font-size:.36rem}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .cursor,.cursor-outer{display:none}html,body{cursor:auto}.glow{display:none}
+    }
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursorInner"><div class="cursor-inner"></div></div>
+  <div class="cursor-outer" id="cursorOuter"></div>
+  <div class="glow glow-1" aria-hidden="true"></div>
+  <div class="glow glow-2" aria-hidden="true"></div>
+
+  <div id="page">
+    <div id="topbar">
+      <a href="index.html" class="logo-frame" aria-label="RAOUF px">
+        <img src="images/logo.png" alt="RAOUF px" width="32" height="32" loading="eager"/>
+      </a>
+    </div>
+
+    <div class="promo-hero">
+      <span class="promo-tag">STREET_PROMO &nbsp;·&nbsp; EXCLUSIVE_ACCESS</span>
+      <h1 class="promo-headline">You Unlocked<br><span class="hl">50% Off.</span></h1>
+      <p class="promo-sub">Pick your package, choose a date, and lock it in before your offer expires.</p>
+    </div>
+
+    <div class="countdown-section">
+      <div class="countdown-card" aria-label="Time remaining on offer">
+        <span class="cd-label">OFFER_EXPIRES_IN</span>
+        <div class="cd-digits" id="cdDigits">
+          <div class="cd-unit"><span class="cd-num" id="cd-h">48</span><span class="cd-unit-lbl">HRS</span></div>
+          <span class="cd-sep" aria-hidden="true">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-unit-lbl">MIN</span></div>
+          <span class="cd-sep" aria-hidden="true">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-unit-lbl">SEC</span></div>
+        </div>
+        <p class="cd-expired" id="cdExpired">OFFER EXPIRED</p>
+      </div>
+    </div>
+
+    <div class="scarcity">
+      <div class="scarcity-inner">
+        <span class="sc-icon" aria-hidden="true">◈</span>
+        <div>
+          <div class="sc-text"><strong>SESSIONS FILLING FAST</strong>Only a few discounted spots available each week.</div>
+          <div class="sc-bar-wrap"><div class="sc-bar"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="packages-section" aria-label="Choose a package">
+      <p class="section-label">CHOOSE_YOUR_PACKAGE</p>
+      <div class="pkg-grid">
+
+        <div class="pkg-card reveal" data-pkg="The Spark — AED 125 (50% off)" tabindex="0" role="button" aria-pressed="false">
+          <span class="pkg-badge">SPARK</span>
+          <div class="pkg-name">THE SPARK</div>
+          <div class="pkg-price-row">
+            <span class="pkg-price-new">AED 125</span>
+            <span class="pkg-price-old">AED 250</span>
+          </div>
+          <div class="pkg-save">YOU SAVE AED 125</div>
+          <ul class="pkg-features">
+            <li>30-minute session</li>
+            <li>5 edited portraits</li>
+            <li>1 location</li>
+            <li>Private online gallery</li>
+          </ul>
+          <button class="pkg-select-btn" type="button">[ SELECT ]</button>
+        </div>
+
+        <div class="pkg-card popular reveal" data-pkg="The Story — AED 250 (50% off)" tabindex="0" role="button" aria-pressed="false">
+          <span class="pkg-badge pkg-popular-badge">MOST POPULAR</span>
+          <div class="pkg-name">THE STORY</div>
+          <div class="pkg-price-row">
+            <span class="pkg-price-new">AED 250</span>
+            <span class="pkg-price-old">AED 500</span>
+          </div>
+          <div class="pkg-save">YOU SAVE AED 250</div>
+          <ul class="pkg-features">
+            <li>1-hour session</li>
+            <li>10 edited portraits</li>
+            <li>Up to 2 locations</li>
+            <li>Outfit change included</li>
+            <li>Private online gallery</li>
+          </ul>
+          <button class="pkg-select-btn" type="button">[ SELECT ]</button>
+        </div>
+
+        <div class="pkg-card reveal" data-pkg="The Cinematic — AED 400 (50% off)" tabindex="0" role="button" aria-pressed="false">
+          <span class="pkg-badge">CINEMATIC</span>
+          <div class="pkg-name">THE CINEMATIC</div>
+          <div class="pkg-price-row">
+            <span class="pkg-price-new">AED 400</span>
+            <span class="pkg-price-old">AED 800</span>
+          </div>
+          <div class="pkg-save">YOU SAVE AED 400</div>
+          <ul class="pkg-features">
+            <li>2-hour session</li>
+            <li>20 edited portraits</li>
+            <li>Multiple locations</li>
+            <li>Wardrobe consultation</li>
+            <li>Rush delivery option</li>
+            <li>Private online gallery</li>
+          </ul>
+          <button class="pkg-select-btn" type="button">[ SELECT ]</button>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="form-section" aria-label="Book your session">
+      <p class="section-label">LOCK_IN_YOUR_DATE</p>
+      <div class="form-wrap reveal">
+        <h2 class="form-title">Complete Your Booking</h2>
+        <p class="form-sub">Fill in your details and pick a session date to secure your 50% off.</p>
+
+        <div id="formBody">
+          <div class="pkg-display empty" id="pkgDisplay">NO PACKAGE SELECTED — CHOOSE ABOVE</div>
+
+          <div class="field-group">
+            <label class="field-label" for="fName">YOUR NAME</label>
+            <input class="field-input" type="text" id="fName" placeholder="Full name" autocomplete="name" required/>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="fEmail">EMAIL ADDRESS</label>
+            <input class="field-input" type="email" id="fEmail" placeholder="you@email.com" autocomplete="email" required/>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="fWa">WHATSAPP NUMBER</label>
+            <input class="field-input" type="tel" id="fWa" placeholder="+971 50 000 0000" autocomplete="tel" required/>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <div class="calendar-wrap">
+            <div class="cal-header">
+              <button class="cal-nav" id="calPrev" type="button" aria-label="Previous month">◀</button>
+              <span class="cal-month" id="calMonth"></span>
+              <button class="cal-nav" id="calNext" type="button" aria-label="Next month">▶</button>
+            </div>
+            <div class="cal-grid" role="grid">
+              <div class="cal-dow">SUN</div><div class="cal-dow">MON</div><div class="cal-dow">TUE</div>
+              <div class="cal-dow">WED</div><div class="cal-dow">THU</div><div class="cal-dow">FRI</div><div class="cal-dow">SAT</div>
+              <div id="calDays" style="display:contents"></div>
+            </div>
+            <p class="cal-hint" id="calHint">SELECT A DATE ABOVE</p>
+          </div>
+
+          <p class="form-status hidden" id="fStatus" role="alert" aria-live="assertive"></p>
+          <button class="btn-submit" id="submitBtn" type="button">[ LOCK IN MY SESSION ]</button>
+        </div>
+
+        <div class="success-overlay" id="successOverlay" aria-live="polite">
+          <span class="success-icon">✓</span>
+          <h2 class="success-title">You're Locked In.<br>Almost.</h2>
+          <p class="success-body">
+            Your booking request is confirmed. Osama will reach out within 24 hours to finalise the details.<br><br>
+            Want to confirm faster? Drop a message on WhatsApp.
+          </p>
+          <a href="https://wa.me/971506180828?text=Hi%20Osama%2C%20I%20just%20submitted%20my%20promo%20booking%20for%2050%25%20off." class="success-wa" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            [ MESSAGE ON WHATSAPP ]
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <p class="fine-print">
+      Offer valid for new bookings only &nbsp;·&nbsp; Cannot be combined with other offers<br>
+      RAOUF px &nbsp;·&nbsp; Dubai, UAE &nbsp;·&nbsp; Est. 2024
+    </p>
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+    const API_BASE = 'https://raoufpx-promo-server-production.up.railway.app';
+    const MONTHS = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+
+    // ── GATE GUARD ──
+    // Primary: sessionStorage set by secret.html after successful code check
+    // Fallback: /verify-token cookie check
+    async function checkAccess() {
+      if (sessionStorage.getItem('raoufpx_granted') === '1') {
+        return { ok: true, expiresAt: Number(sessionStorage.getItem('raoufpx_expires')) || null };
+      }
+      try {
+        const r = await fetch(API_BASE + '/verify-token', { credentials: 'include' });
+        const d = await r.json();
+        if (d.valid) return { ok: true, expiresAt: d.expiresAt || null };
+      } catch (_) {}
+      return { ok: false };
+    }
+
+    checkAccess().then(({ ok, expiresAt }) => {
+      if (!ok) { window.location.replace('secret.html'); return; }
+      document.getElementById('page').classList.add('unlocked');
+      boot(expiresAt);
+    });
+
+    function boot(expiresAt) {
+      // Cursor
+      const ci = document.getElementById('cursorInner');
+      const co = document.getElementById('cursorOuter');
+      if (window.matchMedia('(pointer:fine)').matches) {
+        document.addEventListener('mousemove', e => {
+          ci.style.left = e.clientX+'px'; ci.style.top = e.clientY+'px';
+          co.style.left = e.clientX+'px'; co.style.top = e.clientY+'px';
+        });
+      } else { ci.style.display = co.style.display = 'none'; document.body.style.cursor = 'auto'; }
+
+      // Scroll reveal
+      const ro = new IntersectionObserver(es => {
+        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+      // ── Countdown ──
+      const deadline = expiresAt || (Date.now() + 48*60*60*1000);
+      const cdH = document.getElementById('cd-h');
+      const cdM = document.getElementById('cd-m');
+      const cdS = document.getElementById('cd-s');
+      const cdDigits = document.getElementById('cdDigits');
+      const cdExpired = document.getElementById('cdExpired');
+      function pad(n) { return String(n).padStart(2,'0'); }
+      function tick() {
+        const rem = deadline - Date.now();
+        if (rem <= 0) { cdDigits.style.display='none'; cdExpired.style.display='block'; clearInterval(clk); return; }
+        const s = Math.floor(rem/1000);
+        cdH.textContent = pad(Math.floor(s/3600));
+        cdM.textContent = pad(Math.floor((s%3600)/60));
+        cdS.textContent = pad(s%60);
+      }
+      tick();
+      const clk = setInterval(tick, 1000);
+
+      // ── Package selection ──
+      let selPkg = '';
+      const pkgCards  = document.querySelectorAll('.pkg-card');
+      const pkgDisplay = document.getElementById('pkgDisplay');
+      const fPkgHidden = document.createElement('input');
+      fPkgHidden.type = 'hidden'; fPkgHidden.id = 'fPkg'; fPkgHidden.name = 'package';
+      document.getElementById('formBody').appendChild(fPkgHidden);
+
+      pkgCards.forEach(card => {
+        function pick() {
+          pkgCards.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+          card.classList.add('selected'); card.setAttribute('aria-pressed','true');
+          selPkg = card.dataset.pkg; fPkgHidden.value = selPkg;
+          pkgDisplay.textContent = selPkg; pkgDisplay.classList.remove('empty');
+          setTimeout(() => document.querySelector('.form-section').scrollIntoView({ behavior:'smooth', block:'start' }), 150);
+        }
+        card.querySelector('.pkg-select-btn').addEventListener('click', e => { e.stopPropagation(); pick(); });
+        card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); pick(); } });
+      });
+
+      // ── Calendar ──
+      let calY, calM, selDate = '';
+      const fDateHidden = document.createElement('input');
+      fDateHidden.type = 'hidden'; fDateHidden.id = 'fDate'; fDateHidden.name = 'preferred_date';
+      document.getElementById('formBody').appendChild(fDateHidden);
+
+      const calMonthEl = document.getElementById('calMonth');
+      const calDaysEl  = document.getElementById('calDays');
+      const calHint    = document.getElementById('calHint');
+      const calPrev    = document.getElementById('calPrev');
+      const calNext    = document.getElementById('calNext');
+
+      function buildCal(y, m) {
+        calY = y; calM = m;
+        calMonthEl.textContent = MONTHS[m] + ' ' + y;
+        const today = new Date(); today.setHours(0,0,0,0);
+        const first = new Date(y, m, 1).getDay();
+        const nDays = new Date(y, m+1, 0).getDate();
+        const nowD  = new Date();
+        const maxD  = new Date(nowD.getFullYear(), nowD.getMonth()+3, 1);
+        calPrev.disabled = (y===nowD.getFullYear() && m===nowD.getMonth());
+        calNext.disabled = (y>maxD.getFullYear() || (y===maxD.getFullYear() && m>=maxD.getMonth()));
+        let html = '';
+        for (let i=0; i<first; i++) html += '<div class="cal-day empty" aria-hidden="true"></div>';
+        for (let d=1; d<=nDays; d++) {
+          const date  = new Date(y, m, d);
+          const dow   = date.getDay();
+          const past  = date < today;
+          // Fri(5) + Sat(6) = UAE weekend
+          const avail = !past && (dow===5 || dow===6);
+          const ds    = y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+          const isSel = ds === selDate;
+          let cls = 'cal-day';
+          if (past) cls += ' past disabled';
+          else if (!avail) cls += ' disabled';
+          else if (isSel)  cls += ' available sel';
+          else             cls += ' available';
+          html += '<div class="'+cls+'" data-date="'+ds+'" role="gridcell"'+(avail?' tabindex="0"':' aria-disabled="true"')+'>'+d+'</div>';
+        }
+        calDaysEl.innerHTML = html;
+        calDaysEl.querySelectorAll('.cal-day.available').forEach(day => {
+          day.addEventListener('click', () => pickDate(day.dataset.date, day));
+          day.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); pickDate(day.dataset.date, day); } });
+        });
+      }
+
+      function pickDate(ds, el) {
+        calDaysEl.querySelectorAll('.sel').forEach(d => d.classList.remove('sel'));
+        el.classList.add('sel');
+        selDate = ds; fDateHidden.value = ds;
+        const [y,m,d] = ds.split('-');
+        calHint.textContent = 'SELECTED: '+d+' '+MONTHS[Number(m)-1]+' '+y;
+        calHint.style.color = 'rgba(240,180,76,.6)';
+      }
+
+      calPrev.addEventListener('click', () => { let m=calM-1,y=calY; if(m<0){m=11;y--;} buildCal(y,m); });
+      calNext.addEventListener('click', () => { let m=calM+1,y=calY; if(m>11){m=0;y++;} buildCal(y,m); });
+      const now = new Date();
+      buildCal(now.getFullYear(), now.getMonth());
+
+      // ── Form submission ──
+      const submitBtn      = document.getElementById('submitBtn');
+      const fStatus        = document.getElementById('fStatus');
+      const formBody       = document.getElementById('formBody');
+      const successOverlay = document.getElementById('successOverlay');
+
+      function setStatus(type, msg) {
+        fStatus.className = 'form-status'+(type?' '+type:' hidden');
+        fStatus.textContent = msg;
+      }
+      function markErr(el, msg) {
+        el.classList.add('err'); el.focus(); setStatus('err', msg);
+        el.addEventListener('input', () => { el.classList.remove('err'); setStatus('',''); }, { once:true });
+      }
+
+      submitBtn.addEventListener('click', async () => {
+        const name  = document.getElementById('fName').value.trim();
+        const email = document.getElementById('fEmail').value.trim();
+        const wa    = document.getElementById('fWa').value.trim();
+        if (!name)  { markErr(document.getElementById('fName'),  'Please enter your name.');            return; }
+        if (!email) { markErr(document.getElementById('fEmail'), 'Please enter your email.');           return; }
+        if (!wa)    { markErr(document.getElementById('fWa'),    'Please enter your WhatsApp number.'); return; }
+        if (!selPkg) {
+          setStatus('err','Please select a package above.');
+          document.querySelector('.packages-section').scrollIntoView({ behavior:'smooth' });
+          return;
+        }
+        if (!selDate) {
+          setStatus('err','Please select a session date.');
+          document.querySelector('.calendar-wrap').scrollIntoView({ behavior:'smooth' });
+          return;
+        }
+
+        submitBtn.disabled = true;
+        setStatus('sending','Sending your booking...');
+
+        const body = new FormData();
+        body.append('name',           name);
+        body.append('email',          email);
+        body.append('whatsapp',       wa);
+        body.append('package',        selPkg);
+        body.append('preferred_date', selDate);
+        body.append('promo',          'STREET_50');
+        body.append('_subject',       'New Promo Booking — 50% Off');
+
+        try {
+          const r = await fetch('https://formspree.io/f/xnnvndyv', {
+            method:'POST', body, headers:{ 'Accept':'application/json' }
+          });
+          if (r.ok) {
+            sessionStorage.removeItem('raoufpx_granted');
+            sessionStorage.removeItem('raoufpx_expires');
+            formBody.style.display = 'none';
+            successOverlay.classList.add('show');
+            window.scrollTo({ top:0, behavior:'smooth' });
+          } else {
+            submitBtn.disabled = false;
+            setStatus('err','Submission failed. Please try again.');
+          }
+        } catch(_) {
+          submitBtn.disabled = false;
+          setStatus('err','Connection error. Please try again.');
+        }
+      });
+
+    } // end boot()
+  })();
+  </script>
+</body>
+</html>
