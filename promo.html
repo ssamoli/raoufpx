@@ -830,7 +830,7 @@
             <!-- WhatsApp fallback -->
             <div class="wa-fallback">OR</div>
             <a
-              href="https://wa.me/971506180828?text=Hi%20Osama%2C%20I%20scanned%20your%20card%20and%20I%27d%20like%20to%20book%20a%20portrait%20session."
+              href="https://wa.me/971506180828?text=Hi%20Raouf%2C%20I%20just%20unlocked%20the%20private%20portrait%20session%20page.%0AI'd%20like%20to%20book%20a%20session."
               class="btn-wa"
               target="_blank"
               rel="noopener"
@@ -1013,8 +1013,8 @@
       for(let d=1;d<=dim;d++) {
         const date=new Date(calYear,calMonth,d); date.setHours(0,0,0,0);
         const dow=date.getDay();
-        /* UAE weekend = Friday(5) + Saturday(6) */
-        const avail=(dow===5||dow===6)&&date>=today;
+        /* Weekend = Saturday(6) + Sunday(0) */
+        const avail=(dow===6||dow===0)&&date>=today;
         const el=document.createElement('div');
         el.className='cal-day '+(avail?'available':'disabled');
         el.textContent=d;
