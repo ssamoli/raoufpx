@@ -870,6 +870,18 @@
     'use strict';
 
     const API_BASE  = 'https://raoufpx-promo-server-production.up.railway.app';
+
+    /* ── Session duration tracking ── */
+    const _sessionStart = Date.now();
+    window.addEventListener('beforeunload', () => {
+      const dur = Math.round((Date.now() - _sessionStart) / 1000);
+      const code = sessionStorage.getItem('raoufpx_code') || '';
+      // sendBeacon is fire-and-forget, works during page unload
+      navigator.sendBeacon(
+        API_BASE + '/track-session',
+        JSON.stringify({ code, durationSeconds: dur })
+      );
+    });
     const FORMSPREE = 'https://formspree.io/f/xnnvndyv';
     const TIMER_KEY = 'raoufpx_promo_deadline';
     const TTL_MS    = 48 * 60 * 60 * 1000;
