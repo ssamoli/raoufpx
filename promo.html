@@ -720,7 +720,7 @@
             <div class="pkg-was">AED 250</div>
             <div class="pkg-now-row">
               <span class="pkg-now">AED 125</span>
-              <span class="pkg-off">UNLOCKED</span>
+              <span class="pkg-off">50% OFF</span>
             </div>
             <div class="pkg-div"></div>
             <ul class="pkg-features">
@@ -740,7 +740,7 @@
             <div class="pkg-was">AED 499</div>
             <div class="pkg-now-row">
               <span class="pkg-now">AED 249</span>
-              <span class="pkg-off">UNLOCKED</span>
+              <span class="pkg-off">50% OFF</span>
             </div>
             <div class="pkg-div"></div>
             <ul class="pkg-features">
@@ -759,7 +759,7 @@
             <div class="pkg-was">AED 999</div>
             <div class="pkg-now-row">
               <span class="pkg-now">AED 499</span>
-              <span class="pkg-off">UNLOCKED</span>
+              <span class="pkg-off">50% OFF</span>
             </div>
             <div class="pkg-div"></div>
             <ul class="pkg-features">
@@ -1083,6 +1083,21 @@
         });
         if(r.ok) {
           if(window.plausible) plausible('Booking Submitted', {props:{variant: ctaVariant, package: document.getElementById('fieldPackage').value}});
+          // Track booking in Railway analytics (fire-and-forget, never blocks UI)
+          const bookingCode = sessionStorage.getItem('raoufpx_code') || '';
+          fetch('https://raoufpx-promo-server-production.up.railway.app/track-booking', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({
+              code: bookingCode,
+              clientName: name.value.trim(),
+              email: email.value.trim(),
+              whatsapp: wa.value.trim(),
+              selectedPackage: document.getElementById('fieldPackage').value,
+              price: document.getElementById('fieldPrice').value,
+              date: document.getElementById('fieldDate').value,
+            })
+          }).catch(()=>{});
           submitBtn.textContent='[ BOOKING CONFIRMED ]';
           submitBtn.style.background='var(--accent3)';
           showStatus('success','Booking received! Osama will confirm via WhatsApp shortly.');
