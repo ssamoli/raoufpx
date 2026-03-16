@@ -1170,6 +1170,9 @@
             if (tbData.referralCodes && tbData.referralCodes.length) {
               sessionStorage.setItem('raoufpx_referrals', JSON.stringify(tbData.referralCodes));
             }
+            if (tbData.referralLinks && tbData.referralLinks.length) {
+              sessionStorage.setItem('raoufpx_referral_links', JSON.stringify(tbData.referralLinks));
+            }
           } catch(e) {}
           submitBtn.textContent='[ BOOKING CONFIRMED ]';
           submitBtn.style.background='var(--accent3)';
@@ -1265,34 +1268,55 @@
       // ── Trigger state ──
       const _pageStart = Date.now();
       let _scrollPct   = 0;
+      let _ctaClicked  = false;
 
-      // Scroll depth tracker
+      // Track if user has clicked any booking CTA
+      document.querySelectorAll('[href="#booking"], #submitBtn, #heroCta').forEach(el => {
+        el.addEventListener('click', () => { _ctaClicked = true; }, { once: true });
+      });
+
+      function timeOnPage() { return (Date.now() - _pageStart) / 1000; }
+
+      // Scroll depth tracker (shared)
       window.addEventListener('scroll', () => {
-        const scrollTop  = window.scrollY || document.documentElement.scrollTop;
-        const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
-        _scrollPct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-
-        // Trigger 1: 45s on page AND scrolled ≥50%
-        const timeOnPage = (Date.now() - _pageStart) / 1000;
-        if (_scrollPct >= 50 && timeOnPage >= 45) openModal();
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        _scrollPct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
       }, { passive: true });
 
-      // Fallback interval check for Trigger 1 (catches cases where scroll event
-      // already fired before the 45s threshold was reached)
-      const _scrollCheck = setInterval(() => {
-        if (!shouldTrigger()) { clearInterval(_scrollCheck); return; }
-        const timeOnPage = (Date.now() - _pageStart) / 1000;
-        if (_scrollPct >= 50 && timeOnPage >= 45) {
-          clearInterval(_scrollCheck);
-          openModal();
-        }
-      }, 2000);
+      // Trigger 1: 60 seconds on page, no booking clicked
+      setTimeout(() => {
+        if (!_ctaClicked) openModal();
+      }, 60000);
 
-      // Trigger 2: exit intent AND ≥20s on page
+      // Trigger 2a: Desktop — mouse leaves top of viewport (≥20s on page)
       document.addEventListener('mouseleave', e => {
-        if (e.clientY < 10) {
-          const timeOnPage = (Date.now() - _pageStart) / 1000;
-          if (timeOnPage >= 20) openModal();
+        if (e.clientY < 10 && timeOnPage() >= 20) openModal();
+      });
+
+      // Trigger 2b: Mobile — scroll back to top and pause (≥30s on page, scrolled ≥30% before)
+      let _maxScroll = 0;
+      let _topPauseTimer = null;
+      window.addEventListener('scroll', () => {
+        if (_scrollPct > _maxScroll) _maxScroll = _scrollPct;
+        // User scrolled back near top after having gone down
+        if (window.scrollY < 80 && _maxScroll >= 30 && timeOnPage() >= 30) {
+          if (!_topPauseTimer) {
+            _topPauseTimer = setTimeout(() => openModal(), 1500);
+          }
+        } else {
+          clearTimeout(_topPauseTimer);
+          _topPauseTimer = null;
+        }
+      }, { passive: true });
+
+      // Trigger 2c: Mobile beforeunload (covers tab close / back button)
+      window.addEventListener('beforeunload', () => {
+        if (timeOnPage() >= 20 && shouldTrigger()) {
+          // Can't show modal on beforeunload — fire beacon to capture intent
+          const promoCode = sessionStorage.getItem('raoufpx_code') || '';
+          navigator.sendBeacon(API_BASE + '/capture-hot-lead',
+            JSON.stringify({ promoCode, whatsapp: '', capturedAt: new Date().toISOString(), source: 'beforeunload_intent' })
+          );
         }
       });
 
