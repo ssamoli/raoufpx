@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>RAOUF px — You Unlocked 3 Friend Passes</title>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080810;--accent:#f0b44c;--accent2:#ff7e3e;--accent3:#4cf0d0;--accent4:#c84bff;
+  --text:rgba(255,255,255,.85);--muted:rgba(255,255,255,.45);--border:rgba(255,255,255,.08);
+}
+html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden}
+
+/* CRT scanlines */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:800;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);opacity:.4}
+/* pixel grid */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(240,180,76,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.015) 1px,transparent 1px);background-size:32px 32px}
+
+/* scroll progress */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:9000;width:0%;transition:width .1s}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;padding:60px 24px 40px;
+  position:relative;z-index:1;
+}
+.hero-badge{
+  font-family:'Press Start 2P',monospace;font-size:8px;color:var(--accent2);
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;
+  border:1px solid rgba(255,126,62,.25);padding:6px 14px;border-radius:2px;
+  background:rgba(255,126,62,.06);
+}
+.hero h1{
+  font-family:'Press Start 2P',monospace;font-size:clamp(14px,3vw,22px);
+  color:var(--accent);line-height:1.7;letter-spacing:.04em;margin-bottom:20px;
+  text-shadow:0 0 40px rgba(240,180,76,.3);
+}
+.hero p{
+  font-size:clamp(12px,1.8vw,14px);color:var(--muted);line-height:1.9;
+  max-width:480px;margin:0 auto 40px;
+}
+.hero p b{color:var(--text)}
+
+/* ── CODES GRID ── */
+.codes-section{
+  padding:0 24px 80px;max-width:680px;margin:0 auto;position:relative;z-index:1;
+}
+.codes-label{
+  font-family:'Press Start 2P',monospace;font-size:8px;color:var(--muted);
+  letter-spacing:.1em;text-align:center;margin-bottom:24px;text-transform:uppercase;
+}
+.code-card{
+  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:6px;
+  padding:20px 22px;margin-bottom:12px;display:flex;align-items:center;gap:16px;
+  position:relative;overflow:hidden;transition:.2s;
+}
+.code-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--accent)}
+.code-card:nth-child(2)::before{background:var(--accent3)}
+.code-card:nth-child(3)::before{background:var(--accent4)}
+.code-card:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.14)}
+.code-num{
+  font-family:'Press Start 2P',monospace;font-size:8px;color:var(--muted);
+  min-width:24px;
+}
+.code-value{
+  font-family:'Press Start 2P',monospace;font-size:clamp(13px,2.5vw,17px);
+  color:var(--accent);letter-spacing:.12em;flex:1;
+}
+.code-card:nth-child(2) .code-value{color:var(--accent3)}
+.code-card:nth-child(3) .code-value{color:var(--accent4)}
+.copy-btn{
+  font-family:'Press Start 2P',monospace;font-size:8px;padding:8px 14px;
+  background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--muted);
+  border-radius:3px;cursor:pointer;transition:.15s;white-space:nowrap;flex-shrink:0;
+}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+.copy-btn.copied{border-color:var(--accent3);color:var(--accent3)}
+
+/* ── COPY ALL ── */
+.copy-all-wrap{text-align:center;margin:20px 0 40px}
+.copy-all-btn{
+  font-family:'Press Start 2P',monospace;font-size:9px;padding:13px 28px;
+  background:transparent;border:1px solid var(--accent3);color:var(--accent3);
+  border-radius:4px;cursor:pointer;transition:.15s;letter-spacing:.06em;
+}
+.copy-all-btn:hover{background:var(--accent3);color:#000}
+
+/* ── HOW IT WORKS ── */
+.how{
+  max-width:540px;margin:0 auto 60px;padding:0 24px;
+  position:relative;z-index:1;
+}
+.how h2{
+  font-family:'Press Start 2P',monospace;font-size:9px;color:var(--muted);
+  letter-spacing:.1em;margin-bottom:20px;text-align:center;
+}
+.how-steps{display:flex;flex-direction:column;gap:14px}
+.how-step{
+  display:flex;gap:16px;align-items:flex-start;
+  background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:4px;padding:14px 16px;
+}
+.how-step-num{
+  font-family:'Press Start 2P',monospace;font-size:9px;color:var(--accent);
+  min-width:28px;flex-shrink:0;margin-top:2px;
+}
+.how-step-text{font-size:12px;color:var(--muted);line-height:1.8}
+.how-step-text b{color:var(--text)}
+
+/* ── SHARE ── */
+.share-section{
+  max-width:540px;margin:0 auto 80px;padding:0 24px;text-align:center;position:relative;z-index:1;
+}
+.share-section p{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.8}
+.share-wa{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Press Start 2P',monospace;font-size:9px;padding:13px 22px;
+  background:transparent;border:1px solid rgba(76,240,208,.4);color:var(--accent3);
+  border-radius:4px;cursor:pointer;text-decoration:none;transition:.15s;letter-spacing:.05em;
+}
+.share-wa:hover{background:rgba(76,240,208,.08)}
+
+/* ── NO CODES FALLBACK ── */
+.no-codes{text-align:center;padding:40px 24px;color:var(--muted);font-size:12px;line-height:1.9}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:30px 24px 40px;color:var(--muted);font-size:10px;line-height:1.8;position:relative;z-index:1}
+footer a{color:var(--accent);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── AMBIENT GLOW ── */
+.glow{
+  position:fixed;top:20%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(240,180,76,.06) 0%,transparent 70%);
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div class="glow"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge reveal">BOOKING CONFIRMED ✓</div>
+  <h1 class="reveal">You unlocked<br/>3 friend passes.</h1>
+  <p class="reveal">
+    If you know someone with great style,<br/>
+    share one of these <b>private session codes.</b><br/>
+    They'll get the same exclusive access you had.
+  </p>
+</section>
+
+<!-- CODES -->
+<section class="codes-section">
+  <div class="codes-label reveal">YOUR 3 REFERRAL CODES</div>
+  <div id="codes-container" class="reveal">
+    <!-- injected by JS -->
+  </div>
+  <div class="copy-all-wrap reveal">
+    <button class="copy-all-btn" id="copy-all-btn">[ COPY ALL 3 CODES ]</button>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how reveal">
+  <h2>HOW IT WORKS</h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-step-num">01</div>
+      <div class="how-step-text">Share a code with a friend who would love a portrait session. <b>Each code is single-use.</b></div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">02</div>
+      <div class="how-step-text">They scan the QR code or visit the link and enter their code at <b>raoufpx.com</b>.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">03</div>
+      <div class="how-step-text">They get the same <b>50% off private portrait session</b> you just unlocked.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARE VIA WHATSAPP -->
+<section class="share-section reveal">
+  <p>Want to send the codes directly?<br/>Tap below to share via WhatsApp.</p>
+  <a id="share-wa-btn" class="share-wa" href="#" target="_blank">
+    <span>↗</span> SHARE ON WHATSAPP
+  </a>
+</section>
+
+<footer>
+  <div>© RAOUF px — Dubai Portrait Photography</div>
+  <div style="margin-top:6px"><a href="index.html">← Back to portfolio</a></div>
+</footer>
+
+<script>
+(() => {
+  // ── Scroll progress ──
+  window.addEventListener('scroll', () => {
+    const el = document.getElementById('progress');
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    el.style.width = Math.min(pct, 100) + '%';
+  });
+
+  // ── Reveal on scroll ──
+  const ro = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+  }), { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // ── Load referral codes from sessionStorage ──
+  const stored = sessionStorage.getItem('raoufpx_referrals');
+  const codes = stored ? JSON.parse(stored) : [];
+  const container = document.getElementById('codes-container');
+
+  if (!codes.length) {
+    container.innerHTML = `<div class="no-codes">
+      No referral codes found in this session.<br/>
+      If you just booked, please check you weren't redirected here directly.
+    </div>`;
+    document.getElementById('copy-all-btn').style.display = 'none';
+    document.getElementById('share-wa-btn').style.display = 'none';
+  } else {
+    container.innerHTML = codes.map((code, i) => `
+      <div class="code-card">
+        <span class="code-num">0${i+1}</span>
+        <span class="code-value" id="code-val-${i}">${code}</span>
+        <button class="copy-btn" id="copy-btn-${i}" onclick="copyCode(${i}, '${code}')">[ COPY ]</button>
+      </div>`).join('');
+
+    // Copy all
+    document.getElementById('copy-all-btn').addEventListener('click', () => {
+      navigator.clipboard.writeText(codes.join('\n')).then(() => {
+        const btn = document.getElementById('copy-all-btn');
+        btn.textContent = '[ COPIED! ]';
+        setTimeout(() => { btn.textContent = '[ COPY ALL 3 CODES ]'; }, 2000);
+      });
+    });
+
+    // WhatsApp share
+    const waText = encodeURIComponent(
+      `Hi! I just booked a portrait session with RAOUF px in Dubai and got you an exclusive code.\n\nYou can unlock a 50% private session with this code:\n\n${codes[0]}\n\nVisit: https://raoufpx.com and enter the code to unlock the offer.\n\nExpires in 48 hours!`
+    );
+    document.getElementById('share-wa-btn').href = `https://wa.me/?text=${waText}`;
+  }
+
+  window.copyCode = function(i, code) {
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = document.getElementById('copy-btn-'+i);
+      btn.textContent = '[ COPIED! ]';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '[ COPY ]'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+})();
+</script>
+</body>
+</html>
