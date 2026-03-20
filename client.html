@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>RAOUF px — Your Session</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#080810;
+      --ivory:#F2E8D5;
+      --ivoryFaint:rgba(242,232,213,.28);
+      --ivoryMid:rgba(242,232,213,.55);
+      --ivoryLow:rgba(242,232,213,.18);
+      --accent:#f0b44c;
+      --accent3:#4cf0d0;
+    }
+    html,body{
+      min-height:100%;background:var(--bg);color:var(--ivory);
+      font-family:'Space Mono',monospace;overflow-x:hidden;
+    }
+    /* CRT scanlines — subtle */
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);
+      opacity:.4;
+    }
+
+```
+/* ── STATES ── */
+#loadingState,#errorState,#sessionState{transition:opacity .3s ease}
+.hidden{display:none!important}
+
+/* ── LOADING ── */
+#loadingState{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100dvh;
+  flex-direction:column;gap:1.2rem;
+}
+.loading-dot{
+  display:flex;gap:.5rem;
+}
+.loading-dot span{
+  width:6px;height:6px;border-radius:50%;background:var(--ivoryFaint);
+  animation:ldot .9s ease-in-out infinite;
+}
+.loading-dot span:nth-child(2){animation-delay:.15s}
+.loading-dot span:nth-child(3){animation-delay:.3s}
+@keyframes ldot{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:.8;transform:scale(1)}}
+.loading-label{
+  font-family:'Press Start 2P',monospace;font-size:.3rem;
+  color:var(--ivoryFaint);letter-spacing:.2em;
+}
+
+/* ── ERROR STATE ── */
+#errorState{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100dvh;flex-direction:column;
+  padding:3rem 2rem;text-align:center;gap:1.4rem;
+}
+.error-label{
+  font-family:'Press Start 2P',monospace;font-size:.32rem;
+  color:rgba(255,126,62,.6);letter-spacing:.18em;
+}
+.error-msg{
+  font-family:'Space Mono',monospace;font-size:.78rem;
+  color:var(--ivoryMid);line-height:1.9;
+}
+.error-back{
+  font-family:'Press Start 2P',monospace;font-size:.3rem;
+  color:var(--ivoryFaint);letter-spacing:.14em;text-decoration:none;
+  border-bottom:1px solid var(--ivoryLow);padding-bottom:2px;
+  transition:color .2s,border-color .2s;
+}
+.error-back:hover{color:var(--ivory);border-color:var(--ivoryMid)}
+
+/* ── MAIN SESSION PAGE ── */
+#sessionState{
+  min-height:100dvh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:6rem clamp(2rem,10vw,8rem);
+  max-width:720px;
+  margin:0 auto;
+  opacity:0;
+  animation:pageIn .6s ease .1s forwards;
+}
+@keyframes pageIn{to{opacity:1}}
+
+/* Welcome */
+.s-welcome{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(.78rem,2vw,.9rem);
+  color:var(--ivory);opacity:.5;
+  letter-spacing:.06em;
+  margin-bottom:4rem;
+  animation:slideUp .5s ease .2s both;
+}
+
+/* Section label */
+.s-label{
+  font-family:'Press Start 2P',monospace;
+  font-size:.3rem;letter-spacing:.25em;
+  color:var(--ivory);opacity:.22;
+  text-transform:uppercase;
+  margin-bottom:2rem;
+  animation:slideUp .5s ease .3s both;
+}
+
+/* Timeline */
+.s-timeline{
+  display:flex;flex-direction:column;
+  margin-bottom:3.5rem;
+  animation:slideUp .5s ease .4s both;
+}
+.s-step{
+  display:flex;align-items:flex-start;gap:1.2rem;
+  padding-bottom:1.8rem;position:relative;
+}
+.s-step:not(:last-child)::after{
+  content:'';position:absolute;
+  left:6px;top:16px;
+  width:1px;height:calc(100% - 10px);
+  background:rgba(242,232,213,.07);
+}
+.s-dot{
+  width:13px;height:13px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:3px;position:relative;z-index:1;
+}
+.s-dot::before{
+  content:'';display:block;
+  border-radius:50%;
+}
+.s-step.done .s-dot::before{
+  width:8px;height:8px;
+  background:var(--ivory);opacity:.6;
+}
+.s-step.current .s-dot::before{
+  width:10px;height:10px;
+  background:var(--ivory);opacity:1;
+  box-shadow:0 0 12px rgba(242,232,213,.35);
+}
+.s-step.future .s-dot::before{
+  width:8px;height:8px;
+  border:1px solid rgba(242,232,213,.15);
+  background:transparent;
+}
+.s-step-body{display:flex;flex-direction:column;gap:.3rem;padding-top:1px}
+.s-step-name{
+  font-family:'Space Mono',monospace;
+  font-size:.78rem;line-height:1.4;
+  color:var(--ivory);
+}
+.s-step.done .s-step-name{opacity:.45}
+.s-step.current .s-step-name{opacity:.95;font-weight:700}
+.s-step.future .s-step-name{opacity:.2}
+.s-step-date{
+  font-family:'Space Mono',monospace;
+  font-size:.68rem;
+  color:var(--ivory);opacity:.32;
+}
+
+/* Message */
+.s-message{
+  font-family:'Space Mono',monospace;
+  font-size:clamp(.76rem,1.8vw,.86rem);
+  color:var(--ivory);opacity:.55;
+  line-height:1.95;font-style:italic;
+  margin-bottom:3rem;
+  animation:slideUp .5s ease .5s both;
+}
+
+/* Download */
+.s-action{animation:slideUp .5s ease .6s both}
+.s-download{
+  display:inline-block;
+  font-family:'Press Start 2P',monospace;
+  font-size:.52rem;letter-spacing:.07em;
+  color:var(--bg);background:var(--ivory);
+  text-decoration:none;
+  padding:1rem 2.2rem;
+  position:relative;
+  box-shadow:3px 3px 0 rgba(242,232,213,.25),6px 6px 0 rgba(0,0,0,.35);
+  transition:box-shadow .1s steps(1),transform .1s steps(1);
+  cursor:pointer;
+}
+.s-download::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);
+  pointer-events:none;
+}
+.s-download:hover{
+  box-shadow:1px 1px 0 rgba(242,232,213,.25),3px 3px 0 rgba(0,0,0,.35);
+  transform:translate(2px,2px);
+}
+.s-download:active{box-shadow:0 0 0;transform:translate(4px,4px)}
+.s-download-hint{
+  display:block;margin-top:.9rem;
+  font-family:'Space Mono',monospace;font-size:.62rem;
+  color:var(--ivory);opacity:.25;
+}
+.s-exhausted{
+  font-family:'Space Mono',monospace;font-size:.75rem;
+  color:var(--ivory);opacity:.28;letter-spacing:.04em;
+}
+
+/* Footer */
+.s-footer{
+  margin-top:5rem;
+  font-family:'Press Start 2P',monospace;font-size:.26rem;
+  color:var(--ivory);opacity:.12;letter-spacing:.12em;
+  animation:slideUp .5s ease .7s both;
+}
+.s-footer a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(242,232,213,.1)}
+.s-footer a:hover{opacity:.35}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+@media(max-width:600px){
+  #sessionState{padding:4rem 1.6rem}
+  .s-download{font-size:.46rem;padding:.9rem 1.6rem}
+}
+:focus-visible{outline:2px solid var(--ivory);outline-offset:3px}
+```
+
+  </style>
+</head>
+<body>
+
+  <!-- Loading -->
+
+  <div id="loadingState">
+    <div class="loading-dot">
+      <span></span><span></span><span></span>
+    </div>
+    <p class="loading-label">LOADING</p>
+  </div>
+
+  <!-- Error -->
+
+  <div id="errorState" class="hidden">
+    <p class="error-label">ACCESS DENIED</p>
+    <p class="error-msg" id="errorMsg">This code could not be found.</p>
+    <a href="secret.html" class="error-back">← Enter a different code</a>
+  </div>
+
+  <!-- Session -->
+
+  <div id="sessionState" class="hidden">
+    <p class="s-welcome" id="sWelcome">Welcome back.</p>
+    <p class="s-label">Your session</p>
+    <div class="s-timeline" id="sTimeline" role="list"></div>
+    <p class="s-message" id="sMessage"></p>
+    <div class="s-action" id="sAction"></div>
+    <div class="s-footer">
+      <a href="index.html">RAOUF px</a>
+      &nbsp;·&nbsp; Dubai Portrait Photography
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const API = 'https://raoufpx-promo-server-production.up.railway.app';
+
+    const STEPS = [
+      { key: 'requested', label: 'Requested' },
+      { key: 'confirmed', label: 'Confirmed' },
+      { key: 'scheduled', label: 'Scheduled' },
+      { key: 'completed', label: 'Session Completed' },
+      { key: 'editing',   label: 'Editing in Progress' },
+      { key: 'ready',     label: 'Ready' },
+    ];
+
+    const MESSAGES = {
+      requested: 'Your session request has been received.',
+      confirmed:  'Your session has been confirmed.',
+      scheduled:  'Your session is scheduled.',
+      completed:  'Your session is complete. Editing begins soon.',
+      editing:    'Your images are being carefully crafted.',
+      ready:      'Your session is ready.',
+    };
+
+    // ── Get code from URL ──
+    function getCode() {
+      const params = new URLSearchParams(window.location.search);
+      return (params.get('code') || '').toUpperCase().trim();
+    }
+
+    // ── Format date ──
+    function formatDate(str) {
+      if (!str) return '';
+      try {
+        const d = new Date(str);
+        if (isNaN(d)) return str;
+        const date = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+        const time = d.toLocaleTimeString('en-US', {
+          hour: 'numeric', minute: '2-digit', hour12: true
+        }).replace(' ', '');
+        return `${date}, ${time}`;
+      } catch { return str; }
+    }
+
+    // ── Render timeline ──
+    function renderTimeline(status, sessionDate) {
+      const container = document.getElementById('sTimeline');
+      container.innerHTML = '';
+      const currentIdx = STEPS.findIndex(s => s.key === status);
+
+      STEPS.forEach((step, i) => {
+        const isPast    = i < currentIdx;
+        const isCurrent = i === currentIdx;
+        const stateClass = isCurrent ? 'current' : isPast ? 'done' : 'future';
+
+        const row = document.createElement('div');
+        row.className = `s-step ${stateClass}`;
+        row.setAttribute('role', 'listitem');
+
+        const dot = document.createElement('div');
+        dot.className = 's-dot';
+
+        const body = document.createElement('div');
+        body.className = 's-step-body';
+
+        const name = document.createElement('span');
+        name.className = 's-step-name';
+        name.textContent = step.label;
+        body.appendChild(name);
+
+        if (step.key === 'scheduled' && sessionDate && (isPast || isCurrent)) {
+          const date = document.createElement('span');
+          date.className = 's-step-date';
+          date.textContent = formatDate(sessionDate);
+          body.appendChild(date);
+        }
+
+        row.appendChild(dot);
+        row.appendChild(body);
+        container.appendChild(row);
+      });
+    }
+
+    // ── Render full page ──
+    function renderSession(data, code) {
+      // Welcome
+      const name = data.clientName || null;
+      document.getElementById('sWelcome').textContent = name
+        ? `Welcome back, ${name}.`
+        : 'Welcome back.';
+
+      // Timeline
+      renderTimeline(data.sessionStatus, data.sessionDate);
+
+      // Message
+      document.getElementById('sMessage').textContent =
+        MESSAGES[data.sessionStatus] || '';
+
+      // Action
+      const actionEl = document.getElementById('sAction');
+      actionEl.innerHTML = '';
+
+      if (data.sessionStatus === 'ready' && data.hasFile) {
+        const maxDl = data.maxDownloads || 2;
+        const curDl = data.downloadCount || 0;
+        const exhausted = maxDl > 0 && curDl >= maxDl;
+
+        if (exhausted) {
+          const msg = document.createElement('p');
+          msg.className = 's-exhausted';
+          msg.textContent = 'This session is no longer available for download.';
+          actionEl.appendChild(msg);
+        } else {
+          const btn = document.createElement('a');
+          btn.className = 's-download';
+          btn.href = `${API}/client/download?code=${encodeURIComponent(code)}`;
+          btn.textContent = 'Download Your Session';
+          actionEl.appendChild(btn);
+
+          const remaining = maxDl - curDl;
+          if (maxDl > 0 && remaining <= maxDl) {
+            const hint = document.createElement('span');
+            hint.className = 's-download-hint';
+            hint.textContent = remaining === 1
+              ? '1 download remaining.'
+              : `${remaining} downloads remaining.`;
+            actionEl.appendChild(hint);
+          }
+        }
+      }
+
+      // Show
+      document.getElementById('loadingState').classList.add('hidden');
+      document.getElementById('sessionState').classList.remove('hidden');
+    }
+
+    // ── Show error ──
+    function showError(msg) {
+      document.getElementById('errorMsg').textContent = msg || 'This code could not be found.';
+      document.getElementById('loadingState').classList.add('hidden');
+      document.getElementById('errorState').classList.remove('hidden');
+    }
+
+    // ── Main ──
+    async function init() {
+      const code = getCode();
+
+      if (!code) {
+        showError('No code provided. Please enter your code to continue.');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}/client/status?code=${encodeURIComponent(code)}`);
+
+        if (res.status === 404) {
+          showError('This code was not found. Please check your card and try again.');
+          return;
+        }
+        if (!res.ok) {
+          showError('Unable to load your session. Please try again shortly.');
+          return;
+        }
+
+        const data = await res.json();
+
+        // If no active session → redirect back to secret.html
+        const CLIENT_STATUSES = ['confirmed','scheduled','completed','editing','ready'];
+        if (!data.sessionStatus || !CLIENT_STATUSES.includes(data.sessionStatus)) {
+          window.location.replace(`secret.html?code=${encodeURIComponent(code)}`);
+          return;
+        }
+
+        renderSession(data, code);
+
+      } catch (e) {
+        showError('Connection error. Please check your connection and try again.');
+        console.error(e);
+      }
+    }
+
+    init();
+  })();
+  </script>
+
+</body>
+</html>
