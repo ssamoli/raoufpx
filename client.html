@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>RAOUF px - Your Session</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --bg:#04040a;
+      --gold:#f0b44c;
+      --teal:#4cf0d0;
+      --ivory:#F2E8D5;
+      --dim:rgba(242,232,213,.18);
+      --mid:rgba(242,232,213,.5);
+      --surface:rgba(242,232,213,.04);
+      --border:rgba(242,232,213,.08);
+    }
+
+    html,body{
+      min-height:100%;
+      background:var(--bg);
+      color:var(--ivory);
+      font-family:'Space Mono',monospace;
+      overflow-x:hidden;
+      cursor:none;
+    }
+
+    /* -- CUSTOM CURSOR -- */
+    #cur{
+      position:fixed;pointer-events:none;z-index:99999;
+      width:10px;height:10px;
+      background:var(--gold);
+      clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+      transform:translate(-50%,-50%);
+      transition:width .2s,height .2s,background .2s;
+      animation:cur-pulse 2s ease-in-out infinite;
+    }
+    @keyframes cur-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+    @media(pointer:coarse){#cur{display:none}html,body{cursor:auto}}
+
+    /* -- CRT SCANLINES -- */
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
+      background:repeating-linear-gradient(
+        0deg,
+        transparent,transparent 2px,
+        rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px
+      );
+      opacity:.6;
+    }
+
+    /* -- PIXEL GRID -- */
+    body::after{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:
+        linear-gradient(rgba(240,180,76,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(240,180,76,.018) 1px,transparent 1px);
+      background-size:24px 24px;
+    }
+
+    /* -- AMBIENT LIGHT LEAKS -- */
+    .leak{
+      position:fixed;pointer-events:none;z-index:0;
+      border-radius:50%;filter:blur(80px);
+    }
+    .leak-1{
+      width:500px;height:300px;
+      background:radial-gradient(ellipse,rgba(240,180,76,.07),transparent 70%);
+      top:-80px;left:-100px;
+      animation:drift1 18s ease-in-out infinite alternate;
+    }
+    .leak-2{
+      width:400px;height:400px;
+      background:radial-gradient(ellipse,rgba(76,240,208,.05),transparent 70%);
+      bottom:-100px;right:-80px;
+      animation:drift2 22s ease-in-out infinite alternate;
+    }
+    .leak-3{
+      width:300px;height:200px;
+      background:radial-gradient(ellipse,rgba(200,75,255,.04),transparent 70%);
+      top:40%;left:60%;
+      animation:drift3 15s ease-in-out infinite alternate;
+    }
+    @keyframes drift1{to{transform:translate(60px,30px)}}
+    @keyframes drift2{to{transform:translate(-40px,-50px)}}
+    @keyframes drift3{to{transform:translate(-30px,40px)}}
+
+    /* -- STATES -- */
+    .hidden{display:none!important}
+    #loadingState,#errorState,#sessionState{position:relative;z-index:1}
+
+    /* -- LOADING -- */
+    #loadingState{
+      min-height:100dvh;
+      display:flex;align-items:center;justify-content:center;
+      flex-direction:column;gap:1.8rem;
+    }
+    .load-logo{
+      font-family:'Press Start 2P',monospace;
+      font-size:.55rem;color:var(--gold);
+      letter-spacing:.15em;
+      opacity:0;animation:fadeIn .6s ease .2s forwards;
+    }
+    .load-frames{
+      display:flex;gap:3px;align-items:center;
+      opacity:0;animation:fadeIn .4s ease .5s forwards;
+    }
+    .lf{
+      width:18px;height:24px;
+      border:1px solid var(--dim);
+      position:relative;overflow:hidden;
+    }
+    .lf::before{
+      content:'';position:absolute;top:2px;left:2px;right:2px;height:2px;
+      background:rgba(242,232,213,.12);
+    }
+    .lf::after{
+      content:'';position:absolute;bottom:2px;left:2px;right:2px;height:2px;
+      background:rgba(242,232,213,.12);
+    }
+    .lf.active{border-color:var(--gold);animation:frame-blink 1.4s steps(1) infinite}
+    .lf:nth-child(2).active{animation-delay:.2s}
+    .lf:nth-child(3).active{animation-delay:.4s}
+    .lf:nth-child(4).active{animation-delay:.6s}
+    @keyframes frame-blink{0%,49%{border-color:var(--gold);background:rgba(240,180,76,.06)}50%,100%{border-color:var(--dim);background:transparent}}
+    .load-text{
+      font-family:'Press Start 2P',monospace;
+      font-size:.28rem;color:var(--dim);letter-spacing:.22em;
+      opacity:0;animation:fadeIn .4s ease .7s forwards;
+    }
+    @keyframes fadeIn{to{opacity:1}}
+
+    /* -- ERROR -- */
+    #errorState{
+      min-height:100dvh;
+      display:flex;align-items:center;justify-content:center;
+      flex-direction:column;padding:3rem 2rem;text-align:center;gap:1.6rem;
+    }
+    .err-code{
+      font-family:'Press Start 2P',monospace;font-size:2.5rem;
+      color:rgba(255,76,76,.15);letter-spacing:.1em;
+      text-shadow:0 0 60px rgba(255,76,76,.1);
+    }
+    .err-label{
+      font-family:'Press Start 2P',monospace;font-size:.3rem;
+      color:rgba(255,126,62,.5);letter-spacing:.18em;
+    }
+    .err-msg{font-size:.78rem;color:var(--mid);line-height:1.9;max-width:360px}
+    .err-back{
+      font-family:'Press Start 2P',monospace;font-size:.28rem;
+      color:var(--dim);letter-spacing:.12em;text-decoration:none;
+      border-bottom:1px solid rgba(242,232,213,.08);padding-bottom:2px;
+      transition:color .2s,border-color .2s;
+    }
+    .err-back:hover{color:var(--ivory);border-color:var(--mid)}
+
+    /* ================================================
+       SESSION STATE - the cinematic experience
+    ================================================ */
+    #sessionState{min-height:100dvh}
+
+    /* -- TOP FILM STRIP HEADER -- */
+    #film-header{
+      position:relative;
+      padding:0;
+      border-bottom:1px solid var(--border);
+      overflow:hidden;
+    }
+    /* perforations top */
+    .perfs{
+      display:flex;gap:0;height:14px;
+      background:rgba(0,0,0,.4);
+    }
+    .perf{
+      width:20px;height:10px;
+      margin:2px 6px;
+      background:var(--bg);
+      border:1px solid rgba(242,232,213,.08);
+      flex-shrink:0;
+    }
+    /* header content */
+    .film-content{
+      padding:2.5rem clamp(1.6rem,6vw,5rem) 2rem;
+      display:flex;flex-direction:column;gap:.6rem;
+    }
+    .film-eyebrow{
+      font-family:'Press Start 2P',monospace;
+      font-size:.3rem;color:var(--teal);
+      letter-spacing:.2em;opacity:.6;
+    }
+    .film-eyebrow::before{content:'> ';color:var(--gold)}
+    .film-name{
+      font-family:'Press Start 2P',monospace;
+      font-size:clamp(.7rem,2.5vw,1.1rem);
+      color:var(--ivory);
+      line-height:1.7;
+      letter-spacing:.04em;
+      text-shadow:0 0 40px rgba(240,180,76,.2);
+      opacity:0;
+      animation:nameReveal .8s steps(16) .4s forwards;
+    }
+    @keyframes nameReveal{
+      from{opacity:0;clip-path:inset(0 100% 0 0)}
+      to{opacity:1;clip-path:inset(0 0% 0 0)}
+    }
+    .film-code{
+      font-family:'Space Mono',monospace;
+      font-size:.65rem;color:var(--dim);
+      letter-spacing:.12em;
+    }
+    /* frame counter */
+    .frame-counter{
+      position:absolute;top:1rem;right:clamp(1.6rem,6vw,5rem);
+      font-family:'Press Start 2P',monospace;
+      font-size:.28rem;color:var(--dim);
+      letter-spacing:.1em;
+    }
+
+    /* -- FILM ROLL TIMELINE -- */
+    #film-roll{
+      padding:0 clamp(1.6rem,6vw,5rem);
+      margin:3rem 0 0;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+    #film-roll::-webkit-scrollbar{display:none}
+    .roll-track{
+      display:flex;align-items:stretch;
+      min-width:max-content;
+      padding-bottom:2rem;
+    }
+
+    /* single frame */
+    .frame{
+      display:flex;flex-direction:column;
+      align-items:center;
+      position:relative;
+      width:110px;flex-shrink:0;
+    }
+
+    /* perforations left of frame */
+    .frame-perf{
+      position:absolute;left:-1px;top:0;bottom:0;
+      width:12px;display:flex;flex-direction:column;
+      justify-content:space-around;padding:4px 0;
+    }
+    .frame-perf-hole{
+      width:8px;height:14px;
+      background:var(--bg);
+      border:1px solid rgba(242,232,213,.06);
+      margin-left:2px;
+    }
+
+    /* the frame box */
+    .frame-box{
+      width:80px;height:80px;
+      border:1px solid;
+      position:relative;overflow:hidden;
+      background:rgba(0,0,0,.5);
+      transition:border-color .3s,box-shadow .3s;
+      flex-shrink:0;
+    }
+    .frame.done .frame-box{
+      border-color:rgba(242,232,213,.2);
+    }
+    .frame.current .frame-box{
+      border-color:var(--gold);
+      box-shadow:0 0 20px rgba(240,180,76,.2),inset 0 0 20px rgba(240,180,76,.05);
+    }
+    .frame.future .frame-box{
+      border-color:rgba(242,232,213,.06);
+    }
+
+    /* inner icon */
+    .frame-icon{
+      position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Press Start 2P',monospace;
+      font-size:.9rem;
+      opacity:.15;
+      transition:opacity .3s;
+    }
+    .frame.done .frame-icon{opacity:.35;color:var(--ivory)}
+    .frame.current .frame-icon{
+      opacity:1;color:var(--gold);
+      text-shadow:0 0 20px rgba(240,180,76,.8);
+      animation:icon-pulse 2s ease-in-out infinite;
+    }
+    @keyframes icon-pulse{0%,100%{text-shadow:0 0 20px rgba(240,180,76,.8)}50%{text-shadow:0 0 35px rgba(240,180,76,1),0 0 60px rgba(240,180,76,.4)}}
+    .frame.future .frame-icon{opacity:.07}
+
+    /* grain overlay on each frame */
+    .frame-box::after{
+      content:'';position:absolute;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+      pointer-events:none;opacity:.4;
+      mix-blend-mode:overlay;
+    }
+
+    /* current frame scanline sweep */
+    .frame.current .frame-box::before{
+      content:'';position:absolute;
+      top:-100%;left:0;right:0;
+      height:30%;
+      background:linear-gradient(transparent,rgba(240,180,76,.06),transparent);
+      animation:scan-sweep 3s linear infinite;
+    }
+    @keyframes scan-sweep{to{top:200%}}
+
+    /* connector between frames */
+    .frame-connector{
+      width:20px;height:2px;
+      margin-top:39px;flex-shrink:0;
+      background:rgba(242,232,213,.06);
+      position:relative;
+    }
+    .frame.done + .frame-connector{background:rgba(242,232,213,.15)}
+    .frame-connector::before{
+      content:'';position:absolute;
+      top:50%;left:0;right:0;height:1px;
+      background:inherit;transform:translateY(-50%);
+    }
+
+    /* label below frame */
+    .frame-label{
+      margin-top:.7rem;
+      font-family:'Press Start 2P',monospace;
+      font-size:.22rem;
+      text-align:center;
+      line-height:1.6;
+      letter-spacing:.06em;
+      width:90px;
+      transition:color .3s,opacity .3s;
+    }
+    .frame.done .frame-label{color:var(--ivory);opacity:.35}
+    .frame.current .frame-label{color:var(--gold);opacity:1}
+    .frame.future .frame-label{color:var(--ivory);opacity:.12}
+    .frame-date{
+      display:block;
+      font-family:'Space Mono',monospace;
+      font-size:.55rem;
+      color:var(--dim);
+      margin-top:.3rem;
+      letter-spacing:.04em;
+    }
+
+    /* -- STATUS BLOCK -- */
+    #status-block{
+      padding:2.5rem clamp(1.6rem,6vw,5rem) 0;
+      opacity:0;
+      animation:fadeUp .6s ease .8s forwards;
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    .status-tag{
+      font-family:'Press Start 2P',monospace;
+      font-size:.28rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:.8rem;
+      display:flex;align-items:center;gap:.6rem;
+    }
+    .status-dot{
+      width:6px;height:6px;
+      clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+      animation:status-spin 4s linear infinite;
+    }
+    @keyframes status-spin{to{transform:rotate(360deg)}}
+    .status-headline{
+      font-family:'Press Start 2P',monospace;
+      font-size:clamp(.6rem,2vw,.9rem);
+      color:var(--ivory);
+      line-height:1.8;
+      letter-spacing:.03em;
+      margin-bottom:1rem;
+    }
+    .status-sub{
+      font-family:'Space Mono',monospace;
+      font-size:.82rem;
+      color:var(--mid);
+      line-height:2;
+      max-width:480px;
+      font-style:italic;
+    }
+
+    /* -- DOWNLOAD SECTION -- */
+    #download-block{
+      padding:2.5rem clamp(1.6rem,6vw,5rem);
+      opacity:0;
+      animation:fadeUp .6s ease 1.1s forwards;
+    }
+    .dl-btn{
+      display:inline-flex;align-items:center;gap:.8rem;
+      font-family:'Press Start 2P',monospace;
+      font-size:.48rem;letter-spacing:.06em;
+      color:#04040a;
+      background:var(--gold);
+      text-decoration:none;
+      padding:.9rem 2rem;
+      position:relative;
+      box-shadow:3px 3px 0 #7a5a20,6px 6px 0 rgba(0,0,0,.4);
+      transition:box-shadow .1s steps(1),transform .1s steps(1);
+      cursor:pointer;
+    }
+    .dl-btn::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 60%);
+      pointer-events:none;
+    }
+    .dl-btn:hover{
+      box-shadow:1px 1px 0 #7a5a20,3px 3px 0 rgba(0,0,0,.4);
+      transform:translate(2px,2px);
+    }
+    .dl-btn:active{box-shadow:0 0 0;transform:translate(4px,4px)}
+    .dl-icon{font-size:.9rem;line-height:1}
+    .dl-hint{
+      display:block;margin-top:.9rem;
+      font-family:'Space Mono',monospace;
+      font-size:.62rem;color:var(--dim);
+    }
+    .dl-exhausted{
+      font-family:'Space Mono',monospace;
+      font-size:.75rem;color:var(--dim);
+      line-height:1.9;
+      padding:.8rem 1.2rem;
+      border:1px solid rgba(242,232,213,.06);
+      display:inline-block;
+    }
+
+    /* -- BOTTOM STRIP -- */
+    #film-footer{
+      margin-top:2rem;
+      padding:0 clamp(1.6rem,6vw,5rem) 4rem;
+      display:flex;align-items:center;justify-content:space-between;
+      border-top:1px solid var(--border);
+      padding-top:2rem;
+      opacity:0;
+      animation:fadeUp .6s ease 1.3s forwards;
+    }
+    .footer-brand{
+      font-family:'Press Start 2P',monospace;
+      font-size:.28rem;color:var(--dim);letter-spacing:.12em;
+      text-decoration:none;transition:color .2s;
+    }
+    .footer-brand:hover{color:var(--gold)}
+    .footer-meta{
+      font-family:'Press Start 2P',monospace;
+      font-size:.22rem;color:rgba(242,232,213,.1);letter-spacing:.1em;
+    }
+
+    /* -- PIXEL CORNER BRACKETS (decorative) -- */
+    .bracket-tl,.bracket-br{position:absolute;width:16px;height:16px}
+    .bracket-tl{top:0;left:0;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+    .bracket-br{bottom:0;right:0;border-bottom:2px solid var(--teal);border-right:2px solid var(--teal)}
+
+    @media(max-width:600px){
+      .film-content{padding:2rem 1.4rem 1.6rem}
+      #film-roll{padding:0 1.4rem}
+      #status-block,#download-block,#film-footer{padding-left:1.4rem;padding-right:1.4rem}
+      .frame{width:90px}
+      .frame-box{width:66px;height:66px}
+      .frame-icon{font-size:.75rem}
+      .frame-label{font-size:.2rem;width:76px}
+      .frame-connector{width:14px}
+    }
+    :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div id="cur"></div>
+
+  <!-- Ambient leaks -->
+  <div class="leak leak-1"></div>
+  <div class="leak leak-2"></div>
+  <div class="leak leak-3"></div>
+
+  <!-- -- LOADING -- -->
+  <div id="loadingState">
+    <div class="load-logo">RAOUF px</div>
+    <div class="load-frames">
+      <div class="lf active"></div>
+      <div class="lf active"></div>
+      <div class="lf active"></div>
+      <div class="lf active"></div>
+      <div class="lf"></div>
+      <div class="lf"></div>
+    </div>
+    <p class="load-text">LOADING YOUR SESSION</p>
+  </div>
+
+  <!-- -- ERROR -- -->
+  <div id="errorState" class="hidden">
+    <div class="err-code">404</div>
+    <p class="err-label">ACCESS DENIED</p>
+    <p class="err-msg" id="errorMsg">This code could not be found.</p>
+    <a href="secret.html" class="err-back">[ ENTER A DIFFERENT CODE ]</a>
+  </div>
+
+  <!-- -- SESSION -- -->
+  <div id="sessionState" class="hidden">
+
+    <!-- Film strip header -->
+    <div id="film-header" style="position:relative">
+      <div class="bracket-tl"></div>
+      <div class="bracket-br"></div>
+      <!-- top perforations -->
+      <div class="perfs" id="top-perfs"></div>
+      <div class="film-content">
+        <div class="film-eyebrow">PRIVATE_SESSION</div>
+        <div class="film-name" id="sWelcome">Welcome back.</div>
+        <div class="film-code" id="sCode"></div>
+      </div>
+      <div class="frame-counter" id="frameCounter">FRAME 00</div>
+      <!-- bottom perforations -->
+      <div class="perfs" id="bot-perfs"></div>
+    </div>
+
+    <!-- Film roll timeline -->
+    <div id="film-roll">
+      <div class="roll-track" id="rollTrack"></div>
+    </div>
+
+    <!-- Status -->
+    <div id="status-block">
+      <div class="status-tag" id="statusTag">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusTagText"></span>
+      </div>
+      <div class="status-headline" id="statusHeadline"></div>
+      <div class="status-sub" id="statusSub"></div>
+    </div>
+
+    <!-- Download -->
+    <div id="download-block">
+      <div id="sAction"></div>
+    </div>
+
+    <!-- Footer -->
+    <div id="film-footer">
+      <a href="index.html" class="footer-brand">RAOUF px</a>
+      <span class="footer-meta">DUBAI PORTRAIT PHOTOGRAPHY</span>
+    </div>
+
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const API = 'https://raoufpx-promo-server-production.up.railway.app';
+
+    /* -- Cursor -- */
+    const cur = document.getElementById('cur');
+    if (window.matchMedia('(pointer:fine)').matches) {
+      document.addEventListener('mousemove', e => {
+        cur.style.left = e.clientX + 'px';
+        cur.style.top  = e.clientY + 'px';
+      });
+    }
+
+    /* -- Fill perforations -- */
+    function fillPerfs(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const count = Math.ceil(window.innerWidth / 32) + 4;
+      el.innerHTML = Array(count).fill('<div class="perf"></div>').join('');
+    }
+    fillPerfs('top-perfs');
+    fillPerfs('bot-perfs');
+
+    /* -- STEPS -- */
+    const STEPS = [
+      { key:'requested', label:'REQUESTED',  icon:'?' },
+      { key:'confirmed', label:'CONFIRMED',  icon:'*' },
+      { key:'scheduled', label:'SCHEDULED',  icon:'#' },
+      { key:'completed', label:'COMPLETED',  icon:'o' },
+      { key:'editing',   label:'EDITING',    icon:'~' },
+      { key:'ready',     label:'READY',      icon:'+' },
+    ];
+
+    const STATUS_CONFIG = {
+      requested:{ headline:'Session Requested.',  sub:'Your request has been received. We will confirm your date shortly.',          color:'#f0b44c', dotColor:'rgba(240,180,76,.6)' },
+      confirmed: { headline:'Session Confirmed.',  sub:'Your session has been confirmed. We will reach out with the final details.',   color:'#f0b44c', dotColor:'var(--gold)' },
+      scheduled: { headline:'Session Scheduled.',  sub:'Mark your calendar. Your portrait session is locked in.',                     color:'#4cf0d0', dotColor:'var(--teal)' },
+      completed: { headline:'Session Completed.',  sub:'Your session is wrapped. The real work begins now.',                          color:'#4cf0d0', dotColor:'var(--teal)' },
+      editing:   { headline:'In the Darkroom.',    sub:'Your images are being carefully crafted. Good things take time.',             color:'#c84bff', dotColor:'rgba(200,75,255,.8)' },
+      ready:     { headline:'Your Session is Ready.', sub:'The wait is over. Your private gallery is ready to download.',             color:'#4cf0a0', dotColor:'rgba(76,240,160,.9)' },
+    };
+
+    /* -- Format date -- */
+    function formatDate(str) {
+      if (!str) return '';
+      try {
+        const d = new Date(str);
+        if (isNaN(d)) return str;
+        return d.toLocaleDateString('en-US', { month:'long', day:'numeric' })
+          + ', '
+          + d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit', hour12:true }).replace(' ','');
+      } catch { return str; }
+    }
+
+    /* -- Render film roll timeline -- */
+    function renderFilmRoll(status, sessionDate) {
+      const track = document.getElementById('rollTrack');
+      const currentIdx = STEPS.findIndex(s => s.key === status);
+      let html = '';
+
+      STEPS.forEach((step, i) => {
+        const isPast    = i < currentIdx;
+        const isCurrent = i === currentIdx;
+        const cls = isCurrent ? 'current' : isPast ? 'done' : 'future';
+
+        html += `<div class="frame ${cls}" role="listitem" aria-label="${step.label}">
+          <div class="frame-perf">
+            <div class="frame-perf-hole"></div>
+            <div class="frame-perf-hole"></div>
+            <div class="frame-perf-hole"></div>
+          </div>
+          <div class="frame-box">
+            <div class="frame-icon">${step.icon}</div>
+          </div>
+          <div class="frame-label">
+            ${step.label}
+            ${step.key === 'scheduled' && sessionDate && (isPast || isCurrent)
+              ? '<span class="frame-date">' + formatDate(sessionDate) + '</span>'
+              : ''}
+          </div>
+        </div>`;
+
+        if (i < STEPS.length - 1) {
+          html += `<div class="frame-connector"></div>`;
+        }
+      });
+
+      track.innerHTML = html;
+
+      // Scroll current frame into view after render
+      setTimeout(() => {
+        const currentFrame = track.querySelector('.frame.current');
+        if (currentFrame) {
+          currentFrame.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+        }
+      }, 600);
+
+      // Update frame counter
+      document.getElementById('frameCounter').textContent =
+        'FRAME ' + String(currentIdx + 1).padStart(2, '0');
+    }
+
+    /* -- Render status block -- */
+    function renderStatus(status) {
+      const cfg = STATUS_CONFIG[status] || STATUS_CONFIG.confirmed;
+      document.getElementById('statusDot').style.background = cfg.dotColor;
+      document.getElementById('statusTagText').textContent  = status.toUpperCase();
+      document.getElementById('statusTagText').style.color  = cfg.color;
+      document.getElementById('statusHeadline').textContent = cfg.headline;
+      document.getElementById('statusSub').textContent      = cfg.sub;
+    }
+
+    /* -- Render download block -- */
+    function renderAction(data, code) {
+      const el = document.getElementById('sAction');
+      el.innerHTML = '';
+
+      if (data.sessionStatus !== 'ready' || !data.hasFile) return;
+
+      const maxDl = data.maxDownloads || 2;
+      const curDl = data.downloadCount || 0;
+      const exhausted = maxDl > 0 && curDl >= maxDl;
+
+      if (exhausted) {
+        const d = document.createElement('div');
+        d.className = 'dl-exhausted';
+        d.textContent = 'This session is no longer available for download.\nPlease contact us if you need access.';
+        el.appendChild(d);
+        return;
+      }
+
+      const btn = document.createElement('a');
+      btn.className = 'dl-btn';
+      btn.href = API + '/client/download?code=' + encodeURIComponent(code);
+      btn.innerHTML = '<span class="dl-icon">+</span> DOWNLOAD YOUR SESSION';
+      el.appendChild(btn);
+
+      const remaining = maxDl - curDl;
+      if (maxDl > 0) {
+        const hint = document.createElement('span');
+        hint.className = 'dl-hint';
+        hint.textContent = remaining === 1
+          ? '// 1 download remaining'
+          : '// ' + remaining + ' downloads remaining';
+        el.appendChild(hint);
+      }
+    }
+
+    /* -- Render full session -- */
+    function renderSession(data, code) {
+      // Welcome name
+      const name = data.clientName || null;
+      document.getElementById('sWelcome').textContent = name
+        ? 'Welcome back, ' + name + '.'
+        : 'Welcome back.';
+
+      // Code display
+      document.getElementById('sCode').textContent = '// ' + code;
+
+      // Film roll
+      renderFilmRoll(data.sessionStatus, data.sessionDate);
+
+      // Status
+      renderStatus(data.sessionStatus);
+
+      // Action
+      renderAction(data, code);
+
+      // Reveal
+      document.getElementById('loadingState').classList.add('hidden');
+      document.getElementById('sessionState').classList.remove('hidden');
+    }
+
+    /* -- Error -- */
+    function showError(msg) {
+      document.getElementById('errorMsg').textContent = msg || 'This code could not be found.';
+      document.getElementById('loadingState').classList.add('hidden');
+      document.getElementById('errorState').classList.remove('hidden');
+    }
+
+    /* -- Init -- */
+    async function init() {
+      const code = (new URLSearchParams(window.location.search).get('code') || '').toUpperCase().trim();
+
+      if (!code) {
+        showError('No code provided. Please enter your code to continue.');
+        return;
+      }
+
+      try {
+        const res = await fetch(API + '/client/status?code=' + encodeURIComponent(code));
+
+        if (res.status === 404) {
+          showError('This code was not found. Please check your card and try again.');
+          return;
+        }
+        if (!res.ok) {
+          showError('Unable to load your session. Please try again shortly.');
+          return;
+        }
+
+        const data = await res.json();
+        const CLIENT_STATUSES = ['confirmed','scheduled','completed','editing','ready'];
+
+        if (!data.sessionStatus || !CLIENT_STATUSES.includes(data.sessionStatus)) {
+          window.location.replace('secret.html?code=' + encodeURIComponent(code));
+          return;
+        }
+
+        renderSession(data, code);
+
+      } catch (e) {
+        showError('Connection error. Please check your connection and try again.');
+        console.error(e);
+      }
+    }
+
+    init();
+  })();
+  </script>
+
+</body>
+</html>
