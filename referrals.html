@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>RAOUF px — You Unlocked 3 Friend Passes</title>
+<title>RAOUF px - Your Private Invites</title>
 <meta name="robots" content="noindex,nofollow"/>
 <link rel="icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -12,322 +12,545 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080810;--surface:rgba(255,255,255,.03);--surface2:#0e0e1a;
+  --bg:#080810;--surface:rgba(255,255,255,.03);--surface2:#0d0d18;
   --accent:#f0b44c;--accent2:#ff7e3e;--accent3:#4cf0d0;--accent4:#c84bff;
-  --text:rgba(255,255,255,.85);--muted:rgba(255,255,255,.45);--border:rgba(255,255,255,.08);
+  --text:rgba(255,255,255,.88);--muted:rgba(255,255,255,.45);--dim:rgba(255,255,255,.18);
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
   --success:#4cf0a0;--danger:#ff4c4c;
 }
 html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:800;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);opacity:.4}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(240,180,76,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,76,.015) 1px,transparent 1px);background-size:32px 32px}
 #progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:9000;width:0%;transition:width .1s}
-.hero{min-height:85vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:70px 24px 40px;position:relative;z-index:1}
-.hero-badge{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--accent2);letter-spacing:.12em;margin-bottom:20px;border:1px solid rgba(255,126,62,.25);padding:6px 14px;border-radius:2px;background:rgba(255,126,62,.06)}
-.hero h1{font-family:'Press Start 2P',monospace;font-size:clamp(14px,3vw,22px);color:var(--accent);line-height:1.7;letter-spacing:.04em;margin-bottom:20px;text-shadow:0 0 40px rgba(240,180,76,.3)}
-.hero p{font-size:clamp(12px,1.8vw,14px);color:var(--muted);line-height:1.9;max-width:480px;margin:0 auto 10px}
-.hero p b{color:var(--text)}
-.section{max-width:660px;margin:0 auto;padding:0 20px 60px;position:relative;z-index:1}
-.section-label{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--muted);letter-spacing:.1em;text-align:center;margin-bottom:24px;text-transform:uppercase}
-.code-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:20px 20px 16px;margin-bottom:16px;position:relative;overflow:hidden;transition:.2s}
-.code-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px}
-.code-card:nth-child(1)::before{background:var(--accent)}
-.code-card:nth-child(2)::before{background:var(--accent3)}
-.code-card:nth-child(3)::before{background:var(--accent4)}
-.card-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
-.code-num{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--muted);min-width:22px;flex-shrink:0}
-.code-value{font-family:'Press Start 2P',monospace;font-size:clamp(13px,2.5vw,17px);letter-spacing:.14em;flex:1}
-.copy-btn{font-family:'Press Start 2P',monospace;font-size:8px;padding:7px 12px;background:transparent;border:1px solid rgba(255,255,255,.14);color:var(--muted);border-radius:3px;cursor:pointer;transition:.15s;white-space:nowrap;flex-shrink:0}
-.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
-.copy-btn.copied{border-color:var(--success);color:var(--success)}
-.card-link{font-size:10px;color:var(--muted);margin-bottom:14px;word-break:break-all}
-.card-link a{color:var(--accent3);text-decoration:none}
-.card-link a:hover{text-decoration:underline}
-.card-contact{display:flex;gap:8px;flex-wrap:wrap}
-.contact-input{flex:1;min-width:120px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:11px;padding:8px 10px;border-radius:3px;outline:none;caret-color:var(--accent)}
-.contact-input:focus{border-color:var(--accent)}
-.contact-input::placeholder{color:rgba(255,255,255,.2)}
-.wa-send-btn{font-family:'Press Start 2P',monospace;font-size:8px;padding:8px 12px;background:transparent;border:1px solid rgba(76,240,208,.35);color:var(--accent3);border-radius:3px;cursor:pointer;transition:.15s;white-space:nowrap;flex-shrink:0}
-.wa-send-btn:hover{background:rgba(76,240,208,.08);border-color:var(--accent3)}
-.wa-send-btn:disabled{opacity:.4;cursor:not-allowed}
-.wa-sent{font-size:10px;color:var(--success);display:none;align-items:center;gap:6px;padding-top:6px}
-.actions-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0 40px}
-.btn{font-family:'Press Start 2P',monospace;font-size:9px;padding:12px 20px;background:transparent;border:1px solid;border-radius:4px;cursor:pointer;transition:.15s;letter-spacing:.05em;text-decoration:none;display:inline-flex;align-items:center}
-.btn-session{border-color:rgba(76,240,208,.3);color:var(--accent3);font-size:8px;padding:9px 16px;opacity:.7}
-.btn-session:hover{background:rgba(76,240,208,.07);opacity:1}
-.btn-teal{border-color:var(--accent3);color:var(--accent3)}
-.btn-teal:hover{background:var(--accent3);color:#000}
-.btn-amber{border-color:var(--accent);color:var(--accent)}
-.btn-amber:hover{background:var(--accent);color:#000}
-.save-bar{background:rgba(76,240,208,.06);border:1px solid rgba(76,240,208,.2);border-radius:4px;padding:14px 18px;margin-bottom:32px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.save-bar p{font-size:11px;color:var(--muted);flex:1;line-height:1.7}
-.save-bar p b{color:var(--text)}
-#save-contacts-btn{font-family:'Press Start 2P',monospace;font-size:8px;padding:10px 16px;background:transparent;border:1px solid var(--accent3);color:var(--accent3);border-radius:3px;cursor:pointer;transition:.15s;white-space:nowrap}
-#save-contacts-btn:hover{background:var(--accent3);color:#000}
-#save-contacts-btn:disabled{opacity:.4;cursor:not-allowed}
-#save-contacts-status{font-size:10px;color:var(--success);display:none;width:100%;margin-top:6px}
-.how{max-width:540px;margin:0 auto 60px;padding:0 20px;position:relative;z-index:1}
-.how h2{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:20px;text-align:center}
-.how-steps{display:flex;flex-direction:column;gap:12px}
-.how-step{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:4px;padding:14px 16px}
-.how-step-num{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--accent);min-width:26px;flex-shrink:0;margin-top:2px}
-.how-step-text{font-size:12px;color:var(--muted);line-height:1.8}
+
+/* -- HERO -- */
+.hero{min-height:85vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:80px 24px 48px;position:relative;z-index:1}
+.hero-badge{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--accent2);letter-spacing:.12em;margin-bottom:20px;border:1px solid rgba(255,126,62,.22);padding:6px 16px;background:rgba(255,126,62,.05)}
+.hero h1{font-family:'Press Start 2P',monospace;font-size:clamp(13px,2.8vw,20px);color:var(--accent);line-height:1.75;letter-spacing:.03em;margin-bottom:16px;text-shadow:0 0 40px rgba(240,180,76,.25)}
+.hero-sub{font-size:clamp(11px,1.6vw,13px);color:var(--muted);line-height:1.95;max-width:460px;margin:0 auto 10px}
+.hero-sub b{color:var(--text)}
+
+/* progress tracker */
+.invite-progress{display:flex;align-items:center;gap:16px;margin:28px auto 0;padding:14px 20px;background:rgba(255,255,255,.025);border:1px solid var(--border2);max-width:340px}
+.ip-label{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--muted);letter-spacing:.08em}
+.ip-dots{display:flex;gap:8px}
+.ip-dot{width:12px;height:12px;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);background:var(--border2);transition:background .4s,box-shadow .4s}
+.ip-dot.sent{background:var(--accent3)}
+.ip-dot.used{background:var(--accent);box-shadow:0 0 10px rgba(240,180,76,.5)}
+.ip-count{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--accent3);margin-left:4px}
+
+/* session button */
+.btn-session{font-family:'Press Start 2P',monospace;font-size:8px;padding:9px 16px;background:transparent;border:1px solid rgba(76,240,208,.3);color:var(--accent3);cursor:pointer;text-decoration:none;display:none;align-items:center;margin-top:20px;transition:.15s}
+.btn-session:hover{background:rgba(76,240,208,.07)}
+.btn-session.show{display:inline-flex}
+
+/* -- INVITES SECTION -- */
+.section{max-width:680px;margin:0 auto;padding:0 20px 60px;position:relative;z-index:1}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.section-label{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.section-meta{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--dim);letter-spacing:.07em}
+
+/* invite card */
+.invite-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:18px 18px 14px;margin-bottom:12px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .15s;
+  opacity:0;transform:translateY(12px);
+}
+.invite-card.in{opacity:1;transform:none;transition:opacity .45s ease,transform .45s ease,border-color .25s}
+.invite-card:nth-child(1){transition-delay:.05s}
+.invite-card:nth-child(2){transition-delay:.12s}
+.invite-card:nth-child(3){transition-delay:.19s}
+.invite-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px}
+.invite-card:nth-child(1)::before{background:var(--accent)}
+.invite-card:nth-child(2)::before{background:var(--accent3)}
+.invite-card:nth-child(3)::before{background:var(--accent4)}
+
+/* card status states */
+.invite-card.status-sent{border-color:rgba(76,240,208,.15)}
+.invite-card.status-used{border-color:rgba(240,180,76,.25)}
+.invite-card.status-expired{opacity:.45}
+
+/* card top row */
+.card-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.card-num{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--dim);min-width:22px;flex-shrink:0}
+.card-code{font-family:'Press Start 2P',monospace;font-size:clamp(12px,2.4vw,16px);letter-spacing:.14em;flex:1;transition:text-shadow .3s}
+.invite-card.status-used .card-code{text-shadow:0 0 14px currentColor}
+.card-status-pill{
+  font-family:'Press Start 2P',monospace;font-size:7px;
+  padding:3px 8px;letter-spacing:.06em;flex-shrink:0;
+  border:1px solid;
+}
+.pill-available{color:var(--dim);border-color:var(--border)}
+.pill-sent{color:var(--accent3);border-color:rgba(76,240,208,.3);background:rgba(76,240,208,.05)}
+.pill-used{color:var(--accent);border-color:rgba(240,180,76,.3);background:rgba(240,180,76,.05)}
+.pill-expired{color:var(--danger);border-color:rgba(255,76,76,.2)}
+
+/* countdown */
+.card-countdown{
+  font-family:'Press Start 2P',monospace;font-size:7px;
+  color:var(--accent2);letter-spacing:.07em;
+  margin-bottom:10px;display:none;
+}
+.card-countdown.show{display:block}
+.card-countdown.urgent{color:var(--danger);animation:count-pulse 1s ease-in-out infinite}
+@keyframes count-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* friend row */
+.card-friend{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;
+  padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);
+}
+.friend-input{
+  flex:1;min-width:100px;background:transparent;border:none;border-bottom:1px solid var(--border);
+  color:var(--text);font-family:'Space Mono',monospace;font-size:11px;
+  padding:4px 4px 6px;outline:none;caret-color:var(--accent);transition:border-color .2s;
+}
+.friend-input:focus{border-bottom-color:var(--accent)}
+.friend-input::placeholder{color:rgba(255,255,255,.18)}
+
+/* action buttons row */
+.card-actions{display:flex;gap:8px;flex-wrap:wrap}
+.act-btn{
+  font-family:'Press Start 2P',monospace;font-size:8px;
+  padding:7px 11px;background:transparent;
+  border:1px solid rgba(255,255,255,.12);color:var(--muted);
+  cursor:pointer;transition:.15s;white-space:nowrap;flex-shrink:0;
+}
+.act-btn:hover{border-color:var(--accent);color:var(--accent)}
+.act-btn.copied{border-color:var(--success);color:var(--success)}
+.act-btn.wa{border-color:rgba(76,240,208,.3);color:var(--accent3)}
+.act-btn.wa:hover{background:rgba(76,240,208,.07)}
+.act-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* sent confirmation */
+.wa-sent{font-size:10px;color:var(--success);display:none;align-items:center;gap:6px;padding-top:8px}
+
+/* -- BULK ACTIONS -- */
+.bulk-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0 44px}
+.bulk-btn{
+  font-family:'Press Start 2P',monospace;font-size:8px;
+  padding:11px 18px;background:transparent;border:1px solid;
+  cursor:pointer;transition:.15s;letter-spacing:.05em;text-decoration:none;display:inline-flex;align-items:center;
+}
+.bulk-btn.teal{border-color:var(--accent3);color:var(--accent3)}
+.bulk-btn.teal:hover{background:var(--accent3);color:#000}
+.bulk-btn.amber{border-color:var(--accent);color:var(--accent)}
+.bulk-btn.amber:hover{background:var(--accent);color:#000}
+
+/* -- REWARDS BLOCK -- */
+.rewards-block{
+  max-width:680px;margin:0 auto 50px;padding:0 20px;
+  position:relative;z-index:1;
+  opacity:0;transform:translateY(10px);transition:opacity .5s ease .3s,transform .5s ease .3s;
+}
+.rewards-block.in{opacity:1;transform:none}
+.reward-inner{
+  background:rgba(200,75,255,.04);border:1px solid rgba(200,75,255,.15);
+  padding:20px 22px;position:relative;
+}
+.reward-inner::before{content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--accent4);border-left:2px solid var(--accent4)}
+.reward-inner::after{content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--accent3);border-right:2px solid var(--accent3)}
+.reward-label{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--accent4);letter-spacing:.08em;margin-bottom:12px;display:block}
+.reward-pts{font-family:'Press Start 2P',monospace;font-size:clamp(14px,3vw,20px);color:var(--text);margin-bottom:6px}
+.reward-pts span{color:var(--accent4)}
+.reward-bar-track{width:100%;height:3px;background:rgba(255,255,255,.06);margin:10px 0}
+.reward-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent4),var(--accent3));transition:width .8s ease}
+.reward-sub{font-size:10px;color:var(--dim);line-height:1.8}
+.reward-badge{
+  display:inline-block;margin-top:8px;margin-right:6px;
+  font-family:'Press Start 2P',monospace;font-size:7px;
+  padding:3px 8px;background:rgba(200,75,255,.1);
+  border:1px solid rgba(200,75,255,.3);color:var(--accent4);
+}
+
+/* -- HOW IT WORKS -- */
+.how{max-width:560px;margin:0 auto 60px;padding:0 20px;position:relative;z-index:1}
+.how h2{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--dim);letter-spacing:.1em;margin-bottom:18px;text-align:center}
+.how-steps{display:flex;flex-direction:column;gap:10px}
+.how-step{display:flex;gap:14px;align-items:flex-start;padding:12px 14px;border:1px solid var(--border)}
+.how-step-num{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--accent);min-width:22px;flex-shrink:0;margin-top:1px}
+.how-step-text{font-size:11px;color:var(--muted);line-height:1.85}
 .how-step-text b{color:var(--text)}
-.lead-box{max-width:660px;margin:0 auto 60px;padding:0 20px;position:relative;z-index:1}
-.lead-inner{background:rgba(240,180,76,.04);border:1px solid rgba(240,180,76,.18);padding:24px 22px}
-.lead-inner h2{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--accent);margin-bottom:8px;letter-spacing:.06em}
-.lead-inner p{font-size:11px;color:var(--muted);line-height:1.9;margin-bottom:18px}
-.lead-inner p b{color:var(--text)}
-.lead-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.lead-field{display:flex;flex-direction:column;gap:5px}
-.lead-field label{font-family:'Press Start 2P',monospace;font-size:7px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.lead-field input{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--text);font-family:'Space Mono',monospace;font-size:11px;padding:8px 10px;outline:none;caret-color:var(--accent)}
-.lead-field input:focus{border-color:rgba(240,180,76,.4)}
-.lead-field input::placeholder{color:rgba(255,255,255,.2)}
-#lead-save-btn{font-family:'Press Start 2P',monospace;font-size:8px;padding:10px 18px;background:transparent;border:1px solid var(--accent);color:var(--accent);cursor:pointer;transition:.15s;letter-spacing:.05em}
-#lead-save-btn:hover{background:var(--accent);color:#000}
-#lead-save-btn:disabled{opacity:.4;cursor:not-allowed}
-#lead-save-status{font-size:10px;color:var(--success);margin-top:10px;display:none}
-@media(max-width:500px){.lead-row{grid-template-columns:1fr}}
-.no-codes{text-align:center;padding:40px 24px;color:var(--muted);font-size:12px;line-height:1.9}
-footer{text-align:center;padding:30px 24px 50px;color:var(--muted);font-size:10px;line-height:1.8;position:relative;z-index:1}
+
+/* -- FOOTER -- */
+footer{text-align:center;padding:24px 24px 50px;color:var(--dim);font-size:10px;line-height:1.8;position:relative;z-index:1}
 footer a{color:var(--accent);text-decoration:none}
-footer a:hover{text-decoration:underline}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:none}
-.glow{position:fixed;top:20%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(240,180,76,.06) 0%,transparent 70%)}
+.glow{position:fixed;top:20%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(240,180,76,.05) 0%,transparent 70%)}
+.no-codes{text-align:center;padding:40px 24px;color:var(--muted);font-size:12px;line-height:2}
+@media(max-width:520px){.card-friend{flex-direction:column}.card-actions{gap:6px}.bulk-btn{font-size:7px;padding:9px 12px}}
 </style>
 </head>
 <body>
 <div id="progress"></div>
 <div class="glow"></div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-badge reveal">BOOKING CONFIRMED</div>
-  <h1 class="reveal">You unlocked<br/>3 friend passes.</h1>
-  <p class="reveal">If you know someone with great style,<br/>share one of these <b>private session codes.</b><br/>They get the same exclusive 50% off access you had.</p>
-  <a class="btn btn-session reveal" id="view-session-btn" href="#" style="margin-top:20px;display:none">[ VIEW YOUR SESSION ]</a>
+  <h1 class="reveal">You've unlocked<br/>3 private invites.</h1>
+  <p class="hero-sub reveal">Only a few people get access.<br/>You can share this with <b>3 people.</b></p>
+  <div class="invite-progress reveal" id="inviteProgress">
+    <div class="ip-label">INVITES</div>
+    <div class="ip-dots" id="ipDots">
+      <div class="ip-dot" id="dot-0"></div>
+      <div class="ip-dot" id="dot-1"></div>
+      <div class="ip-dot" id="dot-2"></div>
+    </div>
+    <div class="ip-count" id="ipCount">0/3 used</div>
+  </div>
+  <a class="btn-session reveal" id="view-session-btn" href="#">[ VIEW YOUR SESSION ]</a>
 </section>
 
+<!-- INVITE CARDS -->
 <section class="section">
-  <div class="section-label reveal">YOUR 3 REFERRAL CODES</div>
-  <div class="save-bar reveal" id="save-bar">
-    <p>Add a friend's <b>name + WhatsApp</b> to each code.<br/>We'll prep the message so you can send it in one tap.</p>
-    <button id="save-contacts-btn">[ SAVE CONTACTS ]</button>
-    <div id="save-contacts-status">✓ Contacts saved — WhatsApp buttons are ready.</div>
+  <div class="section-header reveal">
+    <span class="section-label">YOUR 3 PRIVATE INVITES</span>
+    <span class="section-meta" id="codesMeta"></span>
   </div>
-  <div id="codes-container" class="reveal"></div>
-  <div class="actions-row reveal">
-    <button class="btn btn-teal" id="copy-all-btn">[ COPY ALL 3 CODES ]</button>
-    <a class="btn btn-amber" id="share-wa-all" href="#" target="_blank">[ SHARE ALL ON WHATSAPP ]</a>
+  <div id="codes-container"></div>
+  <div class="bulk-row reveal" id="bulk-row">
+    <button class="bulk-btn teal" id="copy-all-btn">[ COPY ALL 3 CODES ]</button>
+    <a class="bulk-btn amber" id="share-wa-all" href="#" target="_blank">[ SHARE ALL ON WHATSAPP ]</a>
+    <a class="bulk-btn" id="share-sms-all" href="#"
+      style="border-color:rgba(76,240,208,.25);color:var(--accent3)">[ IMESSAGE ]</a>
   </div>
 </section>
 
+<!-- REWARDS -->
+<div class="rewards-block" id="rewardsBlock">
+  <div class="reward-inner">
+    <span class="reward-label">INVITE REWARDS</span>
+    <div class="reward-pts"><span id="rewardPts">0</span> pts</div>
+    <div class="reward-bar-track"><div class="reward-bar-fill" id="rewardBarFill" style="width:0%"></div></div>
+    <div class="reward-sub" id="rewardSub">Share your invites to earn reward points. 3 points unlocks a bonus.</div>
+    <div id="rewardBadges"></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
 <section class="how reveal">
   <h2>HOW IT WORKS</h2>
   <div class="how-steps">
-    <div class="how-step"><div class="how-step-num">01</div><div class="how-step-text">Share a code with a friend. <b>Each code is single-use</b> and expires 48 hours after they enter it.</div></div>
-    <div class="how-step"><div class="how-step-num">02</div><div class="how-step-text">They visit <b>raoufpx.com/secret.html</b> and enter the code to unlock the private offer page.</div></div>
-    <div class="how-step"><div class="how-step-num">03</div><div class="how-step-text">They get <b>50% off a private portrait session</b> — and the booking is traced back to you automatically.</div></div>
-  </div>
-</section>
-
-<section class="lead-box reveal">
-  <div class="lead-inner">
-    <h2>STAY IN THE LOOP</h2>
-    <p>Want us to reach out when your session is confirmed and your gallery is ready?<br/>Leave your details — we'll contact you directly on WhatsApp.</p>
-    <div class="lead-row">
-      <div class="lead-field">
-        <label>Your Name</label>
-        <input id="lead-name" type="text" placeholder="Sarah Al..."/>
-      </div>
-      <div class="lead-field">
-        <label>WhatsApp Number</label>
-        <input id="lead-wa" type="tel" placeholder="+971 5X XXX XXXX"/>
-      </div>
-    </div>
-    <button id="lead-save-btn">[ SAVE MY DETAILS ]</button>
-    <div id="lead-save-status">Details saved. We'll be in touch soon.</div>
+    <div class="how-step"><div class="how-step-num">01</div><div class="how-step-text">Share a private invite code with someone. <b>Each code is single-use</b> and gives them 50% off.</div></div>
+    <div class="how-step"><div class="how-step-num">02</div><div class="how-step-text">They visit <b>raoufpx.com</b>, enter the code, and unlock the private booking page.</div></div>
+    <div class="how-step"><div class="how-step-num">03</div><div class="how-step-text">Every booking they make earns you <b>reward points</b> - and if they book, they get their own 3 invites too.</div></div>
   </div>
 </section>
 
 <footer>
-  <div>© RAOUF px — Dubai Portrait Photography</div>
-  <div style="margin-top:6px"><a href="index.html">← Back to portfolio</a></div>
+  <div>RAOUF px - Dubai Portrait Photography</div>
+  <div style="margin-top:6px"><a href="index.html">Back to portfolio</a></div>
 </footer>
 
 <script>
 (() => {
+  'use strict';
   const API = 'https://raoufpx-promo-server-production.up.railway.app';
 
+  // -- Scroll progress --
   window.addEventListener('scroll', () => {
     const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
     document.getElementById('progress').style.width = Math.min(pct,100)+'%';
   });
 
+  // -- Reveal on scroll --
   const ro = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); }
-  }), { threshold: 0.07 });
+  }), { threshold: 0.06 });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
+  // -- Read stored data --
   const stored      = sessionStorage.getItem('raoufpx_referrals');
   const storedLinks = sessionStorage.getItem('raoufpx_referral_links');
-  const codes  = stored      ? JSON.parse(stored)      : [];
-  const links  = storedLinks ? JSON.parse(storedLinks) : [];
+  let codes   = stored      ? JSON.parse(stored)      : [];
+  let links   = storedLinks ? JSON.parse(storedLinks) : [];
   const parentCode = sessionStorage.getItem('raoufpx_code') || '';
 
-  // Wire "View Your Session" button if we have a code
+  // Persist to localStorage so refresh doesn't wipe them (7 day TTL)
+  if (codes.length && parentCode) {
+    try {
+      const stored7 = { codes, links, parentCode, savedAt: Date.now() };
+      localStorage.setItem('raoufpx_invites_' + parentCode, JSON.stringify(stored7));
+    } catch(e) {}
+  } else if (parentCode && !codes.length) {
+    // Try restoring from localStorage
+    try {
+      const raw = localStorage.getItem('raoufpx_invites_' + parentCode);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        const age = Date.now() - (parsed.savedAt || 0);
+        if (age < 7 * 24 * 60 * 60 * 1000) {
+          codes = parsed.codes || [];
+          links = parsed.links || [];
+        }
+      }
+    } catch(e) {}
+  }
+
+  // -- Session button --
   const sessionBtn = document.getElementById('view-session-btn');
   if (parentCode && sessionBtn) {
     sessionBtn.href = 'client.html?code=' + encodeURIComponent(parentCode);
-    sessionBtn.style.display = 'inline-flex';
-  }
-  const colors = ['var(--accent)','var(--accent3)','var(--accent4)'];
-  const container = document.getElementById('codes-container');
-
-  function getLink(code, i) {
-    return links[i] || ('https://raoufpx.com/secret.html?code=' + encodeURIComponent(code));
+    sessionBtn.classList.add('show');
   }
 
-  if (!codes.length) {
-    container.innerHTML = '<div class="no-codes">No referral codes found.<br/>Please complete a booking on the promo page first.</div>';
-    ['copy-all-btn','share-wa-all','save-bar'].forEach(id => {
-      const el = document.getElementById(id); if(el) el.style.display='none';
-    });
-    document.querySelector('.firebase-box').style.display='none';
-  } else {
-    container.innerHTML = codes.map((code, i) => {
-      const link = getLink(code, i);
-      return `<div class="code-card">
-        <div class="card-top">
-          <span class="code-num">0${i+1}</span>
-          <span class="code-value" style="color:${colors[i]}">${code}</span>
-          <button class="copy-btn" id="cbtn-${i}" onclick="copyCode(${i},'${code}')">[ COPY CODE ]</button>
-          <button class="copy-btn" id="lbtn-${i}" onclick="copyLink(${i},'${link}')">[ COPY LINK ]</button>
-        </div>
-        <div class="card-link">🔗 <a href="${link}" target="_blank">${link}</a></div>
-        <div class="card-contact">
-          <input class="contact-input" id="name-${i}" type="text" placeholder="Friend's name (optional)"/>
-          <input class="contact-input" id="wa-${i}" type="tel" placeholder="+971 5X XXX XXXX"/>
-          <button class="wa-send-btn" id="wa-btn-${i}" onclick="sendWA(${i},'${code}','${link}')">[ SEND ON WA ]</button>
-        </div>
-        <div class="wa-sent" id="wa-sent-${i}"><span>✓</span><span>Opened in WhatsApp</span></div>
-      </div>`;
-    }).join('');
-
-    document.getElementById('copy-all-btn').addEventListener('click', () => {
-      navigator.clipboard.writeText(codes.join('\n')).then(() => {
-        const b = document.getElementById('copy-all-btn');
-        b.textContent='[ COPIED! ]';
-        setTimeout(()=>{ b.textContent='[ COPY ALL 3 CODES ]'; },2000);
-        silentSaveContacts(); // capture what we have silently on copy
-      });
-    });
-
-    const allMsg = codes.map((code,i)=>`Code ${i+1}: ${code}\n${getLink(code,i)}`).join('\n\n');
-    const shareMsg = `Hi! I just booked a portrait session with RAOUF px in Dubai.\n\nHere are 3 exclusive friend passes — each is single-use:\n\n${allMsg}\n\nEnter your code at the link above. Expires 48h after entry!`;
-    document.getElementById('share-wa-all').href = 'https://wa.me/?text='+encodeURIComponent(shareMsg);
-
-    document.getElementById('save-contacts-btn').addEventListener('click', saveContacts);
-  }
-
-  // Silent save — sends whatever contacts are filled in without blocking the user
-  function silentSaveContacts() {
-    const contacts = codes.map((code,i)=>({
-      code,
-      name:     (document.getElementById('name-'+i)||{}).value?.trim() || '',
-      whatsapp: (document.getElementById('wa-'+i)||{}).value?.trim()   || '',
-    })).filter(c => c.name || c.whatsapp);
-    if (!contacts.length || !parentCode) return;
-    fetch(API+'/save-referral-contacts',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({ parentCode, contacts }),
-    }).catch(()=>{});
-  }
-
-  window.copyCode = function(i, code) {
-    navigator.clipboard.writeText(code).then(() => {
-      const b=document.getElementById('cbtn-'+i);
-      b.textContent='[ COPIED! ]'; b.classList.add('copied');
-      setTimeout(()=>{ b.textContent='[ COPY CODE ]'; b.classList.remove('copied'); },2000);
-      silentSaveContacts();
-    });
-  };
-
-  window.copyLink = function(i, link) {
-    navigator.clipboard.writeText(link).then(() => {
-      const b=document.getElementById('lbtn-'+i);
-      b.textContent='[ COPIED! ]'; b.classList.add('copied');
-      setTimeout(()=>{ b.textContent='[ COPY LINK ]'; b.classList.remove('copied'); },2000);
-      silentSaveContacts();
-    });
-  };
-
-  window.sendWA = function(i, code, link) {
-    const name = document.getElementById('name-'+i).value.trim() || 'there';
-    const msg  = `Hi ${name}! I just booked a portrait session with RAOUF px in Dubai and got you an exclusive code.\n\nYou can unlock your private session with this code:\n${code}\n\nVisit: ${link} and enter the code to unlock the offer.\n\nExpires in 48 hours!`;
-    const rawWA = document.getElementById('wa-'+i).value.trim().replace(/[\s\-().]/g,'');
-    const waNum = rawWA.startsWith('+') ? rawWA.slice(1) : rawWA;
-    const url   = waNum
-      ? `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`
-      : `https://wa.me/?text=${encodeURIComponent(msg)}`;
-    window.open(url,'_blank');
-    document.getElementById('wa-sent-'+i).style.display='flex';
-    document.getElementById('wa-btn-'+i).disabled=true;
-    silentSaveContacts();
-  };
-
-  async function saveContacts() {
-    const btn    = document.getElementById('save-contacts-btn');
-    const status = document.getElementById('save-contacts-status');
-    const contacts = codes.map((code,i)=>({
-      code,
-      name:     document.getElementById('name-'+i).value.trim(),
-      whatsapp: document.getElementById('wa-'+i).value.trim(),
-    })).filter(c => c.name || c.whatsapp);
-    if (!contacts.length){ alert('Add at least one name or number first.'); return; }
-    btn.disabled=true; btn.textContent='[ SAVING... ]';
+  // -- Live invite status from backend --
+  let liveStatuses = {}; // keyed by code
+  async function fetchInviteStatus() {
+    if (!parentCode) return;
     try {
-      await fetch(API+'/save-referral-contacts',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({ parentCode, contacts }),
-      });
-      status.style.display='block';
-      btn.textContent='[ SAVED ]';
-    } catch(e) {
-      btn.disabled=false; btn.textContent='[ SAVE CONTACTS ]';
-      alert('Could not save. Please try again.');
+      const r = await fetch(API + '/invite/status?parentCode=' + encodeURIComponent(parentCode));
+      if (!r.ok) return;
+      const d = await r.json();
+      // Build lookup by code
+      (d.invites || []).forEach(inv => { liveStatuses[inv.code] = inv; });
+      updateProgressTracker(d);
+      updateRewards(d);
+      updateCardStatuses();
+    } catch(e) {}
+  }
+
+  // -- Progress tracker --
+  function updateProgressTracker(d) {
+    const used   = d.usedInvites  || 0;
+    const shared = d.sharedInvites || 0;
+    const total  = codes.length || 3;
+    document.getElementById('ipCount').textContent = used + '/' + total + ' used';
+    codes.forEach((code, i) => {
+      const dot = document.getElementById('dot-' + i);
+      if (!dot) return;
+      const st = liveStatuses[code];
+      if (!st) return;
+      if (st.status === 'redeemed') dot.classList.add('used');
+      else if (st.sharedAt)          dot.classList.add('sent');
+    });
+  }
+
+  // -- Rewards --
+  function updateRewards(d) {
+    const pts = d.rewardPoints || 0;
+    const unlocked = d.rewardsUnlocked || [];
+    const target = 3;
+    document.getElementById('rewardPts').textContent = pts.toFixed(pts % 1 === 0 ? 0 : 1);
+    document.getElementById('rewardBarFill').style.width = Math.min(pts / target * 100, 100) + '%';
+    const sub = document.getElementById('rewardSub');
+    const rem = Math.max(0, target - pts);
+    sub.textContent = rem > 0
+      ? rem.toFixed(rem % 1 === 0 ? 0 : 1) + ' more point' + (rem !== 1 ? 's' : '') + ' to unlock your bonus.'
+      : 'Bonus unlocked. We will reach out shortly.';
+    const badges = document.getElementById('rewardBadges');
+    badges.innerHTML = unlocked.map(r => {
+      const labels = { 'first_booking': 'First Booking', '3_bookings_bonus': '3 Bookings Bonus' };
+      return '<span class="reward-badge">' + (labels[r] || r) + '</span>';
+    }).join('');
+    if (pts > 0 || unlocked.length > 0) {
+      document.getElementById('rewardsBlock').classList.add('in');
     }
   }
 
-  // Lead form — saves booker's own details to backend as a hot lead
-  const leadBtn = document.getElementById('lead-save-btn');
-  if (leadBtn) {
-    leadBtn.addEventListener('click', async () => {
-      const name     = document.getElementById('lead-name').value.trim();
-      const whatsapp = document.getElementById('lead-wa').value.trim();
-      const statusEl = document.getElementById('lead-save-status');
-      if (!name && !whatsapp) { alert('Enter at least your name or WhatsApp number.'); return; }
-      leadBtn.disabled = true; leadBtn.textContent = '[ SAVING... ]';
-      try {
-        await fetch(API+'/save-referral-contacts', {
-          method: 'POST',
-          headers: { 'Content-Type':'application/json' },
-          body: JSON.stringify({
-            parentCode,
-            contacts: [{ code: parentCode, name, whatsapp, isBooker: true }],
-          }),
-        });
-        statusEl.style.display = 'block';
-        leadBtn.textContent = '[ SAVED ]';
-      } catch(e) {
-        leadBtn.disabled = false;
-        leadBtn.textContent = '[ SAVE MY DETAILS ]';
-        alert('Could not save. Please try again.');
+  // -- Countdown timer --
+  const countdownTimers = {};
+  function startCountdown(code, expiresAt, elId) {
+    if (!expiresAt) return;
+    const el = document.getElementById(elId);
+    if (!el) return;
+
+    function tick() {
+      const ms = new Date(expiresAt) - Date.now();
+      if (ms <= 0) {
+        el.textContent = 'EXPIRED';
+        el.classList.add('show', 'urgent');
+        return;
+      }
+      const h = Math.floor(ms / 3600000);
+      const m = Math.floor((ms % 3600000) / 60000);
+      el.textContent = 'EXPIRES IN ' + h + 'h ' + m + 'm';
+      el.classList.add('show');
+      if (h < 4) el.classList.add('urgent');
+      countdownTimers[code] = setTimeout(tick, 30000);
+    }
+    tick();
+  }
+
+  // -- Update card statuses from live data --
+  function updateCardStatuses() {
+    codes.forEach((code, i) => {
+      const st = liveStatuses[code];
+      if (!st) return;
+      const card = document.getElementById('card-' + i);
+      if (!card) return;
+
+      // Status pill
+      const pill = document.getElementById('pill-' + i);
+      if (pill) {
+        if (st.status === 'redeemed') {
+          pill.textContent = 'USED';
+          pill.className = 'card-status-pill pill-used';
+          card.classList.add('status-used');
+          // Disable send button
+          const wa = document.getElementById('wa-btn-' + i);
+          if (wa) wa.disabled = true;
+        } else if (st.sharedAt) {
+          pill.textContent = 'SENT';
+          pill.className = 'card-status-pill pill-sent';
+          card.classList.add('status-sent');
+        } else if (st.status === 'expired') {
+          pill.textContent = 'EXPIRED';
+          pill.className = 'card-status-pill pill-expired';
+          card.classList.add('status-expired');
+        }
+      }
+
+      // Countdown
+      if (st.expiresAt && st.status !== 'redeemed') {
+        startCountdown(code, st.expiresAt, 'countdown-' + i);
+      }
+
+      // Pre-fill friend name if saved
+      if (st.friendName) {
+        const nameEl = document.getElementById('name-' + i);
+        if (nameEl && !nameEl.value) nameEl.value = st.friendName;
       }
     });
   }
+
+  // -- Track share action --
+  function trackShare(code, method) {
+    fetch(API + '/track-share', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, method }),
+    }).catch(() => {});
+  }
+
+  // -- Silent contact save --
+  function silentSave(code, i) {
+    const name     = (document.getElementById('name-' + i) || {}).value || '';
+    const whatsapp = (document.getElementById('wa-' + i)   || {}).value || '';
+    if (!name && !whatsapp) return;
+    fetch(API + '/save-referral-contacts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ parentCode, contacts: [{ code, name: name.trim(), whatsapp: whatsapp.trim() }] }),
+    }).catch(() => {});
+  }
+
+  // -- Helpers --
+  function getLink(code, i) {
+    return links[i] || ('https://raoufpx.com/secret.html?code=' + encodeURIComponent(code));
+  }
+  const COLORS = ['var(--accent)', 'var(--accent3)', 'var(--accent4)'];
+
+  // -- Render cards --
+  if (!codes.length) {
+    document.getElementById('codes-container').innerHTML =
+      '<div class="no-codes">No invite codes found.<br/>Please complete a booking first.</div>';
+    const br = document.getElementById('bulk-row');
+    if (br) br.style.display = 'none';
+    // Hide rewards block when no codes
+    const rb = document.getElementById('rewardsBlock');
+    if (rb) rb.style.display = 'none';
+  } else {
+    const container = document.getElementById('codes-container');
+    container.innerHTML = codes.map((code, i) => {
+      const link = getLink(code, i);
+      return `
+      <div class="invite-card" id="card-${i}">
+        <div class="card-top">
+          <span class="card-num">0${i+1}</span>
+          <span class="card-code" style="color:${COLORS[i]}">${code}</span>
+          <span class="card-status-pill pill-available" id="pill-${i}">AVAILABLE</span>
+        </div>
+        <div class="card-countdown" id="countdown-${i}"></div>
+        <div class="card-friend">
+          <input class="friend-input" id="name-${i}" type="text" placeholder="Friend's name"/>
+          <input class="friend-input" id="wa-${i}" type="tel" placeholder="+971 5X XXX XXXX" style="flex:1.4"/>
+        </div>
+        <div class="card-actions">
+          <button class="act-btn" id="cbtn-${i}" onclick="doCopyCode(${i},'${code}')">[ COPY CODE ]</button>
+          <button class="act-btn" id="lbtn-${i}" onclick="doCopyLink(${i},'${link}')">[ COPY LINK ]</button>
+          <button class="act-btn wa" id="wa-btn-${i}" onclick="doSendWA(${i},'${code}','${link}')">[ SEND ON WA ]</button>
+        </div>
+        <div class="wa-sent" id="wa-sent-${i}">Opened in WhatsApp</div>
+      </div>`;
+    }).join('');
+
+    // Stagger card entrance
+    setTimeout(() => {
+      document.querySelectorAll('.invite-card').forEach(c => c.classList.add('in'));
+    }, 80);
+
+    // Bulk copy all
+    document.getElementById('copy-all-btn').addEventListener('click', () => {
+      navigator.clipboard.writeText(codes.join('\n')).then(() => {
+        const b = document.getElementById('copy-all-btn');
+        b.textContent = '[ COPIED! ]';
+        setTimeout(() => { b.textContent = '[ COPY ALL 3 CODES ]'; }, 2000);
+        codes.forEach((code, i) => { trackShare(code, 'copy_all'); silentSave(code, i); });
+      });
+    });
+
+    // Bulk WhatsApp
+    const allMsg = codes.map((code,i) => 'Code ' + (i+1) + ': ' + code + '\n' + getLink(code,i)).join('\n\n');
+    const shareMsg = 'Hi! I just booked a portrait session with RAOUF px in Dubai.\n\nHere are 3 exclusive private invites:\n\n' + allMsg + '\n\nEnter your code at the link. Expires 48h after entry!';
+    document.getElementById('share-wa-all').href = 'https://wa.me/?text=' + encodeURIComponent(shareMsg);
+
+    // Fetch live statuses
+    fetchInviteStatus();
+    // Poll every 45s
+    setInterval(fetchInviteStatus, 45000);
+  }
+
+  // -- Copy code --
+  window.doCopyCode = function(i, code) {
+    navigator.clipboard.writeText(code).then(() => {
+      const b = document.getElementById('cbtn-' + i);
+      b.textContent = '[ COPIED! ]'; b.classList.add('copied');
+      setTimeout(() => { b.textContent = '[ COPY CODE ]'; b.classList.remove('copied'); }, 2000);
+      trackShare(code, 'copy_code');
+      silentSave(code, i);
+    });
+  };
+
+  // -- Copy link --
+  window.doCopyLink = function(i, link) {
+    const code = codes[i];
+    navigator.clipboard.writeText(link).then(() => {
+      const b = document.getElementById('lbtn-' + i);
+      b.textContent = '[ COPIED! ]'; b.classList.add('copied');
+      setTimeout(() => { b.textContent = '[ COPY LINK ]'; b.classList.remove('copied'); }, 2000);
+      trackShare(code, 'copy_link');
+      silentSave(code, i);
+    });
+  };
+
+  // -- Send WhatsApp --
+  window.doSendWA = function(i, code, link) {
+    const name   = document.getElementById('name-' + i).value.trim() || 'there';
+    const rawWA  = document.getElementById('wa-' + i).value.trim().replace(/[\s\-().]/g, '');
+    const waNum  = rawWA.startsWith('+') ? rawWA.slice(1) : rawWA;
+    const msg    = 'Hi ' + name + '! I just booked a portrait session with RAOUF px in Dubai and got you a private invite.\n\nYour exclusive code:\n' + code + '\n\nVisit: ' + link + '\n\nExpires in 48 hours!';
+    const url    = waNum
+      ? 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(msg)
+      : 'https://wa.me/?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    document.getElementById('wa-sent-' + i).style.display = 'flex';
+    document.getElementById('wa-btn-' + i).disabled = true;
+    trackShare(code, 'whatsapp');
+    silentSave(code, i);
+    // Update pill to sent
+    setTimeout(fetchInviteStatus, 1200);
+  };
+
+  // -- Codes meta text --
+  if (codes.length) {
+    document.getElementById('codesMeta').textContent = codes.length + ' INVITE' + (codes.length !== 1 ? 'S' : '');
+  }
+
 })();
 </script>
 </body>
