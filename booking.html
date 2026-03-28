@@ -376,19 +376,31 @@
             headers:{'Accept':'application/json'}
           });
 
-          if(res.ok){
+if(res.ok){
             msgOk.style.display='block';
             form.reset();
             dateInput.value = toYMD(nextWeekend());
+            msgOk.scrollIntoView({behavior:'smooth',block:'center'});
 
-            msgOk.scrollIntoView({
-              behavior:'smooth',
-              block:'center'
-            });
+            // Track direct booking in admin dashboard
+            var selPkg = document.getElementById('f-package').value;
+            var pkgLabel = selPkg.charAt(0).toUpperCase()+selPkg.slice(1).toLowerCase();
+            fetch('https://raoufpx-promo-server-production.up.railway.app/track-booking',{
+              method:'POST',
+              headers:{'Content-Type':'application/json'},
+              body:JSON.stringify({
+                code:            null,
+                clientName:      document.getElementById('f-name').value.trim(),
+                email:           document.getElementById('f-email').value.trim(),
+                whatsapp:        document.getElementById('f-phone').value.trim(),
+                selectedPackage: pkgLabel,
+                price:           document.getElementById('f-price').value,
+                date:            document.getElementById('f-date').value,
+                source:          'direct',
+              })
+            }).catch(function(){});
 
-            setTimeout(()=>{
-              window.location.href='confirmation.html'
-            },2500);
+            setTimeout(()=>{window.location.href='confirmation.html'},2500);
 
           } else {
             throw new Error("Form submission failed");
