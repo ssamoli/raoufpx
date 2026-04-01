@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>RAOUF px — Private Portrait Session</title>
+  <title>RAOUF px  Private Portrait Session</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex,nofollow"/>
   <link rel="icon" href="favicon.ico" type="image/x-icon"/>
@@ -10,9 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
   <style>
-    /* ═══════════════════════════════════
+    /* 
        RESET & TOKENS
-    ═══════════════════════════════════ */
+     */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --bg:#080810;
@@ -49,9 +49,9 @@
       background-size:32px 32px;
     }
 
-    /* ═══════════════════════════════════
+    /* 
        CURSOR
-    ═══════════════════════════════════ */
+     */
     .cursor{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
     .cursor-inner{
       width:12px;height:12px;background:var(--accent);
@@ -68,18 +68,18 @@
     body:has(button:hover) .cursor-outer{width:42px;height:42px;border-color:var(--accent)}
     @keyframes cpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.82)}}
 
-    /* ═══════════════════════════════════
+    /* 
        AMBIENT GLOWS
-    ═══════════════════════════════════ */
+     */
     .glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(130px);opacity:.045}
     .glow-1{width:520px;height:520px;background:#f0b44c;top:-160px;left:-110px;animation:g1 26s ease-in-out infinite alternate}
     .glow-2{width:420px;height:420px;background:#4cf0d0;bottom:-90px;right:-90px;animation:g2 32s ease-in-out infinite alternate}
     @keyframes g1{to{transform:translate(60px,40px)}}
     @keyframes g2{to{transform:translate(-55px,-65px)}}
 
-    /* ═══════════════════════════════════
+    /* 
        GATE GUARD
-    ═══════════════════════════════════ */
+     */
     #content{opacity:0;pointer-events:none;position:relative;z-index:1;transition:opacity .45s}
     #content.unlocked{opacity:1;pointer-events:auto}
     #gate-spinner{
@@ -94,9 +94,9 @@
     }
     #gate-spinner.hidden{display:none}
 
-    /* ═══════════════════════════════════
+    /* 
        LOGO BAR
-    ═══════════════════════════════════ */
+     */
     .logo-bar{
       position:absolute;top:0;left:0;right:0;z-index:20;
       display:flex;justify-content:center;
@@ -113,9 +113,9 @@
     .logo-frame::after{bottom:-3px;right:-3px}
     .logo-frame img{height:1.9rem;width:auto;filter:drop-shadow(0 0 10px rgba(240,180,76,.5))}
 
-    /* ═══════════════════════════════════
-       HERO — full-bleed video background
-    ═══════════════════════════════════ */
+    /* 
+       HERO  full-bleed video background
+     */
     .hero{
       position:relative;
       min-height:100dvh;
@@ -129,7 +129,7 @@
       position:absolute;inset:0;z-index:0;
       width:100%;height:100%;
       object-fit:cover;
-      opacity:.35;                  /* subtle — keeps text readable */
+      opacity:.35;                  /* subtle  keeps text readable */
     }
 
     /* Dark gradient overlay */
@@ -186,7 +186,7 @@
       font-style:italic;
     }
 
-    /* CTA button — scrolls to booking */
+    /* CTA button  scrolls to booking */
     .hero-cta{
       display:inline-block;
       font-family:'Press Start 2P',monospace;
@@ -213,9 +213,9 @@
     }
     .hero-cta:active{box-shadow:0 0 0 #7a5a20;transform:translate(4px,4px)}
 
-    /* ═══════════════════════════════════
+    /* 
        PAGE WRAP (below hero)
-    ═══════════════════════════════════ */
+     */
     .page-wrap{
       position:relative;z-index:1;
       max-width:780px;margin:0 auto;
@@ -229,9 +229,9 @@
     }
     .section-label::before{content:'> ';color:var(--accent)}
 
-    /* ═══════════════════════════════════
+    /* 
        COUNTDOWN
-    ═══════════════════════════════════ */
+     */
     .countdown-block{
       margin:0 0 4.5rem;padding:1.8rem;
       border:1px solid rgba(255,126,62,.28);
@@ -244,7 +244,7 @@
       font-family:'Press Start 2P',monospace;font-size:.3rem;
       color:var(--accent2);letter-spacing:.16em;margin-bottom:1.1rem;display:block;
     }
-    .cd-label::before{content:'⏱ '}
+    .cd-label::before{content:' '}
     .cd-digits{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap}
     .cd-unit{display:flex;flex-direction:column;align-items:center;gap:.35rem}
     .cd-num{
@@ -280,9 +280,9 @@
     }
     @keyframes scarpulse{from{opacity:.5}to{opacity:1}}
 
-    /* ═══════════════════════════════════
+    /* 
        PORTFOLIO GRID + LIGHTBOX
-    ═══════════════════════════════════ */
+     */
     .portfolio-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
@@ -336,7 +336,7 @@
       .port-item.featured{grid-column:span 1;aspect-ratio:3/4}
     }
 
-    /* ── LIGHTBOX ── */
+    /*  LIGHTBOX  */
     .lightbox{
       position:fixed;inset:0;z-index:9000;
       background:rgba(4,4,10,.95);
@@ -371,9 +371,9 @@
     .lightbox-prev{left:.8rem}
     .lightbox-next{right:.8rem}
 
-    /* ═══════════════════════════════════
+    /* 
        PACKAGES
-    ═══════════════════════════════════ */
+     */
     .packages-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
@@ -407,7 +407,7 @@
     .pkg-div{height:1px;background:rgba(255,255,255,.06);margin:.8rem 0 1rem}
     .pkg-features{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem;flex:1}
     .pkg-features li{font-family:'Space Mono',monospace;font-size:.74rem;color:var(--muted);line-height:1.7;display:flex;gap:.5rem;align-items:flex-start}
-    .pkg-features li::before{content:'◈';color:var(--accent3);font-size:.55rem;flex-shrink:0;margin-top:.1rem}
+    .pkg-features li::before{content:'';color:var(--accent3);font-size:.55rem;flex-shrink:0;margin-top:.1rem}
     .pkg-features li.hi{color:var(--text)}
     .pkg-features li.hi::before{color:var(--accent)}
     .pkg-select-btn{
@@ -420,14 +420,14 @@
     .pkg-select-btn:hover{background:rgba(240,180,76,.07);border-color:var(--accent)}
     .pkg-card.selected .pkg-select-btn{background:var(--accent);color:#080810;border-color:var(--accent)}
 
-    /* ═══════════════════════════════════
+    /* 
        CALENDAR
-    ═══════════════════════════════════ */
+     */
     .cal-urgency{
       font-family:'Space Mono',monospace;font-size:.8rem;
       color:rgba(255,126,62,.7);margin-bottom:1.2rem;font-style:italic;
     }
-    .cal-urgency::before{content:'⚠ ';color:var(--accent2)}
+    .cal-urgency::before{content:' ';color:var(--accent2)}
     .cal-wrap{
       background:var(--surface);
       border:2px solid rgba(240,180,76,.1);
@@ -462,17 +462,17 @@
     .cal-day.selected-day{background:var(--accent);color:#080810;border-color:var(--accent)}
     .cal-day.today{border-color:rgba(76,240,208,.35)}
     .cal-selected-display{margin-top:1.1rem;font-family:'Press Start 2P',monospace;font-size:.32rem;color:var(--accent3);letter-spacing:.1em;min-height:1.2rem}
-    .cal-selected-display::before{content:'◈ ';color:var(--accent)}
+    .cal-selected-display::before{content:' ';color:var(--accent)}
 
-    /* ═══════════════════════════════════
+    /* 
        BOOKING FORM
-    ═══════════════════════════════════ */
+     */
     .form-context{
       font-family:'Space Mono',monospace;font-size:.82rem;
       color:rgba(76,240,208,.65);margin-bottom:1.6rem;
       line-height:2;font-style:italic;
     }
-    .form-context::before{content:'◈ ';color:var(--accent3)}
+    .form-context::before{content:' ';color:var(--accent3)}
     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-top:1.5rem}
     @media(max-width:540px){.form-grid{grid-template-columns:1fr}}
     .field-wrap{display:flex;flex-direction:column;gap:.55rem}
@@ -510,6 +510,71 @@
     .snote.g{color:rgba(76,240,208,.35)}
     .snote::before{content:'// '}
 
+    /* Participation notice */
+    .notice{
+      margin-bottom:1.6rem;
+      padding:1rem 1.2rem;
+      background:rgba(255,255,255,.025);
+      border-left:2px solid rgba(240,180,76,.2);
+      position:relative;
+    }
+    .notice-label{
+      font-family:'Press Start 2P',monospace;font-size:.28rem;
+      color:rgba(240,180,76,.4);letter-spacing:.14em;
+      display:block;margin-bottom:.6rem;
+    }
+    .notice-label::before{content:'// '}
+    .notice-text{
+      font-family:'Space Mono',monospace;font-size:.7rem;
+      color:rgba(255,255,255,.38);line-height:1.85;
+      margin-bottom:.9rem;
+    }
+    .notice-check-row{
+      display:flex;align-items:flex-start;gap:.7rem;cursor:pointer;
+    }
+    .notice-check-row input[type=checkbox]{
+      width:13px;height:13px;flex-shrink:0;margin-top:2px;
+      accent-color:var(--accent);cursor:pointer;
+    }
+    .notice-check-label{
+      font-family:'Press Start 2P',monospace;font-size:.28rem;
+      color:rgba(255,255,255,.45);letter-spacing:.07em;line-height:1.9;
+      cursor:pointer;
+    }
+    .notice-terms-link{
+      display:inline-block;margin-top:.6rem;
+      font-family:'Press Start 2P',monospace;font-size:.24rem;
+      color:rgba(240,180,76,.25);letter-spacing:.07em;
+      text-decoration:none;border-bottom:1px solid rgba(240,180,76,.1);
+      transition:color .2s,border-color .2s;cursor:pointer;background:none;border-left:none;border-top:none;border-right:none;padding:0;
+    }
+    .notice-terms-link:hover{color:rgba(240,180,76,.55);border-bottom-color:rgba(240,180,76,.35)}
+
+    /* Terms modal */
+    .terms-overlay{
+      display:none;position:fixed;inset:0;z-index:9000;
+      background:rgba(0,0,0,.82);backdrop-filter:blur(4px);
+      align-items:center;justify-content:center;padding:2rem;
+    }
+    .terms-overlay.open{display:flex}
+    .terms-modal{
+      background:#0a0a14;border:1px solid rgba(240,180,76,.15);
+      width:min(600px,96vw);max-height:85vh;overflow-y:auto;
+      padding:2.2rem;position:relative;
+    }
+    .terms-modal::before{content:'';position:absolute;top:-1px;left:-1px;width:16px;height:16px;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+    .terms-modal::after{content:'';position:absolute;bottom:-1px;right:-1px;width:16px;height:16px;border-bottom:2px solid var(--accent3);border-right:2px solid var(--accent3)}
+    .terms-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.06)}
+    .terms-title{font-family:'Press Start 2P',monospace;font-size:.55rem;color:var(--accent);letter-spacing:.07em}
+    .terms-close{background:none;border:none;color:rgba(255,255,255,.3);font-size:1.1rem;cursor:pointer;padding:.2rem .4rem;transition:color .2s;line-height:1}
+    .terms-close:hover{color:rgba(255,255,255,.7)}
+    .terms-body{font-family:'Space Mono',monospace;font-size:.72rem;color:rgba(255,255,255,.45);line-height:2}
+    .terms-body h3{font-family:'Press Start 2P',monospace;font-size:.32rem;color:rgba(255,255,255,.5);letter-spacing:.1em;margin:1.2rem 0 .5rem}
+    .terms-body p{margin-bottom:.8rem}
+
+    /* WA button locked state */
+    .btn-wa.locked{opacity:.35;pointer-events:none;cursor:not-allowed}
+
     /* WhatsApp fallback */
     .wa-fallback{
       display:flex;align-items:center;justify-content:center;gap:.7rem;
@@ -538,13 +603,13 @@
       min-height:1rem;text-align:center;line-height:2.2;
     }
     .form-status.success{color:var(--accent3)}
-    .form-status.success::before{content:'✓ '}
+    .form-status.success::before{content:' '}
     .form-status.error{color:var(--accent2)}
-    .form-status.error::before{content:'✕ '}
+    .form-status.error::before{content:' '}
 
-    /* ═══════════════════════════════════
+    /* 
        FOOTER
-    ═══════════════════════════════════ */
+     */
     .lp-footer{
       text-align:center;padding:2.5rem 1rem;
       border-top:1px solid rgba(255,255,255,.04);
@@ -555,16 +620,16 @@
     .lp-footer a{color:rgba(240,180,76,.25);text-decoration:none}
     .lp-footer a:hover{color:var(--accent)}
 
-    /* ═══════════════════════════════════
+    /* 
        ANIMATIONS & REVEALS
-    ═══════════════════════════════════ */
+     */
     @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s steps(8),transform .5s steps(8)}
     .reveal.visible{opacity:1;transform:translateY(0)}
 
-    /* ═══════════════════════════════════
+    /* 
        MOBILE
-    ═══════════════════════════════════ */
+     */
     @media(max-width:600px){
       .cursor,.cursor-outer{display:none}
       html,body{cursor:auto}
@@ -583,7 +648,7 @@
     :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 
-    /* ══ HOT LEAD CAPTURE MODAL ══ */
+    /*  HOT LEAD CAPTURE MODAL  */
     #hl-overlay{
       display:none;position:fixed;inset:0;z-index:9000;
       background:rgba(0,0,0,.75);backdrop-filter:blur(4px);
@@ -621,7 +686,7 @@
     #hl-success{display:none;text-align:center;padding:10px 0}
     #hl-success p{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--accent3);line-height:1.9}
   </style>
-  <!-- Plausible analytics — no cookies, GDPR-friendly -->
+  <!-- Plausible analytics  no cookies, GDPR-friendly -->
   <script defer data-domain="raoufpx.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
@@ -637,15 +702,15 @@
   <!-- Gate spinner -->
   <div id="gate-spinner"><p>VERIFYING ACCESS...</p></div>
 
-  <!-- ════════════════════════════════════════
+  <!-- 
        ALL PAGE CONTENT (hidden until verified)
-  ════════════════════════════════════════ -->
+   -->
   <div id="content">
 
-    <!-- ══ HERO ══ -->
+    <!--  HERO  -->
     <section class="hero" aria-label="Hero">
 
-      <!-- Background video — autoplay muted loop, no controls -->
+      <!-- Background video  autoplay muted loop, no controls -->
       <video
         class="hero-video"
         autoplay muted loop playsinline
@@ -663,7 +728,7 @@
 
       <!-- Logo pinned to top -->
       <div class="logo-bar">
-        <a href="index.html" class="logo-frame" aria-label="RAOUF px — main site">
+        <a href="index.html" class="logo-frame" aria-label="RAOUF px  main site">
           <img src="images/logo.png" alt="RAOUF px" width="36" height="36" loading="eager"/>
         </a>
       </div>
@@ -672,7 +737,7 @@
       <div class="hero-content reveal">
         <div class="hero-status">
           <span class="ping-dot" aria-hidden="true"></span>
-          ACCESS_GRANTED &nbsp;·&nbsp; PRIVATE_OFFER
+          ACCESS_GRANTED &nbsp;&nbsp; PRIVATE_OFFER
         </div>
 
         <h1 class="hero-h1">
@@ -688,12 +753,12 @@
       </div>
     </section>
 
-    <!-- ════════════════════════════
+    <!-- 
          BELOW-HERO CONTENT
-    ════════════════════════════ -->
+     -->
     <div class="page-wrap">
 
-      <!-- ══ COUNTDOWN ══ -->
+      <!--  COUNTDOWN  -->
       <div class="countdown-block reveal" aria-label="Offer expiry countdown">
         <span class="cd-label">THIS_OFFER_EXPIRES_IN</span>
         <div class="cd-digits" id="cdDigits">
@@ -713,7 +778,7 @@
         </div>
       </div>
 
-      <!-- ══ PORTFOLIO GRID ══ -->
+      <!--  PORTFOLIO GRID  -->
       <section class="sec reveal" aria-label="Portfolio">
         <span class="section-label">RECENT_WORK</span>
 
@@ -746,7 +811,7 @@
         </div>
       </section>
 
-      <!-- ══ PACKAGES ══ -->
+      <!--  PACKAGES  -->
       <section class="sec reveal" aria-label="Choose your package" id="packages">
         <span class="section-label">CHOOSE_YOUR_PACKAGE</span>
         <div class="packages-grid" id="packagesGrid">
@@ -773,7 +838,7 @@
           <!-- SIGNATURE -->
           <div class="pkg-card popular" data-pkg="Signature" data-price="AED 249" tabindex="0" role="button" aria-pressed="false">
             <span class="pkg-badge">PACKAGE_02</span>
-            <span class="pkg-popular-tag">★ MOST POPULAR</span>
+            <span class="pkg-popular-tag"> MOST POPULAR</span>
             <div class="pkg-name">SIGNATURE</div>
             <div class="pkg-was">AED 499</div>
             <div class="pkg-now-row">
@@ -805,7 +870,7 @@
               <li>50+ edited photos</li>
               <li>3 shooting locations</li>
               <li>Multiple outfit changes</li>
-              <li class="hi">◆ CINEMATIC REEL INCLUDED</li>
+              <li class="hi"> CINEMATIC REEL INCLUDED</li>
               <li class="hi">Short film of the session</li>
             </ul>
             <button class="pkg-select-btn" type="button">[ SELECT ]</button>
@@ -814,29 +879,29 @@
         </div>
       </section>
 
-      <!-- ══ CALENDAR ══ -->
+      <!--  CALENDAR  -->
       <section class="sec reveal" aria-label="Pick your date">
         <span class="section-label">CHOOSE_YOUR_DATE</span>
         <p class="cal-urgency">Weekend sessions usually book out quickly.</p>
         <div class="cal-wrap">
           <div class="cal-nav">
-            <button class="cal-btn" id="calPrev" aria-label="Previous month">◀</button>
+            <button class="cal-btn" id="calPrev" aria-label="Previous month"></button>
             <span class="cal-month" id="calMonth"></span>
-            <button class="cal-btn" id="calNext" aria-label="Next month">▶</button>
+            <button class="cal-btn" id="calNext" aria-label="Next month"></button>
           </div>
           <div class="cal-grid" id="calGrid" role="grid" aria-label="Session date picker"></div>
           <div class="cal-selected-display" id="calSelectedDisplay" aria-live="polite"></div>
         </div>
       </section>
 
-      <!-- ══ BOOKING FORM ══ -->
+      <!--  BOOKING FORM  -->
       <section class="sec reveal" id="booking" aria-label="Book your session">
         <span class="section-label">YOUR_DETAILS</span>
         <p class="form-context">After submitting, I'll contact you on WhatsApp to confirm your session.</p>
 
         <form id="bookingForm" novalidate>
-          <!-- Hidden fields — do not remove -->
-          <input type="hidden" name="_subject"  value="Private Portrait Session — Street Promo"/>
+          <!-- Hidden fields  do not remove -->
+          <input type="hidden" name="_subject"  value="Private Portrait Session  Street Promo"/>
           <input type="hidden" name="package"   id="fieldPackage" value=""/>
           <input type="hidden" name="price"     id="fieldPrice"   value=""/>
           <input type="hidden" name="date"      id="fieldDate"    value=""/>
@@ -857,11 +922,23 @@
             </div>
           </div>
 
+          <!-- PARTICIPATION NOTICE -->
+          <div class="notice">
+            <span class="notice-label">PARTICIPATION NOTICE</span>
+            <p class="notice-text">This portrait session is offered at a special promotional rate. By participating, you understand that selected images may be used in the photographer's portfolio, social media, and photography competitions.</p>
+            <label class="notice-check-row">
+              <input type="checkbox" id="termsCheck" onchange="onTermsChange()"/>
+              <span class="notice-check-label">I understand and agree to the participation terms.</span>
+            </label>
+            <br/>
+            <button type="button" class="notice-terms-link" onclick="openTermsModal()">View full terms</button>
+          </div>
+
           <div class="submit-wrap">
             <button class="btn-submit" type="submit" id="submitBtn">[ LOCK IN MY SESSION ]</button>
             <div class="submit-notes">
               <span class="snote">Takes less than 20 seconds.</span>
-              <span class="snote g">No payment now — Osama confirms via WhatsApp.</span>
+              <span class="snote g">No payment now  Osama confirms via WhatsApp.</span>
             </div>
             <p class="form-status" id="formStatus"></p>
 
@@ -869,7 +946,8 @@
             <div class="wa-fallback">OR</div>
             <a
               href="https://wa.me/971506180828?text=Hi%20Raouf%2C%20I%20just%20unlocked%20the%20private%20portrait%20session%20page.%0AI'd%20like%20to%20book%20a%20session."
-              class="btn-wa"
+              class="btn-wa locked"
+              id="waBtn"
               target="_blank"
               rel="noopener"
               aria-label="Message on WhatsApp"
@@ -886,34 +964,60 @@
 
     </div><!-- /.page-wrap -->
 
+    <!-- TERMS MODAL -->
+    <div class="terms-overlay" id="termsOverlay" onclick="if(event.target===this)closeTermsModal()">
+      <div class="terms-modal">
+        <div class="terms-header">
+          <span class="terms-title">PARTICIPATION TERMS</span>
+          <button class="terms-close" onclick="closeTermsModal()">&#10005;</button>
+        </div>
+        <div class="terms-body">
+          <h3>PROMOTIONAL RATE</h3>
+          <p>This portrait session is offered at a special discounted rate as part of an ongoing street photography initiative. The rate is available exclusively to holders of a valid private access code.</p>
+
+          <h3>IMAGE USAGE</h3>
+          <p>By participating in this session, you grant Osama Raouf (RAOUF px) a non-exclusive, royalty-free licence to use selected images from your session in the following contexts: professional portfolio (online and print), social media platforms, photography competitions and award submissions, and editorial or promotional material related to RAOUF px.</p>
+
+          <h3>YOUR RIGHTS</h3>
+          <p>You retain full ownership of your likeness. No images will be sold to third parties or used in commercial advertising without separate written consent. You may request removal of any published image at any time by contacting Contact@raoufpx.com.</p>
+
+          <h3>IMAGE SELECTION</h3>
+          <p>Only images that present you in a dignified and flattering manner will be considered for publication. You will not be tagged without permission on social media.</p>
+
+          <h3>CONTACT</h3>
+          <p>For any questions regarding image usage, please contact: Contact@raoufpx.com or via WhatsApp at +971 50 618 0828.</p>
+        </div>
+      </div>
+    </div>
+
     <footer class="lp-footer">
-      &copy; 2025 RAOUF px &nbsp;·&nbsp; Dubai, UAE &nbsp;·&nbsp;
+      &copy; 2025 RAOUF px &nbsp;&nbsp; Dubai, UAE &nbsp;&nbsp;
       <a href="/cdn-cgi/l/email-protection#32715d5c465351467240535d4754424a1c515d5f"><span class="__cf_email__" data-cfemail="74371b1a001517003406151b0112040c5a171b19">[email&#160;protected]</span></a>
-      &nbsp;·&nbsp;
+      &nbsp;&nbsp;
       <a href="index.html">Main site</a>
     </footer>
 
   </div><!-- /#content -->
 
-  <!-- ══ LIGHTBOX ══ -->
+  <!--  LIGHTBOX  -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-    <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
-    <button class="lightbox-prev"  id="lbPrev"  aria-label="Previous">◀</button>
+    <button class="lightbox-close" id="lbClose" aria-label="Close"></button>
+    <button class="lightbox-prev"  id="lbPrev"  aria-label="Previous"></button>
     <img class="lightbox-img" id="lbImg" src="" alt="Full portrait"/>
-    <button class="lightbox-next"  id="lbNext"  aria-label="Next">▶</button>
+    <button class="lightbox-next"  id="lbNext"  aria-label="Next"></button>
   </div>
 
-  <!-- ══ HOT LEAD CAPTURE MODAL ══ -->
+  <!--  HOT LEAD CAPTURE MODAL  -->
   <div id="hl-overlay" role="dialog" aria-modal="true" aria-labelledby="hl-title">
     <div id="hl-modal">
-      <button id="hl-close" aria-label="Close">✕</button>
-      <h2 id="hl-title">Before you go…</h2>
+      <button id="hl-close" aria-label="Close"></button>
+      <h2 id="hl-title">Before you go</h2>
       <p>Want the private portrait session link on WhatsApp?<br/>
          Your access expires in <span class="hl-expiry">48 hours.</span></p>
       <input id="hl-input" type="tel" placeholder="+971 50 000 0000" autocomplete="tel"/>
       <button id="hl-submit">[ Send My Private Session Link ]</button>
       <div id="hl-note">Used only to send your session link.</div>
-      <div id="hl-success"><p>✓ Got it!<br/>Osama will send your link shortly.</p></div>
+      <div id="hl-success"><p> Got it!<br/>Osama will send your link shortly.</p></div>
     </div>
   </div>
 
@@ -923,7 +1027,7 @@
 
     const API_BASE  = 'https://raoufpx-promo-server-production.up.railway.app';
 
-    /* ── Session duration tracking ── */
+    /*  Session duration tracking  */
     const _sessionStart = Date.now();
     window.addEventListener('beforeunload', () => {
       const dur = Math.round((Date.now() - _sessionStart) / 1000);
@@ -938,7 +1042,7 @@
     const TIMER_KEY = 'raoufpx_promo_deadline';
     const TTL_MS    = 48 * 60 * 60 * 1000;
 
-    /* ── A/B test: hero CTA copy ──
+    /*  A/B test: hero CTA copy 
        Variant A = "Book My Session"  (50%)
        Variant B = "Claim My Session" (50%)
        Variant is sticky per session so it doesn't flip on refresh. */
@@ -956,10 +1060,10 @@
       });
     }
 
-    /* ── Track page view variant ── */
+    /*  Track page view variant  */
     if (window.plausible) plausible('Promo Page View', {props:{variant: ctaVariant}});
 
-    /* ── Cursor ── */
+    /*  Cursor  */
     const ci = document.getElementById('cursorInner');
     const co = document.getElementById('cursorOuter');
     if (window.matchMedia('(pointer:fine)').matches) {
@@ -972,7 +1076,7 @@
       document.body.style.cursor = 'auto';
     }
 
-    /* ── Gate guard ── */
+    /*  Gate guard  */
     const spinner = document.getElementById('gate-spinner');
     const content = document.getElementById('content');
 
@@ -1013,7 +1117,7 @@
 
     verifyAccess();
 
-    /* ── Countdown ── */
+    /*  Countdown  */
     function initCountdown(serverExpiry) {
       let deadline = parseInt(localStorage.getItem(TIMER_KEY)||'0',10);
       if (!deadline || deadline < Date.now()) {
@@ -1038,7 +1142,7 @@
       const t = setInterval(tick,1000);
     }
 
-    /* ── Package selection ── */
+    /*  Package selection  */
     const cards = document.querySelectorAll('.pkg-card');
     cards.forEach(card => {
       const select = () => {
@@ -1052,7 +1156,7 @@
       card.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();select();} });
     });
 
-    /* ── Calendar ── */
+    /*  Calendar  */
     const MONTHS=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
     const DAYS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
     let calYear, calMonth, selectedDate=null;
@@ -1103,7 +1207,7 @@
     document.getElementById('calNext').addEventListener('click',()=>{ if(++calMonth>11){calMonth=0;calYear++;} renderCal(); });
     initCal();
 
-    /* ── Form submission ── */
+    /*  Form submission  */
     const form       = document.getElementById('bookingForm');
     const submitBtn  = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
@@ -1176,7 +1280,7 @@
           } catch(e) {}
           submitBtn.textContent='[ BOOKING CONFIRMED ]';
           submitBtn.style.background='var(--accent3)';
-          showStatus('success','Booking received! Redirecting…');
+          showStatus('success','Booking received! Redirecting');
           form.querySelectorAll('.field-input').forEach(f=>f.disabled=true);
           localStorage.removeItem(TIMER_KEY);
           sessionStorage.removeItem('raoufpx_promo');
@@ -1191,7 +1295,7 @@
       }
     });
 
-    /* ── Lightbox ── */
+    /*  Lightbox  */
     const lb      = document.getElementById('lightbox');
     const lbImg   = document.getElementById('lbImg');
     const lbClose = document.getElementById('lbClose');
@@ -1234,7 +1338,7 @@
       if (e.key === 'ArrowRight') lbOpen(lbIndex + 1);
     });
 
-    /* ── Hot Lead Capture Modal ──────────────────────────────────────────── */
+    /*  Hot Lead Capture Modal  */
     (() => {
       const overlay   = document.getElementById('hl-overlay');
       const input     = document.getElementById('hl-input');
@@ -1265,7 +1369,7 @@
         overlay.classList.remove('open');
       }
 
-      // ── Trigger state ──
+      //  Trigger state 
       const _pageStart = Date.now();
       let _scrollPct   = 0;
       let _ctaClicked  = false;
@@ -1288,12 +1392,12 @@
         if (!_ctaClicked) openModal();
       }, 60000);
 
-      // Trigger 2a: Desktop — mouse leaves top of viewport (≥20s on page)
+      // Trigger 2a: Desktop  mouse leaves top of viewport (20s on page)
       document.addEventListener('mouseleave', e => {
         if (e.clientY < 10 && timeOnPage() >= 20) openModal();
       });
 
-      // Trigger 2b: Mobile — scroll back to top and pause (≥30s on page, scrolled ≥30% before)
+      // Trigger 2b: Mobile  scroll back to top and pause (30s on page, scrolled 30% before)
       let _maxScroll = 0;
       let _topPauseTimer = null;
       window.addEventListener('scroll', () => {
@@ -1312,7 +1416,7 @@
       // Trigger 2c: Mobile beforeunload (covers tab close / back button)
       window.addEventListener('beforeunload', () => {
         if (timeOnPage() >= 20 && shouldTrigger()) {
-          // Can't show modal on beforeunload — fire beacon to capture intent
+          // Can't show modal on beforeunload  fire beacon to capture intent
           const promoCode = sessionStorage.getItem('raoufpx_code') || '';
           navigator.sendBeacon(API_BASE + '/capture-hot-lead',
             JSON.stringify({ promoCode, whatsapp: '', capturedAt: new Date().toISOString(), source: 'beforeunload_intent' })
@@ -1339,7 +1443,7 @@
           return;
         }
         submitHl.disabled = true;
-        submitHl.textContent = '[ Sending… ]';
+        submitHl.textContent = '[ Sending ]';
         const promoCode = sessionStorage.getItem('raoufpx_code') || '';
         try {
           await fetch(API_BASE + '/capture-hot-lead', {
@@ -1364,6 +1468,40 @@
 
       // Also allow Enter key in input
       input.addEventListener('keydown', e => { if (e.key === 'Enter') submitHl.click(); });
+    })();
+
+    //  PARTICIPATION NOTICE & TERMS 
+    (function() {
+      var submitBtn = document.getElementById('submitBtn');
+      var waBtn     = document.getElementById('waBtn');
+      var checkbox  = document.getElementById('termsCheck');
+
+      // Initial state: both locked
+      submitBtn.disabled = true;
+      waBtn.classList.add('locked');
+
+      window.onTermsChange = function() {
+        var agreed = checkbox.checked;
+        submitBtn.disabled = !agreed;
+        if (agreed) {
+          waBtn.classList.remove('locked');
+        } else {
+          waBtn.classList.add('locked');
+        }
+      };
+
+      window.openTermsModal = function() {
+        document.getElementById('termsOverlay').classList.add('open');
+      };
+
+      window.closeTermsModal = function() {
+        document.getElementById('termsOverlay').classList.remove('open');
+      };
+
+      // Keyboard close
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeTermsModal();
+      });
     })();
 
   })();
